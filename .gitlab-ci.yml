@@ -6,7 +6,7 @@ stages:
   - coverage
 flake8:
   stage: codestyle
-  image: registry.gitlab.com/pipeline-components/flake8:latest
+  image: python:3.10
   script:
     - apt update
     - apt install postgres
@@ -14,7 +14,7 @@ flake8:
     - flake8 --verbose
 black:
   stage: codestyle
-  image: registry.gitlab.com/pipeline-components/black:latest
+  image: python:3.10
   script:
     - black --check --verbose -- .
 django:
