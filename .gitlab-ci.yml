@@ -9,7 +9,7 @@ flake8:
   image: python:3.10
   script:
     - apt update
-    - apt install postgres
+    - apt install postgresql
     - pip install -r requirements/dev.txt
     - flake8 --verbose
 black:
@@ -27,7 +27,7 @@ django:
     MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
   script:
     - apt update
-    - apt install postgres
+    - apt install postgresql
     - pip install -r requirements/test.txt
     - cd memotime
     - python3 manage.py migrate
@@ -43,7 +43,7 @@ coverage:
     MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
   script:
     - apt update
-    - apt install postgres
+    - apt install postgresql
     - pip install -r requirements/test.txt
     - cd memotime
     - python3 manage.py migrate
