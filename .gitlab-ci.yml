@@ -25,7 +25,7 @@ django:
     MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
   script:
     - pip install -r requirements/test.txt
-    - cd lyceum
+    - cd memotime
     - python3 manage.py migrate
     - python3 manage.py test
 coverage:
@@ -39,7 +39,7 @@ coverage:
     MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
   script:
     - pip install -r requirements/test.txt
-    - cd lyceum
+    - cd memotime
     - python3 manage.py migrate
     - coverage run manage.py test
     - coverage report
