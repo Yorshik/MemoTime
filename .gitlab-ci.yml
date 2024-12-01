@@ -10,7 +10,7 @@ flake8:
   script:
     - apt update
     - apt install postgres
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/dev.txt
     - flake8 --verbose
 black:
   stage: codestyle
