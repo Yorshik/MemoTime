@@ -23,7 +23,7 @@ django:
       alias: postgres
       entrypoint: ["docker-entrypoint.sh", "postgres"]
   variables:
-    POSTGRES_DB: $MEMOTIME_DATABASE_NAME
+    POSTGRES_DB: example_db
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: $MEMOTIME_DATABASE_PASSWORD
     POSTGRES_HOST_AUTH_METHOD: trust
