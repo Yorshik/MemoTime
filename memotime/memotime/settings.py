@@ -8,26 +8,28 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 SECRET_KEY = decouple.config("MEMOTIME_SECRET_KEY", default="YOURSECRETKEY")
 
-DEBUG = decouple.config("MEMOTIME_DEBUG", "False").lower() in (
-    "yes",
-    "true",
-    "1",
-    "y",
-    "t",
+DEBUG = decouple.config(
+    "DJANGO_DEBUG",
+    default=False,
+    cast=bool,
 )
 
 ALLOWED_HOSTS = decouple.config(
     "MEMOTIME_ALLOWED_HOSTS",
-    default="127.0.0.1,localhost",
-).split(",")
+    default="*",
+    cast=decouple.Csv(),
+)
 
 INSTALLED_APPS = [
+    # Самописные приложения
+    # Нативные Django-приложения # noqa: CM001
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Внешние приложения
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,9 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": decouple.config("MEMOTIME_DATABASE_NAME", default="MemoTime"),
         "USER": decouple.config("MEMOTIME_DATABASE_USER", default=None),
-        "PASSWORD": decouple.config("MEMOTIME_DATABASE_PASSWORD", default=None),
+        "PASSWORD": decouple.config(
+            "MEMOTIME_DATABASE_PASSWORD", default=None
+        ),
         "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="localhost"),
         "PORT": decouple.config("MEMOTIME_DATABASE_PORT", default="5432"),
     },
@@ -86,18 +90,22 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
         "NAME": (
-            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+            "django.contrib.auth.password_validation.MinimumLengthValidator"
         ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.CommonPasswordValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.NumericPasswordValidator"
+        ),
     },
 ]
 
