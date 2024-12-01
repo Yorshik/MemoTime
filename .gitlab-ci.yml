@@ -10,7 +10,7 @@ flake8:
   script:
     - apt update
     - apt install postgresql
-    - pip install -r requirements/dev.txt
+    - pip install -r requirements/test.txt
     - flake8 --verbose
 black:
   stage: codestyle
@@ -28,7 +28,7 @@ django:
   script:
     - apt update
     - apt install postgresql
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/dev.txt
     - cd memotime
     - python3 manage.py migrate
     - python3 manage.py test
