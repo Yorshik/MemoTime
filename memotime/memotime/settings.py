@@ -53,6 +53,7 @@ if DEBUG:
         "127.0.0.1",
     ]
 
+
 ROOT_URLCONF = "memotime.urls"
 
 TEMPLATES_DIR = [BASE_DIR / "templates/"]
@@ -80,28 +81,35 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": decouple.config("MEMOTIME_DATABASE_NAME", default="MemoTime"),
         "USER": decouple.config("MEMOTIME_DATABASE_USER", default=None),
-        "PASSWORD": decouple.config("MEMOTIME_DATABASE_PASSWORD", default=None),
-        "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="localhost"),
+        "PASSWORD": decouple.config(
+            "MEMOTIME_DATABASE_PASSWORD", default=None
+        ),
+        "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="postgres"),
         "PORT": decouple.config("MEMOTIME_DATABASE_PORT", default="5432"),
     },
 }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
         "NAME": (
-            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+            "django.contrib.auth.password_validation.MinimumLengthValidator"
         ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.CommonPasswordValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.NumericPasswordValidator"
+        ),
     },
 ]
+
 
 LANGUAGE_CODE = "ru-ru"
 
@@ -109,7 +117,6 @@ LANGUAGES = [
     ("ru-ru", _("Russian")),
     ("en-us", _("English")),
 ]
-
 
 TIME_ZONE = "UTC"
 
@@ -119,14 +126,17 @@ USE_TZ = True
 
 LOCALE_PATHS = [BASE_DIR / "locale/"]
 
+
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [BASE_DIR / "static_dev"]
 
 STATIC_ROOT = BASE_DIR / "static"
 
+
 MEDIA_ROOT = BASE_DIR / "media/"
 
 MEDIA_URL = "media/"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
