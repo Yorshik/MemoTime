@@ -83,7 +83,7 @@ DATABASES = {
         "USER": decouple.config("POSTGRES_USER", default="postgres"),
         "PASSWORD": decouple.config("POSTGRES_PASSWORD", default=None),
         "HOST": decouple.config("POSTGRES_HOST", default="postgres"),
-        "PORT": decouple.config("POSTGRES_PORT", default="5432"),
+        "PORT": decouple.config("POSTGRES_PORT", default="5432", cast=str),
     },
 }
 
