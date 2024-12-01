@@ -79,13 +79,9 @@ WSGI_APPLICATION = "memotime.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": decouple.config(
-            "MEMOTIME_DATABASE_NAME", default="example_db"
-        ),
+        "NAME": decouple.config("MEMOTIME_DATABASE_NAME", default="example_db"),
         "USER": decouple.config("MEMOTIME_DATABASE_USER", default="postgres"),
-        "PASSWORD": decouple.config(
-            "MEMOTIME_DATABASE_PASSWORD", default=None
-        ),
+        "PASSWORD": decouple.config("MEMOTIME_DATABASE_PASSWORD", default=None),
         "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="postgres"),
         "PORT": decouple.config("MEMOTIME_DATABASE_PORT", default="5432"),
     },
@@ -93,22 +89,18 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
         "NAME": (
-            "django.contrib.auth.password_validation.MinimumLengthValidator"
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
         ),
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation.CommonPasswordValidator"
-        ),
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation.NumericPasswordValidator"
-        ),
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
