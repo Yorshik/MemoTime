@@ -1,7 +1,10 @@
 import pathlib
+import re
 
 import decouple
 from django.utils.translation import gettext_lazy as _
+
+__all__ = ()
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
@@ -76,14 +79,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "memotime.wsgi.application"
 
+
+def postgres_port_cast(value):
+    match = re.search(r":(\d+)", value)
+    if match:
+        return int(match.group(1))
+
+    return value
+
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": decouple.config("MEMOTIME_DATABASE_NAME", default="example_db"),
-        "USER": decouple.config("MEMOTIME_DATABASE_USER", default="postgres"),
-        "PASSWORD": decouple.config("MEMOTIME_DATABASE_PASSWORD", default=None),
-        "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="postgres"),
-        "PORT": decouple.config("MEMOTIME_DATABASE_PORT", default="5432"),
+        "NAME": decouple.config("POSTGRES_DB", default="example_db"),
+        "USER": decouple.config("POSTGRES_USER", default="postgres"),
+        "PASSWORD": decouple.config("POSTGRES_PASSWORD", default=None),
+        "HOST": decouple.config("POSTGRES_HOST", default="postgres"),
+        "PORT": decouple.config(
+            "POSTGRES_PORT",
+            default="5432",
+            cast=postgres_port_cast,
+        ),
     },
 }
 

@@ -97,22 +97,22 @@ py manage.py runserver
 
 Так как используется база данных PostgreSQL ее нужно настроить:
 
-### MEMOTIME_DATABASE_NAME
+### POSTGRES_DB
 
 Имя базы
 
-### MEMOTIME_DATABASE_USER
+### POSTGRES_USER
 
 Имя пользователя, требуется для управления базой данных
 
-### MEMOTIME_DATABASE_PASSWORD
+### POSTGRES_PASSWORD
 
 Пароль для пользователя
 
-### MEMOTIME_DATABASE_HOST
+### POSTGRES_HOST
 
 Хост, на котором находится сервер PostgreSQL, по умолчанию - localhost
 
-### MEMOTIME_DATABASE_PORT
+### POSTGRES_PORT
 
 Порт, который сервер PostgreSQL использует для связи, по умолчанию - 5432
