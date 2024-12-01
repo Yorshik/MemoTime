@@ -37,7 +37,7 @@ coverage:
     MEMOTIME_DATABASE_PASSWORD: "$MEMOTIME_DATABASE_PASSWORD"
     MEMOTIME_DATABASE_HOST: "$MEMOTIME_DATABASE_HOST"
     MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
-    script:
+  script:
     - pip install -r requirements/test.txt
     - cd lyceum
     - python3 manage.py migrate
