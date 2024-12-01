@@ -2,18 +2,6 @@ stages:
   - codestyle
   - test
 
-services:
-  - name: postgres:15.4
-    alias: postgres
-    entrypoint: ["docker-entrypoint.sh", "postgres"]
-
-variables:
-  POSTGRES_DB: $MEMOTIME_DATABASE_NAME
-  POSTGRES_USER: $MEMOTIME_DATABASE_USER
-  POSTGRES_PASSWORD: $MEMOTIME_DATABASE_PASSWORD
-  POSTGRES_HOST_AUTH_METHOD: trust
-  POSTGRES_HOST: postgres
-
 flake8:
   stage: codestyle
   image: registry.gitlab.com/pipeline-components/flake8:latest
@@ -33,9 +21,18 @@ django:
   services:
     - name: postgres:15.4
       alias: postgres
+      entrypoint: ["docker-entrypoint.sh", "postgres"]
+  variables:
+    POSTGRES_DB: $MEMOTIME_DATABASE_NAME
+    POSTGRES_USER: $MEMOTIME_DATABASE_USER
+    POSTGRES_PASSWORD: $MEMOTIME_DATABASE_PASSWORD
+    POSTGRES_HOST_AUTH_METHOD: trust
+    POSTGRES_HOST: postgres
   coverage: '/^TOTAL.+?(\d+\%)$/'
   script:
-    - apt-get update && apt-get install -y postgresql-client
+    - apt-get install -y postgresql-client
+    - export PGPASSWORD=$MEMOTIME_DATABASE_PASSWORD
+    - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
     - pip install -r requirements/test.txt
     - cd memotime
     - python3 manage.py migrate
