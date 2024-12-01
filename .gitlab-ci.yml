@@ -24,13 +24,15 @@ django:
       entrypoint: ["docker-entrypoint.sh", "postgres"]
   variables:
     POSTGRES_DB: $MEMOTIME_DATABASE_NAME
-    POSTGRES_USER: $MEMOTIME_DATABASE_USER
+    POSTGRES_USER: postgres
     POSTGRES_PASSWORD: $MEMOTIME_DATABASE_PASSWORD
     POSTGRES_HOST_AUTH_METHOD: trust
     POSTGRES_HOST: postgres
   coverage: '/^TOTAL.+?(\d+\%)$/'
   script:
     - apt-get update && apt-get install -y postgresql-client
+    - echo "POSTGRES_USER: $POSTGRES_USER"
+    - echo "POSTGRES_DB: $POSTGRES_DB"
     - export PGPASSWORD=$MEMOTIME_DATABASE_PASSWORD
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
     - pip install -r requirements/test.txt
