@@ -8,26 +8,28 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 SECRET_KEY = decouple.config("MEMOTIME_SECRET_KEY", default="YOURSECRETKEY")
 
-DEBUG = decouple.config("MEMOTIME_DEBUG", "False").lower() in (
-    "yes",
-    "true",
-    "1",
-    "y",
-    "t",
+DEBUG = decouple.config(
+    "DJANGO_DEBUG",
+    default=False,
+    cast=bool,
 )
 
 ALLOWED_HOSTS = decouple.config(
     "MEMOTIME_ALLOWED_HOSTS",
-    default="127.0.0.1,localhost",
-).split(",")
+    default="*",
+    cast=decouple.Csv(),
+)
 
 INSTALLED_APPS = [
+    # Самописные приложения
+    # Нативные Django-приложения # noqa: CM001
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Внешние приложения
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ if DEBUG:
     INTERNAL_IPS = [
         "127.0.0.1",
     ]
+
 
 ROOT_URLCONF = "memotime.urls"
 
@@ -76,10 +79,10 @@ WSGI_APPLICATION = "memotime.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": decouple.config("MEMOTIME_DATABASE_NAME", default="MemoTime"),
-        "USER": decouple.config("MEMOTIME_DATABASE_USER", default=None),
+        "NAME": decouple.config("MEMOTIME_DATABASE_NAME", default="example_db"),
+        "USER": decouple.config("MEMOTIME_DATABASE_USER", default="postgres"),
         "PASSWORD": decouple.config("MEMOTIME_DATABASE_PASSWORD", default=None),
-        "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="localhost"),
+        "HOST": decouple.config("MEMOTIME_DATABASE_HOST", default="postgres"),
         "PORT": decouple.config("MEMOTIME_DATABASE_PORT", default="5432"),
     },
 }
@@ -101,13 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 LANGUAGE_CODE = "ru-ru"
 
 LANGUAGES = [
     ("ru-ru", _("Russian")),
     ("en-us", _("English")),
 ]
-
 
 TIME_ZONE = "UTC"
 
@@ -117,14 +120,17 @@ USE_TZ = True
 
 LOCALE_PATHS = [BASE_DIR / "locale/"]
 
+
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [BASE_DIR / "static_dev"]
 
 STATIC_ROOT = BASE_DIR / "static"
 
+
 MEDIA_ROOT = BASE_DIR / "media/"
 
 MEDIA_URL = "media/"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
