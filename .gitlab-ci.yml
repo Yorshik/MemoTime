@@ -1,0 +1,45 @@
+image: python:3.10
+
+stages:
+  - codestyle
+  - test
+  - coverage
+flake8:
+  stage: codestyle
+  image: registry.gitlab.com/pipeline-components/flake8:latest
+  script:
+    - pip install -r requirements/test.txt
+    - flake8 --verbose
+black:
+  stage: codestyle
+  image: registry.gitlab.com/pipeline-components/black:latest
+  script:
+    - black --check --verbose -- .
+django:
+  stage: test
+  variables:
+    MEMOTIME_DATABASE_NAME: "$MEMOTIME_DATABASE_NAME"
+    MEMOTIME_DATABASE_USER: "$MEMOTIME_DATABASE_USER"
+    MEMOTIME_DATABASE_PASSWORD: "$MEMOTIME_DATABASE_PASSWORD"
+    MEMOTIME_DATABASE_HOST: "$MEMOTIME_DATABASE_HOST"
+    MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
+  script:
+    - pip install -r requirements/test.txt
+    - cd lyceum
+    - python3 manage.py migrate
+    - python3 manage.py test
+coverage:
+  stage: coverage
+  coverage: '/^TOTAL.+?(\d+\%)$/'
+  variables:
+    MEMOTIME_DATABASE_NAME: "$MEMOTIME_DATABASE_NAME"
+    MEMOTIME_DATABASE_USER: "$MEMOTIME_DATABASE_USER"
+    MEMOTIME_DATABASE_PASSWORD: "$MEMOTIME_DATABASE_PASSWORD"
+    MEMOTIME_DATABASE_HOST: "$MEMOTIME_DATABASE_HOST"
+    MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
+    script:
+    - pip install -r requirements/test.txt
+    - cd lyceum
+    - python3 manage.py migrate
+    - coverage run manage.py test
+    - coverage report
