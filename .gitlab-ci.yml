@@ -25,14 +25,12 @@ django:
   variables:
     POSTGRES_DB: example_db
     POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: $MEMOTIME_DATABASE_PASSWORD
+    POSTGRES_PASSWORD: postgres
     POSTGRES_HOST_AUTH_METHOD: trust
     POSTGRES_HOST: postgres
   coverage: '/^TOTAL.+?(\d+\%)$/'
   script:
     - apt-get update && apt-get install -y postgresql-client
-    - export PGPASSWORD=$MEMOTIME_DATABASE_PASSWORD
-    - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
     - pip install -r requirements/test.txt
     - cd memotime
     - python3 manage.py migrate
