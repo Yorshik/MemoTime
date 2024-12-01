@@ -32,7 +32,6 @@ django:
   script:
     - apt-get update && apt-get install -y postgresql-client
     - echo "POSTGRES_USER: $POSTGRES_USER"
-    - echo "POSTGRES_DB: $POSTGRES_DB"
     - export PGPASSWORD=$MEMOTIME_DATABASE_PASSWORD
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
     - pip install -r requirements/test.txt
