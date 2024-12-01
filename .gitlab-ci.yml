@@ -6,15 +6,13 @@ stages:
   - coverage
 flake8:
   stage: codestyle
-  image: python:3.10
+  image: registry.gitlab.com/pipeline-components/flake8:latest
   script:
-    - apt update
-    - apt install postgresql
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/flake8.txt
     - flake8 --verbose
 black:
   stage: codestyle
-  image: python:3.10
+  image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
 django:
@@ -27,8 +25,8 @@ django:
     MEMOTIME_DATABASE_PORT: "$MEMOTIME_DATABASE_PORT"
   script:
     - apt update
-    - apt install postgresql
-    - pip install -r requirements/dev.txt
+    - apt install -y postgresql
+    - pip install -r requirements/test.txt
     - cd memotime
     - python3 manage.py migrate
     - python3 manage.py test
