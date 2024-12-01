@@ -20,7 +20,5 @@ flake8-quotes==3.4.0
 flake8-return==1.2.0
 flake8-use-pathlib==0.3.0
 flake8_simplify==0.2.0
-freezegun==1.5.1
 isort==5.13.2
-parametrize==0.1.1
 pep8-naming==0.14.1
