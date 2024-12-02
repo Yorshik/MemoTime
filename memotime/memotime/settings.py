@@ -12,7 +12,7 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 SECRET_KEY = decouple.config("MEMOTIME_SECRET_KEY", default="YOURSECRETKEY")
 
 DEBUG = decouple.config(
-    "DJANGO_DEBUG",
+    "MEMOTIME_DEBUG",
     default=False,
     cast=bool,
 )
@@ -25,6 +25,7 @@ ALLOWED_HOSTS = decouple.config(
 
 INSTALLED_APPS = [
     # Самописные приложения
+    "apps.homepage",
     # Нативные Django-приложения # noqa: CM001
     "django.contrib.admin",
     "django.contrib.auth",
@@ -46,15 +47,9 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
-    MIDDLEWARE.append(
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
-    )
-    INSTALLED_APPS.append(
-        "debug_toolbar",
-    )
-    INTERNAL_IPS = [
-        "127.0.0.1",
-    ]
+    INSTALLED_APPS += ("debug_toolbar",)
+    MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+    INTERNAL_IPS = ["127.0.0.1"]
 
 
 ROOT_URLCONF = "memotime.urls"
@@ -64,7 +59,7 @@ TEMPLATES_DIR = [BASE_DIR / "templates/"]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

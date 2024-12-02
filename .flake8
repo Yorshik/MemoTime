@@ -7,3 +7,5 @@ exclude =
     venv,
     */migrations/
     .pre-commit.py
+application_import_names =
+    apps.homepage
