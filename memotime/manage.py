@@ -1,6 +1,8 @@
 import os
 import sys
 
+__all__ = ()
+
 
 def main():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "memotime.settings")
@@ -18,5 +20,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-__all__ = ()
