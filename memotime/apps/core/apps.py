@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 __all__ = ()
 
 
-class HomepageConfig(django.apps.AppConfig):
+class CoreConfig(django.apps.AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.homepage"
-    verbose_name = _("Главная")
+    name = "apps.core"
+    verbose_name = _("Базовые сущности")

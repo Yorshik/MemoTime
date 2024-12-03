@@ -26,6 +26,7 @@ ALLOWED_HOSTS = decouple.config(
 INSTALLED_APPS = [
     # Самописные приложения
     "apps.homepage",
+    "apps.users",
     # Нативные Django-приложения # noqa: CM001
     "django.contrib.admin",
     "django.contrib.auth",
