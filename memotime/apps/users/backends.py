@@ -1,0 +1,34 @@
+import django.contrib.auth
+import django.contrib.auth.backends
+import django.utils.translation
+
+import apps.users.models
+import apps.users.tokens
+
+__all__ = ()
+
+DjangoUser = django.contrib.auth.get_user_model()
+
+
+class EmailBackend(django.contrib.auth.backends.ModelBackend):
+    def get_user(self, user_id):
+        try:
+            user = DjangoUser.objects.get(pk=user_id)
+        except DjangoUser.DoesNotExist:
+            return None
+
+        return user
+
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        if username is None or password is None:
+            return None
+
+        try:
+            user = apps.users.models.User.objects.by_email_or_username(username)
+        except apps.users.models.User.DoesNotExist:
+            return None
+
+        if not user.check_password(password):
+            return None
+
+        return user

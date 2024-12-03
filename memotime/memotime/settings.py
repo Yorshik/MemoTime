@@ -99,6 +99,8 @@ DATABASES = {
     },
 }
 
+AUTH_USER_MODEL = "users.User"
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
@@ -114,6 +116,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+LOGIN_URL = "/users/login/"
+
+LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = "/users/login/"
+
+PASSWORD_RESET_REDIRECT_URL = "/users/login/"
+
+PASSWORD_CHANGE_REDIRECT_URL = "/users/profile/"
+
+AUTHENTICATION_BACKENDS = [
+    "apps.users.backends.EmailBackend",
 ]
 
 
@@ -139,10 +155,14 @@ STATICFILES_DIRS = [BASE_DIR / "static_dev"]
 
 STATIC_ROOT = BASE_DIR / "static"
 
-
 MEDIA_ROOT = BASE_DIR / "media/"
 
 MEDIA_URL = "media/"
 
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+
+SPAM_EMAIL = decouple.config("MEMOTIME_MAIL", default="your_email@ya.ru")
