@@ -1,0 +1,234 @@
+.nav-item.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-menu.hiding {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+@media (hover: hover) {
+  .nav-item.dropdown:hover .dropdown-menu:not(.force-show) {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .nav-item.dropdown:hover .dropdown-toggle {
+    color: #000 !important;
+  }
+
+  .nav-item.dropdown:not(:hover) .dropdown-menu:not(.force-show) {
+    animation: fadeOut 0.2s ease-out 0.5s forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+    display: none;
+  }
+}
+
+.dropdown-menu .dropdown-item {
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.dropdown-toggle.active {
+  background-color: #ffd700 !important;
+  color: #000 !important;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#birthday-banner .centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#birthday-banner h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 7.5px;
+  text-align: center;
+  margin-top: 7.5px;
+}
+
+#birthday-banner p {
+  margin-bottom: 20px;
+}
+
+#birthday-banner .wrap {
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+#birthday-banner .items-wrap {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 10px;
+  width: 100%;
+}
+
+#birthday-banner .items-wrap:before,
+#birthday-banner .items-wrap:after {
+  content: "";
+  height: 100%;
+  top: 0;
+  width: 10%;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#birthday-banner .items-wrap:before {
+  left: 0;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%);
+}
+
+#birthday-banner .items-wrap:after {
+  right: 0;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 100%);
+}
+
+#birthday-banner .items {
+  flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  min-width: 100%;
+}
+
+#birthday-banner .item {
+  background: #f0f0f0;
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+  transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+}
+
+#birthday-banner .item:hover {
+  transform: scale(1.05);
+  background-color: #007bff;
+  color: white;
+}
+
+#birthday-banner .marquee {
+  animation: scroll 20s linear infinite;
+  display: flex;
+  flex-shrink: 0;
+}
+
+#birthday-banner .reverce {
+  animation-direction: reverse;
+}
+
+#birthday-banner .items-wrap:hover .marquee {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - 10px));
+  }
+}
+
+#birthday-banner .item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#birthday-banner .item a:hover {
+  color: #ffffff;
+}
+
+#birthday-banner .btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 5px;
+}
+
+#birthday-banner .btn:hover {
+  color: #333;
+  background-color: #007bff;
+}
+
+#birthday-banner {
+  position: relative;
+  display: none;
+}

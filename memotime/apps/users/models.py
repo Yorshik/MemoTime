@@ -1,20 +1,14 @@
-import sys
-import uuid
-
 import django.contrib.auth.models
 import django.db.models
+from django.utils.translation import gettext_lazy as _
 import pytz
 
+import apps.core.models
 import apps.users.email_normalizer
+import apps.users.managers
 
 __all__ = ()
 
-DjangoUser = django.contrib.auth.get_user_model()
-
-if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
-    DjangoUser._meta.get_field(
-        "email",
-    )._unique = True
 
 normalizer = apps.users.email_normalizer.EmailNormalizer()
 
@@ -24,21 +18,33 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
 
     objects = apps.users.managers.UserManager()
 
-    def upload_to_path(self, filename):
-        extension = filename.split(".")[-1]
-        new_filename = f"{uuid.uuid4()}.{extension}"
-        return f"uploads/users/avatars/{uuid.uuid4()}/{new_filename}"
-
-    timezone = django.db.models.CharField(choices=TIMEZONE_CHOICES)
+    email = django.db.models.EmailField(
+        _("email"),
+        unique=True,
+        null=False,
+        blank=False,
+        help_text=_("уникальный адрес электронной почты"),
+    )
+    timezone = django.db.models.CharField(
+        _("часовой пояс"),
+        max_length=50,
+        choices=TIMEZONE_CHOICES,
+        default=TIMEZONE_CHOICES[-1],
+        help_text=_("Часовой пояс пользователя"),
+    )
     subscription_end_date = django.db.models.DateTimeField(
-        verbose_name="дата окончания подписки",
-        help_text="дата окончания подписки, после чего она отключается",
+        _("дата окончания подписки"),
+        null=True,
+        default=None,
+        help_text=_("дата окончания подписки, после чего она отключается"),
     )
     is_email_subscribed = django.db.models.BooleanField(
-        verbose_name="почтовые уведомления",
-        help_text="подключены ли уведомления на почту",
+        _("почтовые уведомления"),
+        default=True,
+        help_text=_("подключены ли уведомления на почту"),
     )
     is_telegram_subscribed = django.db.models.BooleanField(
-        verbose_name="уведомления в Телеграм",
-        help_text="подключены ли уведомления в Телеграм",
+        _("уведомления в Телеграм"),
+        default=True,
+        help_text=_("подключены ли уведомления в Телеграм"),
     )

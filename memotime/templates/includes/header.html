@@ -1,0 +1,27 @@
+{% block header %}
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 text-bg-dark">
+    {% load static %}
+    {% load i18n %}
+    <div class="d-flex align-items-center">
+      {% with request.resolver_match.view_name as view_name %}
+        <ul class="nav nav-pills me-4">
+          {% if user.is_superuser %}
+            <li class="nav-item">
+              <a href="{% url 'admin:index' %}" class="nav-link">{% trans 'В админку' %}</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            {% if user.is_authenticated and user.profile %}
+              <div class="ms-3">
+                <a href="{% url 'users:profile' %}"
+                   class="nav-link {% if view_name == 'users:profile' %}active disabled{% endif %}">{% trans 'Профиль' %}</a>
+              </div>
+            {% endif %}
+            <a href="{% url 'users:login' %}"
+               class="nav-link {% if view_name == 'users:login' %}active disabled{% endif %}">{% trans 'Вход' %}</a>
+          </li>
+        </ul>
+      {% endwith %}
+    </div>
+  </header>
+{% endblock header %}

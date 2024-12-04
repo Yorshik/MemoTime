@@ -1,0 +1,45 @@
+{% block content %}
+  {% load i18n %}
+  <div class="col">
+    <a href="{% url 'catalog:item-detail' item.id %}"
+       class="text-decoration-none">
+      <div class="card h-100 overflow-hidden rounded-4 shadow-sm">
+        <div class="position-relative">
+          {% if item.main_image %}
+            <img src="{{ item.main_image.get_image_300x300.url }}"
+                 class="card-img-top img-fluid"
+                 alt="{% trans 'Изображение товара' %}"
+                 style="height: 300px;
+                        object-fit: cover"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
+            <div class="d-flex justify-content-center align-items-center d-none"
+                 style="height: 300px;
+                        background-color: #f0f0f0">
+              <span class="text-muted">{% trans 'Ошибка загрузки' %}</span>
+            </div>
+            {% if category == None %}
+              <span class="badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill position-absolute"
+                    style="bottom: 10px;
+                           left: 10px">{{ item.category }}</span>
+            {% endif %}
+          {% else %}
+            <div class="d-flex justify-content-center align-items-center"
+                 style="height: 300px;
+                        background-color: #f0f0f0">
+              <span class="text-muted">{% trans 'Изображение недоступно' %}</span>
+            </div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
+          <div class="d-flex flex-wrap gap-2 mt-2">
+            {% for tag in item.tags.all %}
+              <span class="badge bg-light text-dark border rounded-pill px-2">{{ tag.name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+{% endblock content %}

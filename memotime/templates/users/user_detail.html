@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block body %}
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            {% if user.profile.image %}
+              <img src="{{ user.profile.get_image_175x175.url }}"
+                   class="card-img-top img-fluid rounded-circle"
+                   alt="{% trans 'Аватар пользователя' %}"
+                   style="width: 175px;
+                          height: 175px;
+                          object-fit: cover;
+                          border: 1px solid #ddd;
+                          margin: 0 auto"
+                   onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
+              <div class="d-flex justify-content-center align-items-center d-none rounded-circle"
+                   style="width: 175px;
+                          height: 175px;
+                          border: 1px solid #ddd;
+                          margin: 0 auto">
+                <span class="text-muted">{% trans "Ошибка загрузки" %}</span>
+              </div>
+            {% else %}
+              <div class="d-flex justify-content-center align-items-center rounded-circle"
+                   style="width: 175px;
+                          height: 175px;
+                          border: 1px solid #ddd;
+                          margin: 0 auto">{% trans "Аватарка отсутствует" %}</div>
+            {% endif %}
+            <h5 class="my-3">{{ user.username }}</h5>
+            <p class="text-muted mb-4">
+              <i class="bi bi-envelope-fill me-2"></i>{{ user.email }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% trans 'Имя' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {% if user.first_name %}
+                    {{ user.first_name }}
+                  {% else %}
+                    <span class="fst-italic">{% trans 'не указано' %}</span>
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% trans 'Фамилия' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {% if user.last_name %}
+                    {{ user.last_name }}
+                  {% else %}
+                    <span class="fst-italic">{% trans 'не указано' %}</span>
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% trans 'Почта' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% trans 'День рождения' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  {% if user.profile.birthday %}
+                    {{ user.profile.birthday|date:"d.m.Y" }}
+                  {% else %}
+                    <span class="fst-italic">{% trans 'не указано' %}</span>
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% trans 'Попытки выпить кофе' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  <span class="badge bg-primary rounded-pill">{{ user.profile.coffee_count }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

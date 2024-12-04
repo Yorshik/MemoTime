@@ -3,7 +3,6 @@ import django.urls
 
 import apps.users.views
 
-
 app_name = "users"
 
 urlpatterns = [
@@ -58,11 +57,6 @@ urlpatterns = [
             template_name="users/password_reset_done.html",
         ),
         name="password-reset-done",
-    ),
-    django.urls.path(
-        "profile/",
-        apps.users.views.UserProfileView.as_view(),
-        name="profile",
     ),
     django.urls.path(
         "reset/done/",

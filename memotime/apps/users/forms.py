@@ -8,6 +8,7 @@ import django.utils
 import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 
+import apps.core.forms
 import apps.users.models
 
 __all__ = ()
@@ -18,7 +19,7 @@ class UserCreationForm(
     django.contrib.auth.forms.UserCreationForm,
 ):
     def clean_username(self):
-        username = self.cleaned_data["username"].lower()
+        username = self.cleaned_data[apps.users.models.User.username.field.name].lower()
         new = apps.users.models.User.objects.filter(username=username)
         if new.count():
             raise django.core.exceptions.ValidationError(
@@ -40,7 +41,7 @@ class UserCreationForm(
 
     def save(self, commit=True, active=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data["email"]
+        user.email = self.cleaned_data[apps.users.models.User.email.field.name]
         user.is_active = active
 
         if commit:
@@ -51,8 +52,8 @@ class UserCreationForm(
     class Meta(django.contrib.auth.forms.UserCreationForm.Meta):
         model = apps.users.models.User
         fields = (
-            "username",
-            "email",
+            apps.users.models.User.username.field.name,
+            apps.users.models.User.email.field.name,
             "password1",
             "password2",
         )

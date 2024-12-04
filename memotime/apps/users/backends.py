@@ -11,14 +11,6 @@ DjangoUser = django.contrib.auth.get_user_model()
 
 
 class EmailBackend(django.contrib.auth.backends.ModelBackend):
-    def get_user(self, user_id):
-        try:
-            user = DjangoUser.objects.get(pk=user_id)
-        except DjangoUser.DoesNotExist:
-            return None
-
-        return user
-
     def authenticate(self, request, username=None, password=None, **kwargs):
         if username is None or password is None:
             return None

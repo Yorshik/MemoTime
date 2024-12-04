@@ -1,9 +1,46 @@
-<html>
-  <body>
-    <h1>Working urls</h1>
-    <ul>
-      <li>root<a href="{% url 'homepage:homepage' %}">/</a></li>
-      <li>admin<a href="/admin">/admin</a></li>
-    </ul>
-  </body>
-</html>
+{% extends "base.html" %}
+{% load i18n static %}
+{% block body %}
+  <h1>Working urls</h1>
+  <ul>
+    <li>
+      root<a href="{% url 'homepage:homepage' %}">/</a>
+    </li>
+    <li>
+      admin<a href="/admin">/admin</a>
+    </li>
+    <li>
+      activate-resend<a href="{% url 'users:activate-resend' %}">/activate/resend/</a>
+    </li>
+    <li>
+      activate<a href="{% url 'users:activate' pk=1 %}">/activate/1/</a>
+    </li>
+    <li>
+      login<a href="{% url 'users:login' %}">/login/</a>
+    </li>
+    <li>
+      logout<a href="{% url 'users:logout' %}">/logout/</a>
+    </li>
+    <li>
+      password-change<a href="{% url 'users:password-change' %}">/password_change/</a>
+    </li>
+    <li>
+      password-change-done<a href="{% url 'users:password-change-done' %}">/password_change/done/</a>
+    </li>
+    <li>
+      password-reset<a href="{% url 'users:password-reset' %}">/password_reset/</a>
+    </li>
+    <li>
+      password-reset-done<a href="{% url 'users:password-reset-done' %}">/password_reset/done/</a>
+    </li>
+    <li>
+      password-reset-complete<a href="{% url 'users:password-reset-complete' %}">/reset/done/</a>
+    </li>
+    <li>
+      password-reset-confirm<a href="{% url 'users:password-reset-confirm' uidb64='uid' token='token' %}">/reset/<uidb64>/<token>/</a>
+    </li>
+    <li>
+      signup<a href="{% url 'users:signup' %}">/signup/</a>
+    </li>
+  </ul>
+{% endblock body %}

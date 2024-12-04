@@ -1,0 +1,67 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="{% trans 'Активируйте ваш аккаунт для восстановления доступа после нескольких неудачных попыток входа.' %}">
+    <meta name="keywords"
+          content="{% trans 'аккаунт, активация, восстановление, безопасность, вход' %}">
+    <title>{% trans "Активируйте ваш аккаунт" %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{% trans "Активируйте ваш аккаунт" %}</h1>
+      <p>{% trans "Ваш аккаунт временно деактивирован из-за нескольких неудачных попыток входа." %}</p>
+      <p>{% trans "Пожалуйста, нажмите на кнопку ниже, чтобы повторно активировать ваш аккаунт:" %}</p>
+      <p>
+        <a href="{{ activation_url }}" class="button">{% trans "Активировать аккаунт" %}</a>
+      </p>
+      <p class="footer">{% trans "Ссылка будет действительна в течение одной недели." %}</p>
+    </div>
+  </body>
+</html>
