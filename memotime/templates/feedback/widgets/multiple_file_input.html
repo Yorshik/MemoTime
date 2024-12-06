@@ -1,0 +1,35 @@
+{% load i18n %}
+<div class="custom-file-upload">
+  <label class="custom-file-upload-trigger" for="{{ widget.attrs.id }}">
+    <svg class="upload-icon"
+         xmlns="http://www.w3.org/2000/svg"
+         width="24"
+         height="24"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+    <span class="upload-text">{% trans "Выберите файлы" %}</span>
+  </label>
+  <input type="file"
+         name="files"
+         id="{{ widget.attrs.id }}"
+         data-max-size="{{ widget.attrs.data_max_size }}"
+         data-max-files="{{ widget.attrs.data_max_files }}"
+         data-upload-text="{% trans 'Выберите файлы или перетащите их сюда' %}"
+         data-selected-text="{% trans 'Выбрано файлов: {count}' %}"
+         data-max-files-text="{% trans 'Максимальное количество файлов: {max_files}' %}"
+         data-max-size-text="{% trans 'Максимальный размер файла: {max_size}' %}"
+         data-invalid-type-text="{% trans 'Неподдерживаемый тип файла' %}"
+         data-too-large-text="{% trans 'Файл слишком большой' %}"
+         multiple
+         class="inputfile">
+  <button type="button" hidden class="clear-selection">{% trans 'Сбросить выбор' %}</button>
+  <div class="file-list"></div>
+</div>

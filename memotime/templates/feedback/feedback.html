@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block body %}
+  <div class="container mt-5">
+    <h2 class="text-center mb-4 display-4">{% trans "Форма обратной связи" %}</h2>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show"
+             role="alert">
+          {{ message }}
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="{% trans 'Закрыть' %}"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <form method="post"
+          enctype="multipart/form-data"
+          class="p-4 border rounded shadow-sm bg-light animate">
+      {% csrf_token %}
+      <div class="mb-4">
+        <h4 class="mb-3 text-primary">{% trans "Информация об авторе" %}</h4>
+        <div class="form-group">
+          {% for field in form.author %}
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label for="{{ field.id_for_label }}" class="form-label mb-0">{{ field.label }}</label>
+              {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
+            </div>
+            {{ field }}
+            {% for error in field.errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="mb-4">
+        <h4 class="mb-3 text-primary">{% trans "Содержание отзыва" %}</h4>
+        <div class="form-group">
+          {% for field in form.feedback %}
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label for="{{ field.id_for_label }}" class="form-label mb-0">{{ field.label }}</label>
+              {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
+            </div>
+            {{ field }}
+            {% for error in field.errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="mb-4">
+        <h4 class="mb-3 text-primary">{% trans "Файлы" %}</h4>
+        <div class="form-group">
+          {% for field in form.files_form %}
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label for="{{ field.id_for_label }}" class="form-label mb-0">{{ field.label }}</label>
+              {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
+            </div>
+            {{ field }}
+            {% for error in field.errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">{% trans "Отправить" %}</button>
+    </form>
+  </div>
+{% endblock body %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/custom_file_input.css' %}">
+{% endblock extra_css %}
+{% block extra_js %}
+  <script src="{% static 'js/custom_file_input.js' %}"></script>
+  <script src="{% static 'js/forms.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new FormAnimator('animate');
+  });
+  </script>
+{% endblock extra_js %}
