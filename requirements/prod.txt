@@ -1,6 +1,7 @@
 Django==4.2.16
+django-betterforms==2.0.0
+Pillow==10.4.0
 psycopg2-binary==2.9.9
+PyJWT==2.10.1
 python-decouple==3.8
 pytz==2024.2
-PyJWT==2.10.1
-Pillow==10.4.0

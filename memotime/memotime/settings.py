@@ -32,6 +32,7 @@ ALLOWED_HOSTS = decouple.config(
 INSTALLED_APPS = [
     # Самописные приложения
     "apps.core.apps.CoreConfig",
+    "apps.feedback.apps.FeedbackConfig",
     "apps.homepage.apps.HomepageConfig",
     "apps.users.apps.UsersConfig",
     # Нативные Django-приложения # noqa: CM001

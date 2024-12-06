@@ -8,6 +8,7 @@ exclude =
     */migrations/
     .pre-commit.py
 application_import_names =
-    apps.core, 
+    apps.core
     apps.homepage
     apps.users
+    apps.feedback
