@@ -65,7 +65,7 @@ if DEBUG:
 
 ROOT_URLCONF = "memotime.urls"
 
-TEMPLATES_DIR = [BASE_DIR / "templates/"]
+TEMPLATES_DIR = [BASE_DIR / "templates"]
 
 TEMPLATES = [
     {
@@ -190,4 +190,4 @@ EMAIL_HOST_PASSWORD = decouple.config(
 )
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = f"MemoTime {EMAIL_HOST_USER}"
+DEFAULT_FROM_EMAIL = f"MemoTime <{EMAIL_HOST_USER}>"
