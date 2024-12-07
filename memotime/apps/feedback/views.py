@@ -26,7 +26,7 @@ class FeedbackView(django.views.generic.edit.FormView):
             feedback_text,
             django.conf.settings.EMAIL_HOST_USER,
             [author.mail],
-            fail_silently=True,
+            fail_silently=False,
         )
 
     def form_valid(self, form):

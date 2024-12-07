@@ -19,7 +19,7 @@
       <a href="{{ signup_url }}">{% trans 'Создать учетную запись' %}</a>
     </div>
   {% endif %}
-  {% url 'password_reset' as password_reset_url %}
+  {% url 'users:password_reset' as password_reset_url %}
   {% if password_reset_url %}
     <div class="password-reset-link text-center">
       <a href="{{ password_reset_url }}">{% trans 'Забыли свой пароль или имя пользователя?' %}</a>
