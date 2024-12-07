@@ -23,11 +23,6 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
                 "Аноним",
             )
 
-        if not cleaned_data.get(apps.feedback.models.PersonalData.user.field.name):
-            cleaned_data[apps.feedback.models.PersonalData.user.field.name] = (
-                django.contrib.auth.models.AnonymousUser()
-            )
-
         return cleaned_data
 
     class Meta:

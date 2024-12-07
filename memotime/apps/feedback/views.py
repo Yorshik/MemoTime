@@ -5,7 +5,7 @@ import django.shortcuts
 import django.urls
 from django.utils.translation import gettext_lazy as _
 import django.views.generic.edit
-
+import django.contrib.auth.models
 import apps.feedback.forms
 
 __all__ = ()
@@ -30,7 +30,9 @@ class FeedbackView(django.views.generic.edit.FormView):
 
     def form_valid(self, form):
         author = form["author"].save(commit=False)
-        author.user = self.request.user
+        if not self.request.user.is_anonymous:
+            author.user = self.request.user
+
         author.save()
         feedback = form["feedback"].save(commit=False)
         feedback.personal_data = author

@@ -11,9 +11,12 @@ from django.utils.translation import gettext_lazy as _
 __all__ = ()
 
 
+User = django.contrib.auth.get_user_model()
+
+
 class PersonalData(django.db.models.Model):
     user = django.db.models.ForeignKey(
-        django.contrib.auth.get_user_model(),
+        User,
         verbose_name=_("пользователь"),
         on_delete=django.db.models.DO_NOTHING,
         help_text=_("Пользователь, отправивший фидбек"),
@@ -115,7 +118,7 @@ def ensure_timestamps_feedback(sender, instance, **kwargs):
 
 class StatusLog(django.db.models.Model):
     user = django.db.models.ForeignKey(
-        django.conf.settings.AUTH_USER_MODEL,
+        User,
         verbose_name=_("пользователь"),
         on_delete=django.db.models.DO_NOTHING,
         help_text=_("Пользователь, изменивший статус"),
