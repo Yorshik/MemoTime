@@ -1,11 +1,12 @@
 import django.conf
+import django.contrib.auth.models
 import django.contrib.messages
 import django.core.mail
 import django.shortcuts
 import django.urls
 from django.utils.translation import gettext_lazy as _
 import django.views.generic.edit
-import django.contrib.auth.models
+
 import apps.feedback.forms
 
 __all__ = ()
