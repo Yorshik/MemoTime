@@ -8,8 +8,8 @@ import django.test
 import django.urls
 import parametrize
 
-from apps.feedback.forms import ProfileUpdateMultiForm
-from apps.feedback.models import Feedback, PersonalData
+import apps.feedback.forms
+import apps.feedback.models
 
 __all__ = ()
 
@@ -30,8 +30,8 @@ class FeedbackFormTests(django.test.TestCase):
         }
 
     def tearDown(self):
-        Feedback.objects.all().delete()
-        PersonalData.objects.all().delete()
+        apps.feedback.models.Feedback.objects.all().delete()
+        apps.feedback.models.PersonalData.objects.all().delete()
         super().tearDown()
 
     @classmethod
@@ -166,14 +166,14 @@ class FeedbackFormTests(django.test.TestCase):
         )
 
     def test_count_feedback_increased(self):
-        items_count = Feedback.objects.count()
+        items_count = apps.feedback.models.Feedback.objects.count()
         django.test.Client().post(
             django.urls.reverse("feedback:feedback"),
             data=self.valid_form_data,
             follow=True,
         )
         self.assertEqual(
-            Feedback.objects.count(),
+            apps.feedback.models.Feedback.objects.count(),
             items_count + 1,
             "Feedback count should increase by 1 after successful submission",
         )
@@ -197,7 +197,7 @@ class FeedbackFormTests(django.test.TestCase):
             follow=True,
         )
         self.assertTrue(
-            Feedback.objects.filter(
+            apps.feedback.models.Feedback.objects.filter(
                 personal_data__name=self.valid_form_data["author-name"],
                 text=self.valid_form_data["feedback-text"],
                 personal_data__mail=self.valid_form_data["author-mail"],
@@ -223,7 +223,7 @@ class FeedbackFormTests(django.test.TestCase):
             data=test_form_data,
             follow=True,
         )
-        created_feedback = Feedback.objects.latest(
+        created_feedback = apps.feedback.models.Feedback.objects.latest(
             "created_on",
         )
         for uploaded_file in created_feedback.files.all():
@@ -242,7 +242,7 @@ class FeedbackFormTests(django.test.TestCase):
         ],
     )
     def test_field_label(self, form_name, field_name, expected_label):
-        form = ProfileUpdateMultiForm().forms[form_name]
+        form = apps.feedback.forms.ProfileUpdateMultiForm().forms[form_name]
         field_label = form.fields[field_name].label
         self.assertEqual(
             field_label,
@@ -260,7 +260,7 @@ class FeedbackFormTests(django.test.TestCase):
         ],
     )
     def test_field_help_text(self, form_name, field_name, expected_help_text):
-        form = ProfileUpdateMultiForm().forms[form_name]
+        form = apps.feedback.forms.ProfileUpdateMultiForm().forms[form_name]
         field_help_text = form.fields[field_name].help_text
         self.assertEqual(
             field_help_text,

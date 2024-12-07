@@ -1,7 +1,7 @@
 import django.test
 import django.urls
 
-from apps.feedback.forms import AuthorForm, FeedbackForm, FilesForm
+import apps.feedback.forms
 
 __all__ = ()
 
@@ -14,7 +14,7 @@ class FeedbackContextTests(django.test.TestCase):
         response = self.client.get(django.urls.reverse("feedback:feedback"))
         self.assertIsInstance(
             response.context["form"]["author"],
-            AuthorForm,
+            apps.feedback.forms.AuthorForm,
             "Author form should be an instance of AuthorForm",
         )
 
@@ -22,7 +22,7 @@ class FeedbackContextTests(django.test.TestCase):
         response = self.client.get(django.urls.reverse("feedback:feedback"))
         self.assertIsInstance(
             response.context["form"]["feedback"],
-            FeedbackForm,
+            apps.feedback.forms.FeedbackForm,
             "Feedback form should be an instance of FeedbackForm",
         )
 
@@ -30,6 +30,6 @@ class FeedbackContextTests(django.test.TestCase):
         response = self.client.get(django.urls.reverse("feedback:feedback"))
         self.assertIsInstance(
             response.context["form"]["files_form"],
-            FilesForm,
+            apps.feedback.forms.FilesForm,
             "Files form should be an instance of FilesForm",
         )

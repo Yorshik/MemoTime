@@ -1,7 +1,7 @@
 import django.test
 import django.urls
 
-import apps.feedback.models as feedback_models
+import apps.feedback.models
 
 __all__ = ()
 
@@ -15,16 +15,16 @@ class FeedbackModelTests(django.test.TestCase):
         }
 
     def tearDown(self):
-        feedback_models.Feedback.objects.all().delete()
-        feedback_models.PersonalData.objects.all().delete()
+        apps.feedback.models.Feedback.objects.all().delete()
+        apps.feedback.models.PersonalData.objects.all().delete()
         super().tearDown()
 
     def test_feedback_creation(self):
-        personal_data = feedback_models.PersonalData.objects.create(
+        personal_data = apps.feedback.models.PersonalData.objects.create(
             name=self.feedback_data["author_name"],
             mail=self.feedback_data["author_mail"],
         )
-        feedback = feedback_models.Feedback.objects.create(
+        feedback = apps.feedback.models.Feedback.objects.create(
             personal_data=personal_data,
             text=self.feedback_data["feedback_text"],
         )

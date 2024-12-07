@@ -12,6 +12,14 @@ __all__ = ()
 
 
 class PersonalData(django.db.models.Model):
+    user = django.db.models.ForeignKey(
+        django.contrib.auth.get_user_model(),
+        verbose_name=_("пользователь"),
+        on_delete=django.db.models.DO_NOTHING,
+        help_text=_("Пользователь, отправивший фидбек"),
+        blank=True,
+        null=True,
+    )
     name = django.db.models.TextField(
         _("имя"),
         max_length=100,

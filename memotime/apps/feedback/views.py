@@ -29,7 +29,9 @@ class FeedbackView(django.views.generic.edit.FormView):
         )
 
     def form_valid(self, form):
-        author = form["author"].save()
+        author = form["author"].save(commit=False)
+        author.user = self.request.user
+        author.save()
         feedback = form["feedback"].save(commit=False)
         feedback.personal_data = author
         feedback.save()

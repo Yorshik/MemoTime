@@ -31,10 +31,12 @@ class FeedbackFilesInline(django.contrib.admin.StackedInline):
 class FeedbackAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         "personal_data_name",
+        "personal_data_user",
         apps.feedback.models.Feedback.status.field.name,
         apps.feedback.models.Feedback.created_on.field.name,
     )
     fields = (
+        "personal_data_user",
         "personal_data_mail",
         "personal_data_name",
         apps.feedback.models.Feedback.text.field.name,
@@ -50,6 +52,7 @@ class FeedbackAdmin(django.contrib.admin.ModelAdmin):
         apps.feedback.models.Feedback.text.field.name,
         "personal_data_name",
         "personal_data_mail",
+        "personal_data_user",
     )
     inlines = [
         FeedbackFilesInline,
@@ -67,6 +70,21 @@ class FeedbackAdmin(django.contrib.admin.ModelAdmin):
         return obj.personal_data.mail
 
     personal_data_mail.short_description = _("Почта автора")
+
+    def personal_data_user(self, obj):
+        if obj.personal_data.user:
+            return django.utils.html.format_html(
+                '<a href="{}">{}</a>',
+                django.contrib.admin.utils.reverse(
+                    "admin:users_user_change",
+                    args=[obj.personal_data.user.pk],
+                ),
+                obj.personal_data.user,
+            )
+
+        return _("Не авторизован")
+
+    personal_data_user.short_description = _("Юзер автора")
 
     def save_model(self, request, obj, form, change):
         if change:

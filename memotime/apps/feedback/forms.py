@@ -1,4 +1,5 @@
 import betterforms.multiform
+import django.contrib.auth.models
 import django.core.exceptions
 import django.forms
 from django.utils.translation import gettext_lazy as _
@@ -20,6 +21,11 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
         if not cleaned_data.get(apps.feedback.models.PersonalData.name.field.name):
             cleaned_data[apps.feedback.models.PersonalData.name.field.name] = _(
                 "Аноним",
+            )
+
+        if not cleaned_data.get(apps.feedback.models.PersonalData.user.field.name):
+            cleaned_data[apps.feedback.models.PersonalData.user.field.name] = (
+                django.contrib.auth.models.AnonymousUser()
             )
 
         return cleaned_data
