@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "apps.core.apps.CoreConfig",
     "apps.feedback.apps.FeedbackConfig",
     "apps.homepage.apps.HomepageConfig",
+    "apps.schedule.apps.ScheduleConfig",
     "apps.users.apps.UsersConfig",
     # Нативные Django-приложения # noqa: CM001
     "django.contrib.admin",
