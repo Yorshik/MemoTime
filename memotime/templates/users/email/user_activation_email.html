@@ -5,8 +5,8 @@
 {% endblock title %}
 {% block content %}
   <h1>{% blocktrans %}Hello, {{ username }}!{% endblocktrans %}</h1>
+  <p>{% trans "Thank you for registering! To activate your account, please click the link below:" %}</p>
   <p>
-    {% trans "Thank you for registering! To activate your account, please click the link below:" %}
+    <a href="{{ link }}">{{ link }}</a>
   </p>
-  <p><a href="{{ link }}">{{ link }}</a></p>
 {% endblock content %}
