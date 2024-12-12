@@ -35,15 +35,18 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
         _("subscription end date"),
         null=True,
         default=None,
+        blank=True,
         help_text=_("Date when the subscription ends and is deactivated"),
     )
     is_email_subscribed = django.db.models.BooleanField(
         _("email notifications"),
         default=True,
+        blank=True,
         help_text=_("Whether email notifications are enabled"),
     )
     is_telegram_subscribed = django.db.models.BooleanField(
         _("Telegram notifications"),
         default=True,
+        blank=True,
         help_text=_("Whether Telegram notifications are enabled"),
     )

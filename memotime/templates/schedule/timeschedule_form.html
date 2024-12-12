@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Schedule Form</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap bundle JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <!-- bootstrap-select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  </head>
+  <body>
+    <h2>
+      {% if form.instance.pk %}
+        Edit Time Schedule
+      {% else %}
+        Create Time Schedule
+      {% endif %}
+    </h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+        </div>
+      {% endfor %}
+      <button type="submit">Save</button>
+      <button type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#addEventModal">Add Event</button>
+    </form>
+    <!-- Modal for Add Event -->
+    <div class="modal fade"
+         id="addEventModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="addEventModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addEventForm"
+                  method="post"
+                  action="{% url 'schedule:event-create' %}">
+              {% csrf_token %}
+              {% for field in event_form %}
+                <div class="form-group">
+                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  {{ field }}
+                  {% if field.errors %}
+                    <div class="invalid-feedback d-block">
+                      {{ field.errors|join:"<br>" }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+              <button type="submit" class="btn btn-primary">Save Event</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.selectpicker').selectpicker({
+                bootstrapVersion: '4'
+            });
+
+             $('#addEventForm').on('submit', function(event) {
+               event.preventDefault();
+                var form = $(this);
+               $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                     success: function (data) {
+                         $('#addEventModal').modal('hide');
+                         $('#addEventForm')[0].reset();
+                         $('.selectpicker').empty();
+                        $.each(data.events, function(key, value) {
+                            $('.selectpicker').append($("<option></option>").attr("value",value[0]).text(value[1]));
+                        });
+                         $('.selectpicker').selectpicker('refresh');
+
+                     },
+                     error: function (data) {
+                         var errors = data.responseJSON;
+                        $.each(errors, function (key, value) {
+                            var input = $('#id_' + key);
+                            input.addClass('is-invalid');
+                            input.next('.invalid-feedback').remove()
+                           input.after('<div class="invalid-feedback d-block">' + value.join("<br>") + '</div>')
+
+                        })
+                     },
+                 })
+             })
+        });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Schedule Detail</title>
+  </head>
+  <body>
+    <h2>Schedule Detail</h2>
+    <p>
+      <strong>Start Date:</strong> {{ schedule.start_date }}
+    </p>
+    <p>
+      <strong>Expiration Date:</strong> {{ schedule.expiration_date|default:"N/A" }}
+    </p>
+    <p>
+      <strong>Is Static:</strong> {{ schedule.is_static }}
+    </p>
+    <a href="{% url 'schedule:schedule-update' schedule.pk %}">Edit</a>
+    <a href="{% url 'schedule:schedule-delete' schedule.pk %}">Delete</a>
+    <h3>Time Schedules</h3>
+    <a href="{% url 'schedule:timeschedule-create' schedule.id %}">Add Time Schedule</a>
+    <ul>
+      {% for timeschedule in time_schedules %}
+        <li>
+          {{ timeschedule.event }} - {{ timeschedule.time_start }} - {{ timeschedule.time_end }}
+          <a href="{% url 'schedule:timeschedule-update' timeschedule.pk %}">Edit</a>
+          <a href="{% url 'schedule:timeschedule-delete' timeschedule.pk %}">Delete</a>
+        </li>
+      {% empty %}
+        <li>No time schedules for this schedule.</li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'schedule:schedule-list' %}">Back to Schedule List</a>
+  </body>
+</html>

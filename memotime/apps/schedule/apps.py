@@ -7,4 +7,4 @@ __all__ = ()
 class ScheduleConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.schedule"
-    verbose_name = _("Sheldure")
+    verbose_name = _("Schedule")

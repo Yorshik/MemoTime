@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Schedule List</title>
+  </head>
+  <body>
+    <h2>Schedule List</h2>
+    <a href="{% url 'schedule:schedule-create' %}">Create New Schedule</a>
+    <ul>
+      {% for schedule in schedules %}
+        <li>
+          <a href="{% url 'schedule:schedule-detail' schedule.pk %}">
+            {{ schedule.start_date }} - {{ schedule.expiration_date }}
+          </a>
+          <a href="{% url 'schedule:schedule-update' schedule.pk %}">Edit</a>
+          <a href="{% url 'schedule:schedule-delete' schedule.pk %}">Delete</a>
+        </li>
+      {% empty %}
+        <li>No schedules available.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
