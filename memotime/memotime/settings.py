@@ -201,7 +201,7 @@ DEFAULT_REPLY_TO_EMAIL = decouple.config(
 
 CELERY_BROKER_URL = decouple.config(
     "CELERY_BROKER_URL",
-    default="redis://localhost:6379/0",
+    default="redis://redis:6379/0",
 )
 
 CELERY_RESULT_BACKEND = "django-db"

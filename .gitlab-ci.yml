@@ -22,12 +22,16 @@ django:
     - name: postgres:15.4
       alias: postgres
       entrypoint: ["docker-entrypoint.sh", "postgres"]
+    - name: redis:latest
+      alias: redis
   variables:
     POSTGRES_DB: example_db
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
     POSTGRES_HOST_AUTH_METHOD: trust
     POSTGRES_HOST: postgres
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
   coverage: '/^TOTAL.+?(\d+\%)$/'
   script:
     - apt-get update && apt-get install -y postgresql-client
