@@ -1,4 +1,3 @@
-import django
 import django.contrib.admin
 import django.contrib.admin.utils
 import django.utils.html
@@ -7,24 +6,6 @@ from django.utils.translation import gettext_lazy as _
 import apps.feedback.models
 
 __all__ = ()
-
-
-class FeedbackFilesInline(django.contrib.admin.StackedInline):
-    model = apps.feedback.models.FeedbackFile
-    extra = 0
-    can_delete = False
-    readonly_fields = (apps.feedback.models.FeedbackFile.file.field.name,)
-
-    def file_display(self, obj):
-        return obj.file.name if obj.file else _("Нет файла")
-
-    file_display.short_description = _("Файл")
-
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
 
 
 @django.contrib.admin.register(apps.feedback.models.Feedback)
@@ -54,22 +35,19 @@ class FeedbackAdmin(django.contrib.admin.ModelAdmin):
         "personal_data_mail",
         "personal_data_user",
     )
-    inlines = [
-        FeedbackFilesInline,
-    ]
 
     def personal_data_name(self, obj):
         if obj.personal_data.name:
             return obj.personal_data.name
 
-        return _("Аноним")
+        return _("Anonymous")
 
-    personal_data_name.short_description = _("Имя автора")
+    personal_data_name.short_description = _("Author Name")
 
     def personal_data_mail(self, obj):
         return obj.personal_data.mail
 
-    personal_data_mail.short_description = _("Почта автора")
+    personal_data_mail.short_description = _("Author Email")
 
     def personal_data_user(self, obj):
         if obj.personal_data.user:
@@ -82,9 +60,9 @@ class FeedbackAdmin(django.contrib.admin.ModelAdmin):
                 obj.personal_data.user,
             )
 
-        return _("Не авторизован")
+        return _("Not logged in")
 
-    personal_data_user.short_description = _("Юзер автора")
+    personal_data_user.short_description = _("Author User")
 
     def save_model(self, request, obj, form, change):
         if change:
@@ -98,7 +76,7 @@ class FeedbackAdmin(django.contrib.admin.ModelAdmin):
                         to=obj.status,
                     )
                 else:
-                    raise Exception(_("Пользователь не авторизован."))
+                    raise Exception(_("User not authenticated."))
 
         super().save_model(request, obj, form, change)
 
@@ -132,7 +110,7 @@ class StatusLogAdmin(django.contrib.admin.ModelAdmin):
             obj.feedback,
         )
 
-    feedback_link.short_description = _("Автор фидбэка")
+    feedback_link.short_description = _("Feedback Author")
 
     def has_add_permission(self, request):
         return False

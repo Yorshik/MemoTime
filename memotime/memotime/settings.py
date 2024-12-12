@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.forms",
     # Внешние приложения
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [
@@ -148,7 +149,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = "en-us"
 
 LANGUAGES = [
     ("ru-ru", _("Russian")),
@@ -192,3 +193,21 @@ EMAIL_HOST_PASSWORD = decouple.config(
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = f"MemoTime {EMAIL_HOST_USER}"
+DEFAULT_REPLY_TO_EMAIL = decouple.config(
+    "MEMOTIME_EMAIL",
+    default="Your support email",
+)
+
+
+CELERY_BROKER_URL = decouple.config(
+    "CELERY_BROKER_URL",
+    default="redis://localhost:6379/0",
+)
+
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_CACHE_BACKEND = "django-cache"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
+CELERY_BEAT_MAX_LOOP_INTERVAL = 15

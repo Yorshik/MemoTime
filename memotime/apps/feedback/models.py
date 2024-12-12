@@ -17,22 +17,22 @@ User = django.contrib.auth.get_user_model()
 class PersonalData(django.db.models.Model):
     user = django.db.models.ForeignKey(
         User,
-        verbose_name=_("пользователь"),
+        verbose_name=_("user"),
         on_delete=django.db.models.DO_NOTHING,
-        help_text=_("Пользователь, отправивший фидбек"),
+        help_text=_("User who submitted the feedback"),
         blank=True,
         null=True,
     )
     name = django.db.models.TextField(
-        _("имя"),
+        _("name"),
         max_length=100,
-        help_text=_("Автор фидбэка"),
+        help_text=_("Feedback author"),
         blank=True,
         null=True,
     )
-    mail = django.db.models.EmailField(
-        _("почта"),
-        help_text=_("Почта автора фидбэка"),
+    email = django.db.models.EmailField(
+        _("email"),
+        help_text=_("Feedback author's email"),
         max_length=200,
         blank=False,
         null=False,
@@ -44,70 +44,46 @@ class PersonalData(django.db.models.Model):
 
 class Feedback(django.db.models.Model):
     class StatusChoices(django.db.models.TextChoices):
-        RECEIVED = "получено", _("получено")
-        IN_PROCESSING = "в обработке", _("в обработке")
-        RESPONSE_GIVEN = "ответ дан", _("ответ дан")
+        RECEIVED = "received", _("received")
+        IN_PROCESSING = "in processing", _("in processing")
+        RESPONSE_GIVEN = "response given", _("response given")
 
     status = django.db.models.CharField(
-        _("статус обработки"),
+        _("processing status"),
         blank=False,
-        help_text=_("Статус обработки"),
+        help_text=_("Processing status"),
         choices=StatusChoices.choices,
         default=StatusChoices.RECEIVED,
         max_length=20,
     )
     text = django.db.models.TextField(
-        _("текст"),
+        _("text"),
         max_length=10240,
-        help_text=_("Содержание фидбэка"),
+        help_text=_("Feedback content"),
         blank=False,
         null=False,
     )
     created_on = django.db.models.DateTimeField(
-        _("создан"),
+        _("created"),
         auto_now_add=True,
-        help_text=_("Дата создания фидбэка"),
+        help_text=_("Date of feedback creation"),
     )
     personal_data = django.db.models.OneToOneField(
         to=PersonalData,
         default=None,
         null=True,
         on_delete=django.db.models.PROTECT,
-        verbose_name=_("персональные данные"),
-        help_text=_("Персональные данные автора"),
+        verbose_name=_("personal data"),
+        help_text=_("Author's personal data"),
         related_name="feedback",
     )
 
     class Meta:
-        verbose_name = _("фидбэк")
-        verbose_name_plural = _("фидбэки")
+        verbose_name = _("feedback")
+        verbose_name_plural = _("feedbacks")
 
     def __str__(self):
         return self.personal_data.name[:15]
-
-
-class FeedbackFile(django.db.models.Model):
-    def get_upload_path(self, filename):
-        return f"uploads/{self.feedback_id}/{filename}"
-
-    file = django.db.models.FileField(
-        _("файл"),
-        upload_to=get_upload_path,
-        help_text=_("Прикрепленный файл"),
-    )
-    feedback = django.db.models.ForeignKey(
-        to=Feedback,
-        on_delete=django.db.models.CASCADE,
-        related_name="files",
-        help_text=_("Ссылка на связанный фидбек, к которому прикреплен файл"),
-    )
-
-    class Meta:
-        verbose_name = _("файл фидбэка")
-        verbose_name_plural = _("файлы фидбэка")
-
-    def __str__(self):
-        return f"id: {self.pk}"
 
 
 @django.dispatch.receiver(django.db.models.signals.pre_save, sender=Feedback)
@@ -119,40 +95,40 @@ def ensure_timestamps_feedback(sender, instance, **kwargs):
 class StatusLog(django.db.models.Model):
     user = django.db.models.ForeignKey(
         User,
-        verbose_name=_("пользователь"),
+        verbose_name=_("user"),
         on_delete=django.db.models.DO_NOTHING,
-        help_text=_("Пользователь, изменивший статус"),
+        help_text=_("User who changed the status"),
         db_column="User_key",
         related_name="status_logs",
     )
     feedback = django.db.models.ForeignKey(
         Feedback,
-        verbose_name=_("фидбэк"),
+        verbose_name=_("feedback"),
         on_delete=django.db.models.CASCADE,
-        help_text=_("Фидбэк, для которого изменён статус"),
+        help_text=_("Feedback for which the status was changed"),
         related_name="status_logs",
     )
     timestamp = django.db.models.DateTimeField(
-        _("время"),
+        _("time"),
         auto_now_add=True,
-        help_text=_("Время изменения статуса"),
+        help_text=_("Time of status change"),
     )
     from_status = django.db.models.CharField(
-        _("из статуса"),
+        _("from status"),
         max_length=20,
         db_column="from",
-        help_text=_("Из какого статуса"),
+        help_text=_("From which status"),
     )
     to = django.db.models.CharField(
-        _("в статус"),
+        _("to status"),
         max_length=20,
         db_column="to",
-        help_text=_("В какой статус"),
+        help_text=_("To which status"),
     )
 
     class Meta:
-        verbose_name = _("лог изменения статуса")
-        verbose_name_plural = _("логи изменения статусов")
+        verbose_name = _("status change log")
+        verbose_name_plural = _("status change logs")
 
     def __str__(self):
         return f"{self.feedback} ({self.from_status} → {self.to})"

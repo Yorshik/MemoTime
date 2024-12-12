@@ -48,6 +48,8 @@ urlpatterns = [
         "password_reset/",
         django.contrib.auth.views.PasswordResetView.as_view(
             template_name="users/password_reset.html",
+            email_template_name="users/email/password_reset_email.html",
+            success_url=django.urls.reverse_lazy("users:password-reset-done"),
         ),
         name="password-reset",
     ),

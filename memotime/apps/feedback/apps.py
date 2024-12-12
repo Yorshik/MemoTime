@@ -7,4 +7,4 @@ __all__ = ()
 class FeedbackConfig(django.apps.AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.feedback"
-    verbose_name = _("Обратная связь")
+    verbose_name = _("Feedback")

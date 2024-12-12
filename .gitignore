@@ -221,3 +221,4 @@ send_mail
 
 # Project-specific ignores
 */media/
+celerybeat-schedule.*

@@ -3,7 +3,6 @@ import shutil
 import tempfile
 
 import django.conf
-import django.core.files.uploadedfile
 import django.test
 import django.urls
 import parametrize
@@ -24,9 +23,8 @@ class FeedbackFormTests(django.test.TestCase):
         super().setUpClass()
         cls.valid_form_data = {
             "author-name": "Тест",
-            "author-mail": "test@example.com",
+            "author-email": "test@example.com",
             "feedback-text": "test_message",
-            "files_form-files": [],
         }
 
     def tearDown(self):
@@ -49,7 +47,7 @@ class FeedbackFormTests(django.test.TestCase):
         "test_data",
         [
             ({},),
-            ({"author-name": "", "author-mail": "", "feedback-text": ""},),
+            ({"author-name": "", "author-email": "", "feedback-text": ""},),
         ],
     )
     def test_empty_form_is_invalid(self, test_data):
@@ -66,15 +64,11 @@ class FeedbackFormTests(django.test.TestCase):
             response.context["form"]["feedback"].is_valid(),
             "Empty feedback form should be invalid",
         )
-        self.assertTrue(
-            response.context["form"]["files_form"].is_valid(),
-            "Empty files form should be valid",
-        )
 
     @parametrize.parametrize(
         "test_data",
         [
-            ({"author-name": "", "author-mail": "", "feedback-text": ""},),
+            ({"author-name": "", "author-email": "", "feedback-text": ""},),
         ],
     )
     def test_empty_form_has_one_error_in_author_form(self, test_data):
@@ -92,7 +86,7 @@ class FeedbackFormTests(django.test.TestCase):
     @parametrize.parametrize(
         "test_data",
         [
-            ({"author-name": "", "author-mail": "", "feedback-text": ""},),
+            ({"author-name": "", "author-email": "", "feedback-text": ""},),
         ],
     )
     def test_empty_form_has_one_error_in_feedback_form(self, test_data):
@@ -113,20 +107,20 @@ class FeedbackFormTests(django.test.TestCase):
             (
                 {
                     "author-name": "Тест",
-                    "author-mail": "invalid_email",
+                    "author-email": "invalid_email",
                     "feedback-text": "test_message",
                 },
             ),
         ],
     )
-    def test_author_form_mail_field_has_error(self, test_data):
+    def test_author_form_email_field_has_error(self, test_data):
         response = self.client.post(
             django.urls.reverse("feedback:feedback"),
             data=test_data,
             follow=True,
         )
         self.assertTrue(
-            response.context["form"]["author"].has_error("mail"),
+            response.context["form"]["author"].has_error("email"),
             "Form should contain an error for invalid email format",
         )
 
@@ -136,7 +130,7 @@ class FeedbackFormTests(django.test.TestCase):
             (
                 {
                     "author-name": "Тест",
-                    "author-mail": "test@example.com",
+                    "author-email": "test@example.com",
                     "feedback-text": "",
                 },
             ),
@@ -161,7 +155,7 @@ class FeedbackFormTests(django.test.TestCase):
         )
         self.assertContains(
             response,
-            "Спасибо! Ваш отзыв был успешно отправлен.",
+            "Thank you! Your feedback has been sent successfully.",
             msg_prefix="Success message should be displayed after form submission",
         )
 
@@ -200,45 +194,17 @@ class FeedbackFormTests(django.test.TestCase):
             apps.feedback.models.Feedback.objects.filter(
                 personal_data__name=self.valid_form_data["author-name"],
                 text=self.valid_form_data["feedback-text"],
-                personal_data__mail=self.valid_form_data["author-mail"],
+                personal_data__email=self.valid_form_data["author-email"],
             ).exists(),
             "Submitted data should be saved in the database",
         )
 
-    def test_uploaded_files_exist(self):
-        test_file = django.core.files.uploadedfile.SimpleUploadedFile(
-            name="test_file.txt",
-            content=b"This is a test file content.",
-            content_type="text/plain",
-        )
-        test_file2 = django.core.files.uploadedfile.SimpleUploadedFile(
-            name="test_file2.txt",
-            content=b"This is another test file content.",
-            content_type="text/plain",
-        )
-        test_form_data = self.valid_form_data.copy()
-        test_form_data["files_form-files"] = [test_file, test_file2]
-        django.test.Client().post(
-            django.urls.reverse("feedback:feedback"),
-            data=test_form_data,
-            follow=True,
-        )
-        created_feedback = apps.feedback.models.Feedback.objects.latest(
-            "created_on",
-        )
-        for uploaded_file in created_feedback.files.all():
-            self.assertTrue(
-                uploaded_file.file.storage.exists(uploaded_file.file.name),
-                "Uploaded files should exist in storage",
-            )
-
     @parametrize.parametrize(
         "form_name, field_name, expected_label",
         [
-            ("author", "name", "Имя"),
-            ("author", "mail", "Почта"),
-            ("feedback", "text", "Описание"),
-            ("files_form", "files", "Прикрепленные файлы"),
+            ("author", "name", "Name"),
+            ("author", "email", "Email"),
+            ("feedback", "text", "Description"),
         ],
     )
     def test_field_label(self, form_name, field_name, expected_label):
@@ -253,10 +219,9 @@ class FeedbackFormTests(django.test.TestCase):
     @parametrize.parametrize(
         "form_name, field_name, expected_help_text",
         [
-            ("author", "name", "Автор фидбэка"),
-            ("author", "mail", "Почта автора фидбэка"),
-            ("feedback", "text", "Содержание обращения"),
-            ("files_form", "files", ""),
+            ("author", "name", "Feedback author"),
+            ("author", "email", "Feedback author's email"),
+            ("feedback", "text", "Content of your feedback"),
         ],
     )
     def test_field_help_text(self, form_name, field_name, expected_help_text):
@@ -272,7 +237,7 @@ class FeedbackFormTests(django.test.TestCase):
     def test_form_field_required(self):
         invalid_data = {
             "author-name": "",
-            "author-mail": "test@example.com",
+            "author-email": "test@example.com",
             "feedback-text": "",
         }
         response = django.test.Client().post(
@@ -281,7 +246,7 @@ class FeedbackFormTests(django.test.TestCase):
             follow=True,
         )
         self.assertTrue(
-            response.context["form"]["author"].fields["mail"].required,
+            response.context["form"]["author"].fields["email"].required,
             "The email field must be mandatory",
         )
 

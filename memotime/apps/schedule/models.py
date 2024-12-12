@@ -4,81 +4,218 @@ from django.utils.translation import gettext_lazy as _
 
 __all__ = ()
 
-
-class Schedule(django.db.models.Model):
-    user = django.db.models.ForeignKey(django.contrib.auth.get_user_model(), on_delete=django.db.models.CASCADE, verbose_name=_("user"), help_text=_("user, who owns this schedule"), related_name="schedule", related_query_name="schedules")
-    start_date = django.db.models.DateField(verbose_name=_("schedule start date"), help_text=_("the day, from which this schedule is active"))
-    expiration_date = django.db.models.DateField(verbose_name=_("schedule expiration date"), help_text=_("the day, when schedule will be destroyed"))
-
-    class Meta:
-        verbose_name = _("schedule")
-        verbose_name_plural = _("schedules")
+User = django.contrib.auth.get_user_model()
 
 
-class DaySchedule(django.db.models.Model):
-    DAY_NUMBER_CHOICES = (
-        ("1", _("Monday")),
-        ("2", _("Tuesday")),
-        ("3", _("Wednesday")),
-        ("4", _("Thursday")),
-        ("5", _("Friday")),
-        ("6", _("Saturday")),
-        ("7", _("Sunday")),
+class Note(django.db.models.Model):
+    disposable = django.db.models.BooleanField(
+        _("disposable"),
+        default=True,
+        help_text=_("Determines if the note is used only once"),
     )
-    user = django.db.models.ForeignKey(django.contrib.auth.get_user_model(), on_delete=django.db.models.CASCADE, verbose_name=_("user"), help_text=_("user, who owns this day schedule"), related_name="day_schedule", related_query_name="day_schedules")
-    day_number = django.db.models.CharField(max_length=1, choices=DAY_NUMBER_CHOICES)
-    schedule = django.db.models.ForeignKey(Schedule, on_delete=django.db.models.CASCADE, related_name="day_schedule", related_query_name="day_schedules", verbose_name=_("schedule"), help_text=_("main schedule"))
-
-    class Meta:
-        verbose_name = _("day schedule")
-        verbose_name_plural = _("day schedules")
-
-
-class TimeSchedule(django.db.models.Model):
-    user = django.db.models.ForeignKey(django.contrib.auth.get_user_model(), on_delete=django.db.models.CASCADE, verbose_name=_("user"), help_text=_("user, who owns this day schedule"), related_name="time_schedule", related_query_name="time_schedules")
-    time_start = django.db.models.DateTimeField(verbose_name=_("start time"), help_text=_("time when the day starts"))
-    time_end = django.db.models.DateTimeField(verbose_name=_("end time"), help_text=_("time when the day ends"))
-    even = django.db.models.BooleanField(verbose_name=_("even week"), help_text=_("shows whether week is even or odd"))
-
-    class Meta:
-        verbose_name = _("time schedule")
-        verbose_name_plural = _("time schedules")
-
-
-class Event(django.db.models.Model):
-    EVENT_TYPE_CHOICES = (
-        ("subject", _("subject")),
-        ("club", _("after-school activity")),
-        ("relax", _("relax")),
+    global_note = django.db.models.BooleanField(
+        _("global"),
+        help_text=_("Global note"),
     )
-
-    user = django.db.models.ForeignKey(django.contrib.auth.get_user_model(), on_delete=django.db.models.CASCADE, verbose_name=_("user"), help_text=_("user, who owns this day schedule"), related_name="event", related_query_name="events")
-    name = django.db.models.CharField(max_length=150, verbose_name=_("name"), help_text=_("name of the event"))
-    custom_name = django.db.models.CharField(max_length=150, verbose_name=_("custom name"), help_text=_("custom name of the event"))
-    event_type = django.db.models.CharField(max_length=20, db_column="type", verbose_name=_("type of the event"), help_text=_("one of the types: subject, after-school activity, relax"))
-
-    class Meta:
-        verbose_name = _("event")
-        verbose_name_plural = _("events")
-
-
-class Notes(django.db.models.Model):
-    user = django.db.models.ForeignKey(django.contrib.auth.get_user_model(), on_delete=django.db.models.CASCADE, verbose_name=_("user"), help_text=_("user, who owns this day schedule"), related_name="notes", related_query_name="notes")
-    disposable = django.db.models.BooleanField(verbose_name=_("is the note disposable"), help_text=_("shows whether note is disposable or repeating"))
-    time_link = django.db.models.ForeignKey(TimeSchedule, verbose_name=_("notification time"), help_text=_("time when notification will come"), related_name="notes", related_query_name="notes", on_delete=django.db.models.CASCADE)
-    global_note = django.db.models.BooleanField(db_column="global", verbose_name=_("is note global"), help_text=_("shows whether note is global (displayed on dependent schedules) or local"))
-    heading = django.db.models.CharField(max_length=150, verbose_name=_("heading"), help_text=_("heading of the note"))
-    description = django.db.models.TextField(verbose_name=_("description"), help_text=_("description of the note, that you will see in the notification"))
+    heading = django.db.models.CharField(
+        _("heading"),
+        max_length=255,
+        help_text=_("Note heading"),
+    )
+    description = django.db.models.TextField(
+        _("description"),
+        help_text=_("Note description"),
+        blank=True,
+    )
+    user = django.db.models.ForeignKey(
+        User,
+        on_delete=django.db.models.CASCADE,
+        related_name="notes",
+        help_text=_("User"),
+    )
 
     class Meta:
         verbose_name = _("note")
         verbose_name_plural = _("notes")
 
+    def __str__(self):
+        return self.heading
+
 
 class Teacher(django.db.models.Model):
-    name = django.db.models.CharField(max_length=150, verbose_name=_("name"), help_text=_("name of the teacher"))
-    user = django.db.models.ForeignKey(django.contrib.auth.get_user_model(), on_delete=django.db.models.CASCADE, verbose_name=_("user"), help_text=_("user, who owns this day schedule"), related_name="teacher", related_query_name="teachers")
+    name = django.db.models.CharField(
+        _("name"),
+        max_length=255,
+        help_text=_("Teacher's name"),
+    )
+    user = django.db.models.ForeignKey(
+        User,
+        on_delete=django.db.models.CASCADE,
+        related_name="teachers",
+        help_text=_("User"),
+    )
 
     class Meta:
         verbose_name = _("teacher")
         verbose_name_plural = _("teachers")
+
+    def __str__(self):
+        return self.name
+
+
+class Event(django.db.models.Model):
+    class EventType(django.db.models.TextChoices):
+        SUBJECT = "subject", _("Subject")
+        CLUB = "club", _("Club")
+        EVENT = "event", _("Event")
+
+    class EventPriority(django.db.models.TextChoices):
+        HIGH = "high", _("High")
+        MEDIUM = "medium", _("Medium")
+        LOW = "low", _("Low")
+
+    name = django.db.models.CharField(
+        _("name"),
+        max_length=255,
+        help_text=_("Event name"),
+    )
+    custom_name = django.db.models.CharField(
+        _("custom name"),
+        max_length=255,
+        help_text=_("Custom event name"),
+        blank=True,
+    )
+    description = django.db.models.TextField(
+        _("description"),
+        help_text=_("Event description"),
+        blank=True,
+    )
+    teacher = django.db.models.ForeignKey(
+        Teacher,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="events",
+        help_text=_("Teacher"),
+    )
+    event_type = django.db.models.CharField(
+        _("type"),
+        max_length=20,
+        choices=EventType.choices,
+        help_text=_("Event type"),
+    )
+    priority = django.db.models.CharField(
+        _("priority"),
+        max_length=20,
+        choices=EventPriority.choices,
+        help_text=_(
+            "If high, the event is displayed over the subject. If medium priority,"
+            " conflicts may arise. If low, the subject overlaps the event.",
+        ),
+    )
+    user = django.db.models.ForeignKey(
+        User,
+        on_delete=django.db.models.CASCADE,
+        related_name="events",
+        help_text=_("User"),
+    )
+    notes = django.db.models.ForeignKey(
+        Note,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="events",
+        help_text=_("Notes related to the event"),
+    )
+
+    class Meta:
+        verbose_name = _("event")
+        verbose_name_plural = _("events")
+
+    def __str__(self):
+        return self.name
+
+
+class Schedule(django.db.models.Model):
+    user = django.db.models.ForeignKey(
+        User,
+        on_delete=django.db.models.CASCADE,
+        related_name="schedules",
+        help_text=_("User"),
+    )
+    is_static = django.db.models.BooleanField(
+        _("static"),
+        help_text=_(
+            "Determines if the schedule alternates (if False, the 'even' field in"
+            " TimeSchedule is used)",
+        ),
+    )
+    start_date = django.db.models.DateField(
+        _("start date"),
+        help_text=_("Schedule start date"),
+    )
+    expiration_date = django.db.models.DateField(
+        _("expiration date"),
+        help_text=_("Schedule expiration date"),
+    )
+
+    class Meta:
+        verbose_name = _("schedule")
+        verbose_name_plural = _("schedules")
+
+    def __str__(self):
+        return f"{self.user} - {self.start_date} - {self.expiration_date}"
+
+
+class TimeSchedule(django.db.models.Model):
+    class DayNumber(django.db.models.IntegerChoices):
+        MONDAY = 1, _("Monday")
+        TUESDAY = 2, _("Tuesday")
+        WEDNESDAY = 3, _("Wednesday")
+        THURSDAY = 4, _("Thursday")
+        FRIDAY = 5, _("Friday")
+        SATURDAY = 6, _("Saturday")
+        SUNDAY = 7, _("Sunday")
+
+    schedule = django.db.models.ForeignKey(
+        Schedule,
+        on_delete=django.db.models.CASCADE,
+        related_name="timeschedules",
+        help_text=_("Schedule"),
+    )
+    time_start = django.db.models.TimeField(
+        _("start time"),
+        help_text=_("Start time of the subject/event"),
+    )
+    time_end = django.db.models.TimeField(
+        _("end time"),
+        help_text=_("End time of the subject/event"),
+    )
+    event = django.db.models.ForeignKey(
+        Event,
+        on_delete=django.db.models.CASCADE,
+        related_name="timeschedules",
+        help_text=_("Event"),
+    )
+    even = django.db.models.BooleanField(
+        _("even week"),
+        help_text=_("Even/odd week for the subject"),
+    )
+    user = django.db.models.ForeignKey(
+        User,
+        on_delete=django.db.models.CASCADE,
+        related_name="timeschedules",
+        help_text=_("User"),
+    )
+    day_number = django.db.models.IntegerField(
+        _("day of the week"),
+        choices=DayNumber.choices,
+        help_text=_("Day of the week (1-7)"),
+    )
+
+    class Meta:
+        verbose_name = _("time schedule")
+        verbose_name_plural = _("time schedules")
+
+    def __str__(self):
+        return f"{self.event} - {self.time_start} - {self.time_end}"

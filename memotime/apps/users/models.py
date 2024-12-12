@@ -9,7 +9,6 @@ import apps.users.managers
 
 __all__ = ()
 
-
 normalizer = apps.users.email_normalizer.EmailNormalizer()
 
 
@@ -19,32 +18,32 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
     objects = apps.users.managers.UserManager()
 
     email = django.db.models.EmailField(
-        _("email"),
+        _("email address"),
         unique=True,
         null=False,
         blank=False,
-        help_text=_("уникальный адрес электронной почты"),
+        help_text=_("Unique email address"),
     )
     timezone = django.db.models.CharField(
-        _("часовой пояс"),
+        _("timezone"),
         max_length=50,
         choices=TIMEZONE_CHOICES,
         default=TIMEZONE_CHOICES[-1],
-        help_text=_("Часовой пояс пользователя"),
+        help_text=_("User's time zone"),
     )
     subscription_end_date = django.db.models.DateTimeField(
-        _("дата окончания подписки"),
+        _("subscription end date"),
         null=True,
         default=None,
-        help_text=_("дата окончания подписки, после чего она отключается"),
+        help_text=_("Date when the subscription ends and is deactivated"),
     )
     is_email_subscribed = django.db.models.BooleanField(
-        _("почтовые уведомления"),
+        _("email notifications"),
         default=True,
-        help_text=_("подключены ли уведомления на почту"),
+        help_text=_("Whether email notifications are enabled"),
     )
     is_telegram_subscribed = django.db.models.BooleanField(
-        _("уведомления в Телеграм"),
+        _("Telegram notifications"),
         default=True,
-        help_text=_("подключены ли уведомления в Телеграм"),
+        help_text=_("Whether Telegram notifications are enabled"),
     )

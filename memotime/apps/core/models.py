@@ -1,6 +1,7 @@
 import uuid
 
 import django.db.models
+from django.utils.translation import gettext_lazy as _
 
 __all__ = ()
 
@@ -13,8 +14,8 @@ class BaseImageModel(django.db.models.Model):
         )
 
     image = django.db.models.ImageField(
-        verbose_name="картинка/аватарка",
-        help_text="картинка заметки/аватарка профиля",
+        verbose_name=_("image/avatar"),
+        help_text=_("Note image/profile avatar"),
         upload_to=upload_to_path,
         null=True,
         blank=True,
