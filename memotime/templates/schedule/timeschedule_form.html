@@ -3,7 +3,7 @@
   <head>
     <title>Time Schedule Form</title>
     <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <!-- jQuery -->
@@ -55,9 +55,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="addEventForm"
-                  method="post"
-                  action="{% url 'schedule:event-create' %}">
+            <form id="addEventForm" method="post">
               {% csrf_token %}
               {% for field in event_form %}
                 <div class="form-group">
@@ -70,49 +68,176 @@
                   {% endif %}
                 </div>
               {% endfor %}
+              <button type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#addTeacherModal"
+                      onclick="fillTeacherName()">Add Teacher</button>
               <button type="submit" class="btn btn-primary">Save Event</button>
             </form>
           </div>
         </div>
       </div>
     </div>
+    <!-- Modal for Add Teacher -->
+    <div class="modal fade"
+         id="addTeacherModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="addTeacherModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addTeacherModalLabel">Add New Teacher</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addTeacherForm" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="id_teacher_name">Name</label>
+                <input type="text"
+                       class="form-control"
+                       id="id_teacher_name"
+                       name="name"
+                       required>
+                <div class="invalid-feedback"></div>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Teacher</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
-        $(document).ready(function() {
-            $('.selectpicker').selectpicker({
-                bootstrapVersion: '4'
-            });
-
-             $('#addEventForm').on('submit', function(event) {
-               event.preventDefault();
-                var form = $(this);
-               $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize(),
-                     success: function (data) {
-                         $('#addEventModal').modal('hide');
-                         $('#addEventForm')[0].reset();
-                         $('.selectpicker').empty();
-                        $.each(data.events, function(key, value) {
-                            $('.selectpicker').append($("<option></option>").attr("value",value[0]).text(value[1]));
-                        });
-                         $('.selectpicker').selectpicker('refresh');
-
-                     },
-                     error: function (data) {
-                         var errors = data.responseJSON;
-                        $.each(errors, function (key, value) {
-                            var input = $('#id_' + key);
-                            input.addClass('is-invalid');
-                            input.next('.invalid-feedback').remove()
-                           input.after('<div class="invalid-feedback d-block">' + value.join("<br>") + '</div>')
-
-                        })
-                     },
-                 })
-             })
+      $(document).ready(function () {
+        $(".selectpicker").selectpicker({
+          bootstrapVersion: "4",
+          noneResultsText: 'Add new Teacher',
         });
+        var eventSelect = $("#id_event");
+          {% if events %}
+           eventSelect.empty();
+                eventSelect.append($("<option></option>").attr("value","").text("---------"))
+          {% for event in events %}
+           eventSelect.append(
+                  $("<option></option>").attr("value", "{{ event.0 }}").text("{{ event.1 }}")
+                );
+         {% endfor %}
+           {% if form.instance.event %}
+                eventSelect.val("{{ form.instance.event.id }}");
+            {% endif %}
+          $('.selectpicker').selectpicker('refresh');
+        {% endif %}
+           var teacherSelect = $("#id_teacher");
+            {% if teachers %}
+                teacherSelect.empty();
+              teacherSelect.append($("<option></option>").attr("value","").text("---------"))
+                {% for teacher in teachers %}
+                  teacherSelect.append(
+                    $("<option></option>").attr("value", "{{ teacher.0 }}").text("{{ teacher.1 }}")
+                );
+                  {% endfor %}
+                  $('.selectpicker').selectpicker('refresh');
+          {% endif %}
 
+             $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+                 if (isSelected === false ) return;
+                 const selectedText = $(this).find('option').eq(clickedIndex).text();
+                  if (selectedText === 'Add new Teacher')
+                  {
+                   $('#addTeacherModal').modal('show');
+                    fillTeacherName()
+
+                    $(this).selectpicker('val',previousValue);
+                  }
+              });
+
+         function fillTeacherName() {
+            const searchQuery = $(".bootstrap-select .bs-searchbox input").val()
+              if (searchQuery)
+            {
+                 $('#id_teacher_name').val(searchQuery);
+            }
+            }
+
+            $('#addTeacherForm').on('submit', function(event) {
+             event.preventDefault();
+            var form = $(this);
+              $.ajax({
+            type: "POST",
+            url: "{% url 'schedule:teacher-create' %}",
+            data: form.serialize(),
+            success: function (data) {
+             $("#addTeacherModal").modal("hide");
+                $('#addTeacherForm')[0].reset();
+                var teacherSelect = $("#id_teacher");
+              teacherSelect.empty();
+              teacherSelect.append($("<option></option>").attr("value","").text("---------"))
+                $.each(data.teachers, function (key, value) {
+                  teacherSelect.append(
+                    $("<option></option>").attr("value", value[0]).text(value[1])
+                );
+              });
+              $(".selectpicker").selectpicker("refresh");
+            },
+             error: function (data) {
+              var errors = data.responseJSON;
+                 var input = $('#id_teacher_name');
+                input.addClass("is-invalid");
+                 input.next(".invalid-feedback").text(errors['name'][0])
+            },
+          });
+      });
+
+        $("#addEventForm").on("submit", function (event) {
+          event.preventDefault();
+          var form = $(this);
+          $.ajax({
+            type: "POST",
+            url: "{% url 'schedule:event-create' %}",
+            data: form.serialize(),
+            success: function (data) {
+              $("#addEventModal").modal("hide");
+              $("#addEventForm")[0].reset();
+              var eventSelect = $("#id_event");
+              eventSelect.empty();
+                eventSelect.append($("<option></option>").attr("value","").text("---------"))
+              $.each(data.events, function (key, value) {
+                eventSelect.append(
+                  $("<option></option>").attr("value", value[0]).text(value[1])
+                );
+              });
+              $(".selectpicker").selectpicker("refresh");
+                var teacherSelect = $("#id_teacher");
+              teacherSelect.empty();
+                teacherSelect.append($("<option></option>").attr("value","").text("---------"))
+                $.each(data.teachers, function (key, value) {
+                  teacherSelect.append(
+                    $("<option></option>").attr("value", value[0]).text(value[1])
+                );
+              });
+              $(".selectpicker").selectpicker("refresh");
+            },
+            error: function (data) {
+              var errors = data.responseJSON;
+              $.each(errors, function (key, value) {
+                var input = $("#id_" + key);
+                input.addClass("is-invalid");
+                input.next(".invalid-feedback").remove();
+                input.after(
+                  '<div class="invalid-feedback d-block">' +
+                    value.join("<br>") +
+                    "</div>"
+                );
+              });
+            },
+          });
+        });
+      });
     </script>
   </body>
 </html>

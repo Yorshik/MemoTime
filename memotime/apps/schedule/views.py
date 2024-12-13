@@ -1,11 +1,11 @@
-import django.shortcuts
-import django.views.generic
-from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
+import django.shortcuts
+from django.urls import reverse_lazy
+import django.views.generic
 
-from apps.schedule import forms
-from apps.schedule import models
+from apps.schedule import forms, models
+
+__all__ = ()
 
 
 class ScheduleCreateView(django.views.generic.CreateView):
@@ -73,6 +73,12 @@ class TimeScheduleCreateView(django.views.generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["event_form"] = forms.EventForm()
+        context["teachers"] = models.Teacher.objects.filter(
+            user=self.request.user,
+        ).values_list(
+            "id",
+            "name",
+        )
         return context
 
     def form_valid(self, form):
@@ -104,6 +110,23 @@ class TimeScheduleUpdateView(django.views.generic.UpdateView):
             kwargs={"pk": self.object.schedule.id},
         )
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["event_form"] = forms.EventForm()
+        context["events"] = models.Event.objects.filter(
+            user=self.request.user,
+        ).values_list(
+            "id",
+            "name",
+        )
+        context["teachers"] = models.Teacher.objects.filter(
+            user=self.request.user,
+        ).values_list(
+            "id",
+            "name",
+        )
+        return context
+
 
 class TimeScheduleDeleteView(django.views.generic.DeleteView):
     model = models.TimeSchedule
@@ -117,7 +140,7 @@ class TimeScheduleDeleteView(django.views.generic.DeleteView):
 
 
 class EventCreateView(django.views.generic.CreateView):
-    model = models.Event
+    model = models.Eventы
     form_class = forms.EventForm
 
     def form_invalid(self, form):
@@ -131,3 +154,20 @@ class EventCreateView(django.views.generic.CreateView):
             "name",
         )
         return JsonResponse({"events": list(events)})
+
+
+class TeacherCreateView(django.views.generic.CreateView):
+    model = models.Teacher
+    form_class = forms.TeacherForm
+
+    def form_invalid(self, form):
+        return JsonResponse(form.errors, status=400)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        teachers = models.Teacher.objects.filter(user=self.request.user).values_list(
+            "id",
+            "name",
+        )
+        return JsonResponse({"teachers": list(teachers)})

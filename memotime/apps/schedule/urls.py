@@ -26,6 +26,11 @@ urlpatterns = [
         name="schedule-delete",
     ),
     django.urls.path(
+        "teacher/create/",
+        views.TeacherCreateView.as_view(),
+        name="teacher-create",
+    ),
+    django.urls.path(
         "<int:pk>/",
         views.ScheduleDetailView.as_view(),
         name="schedule-detail",

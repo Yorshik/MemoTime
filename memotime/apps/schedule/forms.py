@@ -1,6 +1,5 @@
 import django.forms
 import django.utils.timezone
-from django.utils.translation import gettext_lazy as _
 
 from apps.schedule import models
 
@@ -36,6 +35,17 @@ class EventForm(django.forms.ModelForm):
             "priority",
             "notes",
         ]
+        widgets = {
+            "teacher": django.forms.Select(
+                attrs={"class": "selectpicker", "data-live-search": "true"},
+            ),
+        }
+
+
+class TeacherForm(django.forms.ModelForm):
+    class Meta:
+        model = models.Teacher
+        fields = ["name"]
 
 
 class TimeScheduleForm(django.forms.ModelForm):
