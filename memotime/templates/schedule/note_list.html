@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Note List</title>
+  </head>
+  <body>
+    <h2>Note List</h2>
+    <ul>
+      {% for note in notes %}
+        <li>
+          {{ note.heading }}
+          <a href="{% url 'schedule:note-update' pk=note.pk %}">Update</a>
+          <a href="{% url 'schedule:note-delete' pk=note.pk %}">Delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'schedule:note-create' %}">Add Note</a>
+  </body>
+</html>

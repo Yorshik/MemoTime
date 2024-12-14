@@ -2,6 +2,35 @@
 <html>
   <head>
     <title>Schedule Form</title>
+    <style>
+        .errorlist {
+        color: red;
+        list-style: none;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .errorlist li {
+        margin-bottom: 5px;
+    }
+
+     .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    </style>
   </head>
   <body>
     <h2>
@@ -13,7 +42,22 @@
     </h2>
     <form method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      {% if form.errors %}
+        <ul class="errorlist">
+          {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <ul class="errorlist">
+              {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endfor %}
       <button type="submit">Save</button>
     </form>
   </body>

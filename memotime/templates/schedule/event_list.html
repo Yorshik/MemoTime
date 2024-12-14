@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event List</title>
+</head>
+<body>
+    <h2>Event List</h2>
+    <ul>
+        {% for event in events %}
+            <li>
+                {{ event.name }}
+               <a href="{% url 'schedule:event-update' pk=event.pk %}">Update</a>
+                 <a href="{% url 'schedule:event-delete' pk=event.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+     <a href="{% url 'schedule:event-create' %}">Add Event</a>
+</body>
+</html>

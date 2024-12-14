@@ -45,5 +45,65 @@
     <li>
       feedback<a href="{% url 'feedback:feedback' %}">/feedback/</a>
     </li>
+    <li>
+      schedule create <a href="{% url 'schedule:schedule-create' %}">/schedule/create/</a>
+    </li>
+    <li>
+      schedule list <a href="{% url 'schedule:schedule-list' %}">/schedule/</a>
+    </li>
+    <li>
+      schedule update <a href="{% url 'schedule:schedule-update' pk=1 %}">/schedule/1/update/</a>
+    </li>
+    <li>
+      schedule delete <a href="{% url 'schedule:schedule-delete' pk=1 %}">/schedule/1/delete/</a>
+    </li>
+    <li>
+      schedule detail<a href="{% url 'schedule:schedule-detail' pk=1 %}">/schedule/1/</a>
+    </li>
+    <li>
+      teacher create <a href="{% url 'schedule:teacher-create' %}">/schedule/teacher/create/</a>
+    </li>
+    <li>
+      teacher list <a href="{% url 'schedule:teacher-list' %}">/schedule/teacher/</a>
+    </li>
+    <li>
+      teacher update <a href="{% url 'schedule:teacher-update' pk=1 %}">/schedule/teacher/1/update/</a>
+    </li>
+    <li>
+      teacher delete <a href="{% url 'schedule:teacher-delete' pk=1 %}">/schedule/teacher/1/delete/</a>
+    </li>
+    <li>
+      time schedule create <a href="{% url 'schedule:timeschedule-create' schedule_id=1 %}">/schedule/1/timeschedule/create/</a>
+    </li>
+    <li>
+      time schedule update <a href="{% url 'schedule:timeschedule-update' pk=1 %}">/schedule/timeschedule/1/update/</a>
+    </li>
+    <li>
+      time schedule delete<a href="{% url 'schedule:timeschedule-delete' pk=1 %}">/schedule/timeschedule/1/delete/</a>
+    </li>
+    <li>
+      event create <a href="{% url 'schedule:event-create' %}">/schedule/event/create/</a>
+    </li>
+    <li>
+      event list <a href="{% url 'schedule:event-list' %}">/schedule/event/</a>
+    </li>
+    <li>
+      event update <a href="{% url 'schedule:event-update' pk=1 %}">/schedule/event/1/update/</a>
+    </li>
+    <li>
+      event delete <a href="{% url 'schedule:event-delete' pk=1 %}">/schedule/event/1/delete/</a>
+    </li>
+    <li>
+      note create <a href="{% url 'schedule:note-create' %}">/schedule/note/create/</a>
+    </li>
+    <li>
+      note list<a href="{% url 'schedule:note-list' %}">/schedule/notes/</a>
+    </li>
+    <li>
+      note update <a href="{% url 'schedule:note-update' pk=1 %}">/schedule/note/1/update/</a>
+    </li>
+    <li>
+      note delete <a href="{% url 'schedule:note-delete' pk=1 %}">/schedule/note/1/delete/</a>
+    </li>
   </ul>
 {% endblock body %}

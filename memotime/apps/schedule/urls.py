@@ -31,6 +31,21 @@ urlpatterns = [
         name="teacher-create",
     ),
     django.urls.path(
+        "teacher/",
+        views.TeacherListView.as_view(),
+        name="teacher-list",
+    ),
+    django.urls.path(
+        "teacher/<int:pk>/update/",
+        views.TeacherUpdateView.as_view(),
+        name="teacher-update",
+    ),
+    django.urls.path(
+        "teacher/<int:pk>/delete/",
+        views.TeacherDeleteView.as_view(),
+        name="teacher-delete",
+    ),
+    django.urls.path(
         "<int:pk>/",
         views.ScheduleDetailView.as_view(),
         name="schedule-detail",
@@ -51,8 +66,48 @@ urlpatterns = [
         name="timeschedule-delete",
     ),
     django.urls.path(
+        "<int:schedule_id>/timeschedule/event/create/",
+        views.TimeScheduleEventCreateView.as_view(),
+        name="timeschedule-event-create",
+    ),
+    django.urls.path(
         "event/create/",
         views.EventCreateView.as_view(),
         name="event-create",
+    ),
+    django.urls.path(
+        "event/",
+        views.EventListView.as_view(),
+        name="event-list",
+    ),
+    django.urls.path(
+        "event/<int:pk>/update/",
+        views.EventUpdateView.as_view(),
+        name="event-update",
+    ),
+    django.urls.path(
+        "event/<int:pk>/delete/",
+        views.EventDeleteView.as_view(),
+        name="event-delete",
+    ),
+    django.urls.path(
+        "note/create/",
+        views.NoteCreateView.as_view(),
+        name="note-create",
+    ),
+    django.urls.path(
+        "notes/",
+        views.NoteListView.as_view(),
+        name="note-list",
+    ),
+    django.urls.path(
+        "note/<int:pk>/update/",
+        views.NoteUpdateView.as_view(),
+        name="note-update",
+    ),
+    django.urls.path(
+        "note/<int:pk>/delete/",
+        views.NoteDeleteView.as_view(),
+        name="note-delete",
     ),
 ]
