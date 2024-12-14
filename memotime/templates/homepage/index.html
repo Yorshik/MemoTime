@@ -1,49 +1,147 @@
 {% extends "base.html" %}
 {% load i18n static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock extra_css %}
 {% block body %}
-  <h1>Working urls</h1>
-  <ul>
-    <li>
-      root<a href="{% url 'homepage:homepage' %}">/</a>
-    </li>
-    <li>
-      admin<a href="/admin">/admin</a>
-    </li>
-    <li>
-      activate-resend<a href="{% url 'users:activate-resend' %}">/activate/resend/</a>
-    </li>
-    <li>
-      activate<a href="{% url 'users:activate' pk=1 %}">/activate/1/</a>
-    </li>
-    <li>
-      login<a href="{% url 'users:login' %}">/login/</a>
-    </li>
-    <li>
-      logout<a href="{% url 'users:logout' %}">/logout/</a>
-    </li>
-    <li>
-      password-change<a href="{% url 'users:password-change' %}">/password_change/</a>
-    </li>
-    <li>
-      password-change-done<a href="{% url 'users:password-change-done' %}">/password_change/done/</a>
-    </li>
-    <li>
-      password-reset<a href="{% url 'users:password-reset' %}">/password_reset/</a>
-    </li>
-    <li>
-      password-reset-done<a href="{% url 'users:password-reset-done' %}">/password_reset/done/</a>
-    </li>
-    <li>
-      password-reset-complete<a href="{% url 'users:password-reset-complete' %}">/reset/done/</a>
-    </li>
-    <li>
-      password-reset-confirm<a href="{% url 'users:password-reset-confirm' uidb64='uid' token='token' %}">/reset/<uidb64>/<token>/</a>
-    </li>
-    <li>
-      signup<a href="{% url 'users:signup' %}">/signup/</a>
-    </li>
-    <li>
-      feedback<a href="{% url 'feedback:feedback' %}">/feedback/</a>
-    </li>
-  </ul>
+  <section class="slogan container">
+    <h1 data-speed=".9">{% translate 'Organize your studies and active days — a schedule with notes is always at hand!' %}</h1>
+    <p data-speed=".9">{% translate 'We help you organize your time by offering a schedule with notes and reminders of important events' %}</p>
+    <a href="/" class="btn btn_landing" data-speed=".9">{% translate 'Create a note' %}</a>
+  </section>
+  <div class="container">
+    <section class="gallery">
+      <div class="gallery__left">
+        <div class="image_settings image gallery__item"></div>
+        <div class="image_adaptation gallery__item">
+          <div class="tablet image"></div>
+          <div class="mobile image"></div>
+        </div>
+        <div class="image_screen1 image gallery__item"></div>
+        <div class="image_screen2 image gallery__item"></div>
+      </div>
+      <div class="gallery__right" data-speed="1.1">
+        <div class="text-block gallery__item">
+          <h2 class="text-block__h">{% translate 'Alerts' %}</h2>
+          <p class="text-block__p">
+            {% translate 'Notifications about notes can be sent by mail and telegram' %}
+          </p>
+        </div>
+        <div class="text-block gallery__item">
+          <h2 class="text-block__h">{% translate 'Adaptation' %}</h2>
+          <p class="text-block__p">
+            {% translate 'Our site has adaptations for different screen sizes' %}
+          </p>
+        </div>
+        <div class="text-block gallery__item">
+          <h2 class="text-block__h">{% translate 'Availability' %}</h2>
+          <p class="text-block__p">
+            {% translate 'Translations into several languages are used. There is also an intuitive interface that is easy to disassemble' %}
+          </p>
+        </div>
+        <div class="text-block gallery__item">
+          <h2 class="text-block__h">API</h2>
+          <p class="text-block__p">
+            {% translate 'Our site has a public API that everyone can use' %}
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="feedbacks">
+    <div class="wrap">
+      <h2>{% translate 'Feedback' %}</h2>
+      <div class="items-wrap">
+        <div class="items marquee">
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+          <div class="item">
+            <div class="info-user">
+              <img src="/qwe" alt="{% translate 'avatar' %}" class="avatar">
+              <p>ФИО</p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock body %}
+{% block extra_js %}
+<script src="{% static 'js/libs/gsap/gsap.min.js' %}" defer></script>
+<script src="{% static 'js/libs/gsap/ScrollTrigger.min.js' %}" defer></script>
+<script src="{% static 'js/libs/gsap/ScrollSmoother.min.js' %}" defer></script>
+<script src="{% static 'js/scroll.js' %}" defer></script>
+{% endblock extra_js %}

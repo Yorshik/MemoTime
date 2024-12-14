@@ -1,39 +1,28 @@
 {% block footer %}
-  <footer class="footer mt-auto py-3 bg-body-tertiary mt-4">
-    {% load static %}
-    {% load i18n %}
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-4 mb-2 mb-md-0">
-          <div class="d-flex align-items-center">
-            <span class="text-body-secondary">
-              © <span id="django-now" data-django-now="{% now 'Y-m-d H:i:s' %}">{% now 'Y' %}</span> {% trans 'Company, Inc' %}
-            </span>
-          </div>
-        </div>
-        <div class="col-md-4 mb-2 mb-md-0">
-          <form action="{% url 'set_language' %}"
-                method="post"
-                class="d-flex justify-content-center">
-            {% csrf_token %}
-            <div class="input-group" style="max-width: 250px;">
-              <select name="language"
-                      class="form-select form-select-sm"
-                      aria-label="{% trans 'Language Selector' %}">
-                {% for lang_code, lang_name in LANGUAGES %}
-                  <option value="{{ lang_code }}"
-                          {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>{{ lang_name }}</option>
-                {% endfor %}
-              </select>
-              <button class="btn btn-outline-secondary btn-sm" type="submit">{% trans 'Change Language' %}</button>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-4">
-          <ul class="nav justify-content-end">
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+<footer class="footer mt-auto py-3 bg-body-tertiary mt-4">
+  {% load static %}
+  {% load i18n %}
+  <div class="text footer-gap">
+    <a href="mailto:The-MemoTime@yandex.ru">The-MemoTime@yandex.ru</a>
+    <a href="tel:+7(800)555-35-35">+7 (800) 555-35-35</a>
+    <p>©2024</p>
+  </div>
+  <div class="navigation">
+    <nav>
+      <ul class="footer-gap">
+        <li><a href="">{% translate 'Page 1' %}</a></li>
+        <li><a href="">{% translate 'Page 1' %}</a></li>
+        <li><a href="">{% translate 'Page 1' %}</a></li>
+        <li><a href="">{% translate 'Page 1' %}</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <ul class="footer-gap">
+        <li><a href="https://gitlab.crja72.ru/frixit">Frixit</a></li>
+        <li><a href="https://gitlab.crja72.ru/kirill135790zzz">Yorshik</a></li>
+        <li><a href="https://gitlab.crja72.ru/nicitatyushnyakov">nais2008</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
 {% endblock footer %}

@@ -43,4 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	});
+
+
+	const burgerBtn = document.querySelector(".btn_burger");
+	burgerBtn.addEventListener("click", (e) => {
+		burgerBtn.classList.toggle("open");
+	});
 });

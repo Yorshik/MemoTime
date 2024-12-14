@@ -6,26 +6,32 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link type="stylesheet" href="{% static 'fonts/google_sans.css' %}">
-    <link type="image" href="{% static 'fav.ico' %}" rel="icon" />
-    <title>{% trans "LMS project" %}</title>
     <meta name="description" content="{% trans 'LMS project' %}">
     <meta name="keywords" content="{% trans 'catalog, cat' %}">
-    {% block extra_css %}
-    {% endblock extra_css %}
+    <title>{% trans "LMS project" %}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+
+    <!-- FavIcon -->
+    <link type="image" href="{% static 'fav.ico' %}" rel="icon" />
   </head>
-  <body class="d-flex flex-column min-vh-100">
-    {% include "includes/header.html" %}
-    <main class="pt-4 pb-4">
-      {% block body %}
-        <p>{% translate "произошла ошибка - свяжитесь с нами" %}</p>
-      {% endblock body %}
-    </main>
-    {% include "includes/footer.html" %}
-    {% block extra_js %}
-    {% endblock extra_js %}
+  <body>
+    <div class="wraper">
+      <div class="content">
+        {% include "includes/header.html" %}
+        <main class="pt-4 pb-4">
+          {% block body %}
+            <p>{% translate "произошла ошибка - свяжитесь с нами" %}</p>
+          {% endblock body %}
+        </main>
+        {% include "includes/footer.html" %}  
+      </div>
+    </div>
+
+    <!-- JS -->
+    {% block extra_js %}{% endblock extra_js %}
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
   </body>
