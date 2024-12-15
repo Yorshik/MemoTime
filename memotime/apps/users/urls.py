@@ -38,41 +38,34 @@ urlpatterns = [
         name="password-change",
     ),
     django.urls.path(
-        "password_change/done/",
-        django.contrib.auth.views.PasswordChangeDoneView.as_view(
-            template_name="users/password_change_done.html",
-        ),
-        name="password-change-done",
+        "password_reset/done/",
+        apps.users.views.CustomPasswordResetDoneView.as_view(),
+        name="password-reset-done",
     ),
     django.urls.path(
         "password_reset/",
-        django.contrib.auth.views.PasswordResetView.as_view(
-            template_name="users/password_reset.html",
-            email_template_name="users/email/password_reset_email.html",
-            success_url=django.urls.reverse_lazy("users:password-reset-done"),
-        ),
+        apps.users.views.CustomPasswordResetView.as_view(),
         name="password-reset",
     ),
     django.urls.path(
         "password_reset/done/",
-        django.contrib.auth.views.PasswordResetDoneView.as_view(
-            template_name="users/password_reset_done.html",
-        ),
+        apps.users.views.CustomPasswordResetDoneView.as_view(),
         name="password-reset-done",
     ),
     django.urls.path(
         "reset/done/",
-        django.contrib.auth.views.PasswordResetCompleteView.as_view(
-            template_name="users/password_reset_complete.html",
-        ),
+        apps.users.views.CustomPasswordResetCompleteView.as_view(),
         name="password-reset-complete",
     ),
     django.urls.path(
         "reset/<uidb64>/<token>/",
-        django.contrib.auth.views.PasswordResetConfirmView.as_view(
-            template_name="users/password_reset_confirm.html",
-        ),
+        apps.users.views.CustomPasswordResetConfirmView.as_view(),
         name="password-reset-confirm",
+    ),
+    django.urls.path(
+        "profile/",
+        apps.users.views.ProfileView.as_view(),
+        name="profile",
     ),
     django.urls.path(
         "signup/",

@@ -4,8 +4,6 @@ import apps.users.models
 
 __all__ = ()
 
-DjangoUser = django.contrib.auth.get_user_model()
-
 
 class EmailBackend(django.contrib.auth.backends.ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):

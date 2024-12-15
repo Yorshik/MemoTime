@@ -143,3 +143,71 @@ class ActivateResendView(django.views.View):
         )
 
         return django.shortcuts.redirect("users:login")
+
+
+class ProfileView(django.views.generic.UpdateView):
+    template_name = "users/profile.html"
+    form_class = apps.users.forms.UserProfileForm
+    success_url = django.urls.reverse_lazy("users:profile")
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        django.contrib.messages.success(
+            self.request,
+            _("Профиль успешно обновлен"),
+        )
+        return super().form_valid(form)
+
+
+class CustomPasswordResetDoneView(django.contrib.auth.views.PasswordResetDoneView):
+    template_name = "users/password_reset_done.html"
+
+    def get_context_data(self, **kwargs):
+        self.request.session["password_reset_done"] = True
+        return super().get_context_data(**kwargs)
+
+
+class CustomPasswordResetConfirmView(
+    django.contrib.auth.views.PasswordResetConfirmView,
+):
+    template_name = "users/password_reset_confirm.html"
+
+    def form_valid(self, form):
+        django.contrib.messages.success(
+            self.request,
+            _("Пароль успешно изменен"),
+        )
+        self.request.session["password_reset_complete"] = True
+        del self.request.session["password_reset_confirm"]
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        self.request.session["password_reset_confirm"] = True
+        return super().get_context_data(**kwargs)
+
+
+class CustomPasswordResetCompleteView(
+    django.contrib.auth.views.PasswordResetCompleteView,
+):
+    template_name = "users/password_reset_complete.html"
+
+    def dispatch(self, *args, **kwargs):
+        if not self.request.session.get("password_reset_complete"):
+            return django.shortcuts.redirect(
+                django.urls.reverse_lazy("users:password-reset"),
+            )
+
+        return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        self.request.session["password_reset_complete"] = True
+        return super().get_context_data(**kwargs)
+
+
+class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):
+    template_name = "users/password_reset.html"
+    email_template_name = "users/email/password_reset_email.html"
+    form_class = apps.users.forms.CustomPasswordResetForm
+    success_url = django.urls.reverse_lazy("users:password-reset-done")
