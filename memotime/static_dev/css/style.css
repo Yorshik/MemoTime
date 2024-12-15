@@ -5,7 +5,7 @@
   /* Переменные которые меняются при смене темы */
   --back-color: #EFEFEF;
   --second-color: #F8F8F8;
-  --back-btn-landing: #F5FEF7;
+  --back-btn-landing: #E8FBFF;
   --text-color: #000000;
   --shadow: 5px 5px 10px #D1D9E6,
             -5px -5px 10px #FFFFFF;
@@ -75,6 +75,17 @@ body{
     list-style: none;
   }
 }
+
+input, textarea, select{
+  border: var(--border);
+  box-shadow: var(--shadow-inset);
+  padding: 10px 15px;
+  width: 100%;
+  outline: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
 .btn{
   background-color: var(--second-color);
   border-radius: 400px;
@@ -86,7 +97,8 @@ body{
     box-shadow: var(--shadow-inset);
   }
 }
-.wraper{
+
+.content{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -94,6 +106,9 @@ body{
 .container{
   max-width: 1280px;
   margin: 10px auto;
+}
+.red{
+  color: var(--required-form);
 }
 
 header{
