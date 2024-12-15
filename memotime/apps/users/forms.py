@@ -51,3 +51,62 @@ class UserCreationForm(
             "password1",
             "password2",
         )
+
+
+class UserProfileForm(
+    apps.core.forms.BaseForm,
+    django.contrib.auth.forms.UserChangeForm,
+):
+    password_change_link = django.forms.CharField(
+        widget=django.forms.TextInput(attrs={"readonly": True}),
+        label=_("Сменить пароль"),
+        required=False,
+    )
+
+    class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
+        model = apps.users.models.User
+        fields = (
+            apps.users.models.User.username.field.name,
+            apps.users.models.User.email.field.name,
+            apps.users.models.User.first_name.field.name,
+            apps.users.models.User.last_name.field.name,
+            apps.users.models.User.timezone.field.name,
+            apps.users.models.User.is_email_subscribed.field.name,
+            apps.users.models.User.is_telegram_subscribed.field.name,
+            apps.users.models.User.image.field.name,
+            "password_change_link",
+        )
+        widgets = {
+            "image": django.forms.FileInput,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password_change_link"].initial = django.urls.reverse_lazy(
+            "users:password-change",
+        )
+
+    def clean_username(self):
+        username = self.cleaned_data[apps.users.models.User.username.field.name].lower()
+        if username != self.instance.username:
+            new = apps.users.models.User.objects.filter(username=username)
+            if new.count():
+                raise django.core.exceptions.ValidationError(
+                    _("Пользователь уже существует"),
+                )
+
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data[apps.users.models.User.email.field.name]
+        if email != self.instance.email:
+            new = apps.users.models.User.objects.filter(email=email)
+            if new.count():
+                raise django.core.exceptions.ValidationError(
+                    _("Пользователь с таким email уже существует"),
+                )
+
+        return email
+
+    def clean_password_change_link(self):
+        return self.instance.password

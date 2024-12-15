@@ -85,6 +85,9 @@ input, textarea, select{
   border-radius: 10px;
   font-size: 20px;
 }
+textarea{
+  resize: none;
+}
 
 .btn{
   background-color: var(--second-color);

@@ -75,6 +75,11 @@ urlpatterns = [
         name="password-reset-confirm",
     ),
     django.urls.path(
+        "profile/",
+        apps.users.views.ProfileView.as_view(),
+        name="profile",
+    ),
+    django.urls.path(
         "signup/",
         apps.users.views.RegisterView.as_view(),
         name="signup",

@@ -20,7 +20,7 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
         cleaned_data = super().clean()
         if not cleaned_data.get(apps.feedback.models.PersonalData.name.field.name):
             cleaned_data[apps.feedback.models.PersonalData.name.field.name] = _(
-                "Аноним",
+                "Anonymous",
             )
 
         return cleaned_data
@@ -33,10 +33,10 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
         )
         widgets = {
             apps.feedback.models.PersonalData.name.field.name: django.forms.TextInput(
-                attrs={"placeholder": _("Как к вам обращаться?")},
+                attrs={"placeholder": _(" ")},
             ),
             apps.feedback.models.PersonalData.mail.field.name: django.forms.EmailInput(
-                attrs={"placeholder": _("Почта для обратной связи")},
+                attrs={"placeholder": _(" ")},
             ),
         }
 
@@ -45,10 +45,10 @@ class FeedbackForm(apps.core.forms.BaseForm, django.forms.ModelForm):
     class Meta:
         model = apps.feedback.models.Feedback
         fields = (apps.feedback.models.Feedback.text.field.name,)
-        labels = {apps.feedback.models.Feedback.text.field.name: _("Описание")}
+        labels = {apps.feedback.models.Feedback.text.field.name: _("Description")}
         help_texts = {
             apps.feedback.models.Feedback.text.field.name: _(
-                "Содержание обращения",
+                "The content of the appeal",
             ),
         }
         exclude = [
@@ -93,8 +93,7 @@ class MultipleFileField(django.forms.FileField):
         if self.max_files and len(files) > self.max_files:
             raise django.core.exceptions.ValidationError(
                 _(
-                    "Максимальное количество файлов, которое может быть"
-                    " загружено: %(max_files)d.",
+                    "The maximum number of files that can be uploaded: %(max_files)d.",
                 ),
                 params={"max_files": self.max_files},
             )
@@ -106,8 +105,8 @@ class MultipleFileField(django.forms.FileField):
                 if hasattr(cleaned_file, "size") and cleaned_file.size > self.max_size:
                     raise django.core.exceptions.ValidationError(
                         _(
-                            "Максимальный размер файла, который может быть"
-                            " загружен: %(max_size).1f MB.",
+                            "The maximum file size that can be"
+                            " uploaded: %(max_size).1f MB.",
                         ),
                         params={"max_size": self.max_size / (1024 * 1024)},
                     )
@@ -119,7 +118,7 @@ class MultipleFileField(django.forms.FileField):
 
 class FilesForm(apps.core.forms.BaseForm, django.forms.ModelForm):
     files = MultipleFileField(
-        label=_("Прикрепленные файлы"),
+        label=_("Attached files"),
         required=False,
         max_size=10 * 1024 * 1024,
         max_files=5,
