@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock extra_css %}
 {% block body %}
-  <form action="" class="main-form">
+  <form action="" class="main-form" method="post">
     <h2>{% translate 'Log In' %}</h2>
     {% if form.errors %}<div class="danger">{{ form.errors }}</div>{% endif %}
     {% csrf_token %}

@@ -97,20 +97,20 @@ def postgres_port_cast(value):
     return value
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": decouple.config("POSTGRES_DB", default="postgres"),
-#         "USER": decouple.config("POSTGRES_USER", default="postgres"),
-#         "PASSWORD": decouple.config("POSTGRES_PASSWORD", default=None),
-#         "HOST": decouple.config("POSTGRES_HOST", default="postgres"),
-#         "PORT": decouple.config(
-#             "POSTGRES_PORT",
-#             default="5432",
-#             cast=postgres_port_cast,
-#         ),
-#     },
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": decouple.config("POSTGRES_DB", default="postgres"),
+        "USER": decouple.config("POSTGRES_USER", default="postgres"),
+        "PASSWORD": decouple.config("POSTGRES_PASSWORD", default=None),
+        "HOST": decouple.config("POSTGRES_HOST", default="postgres"),
+        "PORT": decouple.config(
+            "POSTGRES_PORT",
+            default="5432",
+            cast=postgres_port_cast,
+        ),
+    },
+}
 
 AUTH_USER_MODEL = "users.User"
 
