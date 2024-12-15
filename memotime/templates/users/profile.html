@@ -1,99 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block body %}
-  <div class="container mt-5">
-    <h2 class="text-center mb-4 display-4">{% trans "Редактировать Профиль" %}</h2>
-    {% if messages %}
+  <h2>{% trans "Изменение профиля" %}</h2>
+  {% if messages %}
+    <ul class="messages">
       {% for message in messages %}
-        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show"
-             role="alert">
-          {{ message }}
-          <button type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="{% trans 'Закрыть' %}"></button>
-        </div>
+        <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
       {% endfor %}
-    {% endif %}
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="card mb-4 shadow-sm animate">
-          <div class="card-body text-center">
-            {% if object.profile.image %}
-              <div class="position-relative d-inline-block"
-                   style="width: 150px;
-                          height: 150px">
-                <img src="{{ object.profile.get_image_175x175.url }}"
-                     class="img-fluid rounded-circle"
-                     alt="{% trans 'Изображение профиля' %}"
-                     style="width: 150px;
-                            height: 150px;
-                            object-fit: cover"
-                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
-                <div class="d-flex justify-content-center align-items-center rounded-circle d-none"
-                     style="width: 150px;
-                            height: 150px;
-                            background-color: #f0f0f0;
-                            position: absolute;
-                            top: 0;
-                            left: 0">
-                  <span class="text-muted">{% trans "Ошибка загрузки" %}</span>
-                </div>
-              </div>
-            {% else %}
-              <div class="position-relative d-inline-block"
-                   style="width: 150px;
-                          height: 150px">
-                <div class="d-flex justify-content-center align-items-center bg-light text-muted rounded-circle shadow-lg"
-                     style="width: 150px;
-                            height: 150px">{% trans "Изображение недоступно" %}</div>
-              </div>
-            {% endif %}
-            <h5 class="my-3 text-primary">{{ object.user.first_name }} {{ object.user.last_name }}</h5>
-            <p class="text-muted mb-2">{{ object.user.email }}</p>
-            <p class="text-muted mb-4">{{ object.profile.birthday|date:"d.m.Y" }}</p>
-            <a href="{% url 'homepage:coffee' %}"
-               class="btn btn-success btn-sm mt-2 w-100">{% trans 'Выпить кофе' %}</a>
-            <a href="{% url 'users:logout' %}"
-               class="btn btn-outline-danger btn-sm mt-2 w-100">{% trans 'Выйти из профиля' %}</a>
-            <a href="{% url 'users:password-change' %}"
-               class="btn btn-outline-warning btn-sm mt-2 w-100">{% trans 'Сменить пароль' %}</a>
-            <a href="{% url 'statistics:mystat' %}"
-               class="btn btn-success btn-sm mt-2 w-100">{% trans 'Оцененные товары' %}</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8">
-        <div class="card mb-4 shadow-sm animate">
-          <div class="card-body">
-            <form method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="mb-4">
-                <h4 class="text-secondary">{% trans 'Личная Информация' %}</h4>
-                <div class="form-group">
-                  {% for field in form.profile.visible_fields %}
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <label for="{{ field.id_for_label }}" class="form-label mb-0">{{ field.label }}</label>
-                      {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
-                    </div>
-                    {{ field }}
-                    {% for error in field.errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
-                  {% endfor %}
-                  {% for field in form.user.visible_fields %}
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <label for="{{ field.id_for_label }}" class="form-label mb-0">{{ field.label }}</label>
-                      {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
-                    </div>
-                    {{ field }}
-                    {% for error in field.errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
-                  {% endfor %}
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">{% trans 'Сохранить изменения' %}</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </ul>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% trans "Сохранить" %}</button>
+  </form>
 {% endblock body %}

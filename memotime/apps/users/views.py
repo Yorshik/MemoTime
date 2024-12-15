@@ -159,3 +159,19 @@ class ActivateResendView(django.views.View):
         )
 
         return django.shortcuts.redirect("users:login")
+
+
+class ProfileView(django.views.generic.UpdateView):
+    template_name = "users/profile.html"
+    form_class = apps.users.forms.UserProfileForm
+    success_url = django.urls.reverse_lazy("users:profile")
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        django.contrib.messages.success(
+            self.request,
+            _("Профиль успешно обновлен"),
+        )
+        return super().form_valid(form)
