@@ -1,0 +1,13 @@
+{% extends 'includes/base_email.html' %}
+{% load i18n %}
+{% block title %}
+  {% trans "Thank you for your feedback!" %}
+{% endblock title %}
+{% block content %}
+  <h1>{% blocktrans %}Hello, {{ author_name }}!{% endblocktrans %}</h1>
+  <p>{% trans "Thank you for your feedback! We appreciate your opinion and will take it into account in our work." %}</p>
+  <p>{% trans "You wrote:" %}</p>
+  <blockquote>
+    {{ feedback_text }}
+  </blockquote>
+{% endblock content %}

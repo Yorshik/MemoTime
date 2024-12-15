@@ -1,12 +1,12 @@
-import django.conf
 import django.contrib.auth.models
 import django.contrib.messages
-import django.core.mail
 import django.shortcuts
 import django.urls
+import django.utils.translation
 from django.utils.translation import gettext_lazy as _
 import django.views.generic.edit
 
+import apps.core.celery_tasks
 import apps.feedback.forms
 
 __all__ = ()
@@ -17,18 +17,6 @@ class FeedbackView(django.views.generic.edit.FormView):
     form_class = apps.feedback.forms.ProfileUpdateMultiForm
     success_url = django.urls.reverse_lazy("feedback:feedback")
 
-    def get_form_kwargs(self):
-        return {**super().get_form_kwargs(), "files": self.request.FILES}
-
-    def _send_confirmation_email(self, author, feedback_text):
-        django.core.mail.send_mail(
-            _(f"Спасибо за отзыв, {author.name}!"),
-            feedback_text,
-            django.conf.settings.EMAIL_HOST_USER,
-            [author.mail],
-            fail_silently=False,
-        )
-
     def form_valid(self, form):
         author = form["author"].save(commit=False)
         if not self.request.user.is_anonymous:
@@ -38,15 +26,20 @@ class FeedbackView(django.views.generic.edit.FormView):
         feedback = form["feedback"].save(commit=False)
         feedback.personal_data = author
         feedback.save()
-        form["files_form"].save(feedback)
-        self._send_confirmation_email(
-            author,
-            form["feedback"].cleaned_data["text"],
+
+        apps.core.celery_tasks.send_email_task.delay(
+            _(f"Thanks for the feedback, {author.name}!"),
+            "feedback/email/feedback_confirmation.html",
+            {
+                "author_name": author.name,
+                "feedback_text": form["feedback"].cleaned_data["text"],
+            },
+            [author.email],
         )
 
         django.contrib.messages.success(
             self.request,
-            _("Спасибо! Ваш отзыв был успешно отправлен."),
+            _("Thank you! Your feedback has been sent successfully."),
         )
 
         return super().form_valid(form)
@@ -55,7 +48,7 @@ class FeedbackView(django.views.generic.edit.FormView):
         if not form.is_valid():
             django.contrib.messages.error(
                 self.request,
-                _("Произошла ошибка при отправке формы."),
+                _("An error occurred while submitting the form."),
             )
 
         return super().form_invalid(form)

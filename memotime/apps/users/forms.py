@@ -17,7 +17,7 @@ class UserCreationForm(
         new = apps.users.models.User.objects.filter(username=username)
         if new.count():
             raise django.core.exceptions.ValidationError(
-                _("Пользователь уже существует"),
+                _("User already exists"),
             )
 
         return username
@@ -28,7 +28,7 @@ class UserCreationForm(
 
         if password1 and password2 and password1 != password2:
             raise django.core.exceptions.ValidationError(
-                _("Пароли не совпадают"),
+                _("Passwords do not match"),
             )
 
         return password2

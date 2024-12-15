@@ -1,4 +1,5 @@
 import django.conf
+import django.contrib.auth.views
 import django.contrib.messages
 import django.core.mail
 import django.core.signing
@@ -8,13 +9,12 @@ import django.urls
 from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
+import apps.core.celery_tasks
 import apps.users.forms
 import apps.users.models
 import apps.users.tokens
 
 __all__ = ()
-
-signer = django.core.signing.TimestampSigner()
 
 
 class RegisterView(django.views.generic.edit.FormView):
@@ -31,23 +31,22 @@ class RegisterView(django.views.generic.edit.FormView):
                     args=[apps.users.tokens.make_token(user)],
                 ),
             )
-            django.core.mail.send_mail(
-                _(f"Активация учетной записи, {user.username}"),
-                f"{link}\n{user.username}",
-                django.conf.settings.EMAIL_HOST_USER,
+
+            apps.core.celery_tasks.send_email_task.delay(
+                _(f"Account activation, {user.username}"),
+                "users/email/user_activation_email.html",
+                {"link": link, "username": user.username},
                 [user.email],
-                fail_silently=False,
             )
+
             django.contrib.messages.success(
                 self.request,
-                _(
-                    "Ссылка для активации учетной записи отправлена на указанный email",
-                ),
+                _("An account activation link has been sent to your email address."),
             )
         else:
             django.contrib.messages.success(
                 self.request,
-                _("Вы успешно зарегистрировались"),
+                _("You have successfully registered."),
             )
 
         return super().form_valid(form)
@@ -66,9 +65,7 @@ class ActivateView(django.views.View):
                     {"activation_status": "expired", "token": pk},
                 )
 
-            user = apps.users.models.User.objects.filter(
-                pk=token["user_id"],
-            ).first()
+            user = apps.users.models.User.objects.filter(pk=token["user_id"]).first()
             if user:
                 if user.is_active:
                     return django.shortcuts.render(
@@ -102,19 +99,11 @@ class ActivateResendView(django.views.View):
 
         token_data = apps.users.tokens.check_token(token)
 
-        if not token_data or token_data.get("status") not in [
-            "valid",
-            "expired",
-        ]:
-            django.contrib.messages.error(
-                request,
-                _("Недействительный токен активации."),
-            )
+        if not token_data or token_data.get("status") not in ["valid", "expired"]:
+            django.contrib.messages.error(request, _("Invalid activation token."))
             return django.shortcuts.redirect("users:signup")
 
-        user = apps.users.models.User.objects.filter(
-            pk=token_data["user_id"],
-        ).first()
+        user = apps.users.models.User.objects.filter(pk=token_data["user_id"]).first()
 
         if not user:
             return django.shortcuts.render(
@@ -133,29 +122,24 @@ class ActivateResendView(django.views.View):
         if token_data["operation"] == "unblock":
             new_token = apps.users.tokens.make_token(user, operation="unblock")
         elif token_data["operation"] == "activate":
-            new_token = apps.users.tokens.make_token(
-                user,
-                operation="activate",
-            )
+            new_token = apps.users.tokens.make_token(user, operation="activate")
         else:
             return django.http.HttpResponseServerError()
 
         link = request.build_absolute_uri(
-            django.urls.reverse(
-                "users:activate",
-                args=[new_token],
-            ),
+            django.urls.reverse("users:activate", args=[new_token]),
         )
-        django.core.mail.send_mail(
-            _(f"Повторная активация учетной записи, {user.username}"),
-            f"{link}\n{user.username}",
-            django.conf.settings.SPAM_EMAIL,
+
+        apps.core.celery_tasks.send_email_task.delay(
+            _(f"Account reactivation, {user.username}"),
+            "users/email/user_reactivation_email.html",
+            {"link": link, "username": user.username},
             [user.email],
-            fail_silently=False,
         )
+
         django.contrib.messages.success(
             request,
-            _("Новая ссылка для активации отправлена на ваш email."),
+            _("A new activation link has been sent to your email address."),
         )
 
         return django.shortcuts.redirect("users:login")

@@ -10,7 +10,7 @@ class FeedbackModelTests(django.test.TestCase):
     def setUp(self):
         self.feedback_data = {
             "author_name": "Тест",
-            "author_mail": "test@example.com",
+            "author_email": "test@example.com",
             "feedback_text": "test_message",
         }
 
@@ -22,7 +22,7 @@ class FeedbackModelTests(django.test.TestCase):
     def test_feedback_creation(self):
         personal_data = apps.feedback.models.PersonalData.objects.create(
             name=self.feedback_data["author_name"],
-            mail=self.feedback_data["author_mail"],
+            email=self.feedback_data["author_email"],
         )
         feedback = apps.feedback.models.Feedback.objects.create(
             personal_data=personal_data,
@@ -33,7 +33,7 @@ class FeedbackModelTests(django.test.TestCase):
             self.feedback_data["author_name"],
         )
         self.assertEqual(
-            feedback.personal_data.mail,
-            self.feedback_data["author_mail"],
+            feedback.personal_data.email,
+            self.feedback_data["author_email"],
         )
         self.assertEqual(feedback.text, self.feedback_data["feedback_text"])

@@ -7,4 +7,4 @@ __all__ = ()
 class HomepageConfig(django.apps.AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.homepage"
-    verbose_name = _("Главная")
+    verbose_name = _("Homepage")

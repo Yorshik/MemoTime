@@ -10,5 +10,6 @@ exclude =
 application_import_names =
     apps.core
     apps.homepage
-    apps.users
     apps.feedback
+    apps.schedule
+    apps.users
