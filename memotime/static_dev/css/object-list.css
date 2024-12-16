@@ -1,0 +1,40 @@
+section{
+  margin-block: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-inline: 40px;
+}
+h2{
+  text-align: center;
+}
+.btn_create{
+  padding: 10px 15px;
+  align-self: flex-start;
+}
+
+.list{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+
+  .item{
+    background-color: var(--second-color);
+    padding: 20px;
+    border: var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    a:first-child{
+      font-weight: 500;
+      text-wrap: balance;
+    }
+    a.btn{
+      text-align: center;
+      padding: 10px 15px;
+    }
+  }
+}

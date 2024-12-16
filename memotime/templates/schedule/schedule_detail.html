@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/schedule-detail.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<div class="container">
+  <a href="{% url 'schedule:schedule-list' %}" class="btn">
+    {% translate 'Back to Schedule List' %}
+  </a>
+  <div class="wraper">
+    <section class="info">
+      <h2>{% translate 'Scedule detail' %}</h2>
+      <div class="info__main">
+        <p>
+          <b>{% translate 'Start Date' %}: </b>
+          {{ schedule.start_date }}
+        </p>
+        <p>
+          <b>{% translate 'Expiration Date' %}: </b>
+          {{ schedule.expiration_date|default:"N/A" }}
+        </p>
+        <p>
+          <b>{% translate 'Is Static' %}: </b>
+          {{ schedule.is_static }}
+        </p>
+        <a href="{% url 'schedule:schedule-update' schedule.pk %}" class="btn">Edit</a>
+        <a href="{% url 'schedule:schedule-delete' schedule.pk %}" class="btn">Delete</a>
+      </div>
+    </section>
+    <section class="time-schedule">
+      <h2>Time Schedules</h2>
+      <a href="{% url 'schedule:timeschedule-create' schedule.id %}" class="btn">Add Time Schedule</a>
+      <div class="timeschedule">
+        {% for timeschedule in time_schedules %}
+          <div>
+            {{ timeschedule.event }} - {{ timeschedule.time_start }} - {{ timeschedule.time_end }}
+            <a href="{% url 'schedule:timeschedule-update' timeschedule.pk %}" class="btn">Edit</a>
+            <a href="{% url 'schedule:timeschedule-delete' timeschedule.pk %}" class="btn">Delete</a>
+          </div>
+        {% empty %}
+          <h4>{% translate 'No time schedules for this schedule' %}</h4>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock body %}

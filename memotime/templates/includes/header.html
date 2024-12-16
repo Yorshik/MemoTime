@@ -29,11 +29,18 @@
           </form>
         </li>
         <li>
-          <a href="">Page 1</a>
+          <a href="{% url 'schedule:schedule-list' %}">{% translate 'Schedule List' %}</a>
         </li>
         <li>
-          <a href="">Page 2</a>
+          <a href="{% url 'schedule:note-list' %}">{% translate 'Note List' %}</a>
         </li>
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <li>
+          <a href="{% url 'users:profile' %}" class="btn btn_prof">
+            <img src="https://masterpiecer-images.s3.yandex.net/b666ea945b0c11ee85533eecbe30a25c:upscaled" alt="{% translate 'error' %}">
+          </a>
+        </li>
+        {% else %}
         <li>
           <a href="{% url 'users:login' %}" class="btn btn_login">
             {% translate 'Log In' %}
@@ -44,11 +51,7 @@
             {% translate 'Sign Up' %}
           </a>
         </li>
-        <li>
-          <a href="{% url 'users:profile' %}" class="btn btn_prof">
-            <img src="https://masterpiecer-images.s3.yandex.net/b666ea945b0c11ee85533eecbe30a25c:upscaled" alt="{% translate 'error' %}">
-          </a>
-        </li>
+        {% endif %}
       </ul>
     </nav>
     <button class="btn btn_burger">

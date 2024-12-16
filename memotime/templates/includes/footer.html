@@ -10,10 +10,26 @@
   <div class="navigation">
     <nav>
       <ul class="footer-gap">
-        <li><a href="">{% translate 'Page 1' %}</a></li>
-        <li><a href="">{% translate 'Page 1' %}</a></li>
-        <li><a href="">{% translate 'Page 1' %}</a></li>
-        <li><a href="">{% translate 'Page 1' %}</a></li>
+        <li>
+          <a href="{% url 'schedule:schedule-create' %}">
+            {% translate 'Create Schedule' %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'schedule:teacher-list' %}">
+            {% translate 'Teacher List' %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'schedule:event-list' %}">
+            {% translate 'Event List' %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'schedule:note-list' %}">
+            {% translate 'Note List' %}
+          </a>
+        </li>
       </ul>
     </nav>
     <nav>

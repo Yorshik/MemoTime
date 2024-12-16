@@ -95,6 +95,7 @@ textarea{
   box-shadow: var(--shadow);
   border: var(--border);
   transition: all .2s;
+  cursor: pointer;
 
   &:active{
     box-shadow: var(--shadow-inset);

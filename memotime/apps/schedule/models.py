@@ -1,8 +1,10 @@
 import django.contrib.auth
 import django.db.models
+import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 
 __all__ = ()
+
 
 User = django.contrib.auth.get_user_model()
 
@@ -15,16 +17,18 @@ class Note(django.db.models.Model):
     )
     global_note = django.db.models.BooleanField(
         _("global"),
+        default=False,
         help_text=_("Global note"),
     )
     heading = django.db.models.CharField(
         _("heading"),
-        max_length=255,
+        max_length=128,
         help_text=_("Note heading"),
     )
     description = django.db.models.TextField(
         _("description"),
         help_text=_("Note description"),
+        max_length=10000,
         blank=True,
     )
     user = django.db.models.ForeignKey(
@@ -88,6 +92,7 @@ class Event(django.db.models.Model):
     description = django.db.models.TextField(
         _("description"),
         help_text=_("Event description"),
+        max_length=10000,
         blank=True,
     )
     teacher = django.db.models.ForeignKey(
@@ -145,6 +150,7 @@ class Schedule(django.db.models.Model):
     )
     is_static = django.db.models.BooleanField(
         _("static"),
+        default=True,
         help_text=_(
             "Determines if the schedule alternates (if False, the 'even' field in"
             " TimeSchedule is used)",
@@ -152,10 +158,14 @@ class Schedule(django.db.models.Model):
     )
     start_date = django.db.models.DateField(
         _("start date"),
+        default=django.utils.timezone.now,
         help_text=_("Schedule start date"),
     )
     expiration_date = django.db.models.DateField(
         _("expiration date"),
+        null=True,
+        default=None,
+        blank=True,
         help_text=_("Schedule expiration date"),
     )
 
@@ -176,6 +186,8 @@ class TimeSchedule(django.db.models.Model):
         FRIDAY = 5, _("Friday")
         SATURDAY = 6, _("Saturday")
         SUNDAY = 7, _("Sunday")
+
+        __empty__ = _("Day")
 
     schedule = django.db.models.ForeignKey(
         Schedule,

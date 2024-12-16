@@ -35,7 +35,7 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
             apps.feedback.models.PersonalData.name.field.name: django.forms.TextInput(
                 attrs={"placeholder": _(" ")},
             ),
-            apps.feedback.models.PersonalData.mail.field.name: django.forms.EmailInput(
+            apps.feedback.models.PersonalData.email.field.name: django.forms.EmailInput(
                 attrs={"placeholder": _(" ")},
             ),
         }

@@ -22,7 +22,14 @@ main{
   .main-form__p{
     text-align: center;
   }
-  div:not(.links, .check){
+  div{
+    .help,
+    & > ul li{
+      font-size: 16px;
+      color: var(--text-color-form);
+    }
+  }
+  div:not(:has(input[type="checkbox"])){
     position: relative;
 
     label{
@@ -59,11 +66,12 @@ main{
       border-radius: 5px;
       background-color: var(--second-color);
       border: var(--border);
-      box-shadow: var(--shadow);
-      color: var(--text-color-form);
+      box-shadow: var(--shadow-inset);
+      color: transparent;
+      font-weight: 900;
     }
     input[type=checkbox]:checked + .checkbox{
-      box-shadow: var(--shadow-inset);
+      color: var(--text-color-form);
     }
     .link{
       pointer-events: auto;

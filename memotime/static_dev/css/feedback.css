@@ -35,7 +35,9 @@ h2{
       pointer-events: none;
     }
     input:focus + label,
-    input:not(:placeholder-shown):valid + label{
+    input:not(:placeholder-shown):valid + label ,
+    textarea:focus + label,
+    textarea:not(:focus):valid + label{
       top: -20px;
       scale: .95; 
     }
@@ -45,4 +47,8 @@ h2{
   padding: 10px 15px;
   font-size: 20px;
   text-align: center;
+}
+.help{
+  font-size: 16px;
+  color: var(--text-color-form);
 }

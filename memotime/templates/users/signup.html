@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock extra_css %}
 {% block body %}
-  <form action="" class="main-form">
+  <form class="main-form" method="post">
     <h2>{% translate 'Sign Up' %}</h2>
     <p><span class="red">*</span> - {% translate 'required field' %}</p>
     {% if form.errors %}<div class="danger">{{ form.errors }}</div>{% endif %}
