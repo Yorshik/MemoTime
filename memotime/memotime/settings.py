@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "apps.feedback.apps.FeedbackConfig",
     "apps.homepage.apps.HomepageConfig",
     "apps.users.apps.UsersConfig",
-    # Нативные Django-приложения # noqa: CM001
+    # Нативные Django-приложения :noqa CM001
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,13 +43,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.forms",
-    # Внешние приложения
+    # Внешние приложения,
+    "captcha",
+    "django_ratelimit",
+    "django_redis",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "memotime.middleware.RedirectBlockedUserMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -191,3 +195,20 @@ EMAIL_HOST_PASSWORD = decouple.config(
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = f"MemoTime <{EMAIL_HOST_USER}>"
+
+
+CAPTCHA_LENGTH = 6
+CAPTCHA_IMAGE_SIZE = (300, 120)
+CAPTCHA_FONT_SIZE = 40
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+        },
+    },
+}

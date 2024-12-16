@@ -1,5 +1,9 @@
+import captcha.fields
+import django.conf
 import django.contrib.auth.forms
 import django.core.exceptions
+import django.forms
+import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 
 import apps.core.forms
@@ -12,6 +16,8 @@ class UserCreationForm(
     apps.core.forms.BaseForm,
     django.contrib.auth.forms.UserCreationForm,
 ):
+    captcha = captcha.fields.CaptchaField()
+
     def clean_username(self):
         username = self.cleaned_data[apps.users.models.User.username.field.name].lower()
         new = apps.users.models.User.objects.filter(username=username)
@@ -51,3 +57,7 @@ class UserCreationForm(
             "password1",
             "password2",
         )
+
+
+class LoginForm(django.contrib.auth.forms.AuthenticationForm):
+    captcha = captcha.fields.CaptchaField()

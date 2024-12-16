@@ -1,5 +1,6 @@
 import django.contrib.auth.models
 import django.db.models
+import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 import pytz
 
@@ -48,3 +49,7 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
         default=True,
         help_text=_("подключены ли уведомления в Телеграм"),
     )
+
+    class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
