@@ -38,6 +38,13 @@ urlpatterns = [
         name="password-change",
     ),
     django.urls.path(
+        "password_change/done/",
+        django.contrib.auth.views.PasswordChangeDoneView.as_view(
+            template_name="users/password_change.html",
+        ),
+        name="password-change-done",
+    ),
+    django.urls.path(
         "password_reset/done/",
         apps.users.views.CustomPasswordResetDoneView.as_view(),
         name="password-reset-done",

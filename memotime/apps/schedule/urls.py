@@ -6,14 +6,14 @@ app_name = "schedule"
 
 urlpatterns = [
     django.urls.path(
-        "create/",
-        views.ScheduleCreateView.as_view(),
-        name="schedule-create",
-    ),
-    django.urls.path(
         "",
         views.ScheduleListView.as_view(),
         name="schedule-list",
+    ),
+    django.urls.path(
+        "create/",
+        views.ScheduleCreateView.as_view(),
+        name="schedule-create",
     ),
     django.urls.path(
         "<int:pk>/update/",
