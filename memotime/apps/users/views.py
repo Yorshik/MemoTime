@@ -1,4 +1,5 @@
 import django.conf
+import django.contrib.auth
 import django.contrib.auth.views
 import django.contrib.messages
 import django.core.mail
@@ -6,6 +7,7 @@ import django.core.signing
 import django.http
 import django.shortcuts
 import django.urls
+import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
@@ -211,3 +213,8 @@ class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):
     email_template_name = "users/email/password_reset_email.html"
     form_class = apps.users.forms.CustomPasswordResetForm
     success_url = django.urls.reverse_lazy("users:password-reset-done")
+
+
+class LoginView(django.contrib.auth.views.LoginView):
+    form_class = apps.users.forms.LoginForm
+    redirect_authenticated_user = True

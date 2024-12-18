@@ -47,23 +47,27 @@
               {% endblock form_hidden_fields %}
               {% block form_fields %}
                 {% for field in form.visible_fields %}
-                  <div class="form-floating mb-3">
-                    <div class="form-floating">
-                      {{ field }}
-                      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                      {% block field_icon %}
-                        {% if field.name == 'username' %}
-                          <i class="bi bi-person input-icon"></i>
-                        {% elif field.name == 'email' %}
-                          <i class="bi bi-envelope input-icon"></i>
-                        {% elif 'password' in field.name %}
-                          <i class="bi bi-lock input-icon"></i>
-                        {% endif %}
-                      {% endblock field_icon %}
+                  {% if field.name == 'captcha' %}
+                    {{ field.as_widget }}
+                  {% else %}
+                    <div class="form-floating mb-3">
+                      <div class="form-floating">
+                        {{ field }}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {% block field_icon %}
+                          {% if field.name == 'username' %}
+                            <i class="bi bi-person input-icon"></i>
+                         {% elif field.name == 'email' %}
+                            <i class="bi bi-envelope input-icon"></i>
+                          {% elif 'password' in field.name %}
+                            <i class="bi bi-lock input-icon"></i>
+                          {% endif %}
+                        {% endblock field_icon %}
+                      </div>
+                      {% if field.errors %}<div class="invalid-feedback d-block">{{ field.errors }}</div>{% endif %}
+                      {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
                     </div>
-                    {% if field.errors %}<div class="invalid-feedback d-block">{{ field.errors }}</div>{% endif %}
-                    {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
-                  </div>
+                  {% endif %}
                 {% endfor %}
               {% endblock form_fields %}
               <div class="d-grid mb-4">

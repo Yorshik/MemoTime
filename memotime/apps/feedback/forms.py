@@ -1,4 +1,5 @@
 import betterforms.multiform
+import captcha.fields
 import django.contrib.auth.models
 import django.core.exceptions
 import django.forms
@@ -42,6 +43,8 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
 
 
 class FeedbackForm(apps.core.forms.BaseForm, django.forms.ModelForm):
+    captcha = captcha.fields.CaptchaField()
+
     class Meta:
         model = apps.feedback.models.Feedback
         fields = (apps.feedback.models.Feedback.text.field.name,)

@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h1>Вы были заблокированы до {{ expires_at|date:"d.m.Y H:i:s" }} из-за подозрительной активности вашего IP адреса</h1>
+{% endblock body %}

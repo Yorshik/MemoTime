@@ -1,5 +1,6 @@
 import django.contrib.auth.models
 import django.db.models
+import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 import pytz
 
@@ -50,3 +51,7 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
         blank=True,
         help_text=_("Whether Telegram notifications are enabled"),
     )
+
+    class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
