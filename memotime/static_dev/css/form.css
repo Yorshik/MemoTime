@@ -22,11 +22,16 @@ main{
   .main-form__p{
     text-align: center;
   }
+  .danger .errorlist li{
+    background-color: var(--back-err);
+    color: var(--text-color-err);
+    padding: 20px;
+    border-radius: 10px;
+  }
   div{
     .help,
     & > ul li{
-      font-size: 16px;
-      color: var(--text-color-form);
+      display: none !important;
     }
   }
   div:not(:has(input[type="checkbox"])){
@@ -43,7 +48,7 @@ main{
     }
     input:focus + label,
     input:not(:focus):valid + label{
-      top: -20px;
+      top: -25px;
       scale: .95; 
     }
   }
@@ -51,10 +56,6 @@ main{
     display: flex;
     justify-content: space-between;
     color: var(--text-color-form);
-
-    a{
-      border-bottom: 2px solid var(--text-color-form);
-    }
   }
   .check{
     input[type=checkbox]{

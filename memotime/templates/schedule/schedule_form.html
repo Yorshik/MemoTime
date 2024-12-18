@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+ {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
 {% block extra_css %}
@@ -14,11 +14,11 @@
       {% translate 'Create Schedule' %}
     {% endif %}
   </h2>
-  <p><span class="red">*</span> - {% translate 'required field' %}</p>
   {% csrf_token %}
   {% with form=form %}
     {% include 'includes/form.html' %}
   {% endwith %}
+  <p><span class="red">*</span> - {% translate 'required field' %}</p>
   <button type="submit" class="btn btn_submit">{% translate 'Save' %}</button>
 </form>
 {% endblock body %}

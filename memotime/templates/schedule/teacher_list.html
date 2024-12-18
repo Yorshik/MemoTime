@@ -7,7 +7,7 @@
 {% block body %}
 <section>
   <h2>{% translate 'Teacher List' %}</h2>
-  <a href="{% url 'schedule:note-create' %}" class="btn btn_create">
+  <a href="{% url 'schedule:teacher-create' %}" class="btn btn_create">
     {% translate 'Add Teacher' %}
   </a>
   <div class="list">
@@ -15,9 +15,13 @@
       <div class="item">
         <h4>{{ teacher.name }}</h4>
         <a href="{% url 'schedule:teacher-update' pk=teacher.pk %}" class="btn">{% translate 'Update' %}</a>
-        <a href="{% url 'schedule:teacher-delete' pk=teacher.pk %}" class="btn">{% translate 'Delete' %}</a>
+        <button data-url="{% url 'schedule:teacher-delete' pk=teacher.pk %}" class="btn btn_del" id="btn-del">{% translate 'Delete' %}</button>
       </div>
     {% endfor %}
   </div>
 </section>
+{% include 'includes/modal.html' %}
 {% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/delete-modal.js' %}"></script>
+{% endblock extra_js %}

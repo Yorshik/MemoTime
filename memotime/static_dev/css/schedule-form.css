@@ -41,7 +41,7 @@
   }
   div:has(input[type="date"]){
     label{
-      top: -20px;
+      top: -25px;
       scale: .95; 
     }
   }

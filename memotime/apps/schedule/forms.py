@@ -27,11 +27,6 @@ class NoteForm(django.forms.ModelForm):
             if event_related:
                 self.initial["event"] = event_related
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        return kwargs
-
     def save(self, commit=True):
         note = super().save(commit=False)
         selected_event = self.cleaned_data["event"]

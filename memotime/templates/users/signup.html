@@ -7,7 +7,6 @@
 {% block body %}
   <form class="main-form" method="post">
     <h2>{% translate 'Sign Up' %}</h2>
-    <p><span class="red">*</span> - {% translate 'required field' %}</p>
     {% if form.errors %}<div class="danger">{{ form.errors }}</div>{% endif %}
     {% csrf_token %}
     {% with form=form %}
@@ -21,6 +20,7 @@
         <a href="https://sakhalinzoo.ru/upload/photos/5ed9c4b3a4680_1591329971.jpg">{% translate 'personal data' %}</a>?
       </label>
     </div>
+    <p><span class="red">*</span> - {% translate 'required field' %}</p>
     <div class="links">
       <a href="{% url 'users:login' %}">{% translate 'Do you have an account?' %}</a>
     </div>
