@@ -1,27 +1,62 @@
 {% block header %}
-  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 text-bg-dark">
-    {% load static %}
-    {% load i18n %}
-    <div class="d-flex align-items-center">
-      {% with request.resolver_match.view_name as view_name %}
-        <ul class="nav nav-pills me-4">
-          {% if user.is_superuser %}
-            <li class="nav-item">
-              <a href="{% url 'admin:index' %}" class="nav-link">{% trans 'В админку' %}</a>
-            </li>
-          {% endif %}
-          <li class="nav-item">
-            {% if user.is_authenticated and user.profile %}
-              <div class="ms-3">
-                <a href="{% url 'users:profile' %}"
-                   class="nav-link {% if view_name == 'users:profile' %}active disabled{% endif %}">{% trans 'Профиль' %}</a>
-              </div>
-            {% endif %}
-            <a href="{% url 'users:login' %}"
-               class="nav-link {% if view_name == 'users:login' %}active disabled{% endif %}">{% trans 'Вход' %}</a>
-          </li>
-        </ul>
-      {% endwith %}
-    </div>
-  </header>
+<header class="header">
+  {% load static %}
+  {% load i18n %}
+  
+  <a href="{% url 'homepage:homepage' %}" class="logo">
+    <img src="{% static '/img/logo.png' %}" alt="{% trans 'Logo' %}">
+  </a>
+  <div class="burger-container">
+    <nav>
+      <ul>
+        <li>
+          <button class="btn btn_theme" id="theme-toggle-btn">
+            <img src="{% static '/img/dark-theme-icon.png' %}" alt="{% translate 'Dark Theme Icon' %}">
+          </button>
+        </li>
+        <li>
+          <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <select name="language" onchange="this.form.submit()">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}"
+                  {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}
+                </option>
+              {% endfor %}
+            </select>
+          </form>
+        </li>
+        <li>
+          <a href="{% url 'schedule:schedule-list' %}">{% translate 'Schedule List' %}</a>
+        </li>
+        <li>
+          <a href="{% url 'schedule:note-list' %}">{% translate 'Note List' %}</a>
+        </li>
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <li>
+          <a href="{% url 'users:profile' %}" class="btn btn_prof">
+            <img src="https://masterpiecer-images.s3.yandex.net/b666ea945b0c11ee85533eecbe30a25c:upscaled" alt="{% translate 'error' %}">
+          </a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'users:login' %}" class="btn btn_login">
+            {% translate 'Log In' %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'users:signup' %}" class="btn btn_signup">
+            {% translate 'Sign Up' %}
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <button class="btn btn_burger">
+      <div class="icon"></div>
+    </button>
+  </div>
+</header>
 {% endblock header %}

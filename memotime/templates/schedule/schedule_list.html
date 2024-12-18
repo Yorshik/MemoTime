@@ -1,23 +1,27 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Schedule List</title>
-  </head>
-  <body>
-    <h2>Schedule List</h2>
-    <a href="{% url 'schedule:schedule-create' %}">Create New Schedule</a>
-    <ul>
-      {% for schedule in schedules %}
-        <li>
-          <a href="{% url 'schedule:schedule-detail' schedule.pk %}">
-            {{ schedule.start_date }} - {{ schedule.expiration_date }}
-          </a>
-          <a href="{% url 'schedule:schedule-update' schedule.pk %}">Edit</a>
-          <a href="{% url 'schedule:schedule-delete' schedule.pk %}">Delete</a>
-        </li>
-      {% empty %}
-        <li>No schedules available.</li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/object-list.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<section>
+  <h2>{% translate 'Schedule List' %}</h2>
+  <a href="{% url 'schedule:schedule-create' %}" class="btn btn_create">
+    {% translate 'Create New Schedule' %}
+  </a>
+  <div class="list">
+    {% for schedule in schedules %}
+      <div class="item">
+        <a href="{% url 'schedule:schedule-detail' schedule.pk %}">
+          {{ schedule.start_date }} - {{ schedule.expiration_date }}
+        </a>
+        <a href="{% url 'schedule:schedule-update' schedule.pk %}" class="btn">{% translate 'Edit' %}</a>
+        <a href="{% url 'schedule:schedule-delete' schedule.pk %}" class="btn">{% translate 'Delete' %}</a>
+      </div>
+    {% empty %}
+      <li>No schedules available.</li>
+    {% endfor %}
+    </div>
+</section>
+{% endblock body %}

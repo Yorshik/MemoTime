@@ -1,17 +1,33 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock extra_css %}
 {% block body %}
-  <h2>{% trans "Изменение профиля" %}</h2>
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% trans "Сохранить" %}</button>
+  <form class="profile" method="post">
+    <div class="profile__left">
+      {% if user.profile.image %}
+        <img src="{{ user.profile.image.url }}" alt="Изображение не добавленно" class="profile__img">
+      {% else %}
+        <div class="profile__image">Изображение не добавленно</div>
+      {% endif %}
+      <button class="btn btn_profile">{% translate 'Change Profile information' %}</button>
+      <a href="{% url 'users:password-change' %}" class="btn btn_profile">{% translate 'Change the password' %}</a>
+    </div>
+    <div class="profile__right">
+      {% csrf_token %}
+      {% with form=form %}
+        {% include "includes/form.html" %}
+      {% endwith %}
+    </div>
   </form>
 {% endblock body %}
+{% block extra_js %}
+<script>
+  let inputs = document.querySelectorAll(".form-control");
+  inputs.forEach((input) => {
+    <!-- input.disabled = true; -->
+  });
+</script>
+{% endblock extra_js %}

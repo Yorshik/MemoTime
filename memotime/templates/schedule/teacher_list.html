@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Teacher List</title>
-</head>
-<body>
-    <h2>Teacher List</h2>
-    <ul>
-        {% for teacher in teachers %}
-            <li>
-                {{ teacher.name }}
-                 <a href="{% url 'schedule:teacher-update' pk=teacher.pk %}">Update</a>
-                  <a href="{% url 'schedule:teacher-delete' pk=teacher.pk %}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
-     <a href="{% url 'schedule:teacher-create' %}">Add Teacher</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/object-list.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<section>
+  <h2>{% translate 'Teacher List' %}</h2>
+  <a href="{% url 'schedule:note-create' %}" class="btn btn_create">
+    {% translate 'Add Teacher' %}
+  </a>
+  <div class="list">
+    {% for teacher in teachers %}
+      <div class="item">
+        <h4>{{ teacher.name }}</h4>
+        <a href="{% url 'schedule:teacher-update' pk=teacher.pk %}" class="btn">{% translate 'Update' %}</a>
+        <a href="{% url 'schedule:teacher-delete' pk=teacher.pk %}" class="btn">{% translate 'Delete' %}</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

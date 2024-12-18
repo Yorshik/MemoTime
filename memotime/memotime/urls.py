@@ -7,6 +7,7 @@ import django.urls
 
 import apps.feedback.urls
 import apps.homepage.urls
+import apps.schedule
 import apps.schedule.urls
 import apps.users.urls
 
@@ -14,7 +15,6 @@ urlpatterns = [
     django.urls.path("", django.urls.include(apps.homepage.urls)),
     django.urls.path("feedback/", django.urls.include(apps.feedback.urls)),
     django.urls.path("schedule/", django.urls.include(apps.schedule.urls)),
-    django.urls.path("users/", django.urls.include(apps.users.urls)),
     django.urls.path(
         "i18n/",
         django.urls.include(

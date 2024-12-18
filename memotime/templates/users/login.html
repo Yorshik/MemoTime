@@ -1,28 +1,21 @@
-{% extends "includes/form_base.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% load i18n %}
-{% block form_title %}
-  {% trans "Вход" %}
-{% endblock form_title %}
-{% block form_description %}
-  <p class="text-muted">{% trans "Войдите в аккаунт" %}</p>
-{% endblock form_description %}
-{% block form_hidden_fields %}
-  <input type="hidden" name="next" value="{{ next }}">
-{% endblock form_hidden_fields %}
-{% block submit_button_text %}
-  {% trans 'Log in' %}
-{% endblock submit_button_text %}
-{% block form_footer %}
-  {% url 'users:signup' as signup_url %}
-  {% if signup_url %}
-    <div class="password-reset-link text-center">
-      <a href="{{ signup_url }}">{% trans 'Создать учетную запись' %}</a>
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock extra_css %}
+{% block body %}
+  <form action="" class="main-form" method="post">
+    <h2>{% translate 'Log In' %}</h2>
+    {% if form.errors %}<div class="danger">{{ form.errors }}</div>{% endif %}
+    {% csrf_token %}
+    {% with form=form %}
+      {% include "includes/form.html" %}
+    {% endwith %}
+    <div class="links">
+      <a href="{% url 'users:password-reset' %}">{% translate 'Forgot your password?' %}</a>
+      <a href="{% url 'users:signup' %}">{% translate 'Don`t you have an account?' %}</a>
     </div>
-  {% endif %}
-  {% url 'users:password_reset' as password_reset_url %}
-  {% if password_reset_url %}
-    <div class="password-reset-link text-center">
-      <a href="{{ password_reset_url }}">{% trans 'Забыли свой пароль или имя пользователя?' %}</a>
-    </div>
-  {% endif %}
-{% endblock form_footer %}
+    <button type="submit" class="btn btn_submit">{% translate 'Log In' %}</button>
+  </form>
+{% endblock body %}

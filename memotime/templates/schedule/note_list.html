@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Note List</title>
-  </head>
-  <body>
-    <h2>Note List</h2>
-    <ul>
-      {% for note in notes %}
-        <li>
-          {{ note.heading }}
-          <a href="{% url 'schedule:note-update' pk=note.pk %}">Update</a>
-          <a href="{% url 'schedule:note-delete' pk=note.pk %}">Delete</a>
-        </li>
-      {% endfor %}
-    </ul>
-    <a href="{% url 'schedule:note-create' %}">Add Note</a>
-  </body>
-</html>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/object-list.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<section>
+  <h2>{% translate 'Note List' %}</h2>
+  <a href="{% url 'schedule:note-create' %}" class="btn btn_create">
+    {% translate 'Add Note' %}
+  </a>
+  <div class="list">
+    {% for note in notes %}
+      <div class="item">
+        <h4>{{ note.heading }}</h4>
+        <a href="{% url 'schedule:note-update' pk=note.pk %}" class="btn">{% translate 'Update' %}</a>
+        <a href="{% url 'schedule:note-delete' pk=note.pk %}" class="btn">{% translate 'Delete' %}</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

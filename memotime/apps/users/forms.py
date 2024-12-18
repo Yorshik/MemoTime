@@ -66,11 +66,9 @@ class UserProfileForm(
     apps.core.forms.BaseForm,
     django.contrib.auth.forms.UserChangeForm,
 ):
-    password_change_link = django.forms.CharField(
-        widget=django.forms.TextInput(attrs={"readonly": True}),
-        label=_("Сменить пароль"),
-        required=False,
-    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        del self.fields[apps.users.models.User.password.field.name]
 
     class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
         model = apps.users.models.User
@@ -81,19 +79,11 @@ class UserProfileForm(
             apps.users.models.User.last_name.field.name,
             apps.users.models.User.timezone.field.name,
             apps.users.models.User.is_email_subscribed.field.name,
-            apps.users.models.User.is_telegram_subscribed.field.name,
             apps.users.models.User.image.field.name,
-            "password_change_link",
         )
         widgets = {
             "image": django.forms.FileInput,
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["password_change_link"].initial = django.urls.reverse_lazy(
-            "users:password-change",
-        )
 
     def clean_username(self):
         username = self.cleaned_data[apps.users.models.User.username.field.name].lower()

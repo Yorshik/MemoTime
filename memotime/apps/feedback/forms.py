@@ -34,10 +34,10 @@ class AuthorForm(apps.core.forms.BaseForm, django.forms.ModelForm):
         )
         widgets = {
             apps.feedback.models.PersonalData.name.field.name: django.forms.TextInput(
-                attrs={"placeholder": _("How should we address you?")},
+                attrs={"placeholder": _(" ")},
             ),
             apps.feedback.models.PersonalData.email.field.name: django.forms.EmailInput(
-                attrs={"placeholder": _("Email for feedback")},
+                attrs={"placeholder": _(" ")},
             ),
         }
 

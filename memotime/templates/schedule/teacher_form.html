@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if form.instance.pk %}Edit Teacher{% else %}Create Teacher{% endif %}</title>
-     <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-</head>
-<body>
-    <h2>{% if form.instance.pk %}Edit Teacher{% else %}Create Teacher{% endif %}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-                 {% if field.errors %}
-                    <div class="invalid-feedback d-block">
-                      {{ field.errors|join:"<br>" }}
-                    </div>
-                  {% endif %}
-            </div>
-        {% endfor %}
-        <button type="submit">Save</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/schedule-form.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<form method="post" class="main-form">
+  <h2>
+  {% if form.instance.pk %}
+    {% translate 'Edit Teacher' %}
+  {% else %}
+    {% translate 'Create Teacher' %}
+  {% endif %}
+  </h2>
+  <p><span class="red">*</span> - {% translate 'required field' %}</p>
+  {% csrf_token %}
+  {% with form=form %}
+    {% include 'includes/form.html' %}
+  {% endwith %}
+  <button type="submit" class="btn btn_submit">{% translate 'Save' %}</button>
+</form>
+{% endblock body %}

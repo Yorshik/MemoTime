@@ -1,0 +1,44 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  a{
+    text-align: center;
+    align-self: flex-start;
+    padding: 10px 15px;
+  }
+  .wraper{
+    display: flex;
+    gap: 20px;
+
+    section{
+      flex: 1;
+      background-color: var(--second-color);
+      border: var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding: 20px;
+
+      .info__main{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .timeschedule{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+        div{
+          box-shadow: var(--shadow-inset);
+          border: var(--border);
+          border-radius: 10px;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

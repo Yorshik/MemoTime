@@ -182,7 +182,7 @@ class AddTimeScheduleForm(django.forms.ModelForm):
             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
             "time_end": django.forms.TimeInput(attrs={"type": "time"}),
             "event": django.forms.Select(
-                attrs={"class": "selectpicker", "data-live-search": "true"},
+                attrs={"class": "selectpicker"},
             ),
         }
 
