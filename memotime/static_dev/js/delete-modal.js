@@ -3,39 +3,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("delete-modal");
   const confirmDeleteBtn = document.getElementById("btn_yes");
   const cancelDeleteBtn = document.getElementById("btn_no");
-
-  let targetUrl = ""; // Переменная для хранения ссылки
-
-  // Обработчик для кнопок "Удалить"
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      // Читаем ссылку из data-url атрибута
-      targetUrl = button.dataset.url;
-
-      // Показываем модальное окно
+      const targetUrl = button.dataset.url;
       modal.style.display = "flex";
+      modal.dataset.url = targetUrl;
     });
   });
-
-  // Обработчик для кнопки "Да" в модальном окне
   confirmDeleteBtn.addEventListener("click", () => {
-    console.log("Переход по ссылке:", targetUrl); // Проверка URL
+    const targetUrl = modal.dataset.url;
+
     if (targetUrl) {
-      window.location.href = targetUrl;
+      $.ajax({
+        type: 'POST',
+        url: targetUrl,
+        data: {
+          csrfmiddlewaretoken: document.querySelector('[name="csrfmiddlewaretoken"]').value
+        },
+        success: function (data) {
+          if (data.status === 'ok') {
+            modal.style.display = "none";
+            window.location.reload();
+          }
+        }
+
+      });
     }
   });
-
-  // Обработчик для кнопки "Отмена"
   cancelDeleteBtn.addEventListener("click", () => {
-    modal.style.display = "none"; // Скрыть модальное окно
-    targetUrl = ""; // Сбросить сохранённый URL
+    modal.style.display = "none";
   });
-
-  // Закрытие модального окна при клике вне его содержимого
   window.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.style.display = "none";
-      targetUrl = "";
     }
   });
 });

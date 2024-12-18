@@ -2,29 +2,29 @@
 {% load i18n %}
 {% load static %}
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/form.css' %}">
-<link rel="stylesheet" href="{% static 'css/multi-select.css' %}">
-<link rel="stylesheet" href="{% static 'css/timeschedule_form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/multi-select.css' %}">
+  <link rel="stylesheet" href="{% static 'css/timeschedule_form.css' %}">
 {% endblock extra_css %}
 {% block body %}
-<form method="post" class="main-form">
-  <h2>
-    {% if form.instance.pk %}
-      {% translate 'Edit Event' %}
-    {% else %}
-      {% translate 'Create Event' %}
-    {% endif %}
-  </h2>
-  {% csrf_token %}
-  {% with form=form %}
-    {% include 'includes/form.html' %}
-  {% endwith %}
-  <button type="submit" class="btn">{% translate 'Save' %}</button>
-</form>
+  <form method="post" class="main-form">
+    <h2>
+      {% if form.instance.pk %}
+        {% translate 'Edit Event' %}
+      {% else %}
+        {% translate 'Create Event' %}
+      {% endif %}
+    </h2>
+    {% csrf_token %}
+    {% with form=form %}
+      {% include 'includes/form.html' %}
+    {% endwith %}
+    <button type="submit" class="btn">{% translate 'Save' %}</button>
+  </form>
 {% endblock body %}
 {% block extra_js %}
-<script src="{% static 'js/multi-select.js' %}"></script>
-<script>
+  <script src="{% static 'js/multi-select.js' %}"></script>
+  <script>
   new MultiSelect(document.getElementById('id_teacher'), {
     selectAll: false,
     closeListOnItemSelect: true,
@@ -34,5 +34,5 @@
     selectAll: false,
     closeListOnItemSelect: true,
   });
-</script>
+  </script>
 {% endblock extra_js %}

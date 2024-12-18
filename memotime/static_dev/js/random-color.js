@@ -23,10 +23,10 @@ function darkenColor(color, factor = 0.1) {
 }
 
 // Применяем стили к каждому элементу time-schedule-item
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const timeScheduleItems = document.querySelectorAll('.time-schedule-item');
 
-  timeScheduleItems.forEach(function(item) {
+  timeScheduleItems.forEach(function (item) {
     const randomColor = generateRandomColor(); // Генерация случайного цвета
 
     // Устанавливаем случайный цвет фона
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Устанавливаем темный цвет для текста
     const textElements = item.querySelectorAll('p, b');
-    textElements.forEach(function(textElement) {
+    textElements.forEach(function (textElement) {
       textElement.style.color = darkTextColor;
     });
   });

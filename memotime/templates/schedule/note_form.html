@@ -6,21 +6,21 @@
   <link rel="stylesheet" href="{% static 'css/timeschedule_form.css' %}">
 {% endblock extra_css %}
 {% block body %}
-<form method="post" class="main-form">
-  <h2>
-  {% if form.instance.pk %}
-    {% translate 'Edit Note' %}
-  {% else %}
-    {% translate 'Create Note' %}
-  {% endif %}
-  </h2>
-  {% csrf_token %}
-  {% with form=form %}
-    {% include 'includes/form.html' %}
-  {% endwith %}
-  <p><span class="red">*</span> - {% translate 'required field' %}</p>
-  <button type="submit" class="btn btn_submit">
-    {% translate 'Save' %}
-  </button>
-</form>
+  <form method="post" class="main-form">
+    <h2>
+      {% if form.instance.pk %}
+        {% translate 'Edit Note' %}
+      {% else %}
+        {% translate 'Create Note' %}
+      {% endif %}
+    </h2>
+    {% csrf_token %}
+    {% with form=form %}
+      {% include 'includes/form.html' %}
+    {% endwith %}
+    <p>
+      <span class="red">*</span> - {% translate 'required field' %}
+    </p>
+    <button type="submit" class="btn btn_submit">{% translate 'Save' %}</button>
+  </form>
 {% endblock body %}

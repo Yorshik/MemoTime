@@ -2,28 +2,27 @@
 {% load i18n %}
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/object-list.css' %}">
+  <link rel="stylesheet" href="{% static 'css/object-list.css' %}">
 {% endblock extra_css %}
 {% block body %}
-<section>
-  <h2>{% translate 'Event List' %}</h2>
-  <a href="{% url 'schedule:event-create' %}" class="btn btn_create">{% translate 'Add Event' %}</a>
-  <div class="list">
-    {% for event in events %}
-      <div class="item">
-        <h4>{{ event.name }}</h4>
-        <a href="{% url 'schedule:event-update' pk=event.pk %}" class="btn">{% translate 'Update' %}</a>
-        <button data-url="{% url 'schedule:event-delete' pk=event.pk %}" 
-                class="btn" 
-                id="btn-del">
-          {% translate 'Delete' %}
-        </button>
-      </div>
-    {% endfor %}
-  </div>
-</section>
-{% include 'includes/modal.html' %}
+  <section>
+    <h2>{% translate 'Event List' %}</h2>
+    <a href="{% url 'schedule:event-create' %}" class="btn btn_create">{% translate 'Add Event' %}</a>
+    <div class="list">
+      {% for event in events %}
+        <div class="item">
+          <h4>{{ event.name }}</h4>
+          <a href="{% url 'schedule:event-update' pk=event.pk %}" class="btn">{% translate 'Update' %}</a>
+          <button data-url="{% url 'schedule:event-delete' pk=event.pk %}"
+                  class="btn"
+                  id="btn-del">{% translate 'Delete' %}</button>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% include 'includes/modal.html' %}
 {% endblock body %}
 {% block extra_js %}
-<script src="{% static 'js/delete-modal.js' %}"></script>
+  <script src="{% static 'js/libs/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/delete-modal.js' %}"></script>
 {% endblock extra_js %}
