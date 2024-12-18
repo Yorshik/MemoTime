@@ -1,5 +1,5 @@
 # MemoTime
-
+for windows install gevent
 ![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/team-1/badges/main/pipeline.svg)
 
 ## Запуск проекта
