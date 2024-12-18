@@ -18,7 +18,7 @@ services:
     image: redis:7.2-alpine
     container_name: redis
     restart: always
-    command: redis-server --save "" --appendonly no # Отключаем сохранение данных на диск
+    command: redis-server --save "" --appendonly no
     volumes:
       - ./redis_data:/data
 
