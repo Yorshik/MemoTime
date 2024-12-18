@@ -1,5 +1,6 @@
 import django.conf
 import django.contrib.auth
+import django.contrib.auth.mixins
 import django.contrib.auth.views
 import django.contrib.messages
 import django.core.mail
@@ -147,7 +148,10 @@ class ActivateResendView(django.views.View):
         return django.shortcuts.redirect("users:login")
 
 
-class ProfileView(django.views.generic.UpdateView):
+class ProfileView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.UpdateView,
+):
     template_name = "users/profile.html"
     form_class = apps.users.forms.UserProfileForm
     success_url = django.urls.reverse_lazy("users:profile")

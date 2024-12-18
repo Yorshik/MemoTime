@@ -1,5 +1,6 @@
-import django.views.generic
 from datetime import datetime
+
+import django.views.generic
 
 __all__ = ()
 

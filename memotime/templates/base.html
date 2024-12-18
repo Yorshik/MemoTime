@@ -9,11 +9,10 @@
     <meta name="description" content="{% trans 'LMS project' %}">
     <meta name="keywords" content="{% trans 'catalog, cat' %}">
     <title>Memotime</title>
-
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block extra_css %}{% endblock extra_css %}
-
+    {% block extra_css %}
+    {% endblock extra_css %}
     <!-- FavIcon -->
     <link type="image" href="{% static 'fav.ico' %}" rel="icon" />
   </head>
@@ -26,12 +25,12 @@
             <p>{% translate "произошла ошибка - свяжитесь с нами" %}</p>
           {% endblock body %}
         </main>
-        {% include "includes/footer.html" %}  
+        {% include "includes/footer.html" %}
       </div>
     </div>
-
     <!-- JS -->
-    {% block extra_js %}{% endblock extra_js %}
+    {% block extra_js %}
+    {% endblock extra_js %}
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
   </body>

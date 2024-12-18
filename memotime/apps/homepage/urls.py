@@ -3,7 +3,6 @@ import django.views.generic
 
 import apps.homepage.views
 
-
 __all__ = ()
 
 

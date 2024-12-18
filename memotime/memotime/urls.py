@@ -21,6 +21,7 @@ urlpatterns = [
         ),
     ),
     django.urls.path("admin/", django.contrib.admin.site.urls),
+    django.urls.path("captcha/", django.urls.include("captcha.urls")),
 ]
 
 if django.conf.settings.DEBUG:

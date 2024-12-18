@@ -14,7 +14,6 @@ class ScheduleCreateView(LoginRequiredMixin, django.views.generic.CreateView):
     form_class = forms.ScheduleForm
     template_name = "schedule/schedule_form.html"
     success_url = django.urls.reverse_lazy("schedule:schedule-list")
-    login_url = "/login/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -25,7 +24,6 @@ class ScheduleListView(LoginRequiredMixin, django.views.generic.ListView):
     model = models.Schedule
     template_name = "schedule/schedule_list.html"
     context_object_name = "schedules"
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -39,7 +37,6 @@ class ScheduleUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
     form_class = forms.ScheduleForm
     template_name = "schedule/schedule_form.html"
     success_url = django.urls.reverse_lazy("schedule:schedule-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -59,7 +56,6 @@ class ScheduleDeleteView(LoginRequiredMixin, django.views.generic.DeleteView):
     model = models.Schedule
     template_name = "schedule/schedule_confirm_delete.html"
     success_url = django.urls.reverse_lazy("schedule:schedule-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -79,7 +75,6 @@ class ScheduleDetailView(LoginRequiredMixin, django.views.generic.DetailView):
     model = models.Schedule
     template_name = "schedule/schedule_detail.html"
     context_object_name = "schedule"
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -106,7 +101,6 @@ class ScheduleDetailView(LoginRequiredMixin, django.views.generic.DetailView):
 class TimeScheduleCreateView(LoginRequiredMixin, django.views.generic.CreateView):
     model = models.TimeSchedule
     template_name = "schedule/timeschedule_form.html"
-    login_url = "/login/"
 
     def get_form_class(self):
         return forms.AddTimeScheduleForm
@@ -173,7 +167,6 @@ class TimeScheduleCreateView(LoginRequiredMixin, django.views.generic.CreateView
 class TimeScheduleUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
     model = models.TimeSchedule
     template_name = "schedule/timeschedule_form.html"
-    login_url = "/login/"
 
     def get_form_class(self):
         return forms.TimeScheduleForm
@@ -218,7 +211,6 @@ class TimeScheduleUpdateView(LoginRequiredMixin, django.views.generic.UpdateView
 class TimeScheduleDeleteView(LoginRequiredMixin, django.views.generic.DeleteView):
     model = models.TimeSchedule
     template_name = "schedule/timeschedule_confirm_delete.html"
-    login_url = "/login/"
 
     def get_success_url(self):
         return django.urls.reverse(
@@ -244,7 +236,6 @@ class TimeScheduleEventCreateView(LoginRequiredMixin, django.views.generic.Creat
     model = models.Event
     form_class = forms.EventForm
     template_name = "schedule/event_form_from_timeschedule.html"
-    login_url = "/login/"
 
     def get_success_url(self):
         return django.urls.reverse(
@@ -268,7 +259,6 @@ class EventCreateView(LoginRequiredMixin, django.views.generic.CreateView):
     model = models.Event
     template_name = "schedule/event_form.html"
     success_url = django.urls.reverse_lazy("schedule:event-list")
-    login_url = "/login/"
 
     def get_form_class(self):
         return forms.EventForm
@@ -287,7 +277,6 @@ class EventListView(LoginRequiredMixin, django.views.generic.ListView):
     model = models.Event
     template_name = "schedule/event_list.html"
     context_object_name = "events"
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -300,7 +289,6 @@ class EventUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
     model = models.Event
     template_name = "schedule/event_form.html"
     success_url = django.urls.reverse_lazy("schedule:event-list")
-    login_url = "/login/"
 
     def get_form_class(self):
         return forms.EventForm
@@ -332,7 +320,6 @@ class EventDeleteView(LoginRequiredMixin, django.views.generic.DeleteView):
     model = models.Event
     template_name = "schedule/event_confirm_delete.html"
     success_url = django.urls.reverse_lazy("schedule:event-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -353,7 +340,6 @@ class TeacherCreateView(LoginRequiredMixin, django.views.generic.CreateView):
     form_class = forms.TeacherForm
     template_name = "schedule/teacher_form.html"
     success_url = django.urls.reverse_lazy("schedule:teacher-list")
-    login_url = "/login/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -364,7 +350,6 @@ class TeacherListView(LoginRequiredMixin, django.views.generic.ListView):
     model = models.Teacher
     template_name = "schedule/teacher_list.html"
     context_object_name = "teachers"
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -378,7 +363,6 @@ class TeacherUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
     form_class = forms.TeacherForm
     template_name = "schedule/teacher_form.html"
     success_url = django.urls.reverse_lazy("schedule:teacher-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -398,7 +382,6 @@ class TeacherDeleteView(LoginRequiredMixin, django.views.generic.DeleteView):
     model = models.Teacher
     template_name = "schedule/teacher_confirm_delete.html"
     success_url = django.urls.reverse_lazy("schedule:teacher-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -418,7 +401,6 @@ class NoteCreateView(LoginRequiredMixin, django.views.generic.CreateView):
     model = models.Note
     template_name = "schedule/note_form.html"
     success_url = django.urls.reverse_lazy("schedule:note-list")
-    login_url = "/login/"
 
     def get_form_class(self):
         return forms.NoteForm
@@ -437,7 +419,6 @@ class NoteListView(LoginRequiredMixin, django.views.generic.ListView):
     model = models.Note
     template_name = "schedule/note_list.html"
     context_object_name = "notes"
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -451,7 +432,6 @@ class NoteUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
     form_class = forms.NoteForm
     template_name = "schedule/note_form.html"
     success_url = django.urls.reverse_lazy("schedule:note-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -466,12 +446,17 @@ class NoteUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
 
         return super().dispatch(request, *args, **kwargs)
 
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+
+        return form_class(user=self.request.user, **self.get_form_kwargs())
+
 
 class NoteDeleteView(LoginRequiredMixin, django.views.generic.DeleteView):
     model = models.Note
     template_name = "schedule/note_confirm_delete.html"
     success_url = django.urls.reverse_lazy("schedule:note-list")
-    login_url = "/login/"
 
     def get_queryset(self):
         if self.request.user.is_authenticated:

@@ -22,8 +22,15 @@ class NoteForm(django.forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["event"].queryset = models.Event.objects.filter(user=user)
-        if self.instance.pk and self.instance.event:
-            self.initial["event"] = self.instance.event
+        if self.instance.pk:
+            event_related = models.Event.objects.filter(notes=self.instance).first()
+            if event_related:
+                self.initial["event"] = event_related
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
     def save(self, commit=True):
         note = super().save(commit=False)
