@@ -7,46 +7,35 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (differenceInMilliseconds / (60 * 60 * 1000) < 24) {
 		djangoNowElement.textContent = jsNow.getFullYear();
 	}
-	const dropdowns = document.querySelectorAll('.nav-item.dropdown');
-	dropdowns.forEach(dropdown => {
-		const menu = dropdown.querySelector('.dropdown-menu');
-		const toggle = dropdown.querySelector('.dropdown-toggle');
-		let isClickOpened = false;
-		toggle.addEventListener('click', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
+});
 
-			isClickOpened = !isClickOpened;
-			if (isClickOpened) {
-				menu.classList.add('show', 'force-show');
-				toggle.classList.add('active');
-			} else {
-				menu.classList.remove('force-show');
-				setTimeout(() => {
-					if (!menu.matches(':hover')) {
-						menu.classList.remove('show');
-						toggle.classList.remove('active');
-					}
-				}, 200);
-			}
-		});
-		document.addEventListener('click', (e) => {
-			if (!dropdown.contains(e.target)) {
-				isClickOpened = false;
-				menu.classList.remove('force-show');
-				toggle.classList.remove('active');
-				setTimeout(() => {
-					if (!menu.matches(':hover')) {
-						menu.classList.remove('show');
-					}
-				}, 200);
-			}
-		});
-	});
+document.addEventListener("DOMContentLoaded", () => {
+	const themeToggleBtn = document.getElementById("theme-toggle-btn");
+	const themeIcon = themeToggleBtn.querySelector("img");
 
+	function setTheme(theme) {
+		document.documentElement.setAttribute("data-theme", theme);
+		document.cookie = `theme=${theme}; path=/; max-age=31536000`;
 
-	const burgerBtn = document.querySelector(".btn_burger");
-	burgerBtn.addEventListener("click", (e) => {
-		burgerBtn.classList.toggle("open");
+		const iconSrc =
+			theme === "dark"
+				? themeToggleBtn.dataset.light
+				: themeToggleBtn.dataset.dark;
+		themeIcon.src = iconSrc;
+	}
+
+	function getCookie(name) {
+		const value = `; ${document.cookie}`;
+		const parts = value.split(`; ${name}=`);
+		if (parts.length === 2) return parts.pop().split(";").shift();
+	}
+
+	const savedTheme = getCookie("theme") || "light";
+	setTheme(savedTheme);
+
+	themeToggleBtn.addEventListener("click", () => {
+		const currentTheme = document.documentElement.getAttribute("data-theme");
+		const newTheme = currentTheme === "dark" ? "light" : "dark";
+		setTheme(newTheme);
 	});
 });

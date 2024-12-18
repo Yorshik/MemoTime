@@ -21,7 +21,6 @@
   {% endwith %}
   <div class="links">
     <a href="{% url 'schedule:timeschedule-event-create' schedule_id=schedule.id %}">{% translate 'Add Event' %}</a>
-    <a href="{% url 'schedule:teacher-create' %}">{% translate 'Add Teacher' %}</a>
   </div>
   <button type="submit" class="btn">{% translate 'Save' %}</button>
 </form>

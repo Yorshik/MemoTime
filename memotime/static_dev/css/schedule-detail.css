@@ -3,42 +3,198 @@
   flex-direction: column;
   gap: 20px;
 
-  a{
+  & :is(a, button).btn:not(&.btn_back, &.btn_prof){
     text-align: center;
     align-self: flex-start;
+    padding: 13px 13px 10px 13px;
+  }
+  a.btn_back{
     padding: 10px 15px;
   }
   .wraper{
     display: flex;
+    flex-direction: column;
     gap: 20px;
 
-    section{
-      flex: 1;
+    .info{
       background-color: var(--second-color);
       border: var(--border);
       border-radius: 10px;
       box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    section{
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 30px;
-      padding: 20px;
 
       .info__main{
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
         gap: 10px;
       }
-      .timeschedule{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+}
+.time-schedule{
+  margin-bottom: 40px;
+}
+.time-schedule__text{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-        div{
-          box-shadow: var(--shadow-inset);
-          border: var(--border);
-          border-radius: 10px;
-          padding: 10px;
+  form{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input{
+      display: none;
+    }
+    label:not(&.switch){
+      font-weight: 500;
+    }
+    .switch{
+      display: flex;
+      align-items: center;
+      width: 85px;
+      height: 40px;
+      box-shadow: var(--shadow);
+      background: var(--deactive-togle);
+      position: relative;
+      cursor: pointer;
+      border-radius: 1.6rem;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: .4rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--second-color);
+        transition: all .4s ease;
+        }
+      &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--active-togle);
+        opacity: 0;
+        transition: all .4s ease;
+      }
+    }
+    input:checked {
+      & ~ .switch {
+        &::before { opacity: 1; }
+        &::after {
+          left: 57%; 
         }
       }
+    }
+  }
+}
+.schedule-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+.day-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--second-color);
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 120px;
+
+  .day-heading{
+    text-align: center;
+  }
+}
+.time-schedule-item {
+  margin-bottom: 5px;
+  border-radius: 5px;
+  height: 70px;
+  overflow: hidden;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all .2s;
+
+  .btns{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+.time-schedule-item:hover{
+  height: auto;
+}
+.time-schedule-item-even {
+  background-color: var(--back-err) !important;
+  color: var(--text-color-err) !important;
+}
+.time-schedule-item-odd {
+  background-color: var(--back-mess) !important;
+  color: var(--text-color-mess) !important;
+}
+.time-schedule-item :is(a, button) {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &::after{
+    height: 0 !important;
+  }
+}
+.day-heading {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.modal-content {
+  background-color: var(--second-color);
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .btns{
+    display: flex;
+    gap: 10px;
+  }
+  .btn{
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 20px;
+
+    &#btn_no{
+      background-color: var(--back-btn-landing);
     }
   }
 }

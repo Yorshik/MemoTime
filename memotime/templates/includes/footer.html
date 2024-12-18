@@ -5,7 +5,7 @@
   <div class="text footer-gap">
     <a href="mailto:The-MemoTime@yandex.ru">The-MemoTime@yandex.ru</a>
     <a href="tel:+7(800)555-35-35">+7 (800) 555-35-35</a>
-    <p>©2024</p>
+    <p>©<span id="django-now" data-django-now="{% now 'Y-m-d H:i:s' %}">{% now 'Y' %}</span> {% trans 'Company, Inc' %}</p>
   </div>
   <div class="navigation">
     <nav>
@@ -34,9 +34,9 @@
     </nav>
     <nav>
       <ul class="footer-gap">
-        <li><a href="https://gitlab.crja72.ru/frixit">Frixit</a></li>
-        <li><a href="https://gitlab.crja72.ru/kirill135790zzz">Yorshik</a></li>
-        <li><a href="https://gitlab.crja72.ru/nicitatyushnyakov">nais2008</a></li>
+        <li><a href="https://gitlab.crja72.ru/frixit" target="_blank">Frixit</a></li>
+        <li><a href="https://gitlab.crja72.ru/kirill135790zzz" target="_blank">Yorshik</a></li>
+        <li><a href="https://gitlab.crja72.ru/nicitatyushnyakov" target="_blank">nais2008</a></li>
       </ul>
     </nav>
   </div>

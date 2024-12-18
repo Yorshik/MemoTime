@@ -12,8 +12,7 @@
       {% else %}
         <div class="profile__image">Изображение не добавленно</div>
       {% endif %}
-      <button class="btn btn_profile">{% translate 'Change Profile information' %}</button>
-      <a href="{% url 'users:password-change' %}" class="btn btn_profile">{% translate 'Change the password' %}</a>
+      <a href="{% url 'users:password-change' %}" class="btn">{% translate 'Change the password' %}</a>
     </div>
     <div class="profile__right">
       {% csrf_token %}
@@ -21,13 +20,26 @@
         {% include "includes/form.html" %}
       {% endwith %}
     </div>
+    <button class="btn btn_profile">{% translate 'Change Profile information' %}</button>
   </form>
 {% endblock body %}
 {% block extra_js %}
 <script>
-  let inputs = document.querySelectorAll(".form-control");
-  inputs.forEach((input) => {
-    <!-- input.disabled = true; -->
+  document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var imageInput = document.getElementById('id_image');
+    var changePasswordLink = document.querySelector('.profile__left .btn');
+    var profileLeft = document.querySelector('.profile__left');
+    var profileRight = document.querySelector('.profile__right');
+
+    // Проверяем, что оба элемента существуют
+    if (imageInput && changePasswordLink) {
+      // Перемещаем input#id_image в блок .profile__left
+      profileLeft.appendChild(imageInput);
+
+      // Перемещаем ссылку на смену пароля в блок .profile__right
+      profileRight.appendChild(changePasswordLink);
+    }
   });
 </script>
 {% endblock extra_js %}

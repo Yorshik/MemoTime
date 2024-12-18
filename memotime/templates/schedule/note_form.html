@@ -14,11 +14,11 @@
     {% translate 'Create Note' %}
   {% endif %}
   </h2>
-  <p><span class="red">*</span> - {% translate 'required field' %}</p>
   {% csrf_token %}
   {% with form=form %}
     {% include 'includes/form.html' %}
   {% endwith %}
+  <p><span class="red">*</span> - {% translate 'required field' %}</p>
   <button type="submit" class="btn btn_submit">
     {% translate 'Save' %}
   </button>

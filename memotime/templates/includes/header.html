@@ -10,8 +10,11 @@
     <nav>
       <ul>
         <li>
-          <button class="btn btn_theme" id="theme-toggle-btn">
-            <img src="{% static '/img/dark-theme-icon.png' %}" alt="{% translate 'Dark Theme Icon' %}">
+          <button id="theme-toggle-btn" 
+                  class="btn btn_theme"
+                  data-light="{% static 'img/light-theme-icon.png' %}"
+                  data-dark="{% static 'img/dark-theme-icon.png' %}">
+            <img src="{% static 'img/dark-theme-icon.png' %}" alt="Theme Icon">
           </button>
         </li>
         <li>
@@ -22,7 +25,8 @@
               {% get_available_languages as LANGUAGES %}
               {% for lang in LANGUAGES %}
                 <option value="{{ lang.0 }}"
-                  {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}
+                        {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                  {{ lang.1 }}
                 </option>
               {% endfor %}
             </select>

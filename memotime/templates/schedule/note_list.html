@@ -15,9 +15,13 @@
       <div class="item">
         <h4>{{ note.heading }}</h4>
         <a href="{% url 'schedule:note-update' pk=note.pk %}" class="btn">{% translate 'Update' %}</a>
-        <a href="{% url 'schedule:note-delete' pk=note.pk %}" class="btn">{% translate 'Delete' %}</a>
+        <button data-url="{% url 'schedule:note-delete' pk=note.pk %}" class="btn dtn_del" id="btn-del">{% translate 'Delete' %}</button>
       </div>
     {% endfor %}
   </div>
 </section>
+{% include 'includes/modal.html' %}
 {% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/delete-modal.js' %}"></script>
+{% endblock extra_js %}

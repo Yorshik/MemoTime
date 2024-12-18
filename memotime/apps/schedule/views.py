@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 import django.shortcuts
 import django.urls
+from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
 from apps.schedule import forms, models
@@ -89,10 +90,35 @@ class ScheduleDetailView(LoginRequiredMixin, django.views.generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["time_schedules"] = models.TimeSchedule.objects.filter(
+        time_schedules = models.TimeSchedule.objects.filter(
             schedule=self.object,
             user=self.request.user,
-        )
+        ).order_by("time_start")
+
+        context["time_schedules"] = time_schedules
+        context["days"] = [
+            {"number": 1, "name": _("Monday")},
+            {"number": 2, "name": _("Tuesday")},
+            {"number": 3, "name": _("Wednesday")},
+            {"number": 4, "name": _("Thursday")},
+            {"number": 5, "name": _("Friday")},
+            {"number": 6, "name": _("Saturday")},
+            {"number": 7, "name": _("Sunday")},
+        ]
+
+        time_slots = []
+        for ts in time_schedules:
+            found = False
+            for slot in time_slots:
+                if slot["start"] == ts.time_start and slot["end"] == ts.time_end:
+                    found = True
+                    break
+
+            if not found:
+                time_slots.append({"start": ts.time_start, "end": ts.time_end})
+
+        context["time_slots"] = time_slots
+
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -458,6 +484,11 @@ class NoteUpdateView(LoginRequiredMixin, django.views.generic.UpdateView):
             return models.Note.objects.filter(user=self.request.user)
 
         raise Http404("Вы не можете изменять чужую заметку.")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
