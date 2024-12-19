@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h1>Edit Group</h1>
+  <p>You can only edit this group if you are its creator.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}

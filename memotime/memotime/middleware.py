@@ -1,10 +1,11 @@
-from datetime import datetime, timedelta
+import datetime
 
-from django.core.cache import cache
-from django.shortcuts import redirect
-from django.urls import reverse
-from django_ratelimit.core import is_ratelimited
-from ipware.ip import IpWare
+import django.conf
+import django.core.cache
+import django.shortcuts
+import django.urls
+import django_ratelimit.core
+import ipware.ip
 
 __all__ = ()
 
@@ -12,71 +13,91 @@ __all__ = ()
 class RedirectBlockedUserMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
+        self.rate_limit = django.conf.settings.RATE_LIMIT
+        self.rate_limit_timeout = django.conf.settings.RATE_LIMIT_TIMEOUT
 
     def __call__(self, request):
-        if (
-            request.resolver_match
-            and request.resolver_match.view_name != "homepage:blocked"
-        ):
-            ip, _ = IpWare().get_client_ip(request.META)
-            if ip:
-                ip_str = str(ip)
-                blocked_ip = cache.get(f"blocked_{ip_str}")
-                if blocked_ip:
-                    expires_at_str = blocked_ip.get("expires_at")
-                    expires_at = datetime.fromisoformat(expires_at_str).timestamp()
-                    return redirect(
-                        reverse(
-                            "homepage:blocked",
-                            kwargs={"expires_at": expires_at},
-                        ),
-                    )
+        if self.rate_limit is False:
+            return self.get_response(request)
+
+        response = self.process_request(request)
+        if response:
+            return response
 
         return self.get_response(request)
 
-    def process_view(self, request, view_func, view_args, view_kwargs):
+    def process_request(self, request):
+        if self.rate_limit is False:
+            return None
+
         if (
             request.resolver_match
             and request.resolver_match.view_name == "homepage:blocked"
         ):
             return None
 
-        ip, _ = IpWare().get_client_ip(request.META)
-        if not ip:
+        ip, is_routable = ipware.ip.IpWare().get_client_ip(request.META)
+        if ip is None:
             return None
 
         ip_str = str(ip)
-        if blocked_ip := cache.get(f"blocked_{ip_str}"):
-            expires_at_str = blocked_ip.get("expires_at")
-            expires_at = datetime.fromisoformat(expires_at_str).timestamp()
-            return redirect(
-                reverse(
+        blocked_ip_data = django.core.cache.cache.get(f"blocked_{ip_str}")
+
+        if blocked_ip_data:
+            expires_at_str = blocked_ip_data.get("expires_at")
+            return django.shortcuts.redirect(
+                django.urls.reverse(
                     "homepage:blocked",
-                    kwargs={"expires_at": expires_at},
+                    kwargs={"expires_at": expires_at_str},
                 ),
             )
+
+        return None
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        if self.rate_limit is False:
+            return None
+
+        response = self.process_request(request)
+        if response:
+            return response
+
+        ip, is_routable = ipware.ip.IpWare().get_client_ip(request.META)
+        if ip is None:
+            return None
+
+        ip_str = str(ip)
 
         def get_ip_key(group, request):
             return ip_str
 
-        is_limited = is_ratelimited(
+        is_limited = django_ratelimit.core.is_ratelimited(
             request=request,
             group="daily_ip_limit",
             key=get_ip_key,
-            rate="100/d",
+            rate=self.rate_limit,
             method=["POST"],
             increment=True,
         )
-        if not is_limited:
-            return None
 
-        expires_at = datetime.now() + timedelta(weeks=1)
-        expires_at_iso = expires_at.isoformat()
-        cache.set(
-            f"blocked_{ip_str}",
-            {"expires_at": expires_at_iso},
-            timeout=60 * 60 * 24 * 7,
-        )
-        return redirect(
-            reverse("homepage:blocked", kwargs={"expires_at": expires_at.timestamp()}),
-        )
+        if is_limited:
+            expires_at = datetime.datetime.now() + datetime.timedelta(
+                seconds=self.rate_limit_timeout,
+            )
+            expires_at_iso = expires_at.isoformat()
+
+            if not django.core.cache.cache.get(f"blocked_{ip_str}"):
+                django.core.cache.cache.set(
+                    f"blocked_{ip_str}",
+                    {"expires_at": expires_at_iso},
+                    timeout=self.rate_limit_timeout,
+                )
+
+            return django.shortcuts.redirect(
+                django.urls.reverse(
+                    "homepage:blocked",
+                    kwargs={"expires_at": expires_at_iso},
+                ),
+            )
+
+        return None

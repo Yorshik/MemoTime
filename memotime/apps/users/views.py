@@ -5,6 +5,7 @@ import django.contrib.auth.views
 import django.contrib.messages
 import django.core.mail
 import django.core.signing
+from django.db.models import BooleanField, Case, Q, Value, When
 import django.http
 import django.shortcuts
 import django.urls
@@ -222,3 +223,73 @@ class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):
 class LoginView(django.contrib.auth.views.LoginView):
     form_class = apps.users.forms.LoginForm
     redirect_authenticated_user = True
+
+
+class GroupCreateView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.CreateView,
+):
+    model = apps.users.models.Group
+    form_class = apps.users.forms.GroupCreateForm
+    template_name = "users/group_create.html"
+    success_url = django.urls.reverse_lazy("users:group-list")
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        self.object.user_set.add(self.request.user)
+        return super().form_valid(form)
+
+
+class GroupListView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.ListView,
+):
+    model = apps.users.models.Group
+    template_name = "users/group_list.html"
+    context_object_name = "groups"
+
+    def get_queryset(self):
+        user = self.request.user
+
+        return (
+            apps.users.models.Group.objects.filter(Q(creator=user) | Q(user=user))
+            .prefetch_related("user_set")
+            .annotate(
+                is_creator=Case(
+                    When(creator=user, then=Value(True)),
+                    default=Value(False),
+                    output_field=BooleanField(),
+                ),
+            )
+            .distinct()
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["created_groups"] = context["groups"].filter(is_creator=True)
+        context["member_groups"] = context["groups"].filter(is_creator=False)
+        return context
+
+
+class GroupUpdateView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.UpdateView,
+):
+    model = apps.users.models.Group
+    form_class = apps.users.forms.GroupUpdateForm
+    template_name = "users/group_update.html"
+    success_url = django.urls.reverse_lazy("users:group-list")
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if self.request.user != obj.creator:
+            raise django.http.Http404(_("You are not the creator of this group."))
+
+        return obj
+
+    def form_valid(self, form):
+        django.contrib.messages.success(
+            self.request,
+            _("Group updated successfully."),
+        )
+        return super().form_valid(form)

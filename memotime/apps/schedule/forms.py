@@ -17,7 +17,7 @@ class NoteForm(django.forms.ModelForm):
 
     class Meta:
         model = models.Note
-        fields = ["heading", "description", "disposable", "global_note"]
+        fields = ["heading", "description", "disposable"]
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,13 +43,26 @@ class NoteForm(django.forms.ModelForm):
 
 
 class ScheduleForm(django.forms.ModelForm):
+    group = django.forms.ModelChoiceField(
+        queryset=None,
+        required=False,
+        label="Группа",
+        widget=django.forms.Select(
+            attrs={"class": "selectpicker", "data-live-search": "true"},
+        ),
+    )
+
     class Meta:
         model = models.Schedule
-        fields = ["is_static", "start_date", "expiration_date"]
+        fields = ["is_static", "start_date", "expiration_date", "group"]
         widgets = {
             "start_date": django.forms.DateInput(attrs={"type": "date"}),
             "expiration_date": django.forms.DateInput(attrs={"type": "date"}),
         }
+
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["group"].queryset = user.groups.all()
 
     def clean_expiration_date(self):
         expiration_date = self.cleaned_data.get("expiration_date")
