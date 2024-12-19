@@ -17,10 +17,10 @@ h2, h1{
   display: grid;
   grid-template-columns: repeat(auto-fit, 400px);
   gap: 20px;
-  padding-inline: 20px;
 
   .item{
     background-color: var(--second-color);
+    color: var(--text-color);
     padding: 20px;
     border: var(--border);
     border-radius: 10px;
@@ -59,9 +59,21 @@ h2, h1{
         padding: 10px 13px;
       }
     }
+    .members{
+      display: flex;
+      gap: 5px;
+
+      .member{
+        background-color: var(--back-color);
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: var(--shadow-inset);
+      }
+    }
   }
   .err{
    font-weight: 500; 
+   color: var(--text-color);
   }
 }
 

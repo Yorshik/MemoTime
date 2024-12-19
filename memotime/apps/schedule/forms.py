@@ -55,7 +55,7 @@ class ScheduleForm(django.forms.ModelForm):
 
     class Meta:
         model = models.Schedule
-        fields = ["is_static", "start_date", "expiration_date", "group"]
+        fields = ["start_date", "expiration_date", "group", "is_static"]
         labels = {"is_static": "Changes by week"}
         widgets = {
             "start_date": django.forms.DateInput(attrs={"type": "date"}),
@@ -109,8 +109,8 @@ class TimeScheduleForm(django.forms.ModelForm):
             "time_start",
             "time_end",
             "event",
-            "even",
             "day_number",
+            "even",
         ]
         widgets = {
             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
@@ -187,8 +187,8 @@ class AddTimeScheduleForm(django.forms.ModelForm):
             "time_start",
             "time_end",
             "event",
-            "even",
             "day_number",
+            "even",
         ]
         widgets = {
             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
