@@ -8,23 +8,1230 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 23:34+0300\n"
+"POT-Creation-Date: 2024-12-20 02:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: apps/homepage/apps.py:8
+
+#: .\apps\core\apps.py:10
+msgid "Базовые сущности"
+msgstr "Basic Entities"
+
+#: .\apps\core\models.py:17
+msgid "image/avatar"
+msgstr "image/avatar"
+
+#: .\apps\core\models.py:18
+msgid "Note image/profile avatar"
+msgstr "Note image/profile avatar"
+
+#: .\apps\feedback\admin.py:43 .\apps\feedback\forms.py:24
+#: .\apps\feedback\models.py:51
+msgid "Anonymous"
+msgstr "Anonymous"
+
+#: .\apps\feedback\admin.py:45
+msgid "Author Name"
+msgstr "Author Name"
+
+#: .\apps\feedback\admin.py:50
+msgid "Author Email"
+msgstr "Author Email"
+
+#: .\apps\feedback\admin.py:63
+msgid "Not logged in"
+msgstr "Not logged in"
+
+#: .\apps\feedback\admin.py:65
+msgid "Author User"
+msgstr "Author User"
+
+#: .\apps\feedback\admin.py:79
+msgid "User not authenticated."
+msgstr "User not authenticated."
+
+#: .\apps\feedback\admin.py:113
+msgid "Feedback Author"
+msgstr "Feedback Author"
+
+#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:57
+#: .\templates\includes\footer.html:29
+msgid "Feedback"
+msgstr "Feedback"
+
+#: .\apps\feedback\forms.py:37 .\apps\feedback\forms.py:40
+msgid " "
+msgstr ""
+
+#: .\apps\feedback\forms.py:51
+msgid "Description"
+msgstr "Description"
+
+#: .\apps\feedback\forms.py:54
+msgid "Content of your feedback"
+msgstr "Content of your feedback"
+
+#: .\apps\feedback\models.py:19 .\apps\feedback\models.py:117
+#: .\apps\users\models.py:56
+msgid "user"
+msgstr "user"
+
+#: .\apps\feedback\models.py:21
+msgid "User who submitted the feedback"
+msgstr "User who submitted the feedback"
+
+#: .\apps\feedback\models.py:26 .\apps\schedule\models.py:65
+#: .\apps\schedule\models.py:102
+msgid "name"
+msgstr "name"
+
+#: .\apps\feedback\models.py:28
+msgid "Feedback author"
+msgstr "Feedback author"
+
+#: .\apps\feedback\models.py:33
+msgid "email"
+msgstr "email"
+
+#: .\apps\feedback\models.py:34
+msgid "Feedback author's email"
+msgstr "Feedback author's email"
+
+#: .\apps\feedback\models.py:56
+msgid "received"
+msgstr "received"
+
+#: .\apps\feedback\models.py:57
+msgid "in processing"
+msgstr "in processing"
+
+#: .\apps\feedback\models.py:58
+msgid "response given"
+msgstr "response given"
+
+#: .\apps\feedback\models.py:61
+msgid "processing status"
+msgstr "processing status"
+
+#: .\apps\feedback\models.py:63
+msgid "Processing status"
+msgstr "Processing status"
+
+#: .\apps\feedback\models.py:69
+msgid "text"
+msgstr "text"
+
+#: .\apps\feedback\models.py:71
+msgid "Feedback content"
+msgstr "Feedback content"
+
+#: .\apps\feedback\models.py:76
+msgid "created"
+msgstr "created"
+
+#: .\apps\feedback\models.py:78
+msgid "Date of feedback creation"
+msgstr "Date of feedback creation"
+
+#: .\apps\feedback\models.py:85 .\templates\users\signup.html:20
+msgid "personal data"
+msgstr "personal data"
+
+#: .\apps\feedback\models.py:86
+msgid "Author's personal data"
+msgstr "Author's personal data"
+
+#: .\apps\feedback\models.py:91 .\apps\feedback\models.py:125
+msgid "feedback"
+msgstr "feedback"
+
+#: .\apps\feedback\models.py:92
+msgid "feedbacks"
+msgstr "feedbacks"
+
+#: .\apps\feedback\models.py:119
+msgid "User who changed the status"
+msgstr "User who changed the status"
+
+#: .\apps\feedback\models.py:127
+msgid "Feedback for which the status was changed"
+msgstr "Feedback for which the status was changed"
+
+#: .\apps\feedback\models.py:131
+msgid "time"
+msgstr "time"
+
+#: .\apps\feedback\models.py:133
+msgid "Time of status change"
+msgstr "Time of status change"
+
+#: .\apps\feedback\models.py:136
+msgid "from status"
+msgstr "from status"
+
+#: .\apps\feedback\models.py:139
+msgid "From which status"
+msgstr "From which status"
+
+#: .\apps\feedback\models.py:142
+msgid "to status"
+msgstr "to status"
+
+#: .\apps\feedback\models.py:145
+msgid "To which status"
+msgstr "To which status"
+
+#: .\apps\feedback\models.py:149
+msgid "status change log"
+msgstr "status change log"
+
+#: .\apps\feedback\models.py:150
+msgid "status change logs"
+msgstr "status change logs"
+
+#: .\apps\feedback\views.py:31
+#, python-brace-format
+msgid "Thanks for the feedback, {author.name}!"
+msgstr "Thanks for the feedback, {author.name}!"
+
+#: .\apps\feedback\views.py:42
+msgid "Thank you! Your feedback has been sent successfully."
+msgstr "Thank you! Your feedback has been sent successfully."
+
+#: .\apps\feedback\views.py:51
+msgid "An error occurred while submitting the form."
+msgstr "An error occurred while submitting the form."
+
+#: .\apps\homepage\apps.py:10
 msgid "Homepage"
 msgstr "Homepage"
 
-#: memotime/settings.py:122
+#: .\apps\schedule\apps.py:10 .\apps\schedule\models.py:237
+#: .\templates\schedule\schedule_detail.html:11
+msgid "Schedule"
+msgstr "Schedule"
+
+#: .\apps\schedule\forms.py:17 .\apps\schedule\models.py:94
+#: .\apps\schedule\models.py:251
+msgid "Event"
+msgstr "Event"
+
+#: .\apps\schedule\forms.py:23
+msgid "One time reminder"
+msgstr "One time reminder"
+
+#: .\apps\schedule\forms.py:55
+msgid "Group"
+msgstr "Group"
+
+#: .\apps\schedule\forms.py:64 .\templates\schedule\schedule_detail.html:16
+msgid "Changes by week"
+msgstr "Changes by week"
+
+#: .\apps\schedule\forms.py:91
+msgid "Start date must be earlier than the end date."
+msgstr "Start date must be earlier than the end date."
+
+#: .\apps\schedule\forms.py:167 .\apps\schedule\forms.py:247
+msgid "Start time must be earlier than end time."
+msgstr "Start time must be earlier than end time."
+
+#: .\apps\schedule\forms.py:192 .\apps\schedule\forms.py:263
+msgid "Time overlaps with an existing event."
+msgstr "Time overlaps with an existing event."
+
+#: .\apps\schedule\models.py:22
+msgid "disposable"
+msgstr "disposable"
+
+#: .\apps\schedule\models.py:24
+msgid "Determines if the note is used only once"
+msgstr "Determines if the note is used only once"
+
+#: .\apps\schedule\models.py:27
+msgid "global"
+msgstr "global"
+
+#: .\apps\schedule\models.py:29
+msgid "Global note"
+msgstr "Global note"
+
+#: .\apps\schedule\models.py:32
+msgid "heading"
+msgstr "heading"
+
+#: .\apps\schedule\models.py:34
+msgid "Note heading"
+msgstr "Note heading"
+
+#: .\apps\schedule\models.py:37 .\apps\schedule\models.py:113
+msgid "description"
+msgstr "description"
+
+#: .\apps\schedule\models.py:38
+msgid "Note description"
+msgstr "Note description"
+
+#: .\apps\schedule\models.py:46 .\apps\schedule\models.py:73
+#: .\apps\schedule\models.py:145 .\apps\schedule\models.py:175
+#: .\apps\schedule\models.py:261
+msgid "User"
+msgstr "User"
+
+#: .\apps\schedule\models.py:52
+msgid "note"
+msgstr "note"
+
+#: .\apps\schedule\models.py:53
+msgid "notes"
+msgstr "notes"
+
+#: .\apps\schedule\models.py:67
+msgid "Teacher's name"
+msgstr "Teacher's name"
+
+#: .\apps\schedule\models.py:79
+msgid "teacher"
+msgstr "teacher"
+
+#: .\apps\schedule\models.py:80
+msgid "teachers"
+msgstr "teachers"
+
+#: .\apps\schedule\models.py:92
+msgid "Subject"
+msgstr "Subject"
+
+#: .\apps\schedule\models.py:93
+msgid "Club"
+msgstr "Club"
+
+#: .\apps\schedule\models.py:97
+msgid "High"
+msgstr "High"
+
+#: .\apps\schedule\models.py:98
+msgid "Medium"
+msgstr "Medium"
+
+#: .\apps\schedule\models.py:99
+msgid "Low"
+msgstr "Low"
+
+#: .\apps\schedule\models.py:104
+msgid "Event name"
+msgstr "Event name"
+
+#: .\apps\schedule\models.py:107
+msgid "custom name"
+msgstr "custom name"
+
+#: .\apps\schedule\models.py:109
+msgid "Custom event name"
+msgstr "Custom event name"
+
+#: .\apps\schedule\models.py:114
+msgid "Event description"
+msgstr "Event description"
+
+#: .\apps\schedule\models.py:124
+msgid "Teacher"
+msgstr "Teacher"
+
+#: .\apps\schedule\models.py:127
+msgid "type"
+msgstr "type"
+
+#: .\apps\schedule\models.py:130
+msgid "Event type"
+msgstr "Event type"
+
+#: .\apps\schedule\models.py:133
+msgid "priority"
+msgstr "priority"
+
+#: .\apps\schedule\models.py:137
+msgid ""
+"If high, the event is displayed over the subject. If medium priority, "
+"conflicts may arise. If low, the subject overlaps the event."
+msgstr ""
+"If high, the event is displayed over the subject. If medium priority, "
+"conflicts may arise. If low, the subject overlaps the event."
+
+#: .\apps\schedule\models.py:153
+msgid "Notes related to the event"
+msgstr "Notes related to the event"
+
+#: .\apps\schedule\models.py:159
+msgid "event"
+msgstr "event"
+
+#: .\apps\schedule\models.py:160
+msgid "events"
+msgstr "events"
+
+#: .\apps\schedule\models.py:183 .\apps\users\models.py:71
+msgid "group"
+msgstr "group"
+
+#: .\apps\schedule\models.py:186
+msgid "static"
+msgstr "static"
+
+#: .\apps\schedule\models.py:189
+msgid ""
+"Determines if the schedule alternates (if False, the 'even' field in "
+"TimeSchedule is used)"
+msgstr ""
+"Determines if the schedule alternates (if False, the 'even' field in "
+"TimeSchedule is used)"
+
+#: .\apps\schedule\models.py:194
+msgid "start date"
+msgstr "start date"
+
+#: .\apps\schedule\models.py:196
+msgid "Schedule start date"
+msgstr "Schedule start date"
+
+#: .\apps\schedule\models.py:199
+msgid "expiration date"
+msgstr "expiration date"
+
+#: .\apps\schedule\models.py:203
+msgid "Schedule expiration date"
+msgstr "Schedule expiration date"
+
+#: .\apps\schedule\models.py:209
+msgid "schedule"
+msgstr "schedule"
+
+#: .\apps\schedule\models.py:210
+msgid "schedules"
+msgstr "schedules"
+
+#: .\apps\schedule\models.py:223 .\apps\schedule\views.py:170
+msgid "Monday"
+msgstr "Monday"
+
+#: .\apps\schedule\models.py:224 .\apps\schedule\views.py:171
+msgid "Tuesday"
+msgstr "Tuesday"
+
+#: .\apps\schedule\models.py:225 .\apps\schedule\views.py:172
+msgid "Wednesday"
+msgstr "Wednesday"
+
+#: .\apps\schedule\models.py:226 .\apps\schedule\views.py:173
+msgid "Thursday"
+msgstr "Thursday"
+
+#: .\apps\schedule\models.py:227 .\apps\schedule\views.py:174
+msgid "Friday"
+msgstr "Friday"
+
+#: .\apps\schedule\models.py:228 .\apps\schedule\views.py:175
+msgid "Saturday"
+msgstr "Saturday"
+
+#: .\apps\schedule\models.py:229 .\apps\schedule\views.py:176
+msgid "Sunday"
+msgstr "Sunday"
+
+#: .\apps\schedule\models.py:231
+msgid "Day"
+msgstr "Day"
+
+#: .\apps\schedule\models.py:240
+msgid "start time"
+msgstr "start time"
+
+#: .\apps\schedule\models.py:241
+msgid "Start time of the subject/event"
+msgstr "Start time of the subject/event"
+
+#: .\apps\schedule\models.py:244
+msgid "end time"
+msgstr "end time"
+
+#: .\apps\schedule\models.py:245
+msgid "End time of the subject/event"
+msgstr "End time of the subject/event"
+
+#: .\apps\schedule\models.py:254
+msgid "even week"
+msgstr "even week"
+
+#: .\apps\schedule\models.py:255
+msgid "Even/odd week for the subject"
+msgstr "Even/odd week for the subject"
+
+#: .\apps\schedule\models.py:264
+msgid "day of the week"
+msgstr "day of the week"
+
+#: .\apps\schedule\models.py:266
+msgid "Day of the week (1-7)"
+msgstr "Day of the week (1-7)"
+
+#: .\apps\schedule\models.py:272
+msgid "time schedule"
+msgstr "time schedule"
+
+#: .\apps\schedule\models.py:273
+msgid "time schedules"
+msgstr "time schedules"
+
+#: .\apps\schedule\views.py:24 .\apps\schedule\views.py:29
+#: .\apps\schedule\views.py:149 .\apps\schedule\views.py:152
+#: .\apps\schedule\views.py:251
+msgid "You cannot view this content."
+msgstr "You cannot view this content."
+
+#: .\apps\schedule\views.py:113
+msgid "Schedule not found"
+msgstr "Schedule not found"
+
+#: .\apps\schedule\views.py:241
+msgid "You cannot add time to someone else's schedule."
+msgstr "You cannot add time to someone else's schedule."
+
+#: .\apps\schedule\views.py:301
+msgid "TimeSchedule not found"
+msgstr "TimeSchedule not found"
+
+#: .\apps\schedule\views.py:410
+msgid "Event not found"
+msgstr "Event not found"
+
+#: .\apps\schedule\views.py:562
+msgid "Note not found"
+msgstr "Note not found"
+
+#: .\apps\users\admin.py:38
+msgid "Creator"
+msgstr "Creator"
+
+#: .\apps\users\apps.py:10
+msgid "Users"
+msgstr "Users"
+
+#: .\apps\users\forms.py:29
+msgid "User already exists"
+msgstr "User already exists"
+
+#: .\apps\users\forms.py:40
+msgid "Passwords do not match"
+msgstr "Passwords do not match"
+
+#: .\apps\users\forms.py:94
+msgid "Пользователь уже существует"
+msgstr "User already exists"
+
+#: .\apps\users\forms.py:105
+msgid "Пользователь с таким email уже существует"
+msgstr "User with this email already exists"
+
+#: .\apps\users\forms.py:175 .\apps\users\forms.py:239
+msgid "Group Name"
+msgstr "Group Name"
+
+#: .\apps\users\forms.py:177 .\apps\users\forms.py:241
+msgid "Usernames or Emails (comma-separated)"
+msgstr "Usernames or Emails (comma-separated)"
+
+#: .\apps\users\forms.py:179 .\apps\users\forms.py:243
+msgid ""
+"Enter usernames or email addresses separated by commas. For example: user1,"
+"user2@example.com,user3"
+msgstr ""
+"Enter usernames or email addresses separated by commas. For example: user1,"
+"user2@example.com,user3"
+
+#: .\apps\users\forms.py:217 .\apps\users\forms.py:288
+#, python-format
+msgid ""
+"Users with the following usernames or emails were not found: %(identifiers)s"
+msgstr ""
+"Users with the following usernames or emails were not found: %(identifiers)s"
+
+#: .\apps\users\models.py:22
+msgid "email address"
+msgstr "email address"
+
+#: .\apps\users\models.py:26
+msgid "Unique email address"
+msgstr "Unique email address"
+
+#: .\apps\users\models.py:29
+msgid "timezone"
+msgstr "timezone"
+
+#: .\apps\users\models.py:33
+msgid "User's time zone"
+msgstr "User's time zone"
+
+#: .\apps\users\models.py:36
+msgid "subscription end date"
+msgstr "subscription end date"
+
+#: .\apps\users\models.py:40
+msgid "Date when the subscription ends and is deactivated"
+msgstr "Date when the subscription ends and is deactivated"
+
+#: .\apps\users\models.py:43
+msgid "email notifications"
+msgstr "email notifications"
+
+#: .\apps\users\models.py:46
+msgid "Whether email notifications are enabled"
+msgstr "Whether email notifications are enabled"
+
+#: .\apps\users\models.py:49
+msgid "Telegram notifications"
+msgstr "Telegram notifications"
+
+#: .\apps\users\models.py:52
+msgid "Whether Telegram notifications are enabled"
+msgstr "Whether Telegram notifications are enabled"
+
+#: .\apps\users\models.py:57
+msgid "users"
+msgstr "users"
+
+#: .\apps\users\models.py:67
+msgid "creator"
+msgstr "creator"
+
+#: .\apps\users\models.py:72
+msgid "groups"
+msgstr "groups"
+
+#: .\apps\users\views.py:40
+#, python-brace-format
+msgid "Account activation, {user.username}"
+msgstr "Account activation, {user.username}"
+
+#: .\apps\users\views.py:48
+msgid "An account activation link has been sent to your email address."
+msgstr "An account activation link has been sent to your email address."
+
+#: .\apps\users\views.py:53
+msgid "You have successfully registered."
+msgstr "You have successfully registered."
+
+#: .\apps\users\views.py:107
+msgid "Invalid activation token."
+msgstr "Invalid activation token."
+
+#: .\apps\users\views.py:138
+#, python-brace-format
+msgid "Account reactivation, {user.username}"
+msgstr "Account reactivation, {user.username}"
+
+#: .\apps\users\views.py:146
+msgid "A new activation link has been sent to your email address."
+msgstr "A new activation link has been sent to your email address."
+
+#: .\apps\users\views.py:166
+msgid "Профиль успешно обновлен"
+msgstr "Profile updated successfully"
+
+#: .\apps\users\views.py:187
+msgid "Пароль успешно изменен"
+msgstr "Password changed successfully"
+
+#: .\apps\users\views.py:289
+msgid "You are not the creator of this group."
+msgstr "You are not the creator of this group."
+
+#: .\memotime\settings.py:159
 msgid "Russian"
 msgstr "Russian"
 
-#: memotime/settings.py:123
+#: .\memotime\settings.py:160
 msgid "English"
 msgstr "English"
+
+#: .\templates\base.html:9
+msgid "LMS project"
+msgstr "LMS project"
+
+#: .\templates\base.html:10
+msgid "catalog, cat"
+msgstr "catalog, cat"
+
+#: .\templates\base.html:33
+msgid "произошла ошибка - свяжитесь с нами"
+msgstr "an error occurred - please contact us"
+
+#: .\templates\feedback\email\feedback_confirmation.html:4
+msgid "Thank you for your feedback!"
+msgstr "Thank you for your feedback!"
+
+#: .\templates\feedback\email\feedback_confirmation.html:7
+#, python-format
+msgid "Hello, %(author_name)s!"
+msgstr "Hello, %(author_name)s!"
+
+#: .\templates\feedback\email\feedback_confirmation.html:8
+msgid ""
+"Thank you for your feedback! We appreciate your opinion and will take it "
+"into account in our work."
+msgstr ""
+"Thank you for your feedback! We appreciate your opinion and will take it "
+"into account in our work."
+
+#: .\templates\feedback\email\feedback_confirmation.html:9
+msgid "You wrote:"
+msgstr "You wrote:"
+
+#: .\templates\feedback\feedback.html:6
+msgid "Feedback form"
+msgstr "Feedback form"
+
+#: .\templates\feedback\feedback.html:15
+msgid "Close"
+msgstr "Close"
+
+#: .\templates\feedback\feedback.html:33 .\templates\schedule\note_form.html:22
+#: .\templates\schedule\schedule_form.html:22
+#: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:23
+msgid "required field"
+msgstr "required field"
+
+#: .\templates\feedback\feedback.html:34
+msgid "Send"
+msgstr "Send"
+
+#: .\templates\homepage\blocked.html:9
+msgid "You have been blocked before"
+msgstr "You have been blocked before"
+
+#: .\templates\homepage\blocked.html:9
+msgid "due to suspicious activity of your IP address"
+msgstr "due to suspicious activity of your IP address"
+
+#: .\templates\homepage\blocked.html:10 .\templates\users\logout.html:11
+#: .\templates\users\password_change_done.html:10
+#: .\templates\users\password_reset_complete.html:10
+#: .\templates\users\password_reset_done.html:11
+msgid "Main"
+msgstr "Main"
+
+#: .\templates\homepage\index.html:8
+msgid ""
+"Organize your studies and active days — a schedule with notes is always at "
+"hand!"
+msgstr ""
+"Organize your studies and active days — a schedule with notes is always at "
+"hand!"
+
+#: .\templates\homepage\index.html:9
+msgid ""
+"We help you organize your time by offering a schedule with notes and "
+"reminders of important events"
+msgstr ""
+"We help you organize your time by offering a schedule with notes and "
+"reminders of important events"
+
+#: .\templates\homepage\index.html:11
+msgid "Create a note"
+msgstr "Create a note"
+
+#: .\templates\homepage\index.html:12
+msgid "Create an event"
+msgstr "Create an event"
+
+#: .\templates\homepage\index.html:13
+msgid "Create a schedule"
+msgstr "Create a schedule"
+
+#: .\templates\homepage\index.html:29
+msgid "Alerts"
+msgstr "Alerts"
+
+#: .\templates\homepage\index.html:31
+msgid "Notifications about notes can be sent by mail and Telegram"
+msgstr "Notifications about notes can be sent by mail and Telegram"
+
+#: .\templates\homepage\index.html:35
+msgid "Adaptation"
+msgstr "Adaptation"
+
+#: .\templates\homepage\index.html:37
+msgid "Our site has adaptations for different screen sizes"
+msgstr "Our site has adaptations for different screen sizes"
+
+#: .\templates\homepage\index.html:41
+msgid "Availability"
+msgstr "Availability"
+
+#: .\templates\homepage\index.html:43
+msgid ""
+"Translations into several languages are used. There is also an intuitive "
+"interface that is easy to use"
+msgstr ""
+"Translations into several languages are used. There is also an intuitive "
+"interface that is easy to use"
+
+#: .\templates\homepage\index.html:49
+msgid "Our site has a public API that everyone can use"
+msgstr "Our site has a public API that everyone can use"
+
+#: .\templates\homepage\index.html:62 .\templates\homepage\index.html:71
+#: .\templates\homepage\index.html:80 .\templates\homepage\index.html:89
+#: .\templates\homepage\index.html:98 .\templates\homepage\index.html:107
+#: .\templates\homepage\index.html:116 .\templates\homepage\index.html:125
+#: .\templates\homepage\index.html:134 .\templates\homepage\index.html:145
+#: .\templates\homepage\index.html:154 .\templates\homepage\index.html:163
+#: .\templates\homepage\index.html:172 .\templates\homepage\index.html:181
+#: .\templates\homepage\index.html:190 .\templates\homepage\index.html:199
+#: .\templates\homepage\index.html:208 .\templates\homepage\index.html:217
+msgid "avatar"
+msgstr "avatar"
+
+#: .\templates\includes\base_email.html:17
+msgid "Sincerely,"
+msgstr "Sincerely,"
+
+#: .\templates\includes\base_email.html:19
+msgid "The Memotime Team"
+msgstr "The Memotime Team"
+
+#: .\templates\includes\footer.html:7
+msgid "Company, Inc"
+msgstr "Company, Inc"
+
+#: .\templates\includes\footer.html:14
+msgid "Group List"
+msgstr "Group List"
+
+#: .\templates\includes\footer.html:19 .\templates\schedule\teacher_list.html:9
+msgid "Teacher List"
+msgstr "Teacher List"
+
+#: .\templates\includes\footer.html:24 .\templates\schedule\event_list.html:9
+msgid "Event List"
+msgstr "Event List"
+
+#: .\templates\includes\header.html:7
+msgid "Logo"
+msgstr "Logo"
+
+#: .\templates\includes\header.html:13
+#: .\templates\schedule\schedule_list.html:9
+msgid "Schedule List"
+msgstr "Schedule List"
+
+#: .\templates\includes\header.html:16 .\templates\schedule\note_list.html:9
+msgid "Note List"
+msgstr "Note List"
+
+#: .\templates\includes\header.html:45 .\templates\users\profile.html:11
+#: .\templates\users\profile.html:13
+msgid "error"
+msgstr "error"
+
+#: .\templates\includes\header.html:51 .\templates\users\login.html:9
+#: .\templates\users\login.html:19 .\templates\users\logout.html:12
+#: .\templates\users\password_change_done.html:11
+#: .\templates\users\password_reset_complete.html:11
+#: .\templates\users\password_reset_done.html:12
+msgid "Log In"
+msgstr "Log In"
+
+#: .\templates\includes\header.html:56 .\templates\users\signup.html:9
+#: .\templates\users\signup.html:27
+msgid "Sign Up"
+msgstr "Sign Up"
+
+#: .\templates\includes\modal.html:4
+msgid "Are you sure about the removal"
+msgstr "Are you sure about the removal"
+
+#: .\templates\includes\modal.html:6
+msgid "Cancel"
+msgstr "Cancel"
+
+#: .\templates\includes\modal.html:7
+msgid "Yes"
+msgstr "Yes"
+
+#: .\templates\schedule\event_form.html:13
+#: .\templates\schedule\event_form_from_timeschedule.html:13
+msgid "Edit Event"
+msgstr "Edit Event"
+
+#: .\templates\schedule\event_form.html:15
+#: .\templates\schedule\event_form_from_timeschedule.html:15
+msgid "Create Event"
+msgstr "Create Event"
+
+#: .\templates\schedule\event_form.html:23
+#: .\templates\schedule\event_form_from_timeschedule.html:23
+#: .\templates\schedule\teacher_list.html:10
+msgid "Add Teacher"
+msgstr "Add Teacher"
+
+#: .\templates\schedule\event_form.html:25
+#: .\templates\schedule\event_form_from_timeschedule.html:25
+#: .\templates\schedule\note_form.html:24
+#: .\templates\schedule\schedule_form.html:27
+#: .\templates\schedule\teacher_form.html:24
+#: .\templates\schedule\timeschedule_form.html:25
+msgid "Save"
+msgstr "Save"
+
+#: .\templates\schedule\event_list.html:10
+#: .\templates\schedule\timeschedule_form.html:23
+msgid "Add Event"
+msgstr "Add Event"
+
+#: .\templates\schedule\note_form.html:12
+msgid "Edit Note"
+msgstr "Edit Note"
+
+#: .\templates\schedule\note_form.html:14
+msgid "Create Note"
+msgstr "Create Note"
+
+#: .\templates\schedule\note_list.html:10
+msgid "Add Note"
+msgstr "Add Note"
+
+#: .\templates\schedule\schedule_detail.html:10
+msgid "Back to Schedule List"
+msgstr "Back to Schedule List"
+
+#: .\templates\schedule\schedule_detail.html:51
+msgid "Odd week"
+msgstr "Odd week"
+
+#: .\templates\schedule\schedule_detail.html:54
+msgid "Even week"
+msgstr "Even week"
+
+#: .\templates\schedule\schedule_form.html:12
+msgid "Edit Schedule"
+msgstr "Edit Schedule"
+
+#: .\templates\schedule\schedule_form.html:14
+msgid "Create Schedule"
+msgstr "Create Schedule"
+
+#: .\templates\schedule\schedule_form.html:25
+msgid "Create group"
+msgstr "Create group"
+
+#: .\templates\schedule\schedule_list.html:10
+msgid "Create New Schedule"
+msgstr "Create New Schedule"
+
+#: .\templates\schedule\schedule_list.html:16
+msgid "View"
+msgstr "View"
+
+#: .\templates\schedule\teacher_form.html:12
+msgid "Edit Teacher"
+msgstr "Edit Teacher"
+
+#: .\templates\schedule\teacher_form.html:14
+msgid "Create Teacher"
+msgstr "Create Teacher"
+
+#: .\templates\schedule\timeschedule_form.html:13
+msgid "Edit entity"
+msgstr "Edit entity"
+
+#: .\templates\schedule\timeschedule_form.html:15
+msgid "Create entity"
+msgstr "Create entity"
+
+#: .\templates\users\activation.html:8
+msgid "Ваша учетная запись успешно активирована."
+msgstr "Your account has been successfully activated."
+
+#: .\templates\users\activation.html:9
+msgid "Вы можете войти в систему."
+msgstr "You can now log in."
+
+#: .\templates\users\activation.html:10 .\templates\users\activation.html:48
+msgid "Перейти к входу"
+msgstr "Go to login"
+
+#: .\templates\users\activation.html:14
+msgid "Переадресация..."
+msgstr "Redirecting..."
+
+#: .\templates\users\activation.html:15
+msgid "Через"
+msgstr "In"
+
+#: .\templates\users\activation.html:18
+msgid "секунду"
+msgstr "second"
+
+#: .\templates\users\activation.html:19
+msgid "секунды"
+msgstr "seconds"
+
+#: .\templates\users\activation.html:20
+msgid "секунд"
+msgstr "seconds"
+
+#: .\templates\users\activation.html:21
+msgid "вы будете переадресованы..."
+msgstr "you will be redirected..."
+
+#: .\templates\users\activation.html:25
+msgid "Срок действия ссылки для активации учетной записи истек."
+msgstr "The account activation link has expired."
+
+#: .\templates\users\activation.html:30
+msgid "Отправить ссылку еще раз"
+msgstr "Resend link"
+
+#: .\templates\users\activation.html:33
+msgid "Ошибка при повторной отправке ссылки."
+msgstr "Error resending link."
+
+#: .\templates\users\activation.html:35
+msgid "Если ошибка повторяется, свяжитесь с техподдержкой:"
+msgstr "If the error persists, please contact support:"
+
+#: .\templates\users\activation.html:35 .\templates\users\activation.html:41
+msgid "Обратная связь"
+msgstr "Feedback"
+
+#: .\templates\users\activation.html:39
+msgid "Сожалеем, но ваша учетная запись была уничтожена."
+msgstr "Sorry, but your account has been deleted."
+
+#: .\templates\users\activation.html:41
+msgid "Если у вас возникли вопросы, свяжитесь с техподдержкой:"
+msgstr "If you have any questions, please contact support:"
+
+#: .\templates\users\activation.html:44
+msgid "Или вы можете зарегистрироваться заново:"
+msgstr "Or you can register again:"
+
+#: .\templates\users\activation.html:44
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: .\templates\users\activation.html:47
+msgid "Ваша учетная запись уже была активирована."
+msgstr "Your account has already been activated."
+
+#: .\templates\users\email\password_reset_email.html:3
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+
+#: .\templates\users\email\password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Please go to the following page and choose a new password:"
+
+#: .\templates\users\email\password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr "Your username, in case you’ve forgotten:"
+
+#: .\templates\users\email\password_reset_email.html:9
+msgid "Thanks for using our site!"
+msgstr "Thanks for using our site!"
+
+#: .\templates\users\email\password_reset_email.html:10
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "The %(site_name)s team"
+
+#: .\templates\users\email\user_activation_email.html:4
+msgid "Account Activation"
+msgstr "Account Activation"
+
+#: .\templates\users\email\user_activation_email.html:7
+#: .\templates\users\email\user_reactivation_email.html:7
+#, python-format
+msgid "Hello, %(username)s!"
+msgstr "Hello, %(username)s!"
+
+#: .\templates\users\email\user_activation_email.html:8
+msgid ""
+"Thank you for registering! To activate your account, please click the link "
+"below:"
+msgstr ""
+"Thank you for registering! To activate your account, please click the link "
+"below:"
+
+#: .\templates\users\email\user_reactivation_email.html:4
+msgid "Account Reactivation"
+msgstr "Account Reactivation"
+
+#: .\templates\users\email\user_reactivation_email.html:9
+msgid ""
+"It looks like you need to reactivate your account. Please click the link "
+"below to do so:"
+msgstr ""
+"It looks like you need to reactivate your account. Please click the link "
+"below to do so:"
+
+#: .\templates\users\group_create.html:9
+msgid "Create Group"
+msgstr "Create Group"
+
+#: .\templates\users\group_create.html:14
+msgid "Create"
+msgstr "Create"
+
+#: .\templates\users\group_list.html:16 .\templates\users\group_list.html:40
+msgid "members"
+msgstr "members"
+
+#: .\templates\users\group_list.html:33
+msgid "You have not created any groups."
+msgstr "You have not created any groups."
+
+#: .\templates\users\group_list.html:46
+msgid "You are not a member of any other groups."
+msgstr "You are not a member of any other groups."
+
+#: .\templates\users\group_list.html:49
+msgid "Create a new group"
+msgstr "Create a new group"
+
+#: .\templates\users\group_update.html:9
+msgid "Edit Group"
+msgstr "Edit Group"
+
+#: .\templates\users\group_update.html:10
+msgid "You can only edit this group if you are its creator"
+msgstr "You can only edit this group if you are its creator"
+
+#: .\templates\users\group_update.html:15
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: .\templates\users\includes\user_card.html:11
+msgid "Аватар пользователя"
+msgstr "User avatar"
+
+#: .\templates\users\includes\user_card.html:22
+msgid "Ошибка загрузки"
+msgstr "Upload error"
+
+#: .\templates\users\includes\user_card.html:29
+msgid "Аватарка отсутсвует"
+msgstr "No avatar"
+
+#: .\templates\users\includes\user_card.html:36
+msgid "неуказано"
+msgstr "not specified"
+
+#: .\templates\users\includes\user_card.html:41
+msgid "Статус"
+msgstr "Status"
+
+#: .\templates\users\includes\user_card.html:43
+msgid "Активен"
+msgstr "Active"
+
+#: .\templates\users\includes\user_card.html:45
+msgid "Не активен"
+msgstr "Inactive"
+
+#: .\templates\users\includes\user_card.html:49
+msgid "Испил кофеёк"
+msgstr "Drank coffee"
+
+#: .\templates\users\includes\user_card.html:49
+msgid "раз(а)"
+msgstr "time(s)"
+
+#: .\templates\users\includes\user_card.html:52
+msgid "Дата рождения"
+msgstr "Date of birth"
+
+#: .\templates\users\includes\user_card.html:60
+msgid "тайна"
+msgstr "secret"
+
+#: .\templates\users\login.html:16
+msgid "Forgot your password?"
+msgstr "Forgot your password?"
+
+#: .\templates\users\login.html:17
+msgid "Don`t you have an account?"
+msgstr "Don`t you have an account?"
+
+#: .\templates\users\logout.html:9
+msgid "You have logged out of your account"
+msgstr "You have logged out of your account"
+
+#: .\templates\users\logout.html:10
+msgid "Thank you for spending time with us!"
+msgstr "Thank you for spending time with us!"
+
+#: .\templates\users\password_change.html:9
+#: .\templates\users\password_reset_confirm.html:9
+msgid "Come up with a new password"
+msgstr "Come up with a new password"
+
+#: .\templates\users\password_change.html:15
+#: .\templates\users\password_reset_confirm.html:15
+msgid "Сhange"
+msgstr "Сhange"
+
+#: .\templates\users\password_change_done.html:9
+#: .\templates\users\password_reset_complete.html:9
+msgid "You have changed your password!"
+msgstr "You have changed your password!"
+
+#: .\templates\users\password_reset.html:9
+msgid "Password reset"
+msgstr "Password reset"
+
+#: .\templates\users\password_reset.html:15
+msgid "Reset"
+msgstr "Reset"
+
+#: .\templates\users\password_reset_done.html:9
+msgid "An email has been sent to you with a link to reset your password"
+msgstr "An email has been sent to you with a link to reset your password"
+
+#: .\templates\users\password_reset_done.html:10
+msgid ""
+"If you haven`t received the email, make sure you entered the correct address "
+"you registered with and check your spam folder"
+msgstr ""
+"If you haven`t received the email, make sure you entered the correct address "
+"you registered with and check your spam folder"
+
+#: .\templates\users\profile.html:15
+msgid "Change the password"
+msgstr "Change the password"
+
+#: .\templates\users\profile.html:16
+msgid "Log Out"
+msgstr "Log Out"
+
+#: .\templates\users\profile.html:24
+msgid "Change Profile information"
+msgstr "Change Profile information"
+
+#: .\templates\users\signup.html:19
+msgid "Do you agree to provide your"
+msgstr "Do you agree to provide your"
+
+#: .\templates\users\signup.html:25
+msgid "Do you have an account?"
+msgstr "Do you have an account?"
