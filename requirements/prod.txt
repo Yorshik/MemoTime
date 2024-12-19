@@ -13,3 +13,4 @@ PyJWT==2.10.1
 python-decouple==3.8
 pytz==2024.2
 redis==5.2.1
+gunicorn==23.0.0
