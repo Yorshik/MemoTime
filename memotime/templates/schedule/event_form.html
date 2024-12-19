@@ -19,24 +19,16 @@
     {% with form=form %}
       {% include 'includes/form.html' %}
     {% endwith %}
-    <div class="links">
-      <a href="{% url 'schedule:teacher-create' %}">{% translate 'Add Teacher' %}</a>
-    </div>
     <button type="submit" class="btn">{% translate 'Save' %}</button>
   </form>
 {% endblock body %}
 {% block extra_js %}
-  <!-- Multi-select.js -->
   <script src="{% static 'js/multi-select.js' %}"></script>
   <script>
   new MultiSelect(document.getElementById('id_teacher'), {
     selectAll: false,
     closeListOnItemSelect: true,
     radio: true,
-  });
-  new MultiSelect(document.getElementById('id_notes'), {
-    selectAll: false,
-    closeListOnItemSelect: true,
   });
   </script>
 {% endblock extra_js %}

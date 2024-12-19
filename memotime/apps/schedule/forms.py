@@ -1,6 +1,6 @@
-from django.core.exceptions import ValidationError
-import django.forms
 from django.utils.translation import gettext_lazy as _
+import django.forms
+from django.core.exceptions import ValidationError
 
 from apps.schedule import models
 
@@ -95,6 +95,13 @@ class ScheduleForm(django.forms.ModelForm):
         return cleaned_data
 
 
+from django.core.exceptions import ValidationError
+import django.forms
+from django.utils.translation import gettext_lazy as _
+
+from apps.schedule import models
+
+
 class EventForm(django.forms.ModelForm):
     class Meta:
         model = models.Event
@@ -113,8 +120,55 @@ class EventForm(django.forms.ModelForm):
         }
 
     def __init__(self, user, *args, **kwargs):
+        print("----- Начало инициализации EventForm -----")
+        print(f"Пользователь: {user}")
         super().__init__(*args, **kwargs)
         self.fields["teacher"].queryset = models.Teacher.objects.filter(user=user)
+        print(f"Доступные учителя: {self.fields['teacher'].queryset}")
+
+        # Проверяем, есть ли instance (т.е. редактируется ли объект)
+        if self.instance.pk:
+            print(
+                "Текущий учитель (ID):"
+                f" {self.instance.teacher.pk if self.instance.teacher else None}"
+            )
+            print(
+                "Текущий учитель (Имя):"
+                f" {self.instance.teacher.name if self.instance.teacher else None}"
+            )
+        else:
+            print("Текущий учитель: Не определен (новый объект)")
+
+        print("----- Конец инициализации EventForm -----\n")
+
+    def clean(self):
+        cleaned_data = super().clean()
+        print("----- Начало clean EventForm -----")
+        print(f"Очищенные данные: {cleaned_data}")
+
+        # Получаем значение teacher из cleaned_data
+        teacher = cleaned_data.get("teacher")
+
+        # Проверяем, было ли выбрано значение
+        if teacher:
+            print(f"Выбранный учитель (ID): {teacher.pk}")
+            print(f"Выбранный учитель (Имя): {teacher.name}")
+        else:
+            print("Учитель не выбран")
+
+        print("----- Конец clean EventForm -----\n")
+        return cleaned_data
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        print("----- Начало save EventForm -----")
+        print(f"Объект Event перед сохранением: {instance}")
+        print(f"Значение teacher перед сохранением: {instance.teacher}")
+        if commit:
+            instance.save()
+            print(f"Объект Event сохранен в БД. ID: {instance.pk}")
+        print("----- Конец save EventForm -----\n")
+        return instance
 
 
 class TeacherForm(django.forms.ModelForm):
