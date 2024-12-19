@@ -1,8 +1,10 @@
+from django.core.exceptions import ValidationError
 import django.forms
+from django.utils.translation import gettext_lazy as _
 
 from apps.schedule import models
 
-__all__ = ()
+__all__ = []
 
 
 class NoteForm(django.forms.ModelForm):
@@ -12,13 +14,13 @@ class NoteForm(django.forms.ModelForm):
             attrs={"class": "selectpicker", "data-live-search": "true"},
         ),
         required=False,
-        label="Event",
+        label=_("Event"),
     )
 
     class Meta:
         model = models.Note
         fields = ["heading", "description", "disposable"]
-        labels = {"disposable": "One time reminder"}
+        labels = {"disposable": _("One time reminder")}
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -33,12 +35,15 @@ class NoteForm(django.forms.ModelForm):
         selected_event = self.cleaned_data["event"]
 
         if selected_event:
-            note.event = selected_event
-        else:
-            note.event = None
+            if commit:
+                note.save()
 
-        if commit:
-            note.save()
+            models.Event.objects.filter(notes=note).update(notes=None)
+            selected_event.notes = note
+            selected_event.save()
+        else:
+            if commit:
+                note.save()
 
         return note
 
@@ -47,7 +52,7 @@ class ScheduleForm(django.forms.ModelForm):
     group = django.forms.ModelChoiceField(
         queryset=None,
         required=False,
-        label="Группа",
+        label=_("Group"),
         widget=django.forms.Select(
             attrs={"class": "selectpicker", "data-live-search": "true"},
         ),
@@ -56,22 +61,38 @@ class ScheduleForm(django.forms.ModelForm):
     class Meta:
         model = models.Schedule
         fields = ["is_static", "start_date", "expiration_date", "group"]
-        labels = {"is_static": "Changes by week"}
+        labels = {"is_static": _("Changes by week")}
         widgets = {
-            "start_date": django.forms.DateInput(attrs={"type": "date"}),
-            "expiration_date": django.forms.DateInput(attrs={"type": "date"}),
+            "start_date": django.forms.DateInput(
+                attrs={"type": "date"},
+                format="%Y-%m-%d",
+            ),
+            "expiration_date": django.forms.DateInput(
+                attrs={"type": "date"},
+                format="%Y-%m-%d",
+            ),
         }
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["group"].queryset = user.groups.all()
+        self.fields["start_date"].input_formats = ["%Y-%m-%d"]
+        self.fields["expiration_date"].input_formats = ["%Y-%m-%d"]
 
-    def clean_expiration_date(self):
-        expiration_date = self.cleaned_data.get("expiration_date")
-        if not expiration_date:
-            return None
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get("start_date")
+        expiration_date = cleaned_data.get("expiration_date")
 
-        return expiration_date
+        if start_date and expiration_date and start_date > expiration_date:
+            self.add_error(
+                "expiration_date",
+                ValidationError(
+                    _("Start date must be earlier than the end date."),
+                ),
+            )
+
+        return cleaned_data
 
 
 class EventForm(django.forms.ModelForm):
@@ -142,8 +163,8 @@ class TimeScheduleForm(django.forms.ModelForm):
             return cleaned_data
 
         if time_start >= time_end:
-            raise django.core.exceptions.ValidationError(
-                "Время начала должно быть раньше времени окончания.",
+            raise ValidationError(
+                _("Start time must be earlier than end time."),
             )
 
         if event.event_type != models.Event.EventType.SUBJECT:
@@ -167,8 +188,8 @@ class TimeScheduleForm(django.forms.ModelForm):
 
         for schedule in existing_schedules:
             if (time_start < schedule.time_end) and (time_end > schedule.time_start):
-                raise django.core.exceptions.ValidationError(
-                    "Время пересекается с существующим событием.",
+                raise ValidationError(
+                    _("Time overlaps with an existing event."),
                 )
 
         return cleaned_data
@@ -222,8 +243,8 @@ class AddTimeScheduleForm(django.forms.ModelForm):
             return cleaned_data
 
         if time_start >= time_end:
-            raise django.core.exceptions.ValidationError(
-                "Время начала должно быть раньше времени окончания.",
+            raise ValidationError(
+                _("Start time must be earlier than end time."),
             )
 
         if event.event_type != models.Event.EventType.SUBJECT:
@@ -238,8 +259,8 @@ class AddTimeScheduleForm(django.forms.ModelForm):
 
         for schedule in existing_schedules:
             if (time_start < schedule.time_end) and (time_end > schedule.time_start):
-                raise django.core.exceptions.ValidationError(
-                    "Время пересекается с существующим событием.",
+                raise ValidationError(
+                    _("Time overlaps with an existing event."),
                 )
 
         return cleaned_data
