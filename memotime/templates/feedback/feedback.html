@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block body %}
+  <div class="container">
+    <h2>{% trans "Feedback form" %}</h2>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}"
+             role="alert">
+          {{ message }}
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="{% trans 'Close' %}"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <form method="post"
+          enctype="multipart/form-data"
+          class="main-form">
+      {% csrf_token %}
+      <div class="form-group animate-placeholder">
+          {% with form=form.author %}
+            {% include 'includes/form.html' %}
+          {% endwith %}
+      </div>
+      <div class="form-group animate-placeholder">
+        {% with form=form.feedback %}
+          {% include 'includes/form.html' %}
+        {% endwith %}
+      </div>
+      <p><span class="red">*</span> - {% translate 'required field' %}</p>
+      <button type="submit" class="btn btn_submit">{% trans "Send" %}</button>
+    </form>
+  </div>
+{% endblock body %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock extra_css %}
+{% block extra_js %}
+  <script src="{% static 'js/custom_file_input.js' %}"></script>
+  <script src="{% static 'js/forms.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new FormAnimator('animate');
+  });
+  </script>
+{% endblock extra_js %}

@@ -1,0 +1,74 @@
+name: "memotime"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: always
+    volumes:
+      - ./docker/postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    restart: always
+    command: redis-server --save "" --appendonly no
+    volumes:
+      - ./docker/redis_data:/data
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn memotime.wsgi:application --bind 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - ./docker/static:/memotime/static
+      - ./docker/media:/memotime/media
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: celery
+    command: celery -A memotime worker -l info
+    restart: always
+    volumes:
+      - ./docker/media:/app/media
+    depends_on:
+      - postgres
+      - redis
+      - django
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/static:/memotime/static
+      - ./docker/media:/memotime/media
+      - ./docker/certs:/etc/nginx/certs:ro
+    depends_on:
+      - django

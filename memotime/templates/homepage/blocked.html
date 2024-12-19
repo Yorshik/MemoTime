@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/block.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<div class="wrap">
+  <h2>{% translate 'You have been blocked before' %} {{ expires_at|date:"d.m.Y H:i:s" }} {% translate 'due to suspicious activity of your IP address' %}</h2>
+  <a href="{% url 'homepage:homepage' %}" class="btn">{% translate 'Main' %}</a>
+</div>
+{% endblock body %}

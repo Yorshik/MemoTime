@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock extra_css %}
+{% block body %}
+  <form action="" class="main-form" method="post">
+    <h2>{% translate 'Log In' %}</h2>
+    {% if form.errors %}<div class="danger">{{ form.errors }}</div>{% endif %}
+    {% csrf_token %}
+    {% with form=form %}
+      {% include "includes/form.html" %}
+    {% endwith %}
+    <div class="links">
+      <a href="{% url 'users:password-reset' %}">{% translate 'Forgot your password?' %}</a>
+      <a href="{% url 'users:signup' %}">{% translate 'Don`t you have an account?' %}</a>
+    </div>
+    <button type="submit" class="btn btn_submit">{% translate 'Log In' %}</button>
+  </form>
+{% endblock body %}

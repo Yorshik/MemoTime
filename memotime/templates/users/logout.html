@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<div class="main-form main-form_text">
+  <h2>{% translate 'You have logged out of your account' %}</h2>
+  <p class="main-form__p">{% translate 'Thank you for spending time with us!' %}</p>
+  <a href="{% url 'homepage:homepage' %}" class="btn btn_submit">{% translate 'Main' %}</a>
+  <a href="{% url 'users:login' %}" class="btn btn_submit">{% translate 'Log In' %}</a>
+</div>
+{% endblock body %}

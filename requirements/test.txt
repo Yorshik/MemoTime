@@ -1,0 +1,6 @@
+-r flake8.txt
+-r prod.txt
+coverage==7.6.4
+django-debug-toolbar==4.4.6
+isort==5.13.2
+parametrize==0.1.1

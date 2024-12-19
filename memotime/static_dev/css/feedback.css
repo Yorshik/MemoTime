@@ -1,0 +1,58 @@
+h2{
+  text-align: center;
+  margin-bottom: 40px;
+}
+.container{
+  display: grid;
+  place-content: center;
+}
+.main-form{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+  background-color: var(--second-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  width: 850px;
+
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .animate-placeholder div{
+    position: relative;
+
+    label{
+      position: absolute;
+      top: 11px;
+      left: 15px;
+      transition: all .2s;
+      transform-origin: left;
+      color: var(--text-color-form);
+      pointer-events: none;
+    }
+    input:focus + label,
+    input:not(:placeholder-shown):valid + label ,
+    textarea:focus + label,
+    textarea:not(:focus):valid + label{
+      top: -25px;
+      scale: .95; 
+    }
+  }
+  div:has(img){
+    display: grid;
+    gap: 40px;
+
+    img{
+      justify-self: center;
+    }
+  }
+}
+.btn_submit{
+  padding: 10px 15px;
+  font-size: 20px;
+  text-align: center;
+}

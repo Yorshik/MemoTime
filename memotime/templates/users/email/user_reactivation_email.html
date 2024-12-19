@@ -1,0 +1,12 @@
+{% extends 'includes/base_email.html' %}
+{% load i18n %}
+{% block title %}
+  {% trans "Account Reactivation" %}
+{% endblock title %}
+{% block content %}
+  <h1>{% blocktrans %}Hello, {{ username }}!{% endblocktrans %}</h1>
+  <p>
+    {% trans "It looks like you need to reactivate your account. Please click the link below to do so:" %}
+  </p>
+  <p><a href="{{ link }}">{{ link }}</a></p>
+{% endblock content %}

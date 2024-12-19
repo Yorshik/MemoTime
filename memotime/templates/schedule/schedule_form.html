@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/schedule-form.css' %}">
+{% endblock extra_css %}
+{% block body %}
+  <form method="post" class="main-form">
+    <h2>
+      {% if form.instance.pk %}
+        {% translate 'Edit Schedule' %}
+      {% else %}
+        {% translate 'Create Schedule' %}
+      {% endif %}
+    </h2>
+    {% csrf_token %}
+    {% with form=form %}
+      {% include 'includes/form.html' %}
+    {% endwith %}
+    <p>
+      <span class="red">*</span> - {% translate 'required field' %}
+    </p>
+    <div class="links">
+      <a href="">{% translate 'Create group' %}</a>
+    </div>
+    <button type="submit" class="btn btn_submit">{% translate 'Save' %}</button>
+  </form>
+{% endblock body %}
