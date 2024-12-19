@@ -18,6 +18,7 @@ class NoteForm(django.forms.ModelForm):
     class Meta:
         model = models.Note
         fields = ["heading", "description", "disposable"]
+        labels = {"disposable": "One time reminder"}
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -55,6 +56,7 @@ class ScheduleForm(django.forms.ModelForm):
     class Meta:
         model = models.Schedule
         fields = ["is_static", "start_date", "expiration_date", "group"]
+        labels = {"is_static": "Changes by week"}
         widgets = {
             "start_date": django.forms.DateInput(attrs={"type": "date"}),
             "expiration_date": django.forms.DateInput(attrs={"type": "date"}),

@@ -22,11 +22,21 @@ main{
   .main-form__p{
     text-align: center;
   }
-  .danger .errorlist li{
+  .danger .errorlist{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li{
+      color: var(--second-color);
+    }
+  }
+  .danger .errorlist li ul li{
     background-color: var(--back-err);
     color: var(--text-color-err);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
+    box-shadow: var(--shadow);
   }
   div:not(:has(input[type="checkbox"])){
     position: relative;

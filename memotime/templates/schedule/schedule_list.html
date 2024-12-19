@@ -15,7 +15,7 @@
           <a href="{% url 'schedule:schedule-detail' schedule.pk %}"
              class="btn btn_check">{% translate 'View' %}</a>
           <div class="btns">
-            <a href="{% url 'schedule:schedule-update' schedule.pk %}" class="btn">
+            <a href="{% url 'schedule:schedule-update' schedule.pk %}" class="btn" tooltip="Edit" flow="up">
               <svg xmlns="http://www.w3.org/2000/svg"
                    width="20"
                    height="20"
@@ -27,7 +27,8 @@
             </a>
             <button data-url="{% url 'schedule:schedule-delete' schedule.pk %}"
                     class="btn btn_del"
-                    id="btn-del">
+                    id="btn-del"
+                    tooltip="Delete" flow="up">
               <svg xmlns="http://www.w3.org/2000/svg"
                    width="20"
                    height="20"
