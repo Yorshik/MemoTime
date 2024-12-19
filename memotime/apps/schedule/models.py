@@ -53,6 +53,10 @@ class Note(django.db.models.Model):
         verbose_name_plural = _("notes")
 
     def __str__(self):
+        max_length = 25
+        if len(self.heading) > max_length:
+            return self.heading[: max_length - 3] + "..."
+
         return self.heading
 
 
@@ -76,6 +80,10 @@ class Teacher(django.db.models.Model):
         verbose_name_plural = _("teachers")
 
     def __str__(self):
+        max_length = 25
+        if len(self.name) > max_length:
+            return self.name[: max_length - 3] + "..."
+
         return self.name
 
 
@@ -152,6 +160,10 @@ class Event(django.db.models.Model):
         verbose_name_plural = _("events")
 
     def __str__(self):
+        max_length = 25
+        if len(self.name) > max_length:
+            return self.name[: max_length - 3] + "..."
+
         return self.name
 
 
@@ -198,7 +210,12 @@ class Schedule(django.db.models.Model):
         verbose_name_plural = _("schedules")
 
     def __str__(self):
-        return f"{self.user} - {self.start_date} - {self.expiration_date}"
+        max_length = 45
+        result = f"{self.user} - {self.start_date} - {self.expiration_date}"
+        if len(result) > max_length:
+            return result[: max_length - 3] + "..."
+
+        return result
 
 
 class TimeSchedule(django.db.models.Model):
@@ -256,4 +273,9 @@ class TimeSchedule(django.db.models.Model):
         verbose_name_plural = _("time schedules")
 
     def __str__(self):
-        return f"{self.event} - {self.time_start} - {self.time_end}"
+        max_length = 45
+        result = f"{self.event} - {self.time_start} - {self.time_end}"
+        if len(result) > max_length:
+            return result[: max_length - 3] + "..."
+
+        return result
