@@ -4,9 +4,9 @@ main{
 }
 .profile{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 45px;
   width: 1500px;
   background-color: var(--second-color);
   border-radius: 10px;
@@ -50,14 +50,22 @@ main{
       height: 100%;
       width: 200px;
     }
-    
+    .btn{
+      padding: 20px 15px;
+      width: 100%;
+      text-align: center;
+
+      &:hover{
+        background-color: var(--back-btn-del);
+      }
+    }
   }
   .profile__right{
     width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 30px;
+    gap: 45px;
     flex: .5;
 
     .btn{
@@ -66,12 +74,11 @@ main{
       width: 100%;
       text-align: center;
     }
-    .help,
     .red{
       display: none;
     }
-    div:not(:has(input)) label{
-      display: none;
+    div:nth-child(8){
+      display: none !important;
     }
     div:not(:has(input[type="checkbox"])){
       position: relative;

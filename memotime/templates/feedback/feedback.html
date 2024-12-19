@@ -20,7 +20,6 @@
           enctype="multipart/form-data"
           class="main-form">
       {% csrf_token %}
-      <p><span class="red">*</span> - {% translate 'required field' %}</p>
       <div class="form-group animate-placeholder">
           {% with form=form.author %}
             {% include 'includes/form.html' %}
@@ -31,6 +30,7 @@
           {% include 'includes/form.html' %}
         {% endwith %}
       </div>
+      <p><span class="red">*</span> - {% translate 'required field' %}</p>
       <button type="submit" class="btn btn_submit">{% trans "Send" %}</button>
     </form>
   </div>

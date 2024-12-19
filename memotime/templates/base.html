@@ -11,8 +11,15 @@
     <title>Memotime</title>
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block extra_css %}
-    {% endblock extra_css %}
+    {% block extra_css %}{% endblock extra_css %}
+    <script>
+      (function() {
+        // Получаем сохранённую тему из localStorage или используем светлую по умолчанию
+        const savedTheme = localStorage.getItem("theme") || "light";
+        // Устанавливаем атрибут data-theme для <html> до того, как страница будет отрисована
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
     <!-- FavIcon -->
     <link type="image" href="{% static 'favicon.ico' %}" rel="icon" />
   </head>

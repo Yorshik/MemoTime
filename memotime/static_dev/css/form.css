@@ -28,12 +28,6 @@ main{
     padding: 20px;
     border-radius: 10px;
   }
-  div{
-    .help,
-    & > ul li{
-      display: none !important;
-    }
-  }
   div:not(:has(input[type="checkbox"])){
     position: relative;
 
@@ -50,6 +44,15 @@ main{
     input:not(:focus):valid + label{
       top: -25px;
       scale: .95; 
+    }
+  }
+  div:has(img){
+    display: grid;
+    gap: 35px;
+
+    img{
+      justify-self: center;
+      border-radius: 8px;
     }
   }
   .links{

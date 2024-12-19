@@ -42,9 +42,6 @@
       left: 50%;
       transform: translateX(-50%);
     }
-    .help{
-      flex-basis: 100%;
-    }
   }
   button{
     padding: 10px 15px;

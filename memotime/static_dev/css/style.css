@@ -1,6 +1,13 @@
 /* Шрифт */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
+html {
+  visibility: hidden; /* Скрываем страницу до применения темы */
+}
+html[data-theme] {
+  visibility: visible;
+}
+
 :root{
   /* Переменные которые меняются при смене темы */
   --back-color: #EFEFEF;
@@ -246,6 +253,15 @@ header{
         li .btn_theme{
           padding: 10px;
           cursor: pointer;
+
+          img{
+            transition: all 1s cubic-bezier(0.99, -0.09, 0.19, 0.69);
+            rotate: 0;
+
+            &:hover{
+              rotate: 360deg;
+            }
+          }
         }
         li form{
           select{

@@ -8,6 +8,11 @@
   & :is(h1, p){
     text-wrap: balance;
   }
+  .btns{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
   .btn_landing{
     align-self: center;
     padding: 20px 18px;
@@ -18,7 +23,7 @@
 .gallery{
   display: flex;
   height: auto;
-  margin-top: 90px;
+  margin-top: 150px;
 
   & > *{
     flex: 1;

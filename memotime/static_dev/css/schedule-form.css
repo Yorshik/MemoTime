@@ -1,11 +1,6 @@
 .main-form{
   margin-block: 40px;
 
-  .help{
-    font-size: 16px;
-    color: var(--text-color-form);
-    margin-top: 5px;
-  }
   div:has(input[type="checkbox"]){
     display: flex;
     flex-wrap: wrap;

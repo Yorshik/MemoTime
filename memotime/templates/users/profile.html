@@ -8,11 +8,12 @@
   <form class="profile" method="post">
     <div class="profile__left">
       {% if user.profile.image %}
-        <img src="{{ user.profile.image.url }}" alt="Изображение не добавленно" class="profile__img">
+        <img src="{{ user.profile.image.url }}" alt="{% translate 'error' %}" class="profile__image">
       {% else %}
-        <div class="profile__image">Изображение не добавленно</div>
+        <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'error' %}" class="profile__image">
       {% endif %}
-      <a href="{% url 'users:password-change' %}" class="btn">{% translate 'Change the password' %}</a>
+      <a href="{% url 'users:password-change' %}" class="btn btn_change">{% translate 'Change the password' %}</a>
+      <a href="{% url 'users:logout' %}" class="btn">{% translate 'Log Out' %}</a>
     </div>
     <div class="profile__right">
       {% csrf_token %}
@@ -28,7 +29,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Получаем элементы
     var imageInput = document.getElementById('id_image');
-    var changePasswordLink = document.querySelector('.profile__left .btn');
+    var changePasswordLink = document.querySelector('.profile__left .btn_change');
     var profileLeft = document.querySelector('.profile__left');
     var profileRight = document.querySelector('.profile__right');
 

@@ -11,9 +11,9 @@
     <div class="list">
       {% for schedule in schedules %}
         <div class="item">
-          <h4>{{ schedule.start_date }} — {{ schedule.expiration_date }}</h4>
+          <h4>{{ schedule.start_date }} — {{ schedule.expiration_date|default:"∞" }}</h4>
           <a href="{% url 'schedule:schedule-detail' schedule.pk %}"
-             class="btn btn_check">{% translate 'Check' %}</a>
+             class="btn btn_check">{% translate 'View' %}</a>
           <div class="btns">
             <a href="{% url 'schedule:schedule-update' schedule.pk %}" class="btn">
               <svg xmlns="http://www.w3.org/2000/svg"

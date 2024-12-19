@@ -9,33 +9,40 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-	const themeToggleBtn = document.getElementById("theme-toggle-btn");
-	const themeIcon = themeToggleBtn.querySelector("img");
+// theme-toggle.js
 
-	function setTheme(theme) {
-		document.documentElement.setAttribute("data-theme", theme);
-		document.cookie = `theme=${theme}; path=/; max-age=31536000`;
+document.addEventListener("DOMContentLoaded", function () {
+  const themeToggleBtn = document.getElementById("theme-toggle-btn");
+  const themeIcon = themeToggleBtn.querySelector("img");
 
-		const iconSrc =
-			theme === "dark"
-				? themeToggleBtn.dataset.light
-				: themeToggleBtn.dataset.dark;
-		themeIcon.src = iconSrc;
-	}
+  // Получаем сохранённую тему из localStorage или используем светлую по умолчанию
+  const savedTheme = localStorage.getItem("theme") || "light";
 
-	function getCookie(name) {
-		const value = `; ${document.cookie}`;
-		const parts = value.split(`; ${name}=`);
-		if (parts.length === 2) return parts.pop().split(";").shift();
-	}
+  // Устанавливаем начальную тему и иконку при загрузке страницы
+  function setInitialTheme() {
+    document.documentElement.setAttribute("data-theme", savedTheme);  // Устанавливаем тему
+    const iconSrc = savedTheme === "dark" ? themeToggleBtn.dataset.light : themeToggleBtn.dataset.dark;
+    themeIcon.src = iconSrc;  // Устанавливаем картинку
+  }
 
-	const savedTheme = getCookie("theme") || "light";
-	setTheme(savedTheme);
+  setInitialTheme(); // Устанавливаем начальную тему и картинку
 
-	themeToggleBtn.addEventListener("click", () => {
-		const currentTheme = document.documentElement.getAttribute("data-theme");
-		const newTheme = currentTheme === "dark" ? "light" : "dark";
-		setTheme(newTheme);
-	});
+  // Функция для переключения темы
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark"; // Меняем тему
+
+    // Сохраняем новую тему в localStorage
+    localStorage.setItem("theme", newTheme);
+
+    // Устанавливаем новую тему на странице
+    document.documentElement.setAttribute("data-theme", newTheme);
+
+    // Меняем картинку на кнопке
+    const iconSrc = newTheme === "dark" ? themeToggleBtn.dataset.light : themeToggleBtn.dataset.dark;
+    themeIcon.src = iconSrc;
+  }
+
+  // Добавляем обработчик клика на кнопку для переключения темы
+  themeToggleBtn.addEventListener("click", toggleTheme);
 });

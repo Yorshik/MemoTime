@@ -9,7 +9,7 @@ h2{
 .main-form{
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 40px;
   padding: 40px;
   background-color: var(--second-color);
   border-radius: 10px;
@@ -20,7 +20,7 @@ h2{
   .form-group{
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 40px;
   }
   .animate-placeholder div{
     position: relative;
@@ -38,8 +38,16 @@ h2{
     input:not(:placeholder-shown):valid + label ,
     textarea:focus + label,
     textarea:not(:focus):valid + label{
-      top: -20px;
+      top: -25px;
       scale: .95; 
+    }
+  }
+  div:has(img){
+    display: grid;
+    gap: 40px;
+
+    img{
+      justify-self: center;
     }
   }
 }
@@ -47,8 +55,4 @@ h2{
   padding: 10px 15px;
   font-size: 20px;
   text-align: center;
-}
-.help{
-  font-size: 16px;
-  color: var(--text-color-form);
 }

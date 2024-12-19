@@ -10,9 +10,9 @@
   <form method="post" class="main-form">
     <h2>
       {% if form.instance.pk %}
-        {% translate 'Edit Time Schedule' %}
+        {% translate 'Edit entity' %}
       {% else %}
-        {% translate 'Create Time Schedule' %}
+        {% translate 'Create entity' %}
       {% endif %}
     </h2>
     {% csrf_token %}
