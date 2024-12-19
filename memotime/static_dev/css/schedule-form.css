@@ -1,6 +1,10 @@
 .main-form{
   margin-block: 40px;
 
+  div:has(select) label{
+    top: -25px !important;
+    scale: .95;
+  }
   div:has(input[type="checkbox"]){
     display: flex;
     flex-wrap: wrap;

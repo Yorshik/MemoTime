@@ -13,7 +13,7 @@
       <div class="item">
         <article>
           <b>{{ group.name }}</b> 
-          ( {{ group.user_set.count }} {% translate 'members' %} )
+          <p>( {{ group.user_set.count }} {% translate 'members' %} )</p>
           <a href="{% url 'users:group-update' group.pk %}" class="btn" tooltip="Edit" flow="up">
             <svg xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -26,7 +26,7 @@
           </a> 
         </article>
         <div class="members">
-          {% for user in group.user_set.all %}<div class="member">{{ user.get_username }}</div>{% endfor %}
+          {% for user in group.user_set.all %}<p class="member">{{ user.get_username }}</p>{% endfor %}
         </div>
       </div>
     {% empty %}
@@ -37,10 +37,10 @@
   <div class="list">
     {% for group in member_groups %}
       <div class="item">
-        <b>{{ group.name }}</b> ( {{ group.user_set.count }} {% translate 'members' %} )
-        <ul>
-          {% for user in group.user_set.all %}<li>{{ user.get_username }}</li>{% endfor %}
-        </ul>
+        <b>{{ group.name }}</b> <p>( {{ group.user_set.count }} {% translate 'members' %} )</p>
+        <div class="members">
+          {% for user in group.user_set.all %}<p class="member">{{ user.get_username }}</p>{% endfor %}
+        </div>
       </div>
     {% empty %}
       <div class="err">{% translate 'You are not a member of any other groups.' %}</div>
