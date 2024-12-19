@@ -57,7 +57,7 @@
 4. **Создание суперпользователя:**
 
     ```bash
-    docker compose exec web python memotime/manage.py createsuperuser
+    docker compose exec django python manage.py createsuperuser
     ```
 
     Следуйте инструкциям для создания учетной записи администратора.
