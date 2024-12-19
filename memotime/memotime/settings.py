@@ -199,6 +199,14 @@ EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = f"MemoTime <{EMAIL_HOST_USER}>"
 
 
+RATE_LIMIT = decouple.config("MEMOTIME_RATE_LIMIT", default=False)
+RATE_LIMIT_TIMEOUT = decouple.config(
+    "MEMOTIME_RATE_LIMIT_TIMEOUT",
+    default=60 * 60 * 24,
+    cast=int,
+)
+
+
 CAPTCHA_LENGTH = 6
 CAPTCHA_IMAGE_SIZE = (300, 120)
 CAPTCHA_FONT_SIZE = 40

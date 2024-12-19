@@ -8,7 +8,7 @@
 {% block body %}
   <form method="post" class="main-form">
     <h2>
-      {% if form.instance.pk %}
+      {% if note_object.pk %}
         {% translate 'Edit Note' %}
       {% else %}
         {% translate 'Create Note' %}
