@@ -3,10 +3,16 @@ import django.db.models
 import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 
+from apps.schedule.managers import (
+    EventManager,
+    NoteManager,
+    ScheduleManager,
+    TeacherManager,
+    TimeScheduleManager,
+)
 import apps.users.models
 
 __all__ = ()
-
 
 User = django.contrib.auth.get_user_model()
 
@@ -40,6 +46,8 @@ class Note(django.db.models.Model):
         help_text=_("User"),
     )
 
+    objects = NoteManager()
+
     class Meta:
         verbose_name = _("note")
         verbose_name_plural = _("notes")
@@ -60,6 +68,8 @@ class Teacher(django.db.models.Model):
         related_name="teachers",
         help_text=_("User"),
     )
+
+    objects = TeacherManager()
 
     class Meta:
         verbose_name = _("teacher")
@@ -135,6 +145,8 @@ class Event(django.db.models.Model):
         help_text=_("Notes related to the event"),
     )
 
+    objects = EventManager()
+
     class Meta:
         verbose_name = _("event")
         verbose_name_plural = _("events")
@@ -178,6 +190,8 @@ class Schedule(django.db.models.Model):
         blank=True,
         help_text=_("Schedule expiration date"),
     )
+
+    objects = ScheduleManager()
 
     class Meta:
         verbose_name = _("schedule")
@@ -234,6 +248,8 @@ class TimeSchedule(django.db.models.Model):
         choices=DayNumber.choices,
         help_text=_("Day of the week (1-7)"),
     )
+
+    objects = TimeScheduleManager()
 
     class Meta:
         verbose_name = _("time schedule")

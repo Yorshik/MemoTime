@@ -6,7 +6,6 @@ from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
 from apps.schedule import forms, models
-import apps.users.models
 
 __all__ = []
 
@@ -67,27 +66,9 @@ class ScheduleUpdateView(
 
     def get_object(self, queryset=None):
         if not hasattr(self, "_schedule_object"):
-            self._schedule_object = (
-                self.model.objects.select_related("user", "group")
-                .prefetch_related(
-                    django.db.models.Prefetch(
-                        "user__created_groups",
-                        queryset=apps.users.models.Group.objects.all(),
-                    ),
-                )
-                .only(
-                    "id",
-                    "user_id",
-                    "group_id",
-                    "is_static",
-                    "start_date",
-                    "expiration_date",
-                    "user__id",
-                    "user__username",
-                    "group__group_ptr_id",
-                    "group__name",
-                )
-                .get(pk=self.kwargs.get(self.pk_url_kwarg))
+            self._schedule_object = models.Schedule.objects.get_schedule_by_pk_and_user(
+                pk=self.kwargs.get(self.pk_url_kwarg),
+                user=self.request.user,
             )
 
         return self._schedule_object
@@ -118,7 +99,7 @@ class ScheduleListView(
     context_object_name = "schedules"
 
     def get_queryset(self):
-        return models.Schedule.objects.filter(user=self.request.user)
+        return models.Schedule.objects.get_schedules_for_user(user=self.request.user)
 
 
 class ScheduleDeleteView(AccessMixin, django.views.generic.View):
@@ -155,8 +136,8 @@ class ScheduleDetailView(
 
     def get_object(self, queryset=None):
         if self._schedule_object is None:
-            self._schedule_object = (
-                super().get_queryset().select_related("user").get(pk=self.kwargs["pk"])
+            self._schedule_object = models.Schedule.objects.get_schedule_by_pk(
+                pk=self.kwargs["pk"],
             )
 
         return self._schedule_object
@@ -176,24 +157,13 @@ class ScheduleDetailView(
         context = super().get_context_data(**kwargs)
 
         context["time_schedules"] = (
-            models.TimeSchedule.objects.filter(schedule=self.object)
-            .select_related("event")
-            .order_by("day_number", "time_start")
+            models.TimeSchedule.objects.get_timeschedules_for_schedule(
+                schedule=self.object,
+            )
         )
 
-        context["time_slots"] = (
-            context["time_schedules"]
-            .annotate(
-                start=django.db.models.F("time_start"),
-                end=django.db.models.F("time_end"),
-            )
-            .values(
-                "id",
-                "start",
-                "end",
-                "event__name",
-            )
-            .distinct()
+        context["time_slots"] = models.TimeSchedule.objects.get_time_slots_for_schedule(
+            schedule=self.object,
         )
 
         context["days"] = [
@@ -233,9 +203,13 @@ class TimeScheduleCreateView(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["event_form"] = forms.EventForm(user=self.request.user)
-        context["events"] = models.Event.objects.filter(user=self.request.user)
-        context["teachers"] = models.Teacher.objects.filter(user=self.request.user)
-        context["schedule"] = models.Schedule.objects.get(
+        context["events"] = models.Event.objects.get_events_for_user(
+            user=self.request.user,
+        )
+        context["teachers"] = models.Teacher.objects.get_teachers_for_user(
+            user=self.request.user,
+        )
+        context["schedule"] = models.Schedule.objects.get_schedule_by_pk_and_user(
             pk=self.kwargs["schedule_id"],
             user=self.request.user,
         )
@@ -247,7 +221,7 @@ class TimeScheduleCreateView(
         return kwargs
 
     def form_valid(self, form):
-        schedule = models.Schedule.objects.get(
+        schedule = models.Schedule.objects.get_schedule_by_pk_and_user(
             pk=self.kwargs["schedule_id"],
             user=self.request.user,
         )
@@ -300,10 +274,20 @@ class TimeScheduleUpdateView(AccessMixin, django.views.generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["event_form"] = forms.EventForm(user=self.request.user)
-        context["events"] = models.Event.objects.filter(user=self.request.user)
-        context["teachers"] = models.Teacher.objects.filter(user=self.request.user)
+        context["events"] = models.Event.objects.get_events_for_user(
+            user=self.request.user,
+        )
+        context["teachers"] = models.Teacher.objects.get_teachers_for_user(
+            user=self.request.user,
+        )
         context["schedule"] = self.object.schedule
         return context
+
+    def get_object(self, queryset=None):
+        return models.TimeSchedule.objects.get_timeschedule_by_pk_and_user(
+            pk=self.kwargs["pk"],
+            user=self.request.user,
+        )
 
 
 class TimeScheduleDeleteView(AccessMixin, django.views.generic.View):
@@ -385,7 +369,7 @@ class EventListView(
     context_object_name = "events"
 
     def get_queryset(self):
-        return models.Event.objects.filter(user=self.request.user)
+        return models.Event.objects.get_events_for_user(user=self.request.user)
 
 
 class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
@@ -396,26 +380,9 @@ class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
 
     def get_object(self, queryset=None):
         if not hasattr(self, "_event_object"):
-            self._event_object = (
-                self.model.objects.select_related("user", "teacher", "notes")
-                .only(
-                    "id",
-                    "name",
-                    "custom_name",
-                    "description",
-                    "event_type",
-                    "priority",
-                    "user_id",
-                    "teacher_id",
-                    "notes_id",
-                    "user__id",
-                    "user__username",
-                    "teacher__id",
-                    "teacher__name",
-                    "notes__id",
-                    "notes__heading",
-                )
-                .get(pk=self.kwargs.get(self.pk_url_kwarg))
+            self._event_object = models.Event.objects.get_event_by_pk_and_user(
+                pk=self.kwargs.get(self.pk_url_kwarg),
+                user=self.request.user,
             )
 
         return self._event_object
@@ -477,7 +444,7 @@ class TeacherListView(
     context_object_name = "teachers"
 
     def get_queryset(self):
-        return models.Teacher.objects.filter(user=self.request.user)
+        return models.Teacher.objects.get_teachers_for_user(user=self.request.user)
 
 
 class TeacherUpdateView(AccessMixin, django.views.generic.UpdateView):
@@ -489,10 +456,9 @@ class TeacherUpdateView(AccessMixin, django.views.generic.UpdateView):
 
     def get_object(self, queryset=None):
         if not hasattr(self, "_teacher_object"):
-            self._teacher_object = (
-                self.model.objects.select_related("user")
-                .only("id", "name", "user__id", "user__username")
-                .get(pk=self.kwargs.get(self.pk_url_kwarg))
+            self._teacher_object = models.Teacher.objects.get_teacher_by_pk_and_user(
+                pk=self.kwargs.get(self.pk_url_kwarg),
+                user=self.request.user,
             )
 
         return self._teacher_object
@@ -545,7 +511,7 @@ class NoteListView(
     context_object_name = "notes"
 
     def get_queryset(self):
-        return models.Note.objects.filter(user=self.request.user)
+        return models.Note.objects.get_notes_for_user(user=self.request.user)
 
 
 class NoteUpdateView(AccessMixin, django.views.generic.UpdateView):
@@ -557,7 +523,7 @@ class NoteUpdateView(AccessMixin, django.views.generic.UpdateView):
     def get_object(self, queryset=None):
         if not hasattr(self, "_note_object"):
             self._note_object = (
-                self.model.objects.select_related("user")
+                models.Note.objects.select_related("user")
                 .only(
                     "id",
                     "disposable",
@@ -568,7 +534,7 @@ class NoteUpdateView(AccessMixin, django.views.generic.UpdateView):
                     "user__id",
                     "user__username",
                 )
-                .get(pk=self.kwargs.get(self.pk_url_kwarg))
+                .get(pk=self.kwargs.get(self.pk_url_kwarg), user=self.request.user)
             )
 
         return self._note_object
