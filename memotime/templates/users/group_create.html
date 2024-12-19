@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock extra_css %}
 {% block body %}
-  <h1>Create Group</h1>
-  <form method="post">
+<form method="post" class="main-form">
+    <h2>{% translate 'Create Group' %}</h2>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create</button>
+    {% with form=form %}
+      {% include 'includes/form.html' %}
+    {% endwith %}
+    <button type="submit" class="btn btn_submit">{% translate 'Create' %}</button>
   </form>
 {% endblock %}

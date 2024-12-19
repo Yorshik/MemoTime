@@ -51,7 +51,8 @@ main{
       pointer-events: none;
     }
     input:focus + label,
-    input:not(:focus):valid + label{
+    input:not(:focus):valid + label,
+    input:not(:placeholder-shown):not(:empty) + label{
       top: -25px;
       scale: .95; 
     }

@@ -236,7 +236,10 @@ class GroupCreateView(
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
-        self.object.user_set.add(self.request.user)
+        super().form_valid(form)
+        self.object.user_set.add(
+            self.request.user,
+        )
         return super().form_valid(form)
 
 

@@ -5,7 +5,7 @@ section{
   gap: 20px;
   padding-inline: 20px;
 }
-h2{
+h2, h1{
   text-align: center;
 }
 .btn_create{
@@ -15,8 +15,9 @@ h2{
 
 .list{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, 400px);
   gap: 20px;
+  padding-inline: 20px;
 
   .item{
     background-color: var(--second-color);
@@ -47,8 +48,28 @@ h2{
     .btn_check{
       background-color: var(--back-btn-landing);
     }
+    article{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .btn{
+        padding: 10px 13px;
+      }
+    }
+  }
+  .err{
+   font-weight: 500; 
   }
 }
+
+.btn_create{
+  padding: 10px 15px;
+  margin-top: 40px;
+}
+
 .modal {
   position: fixed;
   top: 0;

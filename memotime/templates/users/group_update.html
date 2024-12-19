@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock extra_css %}
 {% block body %}
-  <h1>Edit Group</h1>
-  <p>You can only edit this group if you are its creator.</p>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-  </form>
+<form method="post" class="main-form">
+  <h2>{% translate 'Edit Group' %}</h2>
+  <p>{% translate 'You can only edit this group if you are its creator' %}</p>
+  {% csrf_token %}
+  {% with form=form %}
+    {% include 'includes/form.html' %}
+  {% endwith %}
+  <button type="submit" class="btn btn_submit">{% translate 'Save Changes' %}</button>
+</form>
 {% endblock %}
