@@ -55,3 +55,21 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
     class Meta:
         verbose_name = _("user")
         verbose_name_plural = _("users")
+
+
+class Group(django.contrib.auth.models.Group):
+    creator = django.db.models.ForeignKey(
+        User,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="created_groups",
+        verbose_name=_("creator"),
+    )
+
+    class Meta:
+        verbose_name = _("group")
+        verbose_name_plural = _("groups")
+
+    def __str__(self):
+        return self.name

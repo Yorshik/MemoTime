@@ -3,6 +3,8 @@ import django.db.models
 import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 
+import apps.users.models
+
 __all__ = ()
 
 
@@ -147,6 +149,14 @@ class Schedule(django.db.models.Model):
         on_delete=django.db.models.CASCADE,
         related_name="schedules",
         help_text=_("User"),
+    )
+    group = django.db.models.ForeignKey(
+        apps.users.models.Group,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="schedules",
+        verbose_name=_("group"),
     )
     is_static = django.db.models.BooleanField(
         _("static"),

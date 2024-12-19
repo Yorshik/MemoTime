@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h1>My Groups</h1>
+  <h2>Groups I Created:</h2>
+  <ul>
+    {% for group in created_groups %}
+      <li>
+        {{ group.name }} ({{ group.user_set.count }} members)
+        <a href="{% url 'users:group-update' group.pk %}">Edit</a>
+        <ul>
+          {% for user in group.user_set.all %}<li>{{ user.get_username }}</li>{% endfor %}
+        </ul>
+      </li>
+    {% empty %}
+      <li>You have not created any groups.</li>
+    {% endfor %}
+  </ul>
+  <h2>Groups I'm a Member Of:</h2>
+  <ul>
+    {% for group in member_groups %}
+      <li>
+        {{ group.name }} ({{ group.user_set.count }} members)
+        <ul>
+          {% for user in group.user_set.all %}<li>{{ user.get_username }}</li>{% endfor %}
+        </ul>
+      </li>
+    {% empty %}
+      <li>You are not a member of any other groups.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'users:group-create' %}">Create a new group</a>
+{% endblock %}

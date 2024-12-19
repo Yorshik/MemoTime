@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
 from apps.schedule import forms, models
+import apps.users.models
 
 __all__ = []
 
@@ -45,6 +46,11 @@ class ScheduleCreateView(
         kwargs["user"] = self.request.user
         return kwargs
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["group"].queryset = self.request.user.created_groups.all()
+        return form
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -62,15 +68,24 @@ class ScheduleUpdateView(
     def get_object(self, queryset=None):
         if not hasattr(self, "_schedule_object"):
             self._schedule_object = (
-                self.model.objects.select_related("user")
+                self.model.objects.select_related("user", "group")
+                .prefetch_related(
+                    django.db.models.Prefetch(
+                        "user__created_groups",
+                        queryset=apps.users.models.Group.objects.all(),
+                    ),
+                )
                 .only(
                     "id",
                     "user_id",
+                    "group_id",
                     "is_static",
                     "start_date",
                     "expiration_date",
                     "user__id",
                     "user__username",
+                    "group__group_ptr_id",
+                    "group__name",
                 )
                 .get(pk=self.kwargs.get(self.pk_url_kwarg))
             )
@@ -81,6 +96,11 @@ class ScheduleUpdateView(
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.get_object().user
         return kwargs
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["group"].queryset = self.get_object().user.created_groups.all()
+        return form
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,7 +164,11 @@ class ScheduleDetailView(
     def dispatch(self, request, *args, **kwargs):
         schedule = self.get_object()
         if schedule.user != request.user:
-            raise django.http.Http404(_("You cannot view this content."))
+            if not schedule.group:
+                raise django.http.Http404(_("You cannot view this content."))
+
+            if request.user not in schedule.group.user_set.all():
+                raise django.http.Http404(_("You cannot view this content."))
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -243,7 +267,6 @@ class TimeScheduleCreateView(
                     _("You cannot add time to someone else's schedule."),
                 )
 
-        else:  # Добавлено условие, если пользователь не аутентифицирован
             raise django.http.Http404(
                 _("You cannot view this content."),
             )
