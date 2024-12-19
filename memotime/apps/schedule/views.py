@@ -267,11 +267,15 @@ class TimeScheduleCreateView(
                     _("You cannot add time to someone else's schedule."),
                 )
 
-            raise django.http.Http404(
-                _("You cannot view this content."),
+            return super().dispatch(
+                request,
+                *args,
+                **kwargs,
             )
 
-        return super().dispatch(request, *args, **kwargs)
+        raise django.http.Http404(
+            _("You cannot view this content."),
+        )
 
 
 class TimeScheduleUpdateView(AccessMixin, django.views.generic.UpdateView):

@@ -84,13 +84,9 @@ class EventForm(django.forms.ModelForm):
             "teacher",
             "event_type",
             "priority",
-            "notes",
         ]
         widgets = {
             "teacher": django.forms.Select(
-                attrs={"class": "selectpicker", "data-live-search": "true"},
-            ),
-            "notes": django.forms.Select(
                 attrs={"class": "selectpicker", "data-live-search": "true"},
             ),
         }
@@ -98,7 +94,6 @@ class EventForm(django.forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["teacher"].queryset = models.Teacher.objects.filter(user=user)
-        self.fields["notes"].queryset = models.Note.objects.filter(user=user)
 
 
 class TeacherForm(django.forms.ModelForm):
