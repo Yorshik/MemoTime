@@ -1,7 +1,12 @@
+import datetime
+import json
+
 import django.contrib.auth
 import django.db.models
+import django.dispatch
 import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
+import django_celery_beat.models
 
 __all__ = ()
 
@@ -14,6 +19,9 @@ class Note(django.db.models.Model):
         _("disposable"),
         default=True,
         help_text=_("Determines if the note is used only once"),
+    )
+    prediction = django.db.models.IntegerField(
+        default=0,
     )
     global_note = django.db.models.BooleanField(
         _("global"),
@@ -129,7 +137,7 @@ class Event(django.db.models.Model):
         on_delete=django.db.models.SET_NULL,
         null=True,
         blank=True,
-        related_name="events",
+        related_name="event",
         help_text=_("Notes related to the event"),
     )
 
@@ -231,3 +239,96 @@ class TimeSchedule(django.db.models.Model):
 
     def __str__(self):
         return f"{self.event} - {self.time_start} - {self.time_end}"
+
+
+@django.dispatch.receiver(django.db.models.signals.post_save, sender=Note)
+def create_email_task_for_note(sender, instance, created, **kwargs):
+    if not created:
+        return
+
+    note = instance
+    event = note.event
+    user = note.user
+    time_schedules = TimeSchedule.objects.filter(event=event, user=user)
+    for schedule in time_schedules:
+        now = django.utils.timezone.now()
+        today = now.date()
+        current_weekday = today.isoweekday()
+        days_ahead = schedule.day_number - current_weekday
+        if days_ahead < 0:
+            days_ahead += 7
+
+        next_event_date = today + datetime.timedelta(days=days_ahead)
+        event_datetime = datetime.datetime.combine(next_event_date, schedule.time_start)
+        event_datetime = django.utils.timezone.make_aware(event_datetime)
+        prediction_delta = datetime.timedelta(minutes=event.prediction)
+        reminder_time = event_datetime - prediction_delta
+        if reminder_time < now:
+            continue
+
+        args = json.dumps(
+            [
+                "TEST",
+                "schedule/email/event.html",
+                {"description": "TEST DESC", "author_name": "Yorshik"},
+                [user.email],
+            ],
+        )
+        if note.disposable:
+            notification_minute = reminder_time.minute
+            notification_hour = reminder_time.hour
+            crontab_day_of_week = reminder_time.isoweekday() % 7
+            crontab, created_cron = (
+                django_celery_beat.models.CrontabSchedule.objects.get_or_create(
+                    minute=str(notification_minute),
+                    hour=str(notification_hour),
+                    day_of_week=str(crontab_day_of_week),
+                    timezone=django.utils.timezone.get_current_timezone(),
+                )
+            )
+            task_name = f"Email Note {note.id} for TimeSchedule {schedule.id}"
+            django_celery_beat.models.PeriodicTask.objects.get_or_create(
+                name=task_name,
+                defaults={
+                    "crontab": crontab,
+                    "task": "your_app.tasks.send_note_email",
+                    "args": args,
+                    "enabled": True,
+                },
+            )
+        else:
+            task_name = f"One-time Email Note {note.id} for TimeSchedule {schedule.id}"
+            clocked, _ = (
+                django_celery_beat.models.ClockedSchedule.objects.get_or_create(
+                    clocked_time=reminder_time,
+                )
+            )
+            django_celery_beat.models.PeriodicTask.objects.get_or_create(
+                name=task_name,
+                defaults={
+                    "clocked": clocked,
+                    "task": "your_app.tasks.send_note_email",
+                    "args": args,
+                    "enabled": True,
+                    "one_off": True,
+                },
+            )
+
+
+@django.dispatch.receiver(django.db.models.signals.post_delete, sender=Note)
+def delete_email_task_on_note_delete(sender, instance, **kwargs):
+    note = instance
+    event = note.event
+    user = note.user
+    time_schedules = TimeSchedule.objects.filter(event=event, user=user)
+    for schedule in time_schedules:
+        task_name_one_time = (
+            f"One-time Email Note {note.id} for TimeSchedule {schedule.id}"
+        )
+        task_name_weekly = f"Email Note {note.id} for TimeSchedule {schedule.id}"
+        django_celery_beat.models.PeriodicTask.objects.filter(
+            name=task_name_one_time,
+        ).delete()
+        django_celery_beat.models.PeriodicTask.objects.filter(
+            name=task_name_weekly,
+        ).delete()

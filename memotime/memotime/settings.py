@@ -49,13 +49,14 @@ INSTALLED_APPS = [
     "django_ratelimit",
     "django_redis",
     "django_celery_results",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "memotime.middleware.RedirectBlockedUserMiddleware",
+    # "memotime.middleware.RedirectBlockedUserMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",

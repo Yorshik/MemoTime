@@ -1,0 +1,588 @@
+
+[2024-12-19 01:41:55,607: CRITICAL/MainProcess] Unrecoverable error: AttributeError("'NoneType' object has no attribute 'tzinfo'")
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 746, in start
+    c.loop(*c.loop_args())
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\loops.py", line 130, in synloop
+    connection.drain_events(timeout=2.0)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\connection.py", line 341, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\redis.py", line 591, in get
+    ret = self.handle_event(fileno, event)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\redis.py", line 573, in handle_event
+    return self.on_readable(fileno), self
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\redis.py", line 569, in on_readable
+    chan.handlers[type]()
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\redis.py", line 979, in _brpop_read
+    self.connection._deliver(loads(bytes_to_str(item)), dest)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 1017, in _deliver
+    callback(message)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 639, in _callback
+    return callback(message)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\kombu\messaging.py", line 656, in _receive_callback
+    return on_m(message) if on_m else self.receive(decoded, message)
+           ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 685, in on_task_received
+    strategy(
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\strategy.py", line 145, in task_message_handler
+    req = Req(
+          ^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\worker\request.py", line 139, in __init__
+    self._eta = maybe_make_aware(eta, self.tzlocal)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\utils\time.py", line 348, in maybe_make_aware
+    if is_naive(dt):
+       ^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\celery\utils\time.py", line 297, in is_naive
+    return dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None
+           ^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'tzinfo'
+[2024-12-19 01:41:56,534: ERROR/SpawnPoolWorker-1] Pool process <billiard.pool.Worker object at 0x0000013A25801820> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 115, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Отказано в доступе
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,534: ERROR/SpawnPoolWorker-1] Pool process <billiard.pool.Worker object at 0x0000013A25801820> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 115, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Отказано в доступе
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,556: ERROR/SpawnPoolWorker-8] Pool process <billiard.pool.Worker object at 0x000001CE21E114F0> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,556: ERROR/SpawnPoolWorker-8] Pool process <billiard.pool.Worker object at 0x000001CE21E114F0> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,563: ERROR/SpawnPoolWorker-4] Pool process <billiard.pool.Worker object at 0x000002692A2FDA30> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,563: ERROR/SpawnPoolWorker-4] Pool process <billiard.pool.Worker object at 0x000002692A2FDA30> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,576: ERROR/SpawnPoolWorker-10] Pool process <billiard.pool.Worker object at 0x000002CC11271820> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,576: ERROR/SpawnPoolWorker-10] Pool process <billiard.pool.Worker object at 0x000002CC11271820> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,589: ERROR/SpawnPoolWorker-12] Pool process <billiard.pool.Worker object at 0x00000210FAD61760> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,589: ERROR/SpawnPoolWorker-12] Pool process <billiard.pool.Worker object at 0x00000210FAD61760> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,591: ERROR/SpawnPoolWorker-11] Pool process <billiard.pool.Worker object at 0x000002198C1DD580> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,591: ERROR/SpawnPoolWorker-11] Pool process <billiard.pool.Worker object at 0x000002198C1DD580> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 118, in __exit__
+    return self._semlock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] Неверный дескриптор
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,629: ERROR/SpawnPoolWorker-7] Pool process <billiard.pool.Worker object at 0x00000291096BD940> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 115, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Отказано в доступе
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе
+[2024-12-19 01:41:56,629: ERROR/SpawnPoolWorker-7] Pool process <billiard.pool.Worker object at 0x00000291096BD940> error: PermissionError(13, 'Отказано в доступе', None, 5, None)
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 473, in receive
+    ready, req = _receive(1.0)
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 445, in _recv
+    return True, loads(get_payload())
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\queues.py", line 394, in get_payload
+    with self._rlock:
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\synchronize.py", line 115, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Отказано в доступе
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 351, in workloop
+    req = wait_for_job()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 480, in receive
+    raise SystemExit(EX_FAILURE)
+SystemExit: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 396, in workloop
+    self._ensure_messages_consumed(completed=completed)
+  File "C:\Users\Kirill\PycharmProjects\team-1\venv\Lib\site-packages\billiard\pool.py", line 406, in _ensure_messages_consumed
+    if self.on_ready_counter.value >= completed:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in getvalue
+PermissionError: [WinError 5] Отказано в доступе

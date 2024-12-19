@@ -1,0 +1,13 @@
+{% extends 'includes/base_email.html' %}
+{% load i18n %}
+{% block title %}
+  {% trans "Notification!" %}
+{% endblock title %}
+{% block content %}
+  <h1>{% blocktrans %}Hello, {{ author_name }}!{% endblocktrans %}</h1>
+  <p>{% trans "Here is notification for {{ name }}" %}</p>
+  <p>{% trans "Description:" %}</p>
+  <blockquote>
+    {{ description }}
+  </blockquote>
+{% endblock content %}
