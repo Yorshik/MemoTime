@@ -17,7 +17,7 @@ class NoteForm(django.forms.ModelForm):
 
     class Meta:
         model = models.Note
-        fields = ["heading", "description", "disposable", "global_note"]
+        fields = ["heading", "description", "disposable"]
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
