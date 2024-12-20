@@ -45,6 +45,14 @@ class Note(django.db.models.Model):
         related_name="notes",
         help_text=_("User"),
     )
+    event = django.db.models.ForeignKey(
+        "Event",
+        on_delete=django.db.models.CASCADE,
+        related_name="notes",
+        null=True,
+        blank=True,
+        help_text=_("Event related to the note"),
+    )
 
     objects = NoteManager()
 
@@ -143,14 +151,6 @@ class Event(django.db.models.Model):
         on_delete=django.db.models.CASCADE,
         related_name="events",
         help_text=_("User"),
-    )
-    notes = django.db.models.ForeignKey(
-        Note,
-        on_delete=django.db.models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="events",
-        help_text=_("Notes related to the event"),
     )
 
     objects = EventManager()

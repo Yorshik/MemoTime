@@ -19,31 +19,17 @@ class NoteForm(django.forms.ModelForm):
 
     class Meta:
         model = models.Note
-        fields = ["heading", "description", "disposable"]
+        fields = ["heading", "description", "disposable", "event"]
         labels = {"disposable": _("One time reminder")}
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["event"].queryset = models.Event.objects.filter(user=user)
-        if self.instance.pk:
-            event_related = models.Event.objects.filter(notes=self.instance).first()
-            if event_related:
-                self.initial["event"] = event_related
 
     def save(self, commit=True):
         note = super().save(commit=False)
-        selected_event = self.cleaned_data["event"]
-
-        if selected_event:
-            if commit:
-                note.save()
-
-            models.Event.objects.filter(notes=note).update(notes=None)
-            selected_event.notes = note
-            selected_event.save()
-        else:
-            if commit:
-                note.save()
+        if commit:
+            note.save()
 
         return note
 
