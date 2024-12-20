@@ -9,7 +9,9 @@
   <form class="profile" method="post" enctype="multipart/form-data">
     <div class="profile__left">
       {% if user.image %}
-        <img src="{{ user.image.url }}" alt="{% translate 'error' %}" class="profile__image">
+        <img src="{{ user.image.url }}"
+             alt="{% translate 'error' %}"
+             class="profile__image">
       {% else %}
         <img src="{% static 'img/no-avatar.jpg' %}"
              alt="{% translate 'error' %}"
@@ -28,7 +30,7 @@
   </form>
 {% endblock body %}
 {% block extra_js %}
-  {% comment %} <script>
+  <script>
   document.addEventListener('DOMContentLoaded', function() {
     var imageInput = document.getElementById('id_image');
     var changePasswordLink = document.querySelector('.profile__left .btn_change');
@@ -39,6 +41,6 @@
       profileRight.appendChild(changePasswordLink);
     }
   });
-  </script> {% endcomment %}
+  </script>
   <script src="{% static 'js/multi-select.js' %}"></script>
 {% endblock extra_js %}

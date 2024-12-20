@@ -15,16 +15,43 @@ normalizer = apps.users.email_normalizer.EmailNormalizer()
 User = django.contrib.auth.get_user_model()
 
 
+class CustomCheckboxInput(django.forms.CheckboxInput):
+    template_name = "widgets/checkbox-input.html"
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context["label_text"] = self.attrs.get("label_text")
+        return context
+
+
 class UserCreationForm(
     apps.core.forms.BaseForm,
     django.contrib.auth.forms.UserCreationForm,
 ):
     captcha = captcha.fields.CaptchaField()
+    agree_to_data_processing = django.forms.BooleanField(
+        required=True,
+        label="",
+        error_messages={
+            "required": _(
+                "You must agree to the personal data processing to register.",
+            ),
+        },
+        widget=CustomCheckboxInput(
+            attrs={
+                "label_text": _(
+                    "Do you agree to provide your <a"
+                    " href='https://sakhalinzoo.ru/upload/photos/"
+                    "5ed9c4b3a4680_1591329971.jpg'>personal"
+                    " data</a>?",
+                ),
+            },
+        ),
+    )
 
     def clean_username(self):
         username = self.cleaned_data[apps.users.models.User.username.field.name].lower()
-        new = apps.users.models.User.objects.filter(username=username)
-        if new.count():
+        if apps.users.models.User.objects.filter(username=username).exists():
             raise django.core.exceptions.ValidationError(
                 _("User already exists"),
             )
@@ -32,8 +59,8 @@ class UserCreationForm(
         return username
 
     def clean_password2(self):
-        password1 = self.cleaned_data["password1"]
-        password2 = self.cleaned_data["password2"]
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
 
         if password1 and password2 and password1 != password2:
             raise django.core.exceptions.ValidationError(
@@ -59,7 +86,13 @@ class UserCreationForm(
             apps.users.models.User.email.field.name,
             "password1",
             "password2",
+            "captcha",
+            "agree_to_data_processing",
         )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["agree_to_data_processing"].label_suffix = ""
 
 
 class UserProfileForm(

@@ -1,0 +1,10 @@
+<div class="check">
+  {% load i18n %}
+  {% include "django/forms/widgets/input.html" %}
+  <label for="{{ widget.attrs.id }}" class="checkbox">✓</label>
+  <label for="{{ widget.attrs.id }}" class="link">
+    {% autoescape off %}
+      {% trans label_text %}
+    {% endautoescape %}
+  </label>
+</div>

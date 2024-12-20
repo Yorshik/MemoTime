@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 00:23+0300\n"
+"POT-Creation-Date: 2024-12-21 02:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgstr "Created"
 msgid "Date of feedback creation"
 msgstr "Date of feedback creation"
 
-#: .\apps\feedback\models.py:85 .\templates\users\signup.html:19
+#: .\apps\feedback\models.py:85
 msgid "personal data"
 msgstr "Personal data"
 
@@ -516,31 +516,41 @@ msgstr "Creator"
 msgid "Users"
 msgstr "Users"
 
-#: .\apps\users\forms.py:29
+#: .\apps\users\forms.py:37
+msgid "You must agree to the personal data processing to register."
+msgstr "You must agree to the personal data processing to register."
+
+#: .\apps\users\forms.py:43
+msgid ""
+"Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"
+"photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
+msgstr "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
+
+#: .\apps\users\forms.py:56
 msgid "User already exists"
 msgstr "User already exists"
 
-#: .\apps\users\forms.py:40
+#: .\apps\users\forms.py:67
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: .\apps\users\forms.py:104
+#: .\apps\users\forms.py:137
 msgid "Пользователь уже существует"
 msgstr "User already exists"
 
-#: .\apps\users\forms.py:115
+#: .\apps\users\forms.py:148
 msgid "Пользователь с таким email уже существует"
 msgstr "User with this email already exists"
 
-#: .\apps\users\forms.py:185 .\apps\users\forms.py:249
+#: .\apps\users\forms.py:218 .\apps\users\forms.py:282
 msgid "Group Name"
 msgstr "Group Name"
 
-#: .\apps\users\forms.py:187 .\apps\users\forms.py:251
+#: .\apps\users\forms.py:220 .\apps\users\forms.py:284
 msgid "Usernames or Emails (comma-separated)"
 msgstr "Usernames or Emails (comma-separated)"
 
-#: .\apps\users\forms.py:189 .\apps\users\forms.py:253
+#: .\apps\users\forms.py:222 .\apps\users\forms.py:286
 msgid ""
 "Enter usernames or email addresses separated by commas. For example: user1,"
 "user2@example.com,user3"
@@ -548,7 +558,7 @@ msgstr ""
 "Enter usernames or email addresses separated by commas. For example: user1,"
 "user2@example.com, user3"
 
-#: .\apps\users\forms.py:227 .\apps\users\forms.py:298
+#: .\apps\users\forms.py:260 .\apps\users\forms.py:331
 #, python-format
 msgid ""
 "Users with the following usernames or emails were not found: %(identifiers)s"
@@ -696,7 +706,7 @@ msgstr "Close"
 
 #: .\templates\feedback\feedback.html:32 .\templates\schedule\note_form.html:23
 #: .\templates\schedule\schedule_form.html:23
-#: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:23
+#: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:15
 msgid "required field"
 msgstr "Required field"
 
@@ -832,7 +842,7 @@ msgid "Theme Icon"
 msgstr "Theme Icon"
 
 #: .\templates\includes\header.html:48 .\templates\includes\header.html:54
-#: .\templates\users\profile.html:12 .\templates\users\profile.html:15
+#: .\templates\users\profile.html:13 .\templates\users\profile.html:17
 msgid "error"
 msgstr "Error"
 
@@ -845,7 +855,7 @@ msgid "Log In"
 msgstr "Log In"
 
 #: .\templates\includes\header.html:63 .\templates\users\signup.html:9
-#: .\templates\users\signup.html:28
+#: .\templates\users\signup.html:20
 msgid "Sign Up"
 msgstr "Sign Up"
 
@@ -1226,25 +1236,24 @@ msgstr ""
 "If you haven't received the email, make sure you entered the correct address "
 "you registered with and check your spam folder"
 
-#: .\templates\users\profile.html:18
+#: .\templates\users\profile.html:20
 msgid "Change the password"
 msgstr "Change the password"
 
-#: .\templates\users\profile.html:19
+#: .\templates\users\profile.html:21
 msgid "Log Out"
 msgstr "Log Out"
 
-#: .\templates\users\profile.html:27
+#: .\templates\users\profile.html:29
 msgid "Change Profile information"
 msgstr "Change Profile information"
 
 #: .\templates\users\signup.html:18
-msgid "Do you agree to provide your"
-msgstr "Do you agree to provide your"
-
-#: .\templates\users\signup.html:26
 msgid "Do you have an account?"
 msgstr "Do you have an account?"
+
+#~ msgid "Do you agree to provide your"
+#~ msgstr "Do you agree to provide your"
 
 #~ msgid "Company, Inc"
 #~ msgstr "Company, Inc"
@@ -1281,4 +1290,3 @@ msgstr "Do you have an account?"
 
 #~ msgid "тайна"
 #~ msgstr "Secret"
-
