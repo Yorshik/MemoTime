@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 20:55+0300\n"
+"POT-Creation-Date: 2024-12-21 00:23+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,8 +61,8 @@ msgstr "Пользователь не аутентифицирован."
 msgid "Feedback Author"
 msgstr "Автор обратной связи"
 
-#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:57
-#: .\templates\includes\footer.html:24
+#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:55
+#: .\templates\includes\footer.html:21
 msgid "Feedback"
 msgstr "Обратная связь"
 
@@ -140,7 +140,7 @@ msgstr "создано"
 msgid "Date of feedback creation"
 msgstr "Дата создания отзыва"
 
-#: .\apps\feedback\models.py:85 .\templates\users\signup.html:20
+#: .\apps\feedback\models.py:85 .\templates\users\signup.html:19
 msgid "personal data"
 msgstr "персональные данные"
 
@@ -277,10 +277,8 @@ msgid "User"
 msgstr "Пользователь"
 
 #: .\apps\schedule\models.py:54
-#, fuzzy
-#| msgid "Notes related to the event"
 msgid "Event related to the note"
-msgstr "Заметки, связанные с событием"
+msgstr "Событие, связанное с заметкой"
 
 #: .\apps\schedule\models.py:60
 msgid "note"
@@ -528,23 +526,23 @@ msgstr "Пользователь уже существует"
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: .\apps\users\forms.py:94
+#: .\apps\users\forms.py:104
 msgid "Пользователь уже существует"
 msgstr "Пользователь уже существует"
 
-#: .\apps\users\forms.py:105
+#: .\apps\users\forms.py:115
 msgid "Пользователь с таким email уже существует"
 msgstr "Пользователь с таким email уже существует"
 
-#: .\apps\users\forms.py:175 .\apps\users\forms.py:239
+#: .\apps\users\forms.py:185 .\apps\users\forms.py:249
 msgid "Group Name"
 msgstr "Название группы"
 
-#: .\apps\users\forms.py:177 .\apps\users\forms.py:241
+#: .\apps\users\forms.py:187 .\apps\users\forms.py:251
 msgid "Usernames or Emails (comma-separated)"
 msgstr "Имена пользователей или адреса электронной почты (через запятую)"
 
-#: .\apps\users\forms.py:179 .\apps\users\forms.py:243
+#: .\apps\users\forms.py:189 .\apps\users\forms.py:253
 msgid ""
 "Enter usernames or email addresses separated by commas. For example: user1,"
 "user2@example.com,user3"
@@ -552,7 +550,7 @@ msgstr ""
 "Введите имена пользователей или адреса электронной почты, разделенные "
 "запятыми. Например: user1,user2@example.com,user3"
 
-#: .\apps\users\forms.py:217 .\apps\users\forms.py:288
+#: .\apps\users\forms.py:227 .\apps\users\forms.py:298
 #, python-format
 msgid ""
 "Users with the following usernames or emails were not found: %(identifiers)s"
@@ -666,7 +664,7 @@ msgstr "Проект LMS"
 msgid "catalog, cat"
 msgstr "каталог, кот"
 
-#: .\templates\base.html:35
+#: .\templates\base.html:30
 msgid "произошла ошибка - свяжитесь с нами"
 msgstr "произошла ошибка - свяжитесь с нами"
 
@@ -679,7 +677,7 @@ msgstr "Спасибо за ваш отзыв!"
 msgid "Hello, %(author_name)s!"
 msgstr "Здравствуйте, %(author_name)s!"
 
-#: .\templates\feedback\email\feedback_confirmation.html:8
+#: .\templates\feedback\email\feedback_confirmation.html:9
 msgid ""
 "Thank you for your feedback! We appreciate your opinion and will take it "
 "into account in our work."
@@ -687,7 +685,7 @@ msgstr ""
 "Спасибо за ваш отзыв! Мы ценим ваше мнение и обязательно учтем его в нашей "
 "работе."
 
-#: .\templates\feedback\email\feedback_confirmation.html:9
+#: .\templates\feedback\email\feedback_confirmation.html:11
 msgid "You wrote:"
 msgstr "Вы написали:"
 
@@ -699,7 +697,7 @@ msgstr "Форма обратной связи"
 msgid "Close"
 msgstr "Закрыть"
 
-#: .\templates\feedback\feedback.html:33 .\templates\schedule\note_form.html:23
+#: .\templates\feedback\feedback.html:32 .\templates\schedule\note_form.html:23
 #: .\templates\schedule\schedule_form.html:23
 #: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:23
 msgid "required field"
@@ -709,22 +707,22 @@ msgstr "обязательное поле"
 msgid "Send"
 msgstr "Отправить"
 
-#: .\templates\homepage\blocked.html:9
+#: .\templates\homepage\blocked.html:10
 msgid "You have been blocked before"
 msgstr "Вы были заблокированы ранее"
 
-#: .\templates\homepage\blocked.html:9
+#: .\templates\homepage\blocked.html:10
 msgid "due to suspicious activity of your IP address"
 msgstr "из-за подозрительной активности вашего IP-адреса"
 
-#: .\templates\homepage\blocked.html:10 .\templates\users\logout.html:11
+#: .\templates\homepage\blocked.html:12 .\templates\users\logout.html:11
 #: .\templates\users\password_change_done.html:10
 #: .\templates\users\password_reset_complete.html:10
-#: .\templates\users\password_reset_done.html:11
+#: .\templates\users\password_reset_done.html:13
 msgid "Main"
 msgstr "Главная"
 
-#: .\templates\homepage\index.html:8
+#: .\templates\homepage\index.html:9
 msgid ""
 "Organize your studies and active days — a schedule with notes is always at "
 "hand!"
@@ -732,7 +730,7 @@ msgstr ""
 "Организуйте свою учебу и активный отдых — расписание с заметками всегда под "
 "рукой!"
 
-#: .\templates\homepage\index.html:9
+#: .\templates\homepage\index.html:12
 msgid ""
 "We help you organize your time by offering a schedule with notes and "
 "reminders of important events"
@@ -740,31 +738,31 @@ msgstr ""
 "Мы помогаем вам организовать свое время, предлагая расписание с заметками и "
 "напоминая о важных событиях"
 
-#: .\templates\homepage\index.html:11
+#: .\templates\homepage\index.html:15
 msgid "Create a note"
 msgstr "Создать заметку"
 
-#: .\templates\homepage\index.html:12
+#: .\templates\homepage\index.html:16
 msgid "Create an event"
 msgstr "Создать событие"
 
-#: .\templates\homepage\index.html:13
+#: .\templates\homepage\index.html:17
 msgid "Create a schedule"
 msgstr "Создать расписание"
 
-#: .\templates\homepage\index.html:29
+#: .\templates\homepage\index.html:33
 msgid "Alerts"
 msgstr "Оповещения"
 
-#: .\templates\homepage\index.html:31
+#: .\templates\homepage\index.html:34
 msgid "Notifications about notes can be sent by mail and Telegram"
 msgstr "Уведомления о заметках могут быть отправлены по почте и в Telegram"
 
-#: .\templates\homepage\index.html:35
+#: .\templates\homepage\index.html:37
 msgid "Adaptation"
 msgstr "Адаптация"
 
-#: .\templates\homepage\index.html:37
+#: .\templates\homepage\index.html:38
 msgid "Our site has adaptations for different screen sizes"
 msgstr "Наш сайт адаптирован под различные размеры экранов"
 
@@ -780,19 +778,19 @@ msgstr ""
 "Используются переводы на несколько языков. Также имеется интуитивно понятный "
 "интерфейс, которым легко пользоваться"
 
-#: .\templates\homepage\index.html:49
+#: .\templates\homepage\index.html:48
 msgid "Our site has a public API that everyone can use"
 msgstr "Наш сайт имеет публичный API, которым может воспользоваться каждый"
 
-#: .\templates\homepage\index.html:62 .\templates\homepage\index.html:71
-#: .\templates\homepage\index.html:80 .\templates\homepage\index.html:89
-#: .\templates\homepage\index.html:98 .\templates\homepage\index.html:107
-#: .\templates\homepage\index.html:116 .\templates\homepage\index.html:125
-#: .\templates\homepage\index.html:134 .\templates\homepage\index.html:145
-#: .\templates\homepage\index.html:154 .\templates\homepage\index.html:163
-#: .\templates\homepage\index.html:172 .\templates\homepage\index.html:181
-#: .\templates\homepage\index.html:190 .\templates\homepage\index.html:199
-#: .\templates\homepage\index.html:208 .\templates\homepage\index.html:217
+#: .\templates\homepage\index.html:61 .\templates\homepage\index.html:72
+#: .\templates\homepage\index.html:83 .\templates\homepage\index.html:94
+#: .\templates\homepage\index.html:105 .\templates\homepage\index.html:116
+#: .\templates\homepage\index.html:127 .\templates\homepage\index.html:138
+#: .\templates\homepage\index.html:149 .\templates\homepage\index.html:162
+#: .\templates\homepage\index.html:173 .\templates\homepage\index.html:184
+#: .\templates\homepage\index.html:195 .\templates\homepage\index.html:206
+#: .\templates\homepage\index.html:217 .\templates\homepage\index.html:228
+#: .\templates\homepage\index.html:239 .\templates\homepage\index.html:250
 msgid "avatar"
 msgstr "аватар"
 
@@ -812,10 +810,6 @@ msgstr "Список групп"
 msgid "Teacher List"
 msgstr "Список преподавателей"
 
-#: .\templates\includes\footer.html:21 .\templates\schedule\event_list.html:9
-msgid "Event List"
-msgstr "Список событий"
-
 #: .\templates\includes\header.html:6
 msgid "Logo"
 msgstr "Логотип"
@@ -824,33 +818,37 @@ msgstr "Логотип"
 msgid "Schedule List"
 msgstr "Список расписаний"
 
-#: .\templates\includes\header.html:15 .\templates\schedule\note_list.html:9
+#: .\templates\includes\header.html:15 .\templates\schedule\event_list.html:9
+msgid "Event List"
+msgstr "Список событий"
+
+#: .\templates\includes\header.html:18 .\templates\schedule\note_list.html:9
 msgid "Note List"
 msgstr "Список заметок"
 
-#: .\templates\includes\header.html:22
+#: .\templates\includes\header.html:25
 msgid "Theme"
 msgstr "Тема"
 
-#: .\templates\includes\header.html:25
+#: .\templates\includes\header.html:28
 msgid "Theme Icon"
 msgstr "Иконка темы"
 
-#: .\templates\includes\header.html:44 .\templates\users\profile.html:11
-#: .\templates\users\profile.html:13
+#: .\templates\includes\header.html:48 .\templates\includes\header.html:54
+#: .\templates\users\profile.html:12 .\templates\users\profile.html:15
 msgid "error"
 msgstr "ошибка"
 
-#: .\templates\includes\header.html:49 .\templates\users\login.html:9
-#: .\templates\users\login.html:19 .\templates\users\logout.html:12
+#: .\templates\includes\header.html:60 .\templates\users\login.html:9
+#: .\templates\users\login.html:24 .\templates\users\logout.html:12
 #: .\templates\users\password_change_done.html:11
 #: .\templates\users\password_reset_complete.html:11
-#: .\templates\users\password_reset_done.html:12
+#: .\templates\users\password_reset_done.html:14
 msgid "Log In"
 msgstr "Войти"
 
-#: .\templates\includes\header.html:52 .\templates\users\signup.html:9
-#: .\templates\users\signup.html:27
+#: .\templates\includes\header.html:63 .\templates\users\signup.html:9
+#: .\templates\users\signup.html:28
 msgid "Sign Up"
 msgstr "Зарегистрироваться"
 
@@ -885,7 +883,6 @@ msgstr "Создать событие"
 msgid "Save"
 msgstr "Сохранить"
 
-
 #: .\templates\schedule\event_form_from_timeschedule.html:23
 #: .\templates\schedule\teacher_list.html:10
 msgid "Add Teacher"
@@ -900,8 +897,9 @@ msgstr "Добавить событие"
 #: .\templates\schedule\note_list.html:18
 #: .\templates\schedule\schedule_detail.html:26
 #: .\templates\schedule\schedule_detail.html:97
-#: .\templates\schedule\schedule_list.html:22
-#: .\templates\schedule\teacher_list.html:16
+#: .\templates\schedule\schedule_list.html:21
+#: .\templates\schedule\teacher_list.html:18
+#: .\templates\users\group_list.html:19
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -909,8 +907,8 @@ msgstr "Редактировать"
 #: .\templates\schedule\note_list.html:32
 #: .\templates\schedule\schedule_detail.html:40
 #: .\templates\schedule\schedule_detail.html:121
-#: .\templates\schedule\schedule_list.html:36
-#: .\templates\schedule\teacher_list.html:28
+#: .\templates\schedule\schedule_list.html:35
+#: .\templates\schedule\teacher_list.html:31
 msgid "Delete"
 msgstr "Удалить"
 
@@ -959,28 +957,28 @@ msgstr "Создать расписание"
 msgid "Create group"
 msgstr "Создать группу"
 
-#: .\templates\schedule\schedule_list.html:10
+#: .\templates\schedule\schedule_list.html:9
 msgid "My Schedules"
 msgstr "Мои расписания"
 
-#: .\templates\schedule\schedule_list.html:11
+#: .\templates\schedule\schedule_list.html:10
 msgid "Create New Schedule"
 msgstr "Создать новое расписание"
 
-#: .\templates\schedule\schedule_list.html:18
-#: .\templates\schedule\schedule_list.html:63
+#: .\templates\schedule\schedule_list.html:17
+#: .\templates\schedule\schedule_list.html:62
 msgid "View"
 msgstr "Просмотр"
 
-#: .\templates\schedule\schedule_list.html:51
+#: .\templates\schedule\schedule_list.html:50
 msgid "No personal schedules available."
 msgstr "Нет доступных личных расписаний."
 
-#: .\templates\schedule\schedule_list.html:56
+#: .\templates\schedule\schedule_list.html:55
 msgid "Shared Schedules"
 msgstr "Общие расписания"
 
-#: .\templates\schedule\schedule_list.html:67
+#: .\templates\schedule\schedule_list.html:66
 msgid "No shared schedules available."
 msgstr "Нет доступных общих расписаний."
 
@@ -1124,7 +1122,7 @@ msgstr ""
 msgid "Account Reactivation"
 msgstr "Повторная активация аккаунта"
 
-#: .\templates\users\email\user_reactivation_email.html:9
+#: .\templates\users\email\user_reactivation_email.html:8
 msgid ""
 "It looks like you need to reactivate your account. Please click the link "
 "below to do so:"
@@ -1136,19 +1134,31 @@ msgstr ""
 msgid "Create Group"
 msgstr "Создать группу"
 
-#: .\templates\users\group_list.html:16 .\templates\users\group_list.html:40
+#: .\templates\users\group_list.html:9
+msgid "My Groups"
+msgstr "Мои группы"
+
+#: .\templates\users\group_list.html:10
+msgid "Groups I Created:"
+msgstr "Группы, которые я создал:"
+
+#: .\templates\users\group_list.html:16 .\templates\users\group_list.html:44
 msgid "members"
 msgstr "участники"
 
-#: .\templates\users\group_list.html:33
+#: .\templates\users\group_list.html:36
 msgid "You have not created any groups."
 msgstr "Вы не создали ни одной группы."
 
-#: .\templates\users\group_list.html:46
+#: .\templates\users\group_list.html:39
+msgid "Groups I'm a Member Of:"
+msgstr "Группы, в которых я состою:"
+
+#: .\templates\users\group_list.html:50
 msgid "You are not a member of any other groups."
 msgstr "Вы не состоите ни в одной другой группе."
 
-#: .\templates\users\group_list.html:49
+#: .\templates\users\group_list.html:53
 msgid "Create a new group"
 msgstr "Создать новую группу"
 
@@ -1164,11 +1174,15 @@ msgstr "Вы можете редактировать эту группу, тол
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: .\templates\users\login.html:16
+#: .\templates\users\login.html:15
 msgid "Forgot your password?"
 msgstr "Забыли пароль?"
 
-#: .\templates\users\login.html:17
+#: .\templates\users\login.html:16
+msgid "Update Cupcha"
+msgstr "Обновить капчу"
+
+#: .\templates\users\login.html:22
 msgid "Don`t you have an account?"
 msgstr "У вас нет аккаунта?"
 
@@ -1207,7 +1221,7 @@ msgstr "Сбросить"
 msgid "An email has been sent to you with a link to reset your password"
 msgstr "Вам было отправлено письмо со ссылкой для сброса пароля"
 
-#: .\templates\users\password_reset_done.html:10
+#: .\templates\users\password_reset_done.html:11
 msgid ""
 "If you haven`t received the email, make sure you entered the correct address "
 "you registered with and check your spam folder"
@@ -1215,28 +1229,25 @@ msgstr ""
 "Если вы не получили письмо, убедитесь, что вы ввели правильный адрес, с "
 "которым вы зарегистрировались, и проверьте папку со спамом"
 
-#: .\templates\users\profile.html:15
+#: .\templates\users\profile.html:18
 msgid "Change the password"
 msgstr "Изменить пароль"
 
-#: .\templates\users\profile.html:16
+#: .\templates\users\profile.html:19
 msgid "Log Out"
 msgstr "Выйти"
 
-#: .\templates\users\profile.html:24
+#: .\templates\users\profile.html:27
 msgid "Change Profile information"
 msgstr "Изменить информацию профиля"
 
-#: .\templates\users\signup.html:19
+#: .\templates\users\signup.html:18
 msgid "Do you agree to provide your"
 msgstr "Согласны ли вы предоставить свои"
 
-#: .\templates\users\signup.html:25
+#: .\templates\users\signup.html:26
 msgid "Do you have an account?"
 msgstr "У вас есть аккаунт?"
-
-#~ msgid "Group"
-#~ msgstr "Группа"
 
 #~ msgid "Company, Inc"
 #~ msgstr "Компания, Инк"
