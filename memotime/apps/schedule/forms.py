@@ -1,6 +1,6 @@
-from django.utils.translation import gettext_lazy as _
-import django.forms
 from django.core.exceptions import ValidationError
+import django.forms
+from django.utils.translation import gettext_lazy as _
 
 from apps.schedule import models
 
@@ -8,19 +8,22 @@ __all__ = []
 
 
 class NoteForm(django.forms.ModelForm):
-    event = django.forms.ModelChoiceField(
-        queryset=None,
-        widget=django.forms.Select(
-            attrs={"class": "selectpicker", "data-live-search": "true"},
-        ),
-        required=False,
-        label=_("Event"),
-    )
-
     class Meta:
         model = models.Note
         fields = ["heading", "description", "disposable", "event"]
         labels = {"disposable": _("One time reminder")}
+        widgets = {
+            "event": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-search": "true",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
+            ),
+        }
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,15 +38,6 @@ class NoteForm(django.forms.ModelForm):
 
 
 class ScheduleForm(django.forms.ModelForm):
-    group = django.forms.ModelChoiceField(
-        queryset=None,
-        required=False,
-        label=_("Group"),
-        widget=django.forms.Select(
-            attrs={"class": "selectpicker", "data-live-search": "true"},
-        ),
-    )
-
     class Meta:
         model = models.Schedule
         fields = ["is_static", "start_date", "expiration_date", "group"]
@@ -56,6 +50,16 @@ class ScheduleForm(django.forms.ModelForm):
             "expiration_date": django.forms.DateInput(
                 attrs={"type": "date"},
                 format="%Y-%m-%d",
+            ),
+            "group": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-search": "true",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
             ),
         }
 
@@ -81,13 +85,6 @@ class ScheduleForm(django.forms.ModelForm):
         return cleaned_data
 
 
-from django.core.exceptions import ValidationError
-import django.forms
-from django.utils.translation import gettext_lazy as _
-
-from apps.schedule import models
-
-
 class EventForm(django.forms.ModelForm):
     class Meta:
         model = models.Event
@@ -101,59 +98,47 @@ class EventForm(django.forms.ModelForm):
         ]
         widgets = {
             "teacher": django.forms.Select(
-                attrs={"class": "selectpicker", "data-live-search": "true"},
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-search": "true",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
+            ),
+            "event_type": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
+            ),
+            "priority": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
             ),
         }
 
     def __init__(self, user, *args, **kwargs):
-        print("----- Начало инициализации EventForm -----")
-        print(f"Пользователь: {user}")
         super().__init__(*args, **kwargs)
         self.fields["teacher"].queryset = models.Teacher.objects.filter(user=user)
-        print(f"Доступные учителя: {self.fields['teacher'].queryset}")
-
-        # Проверяем, есть ли instance (т.е. редактируется ли объект)
-        if self.instance.pk:
-            print(
-                "Текущий учитель (ID):"
-                f" {self.instance.teacher.pk if self.instance.teacher else None}"
-            )
-            print(
-                "Текущий учитель (Имя):"
-                f" {self.instance.teacher.name if self.instance.teacher else None}"
-            )
-        else:
-            print("Текущий учитель: Не определен (новый объект)")
-
-        print("----- Конец инициализации EventForm -----\n")
 
     def clean(self):
-        cleaned_data = super().clean()
-        print("----- Начало clean EventForm -----")
-        print(f"Очищенные данные: {cleaned_data}")
-
-        # Получаем значение teacher из cleaned_data
-        teacher = cleaned_data.get("teacher")
-
-        # Проверяем, было ли выбрано значение
-        if teacher:
-            print(f"Выбранный учитель (ID): {teacher.pk}")
-            print(f"Выбранный учитель (Имя): {teacher.name}")
-        else:
-            print("Учитель не выбран")
-
-        print("----- Конец clean EventForm -----\n")
-        return cleaned_data
+        return super().clean()
 
     def save(self, commit=True):
         instance = super().save(commit=False)
-        print("----- Начало save EventForm -----")
-        print(f"Объект Event перед сохранением: {instance}")
-        print(f"Значение teacher перед сохранением: {instance.teacher}")
         if commit:
             instance.save()
-            print(f"Объект Event сохранен в БД. ID: {instance.pk}")
-        print("----- Конец save EventForm -----\n")
+
         return instance
 
 
@@ -177,7 +162,23 @@ class TimeScheduleForm(django.forms.ModelForm):
             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
             "time_end": django.forms.TimeInput(attrs={"type": "time"}),
             "event": django.forms.Select(
-                attrs={"class": "selectpicker", "data-live-search": "true"},
+                attrs={
+                    "data-search": "true",
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
+            ),
+            "day_number": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
             ),
         }
 
@@ -255,7 +256,23 @@ class AddTimeScheduleForm(django.forms.ModelForm):
             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
             "time_end": django.forms.TimeInput(attrs={"type": "time"}),
             "event": django.forms.Select(
-                attrs={"class": "selectpicker"},
+                attrs={
+                    "data-search": "true",
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
+            ),
+            "day_number": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
             ),
         }
 

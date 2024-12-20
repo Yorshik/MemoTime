@@ -390,8 +390,7 @@ class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
-        # Убрал, так как instance уже передается в super
-        # kwargs["instance"] = self.get_object()
+
         return kwargs
 
     def get_context_data(self, **kwargs):
@@ -400,27 +399,7 @@ class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
         return context
 
     def form_valid(self, form):
-        print("----- form_valid начало -----")
-        print(f"Полученные данные: {form.cleaned_data}")
-        print(f"Текущий объект: {self.object}")
-        print(
-            "ID учителя из формы:"
-            f" {form.cleaned_data['teacher'].pk if form.cleaned_data['teacher'] else None}",
-        )
-        print(
-            "ID учителя до сохранения:"
-            f" {self.object.teacher.pk if self.object.teacher else None}",
-        )
 
-        # Убрал, так как сохранение уже выполняется автоматически
-        # response = super().form_valid(form)
-
-        print(
-            "ID учителя после сохранения:"
-            f" {self.object.teacher.pk if self.object.teacher else None}",
-        )
-        print("----- form_valid конец -----\n")
-        # return response
         return super().form_valid(form)
 
 

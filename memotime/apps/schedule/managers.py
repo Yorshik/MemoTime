@@ -44,7 +44,8 @@ class EventManager(django.db.models.Manager):
 
     def get_event_by_pk_and_user(self, pk, user):
         return (
-            self.select_related("user", "teacher", "notes")
+            self.select_related("user", "teacher")
+            .prefetch_related("notes")
             .only(
                 "id",
                 "name",
@@ -54,13 +55,10 @@ class EventManager(django.db.models.Manager):
                 "priority",
                 "user_id",
                 "teacher_id",
-                "notes_id",
                 "user__id",
                 "user__username",
                 "teacher__id",
                 "teacher__name",
-                "notes__id",
-                "notes__heading",
             )
             .get(pk=pk, user=user)
         )

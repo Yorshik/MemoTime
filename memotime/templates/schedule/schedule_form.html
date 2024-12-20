@@ -3,6 +3,7 @@
 {% load static %}
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/multi-select.css' %}">
   <link rel="stylesheet" href="{% static 'css/schedule-form.css' %}">
 {% endblock extra_css %}
 {% block body %}
@@ -27,3 +28,6 @@
     <button type="submit" class="btn btn_submit">{% translate 'Save' %}</button>
   </form>
 {% endblock body %}
+{% block extra_js %}
+  <script src="{% static 'js/multi-select.js' %}"></script>
+{% endblock extra_js %}
