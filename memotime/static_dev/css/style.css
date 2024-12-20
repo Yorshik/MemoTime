@@ -195,6 +195,14 @@ select{
 .btn_del:hover{
   background-color: var(--back-btn-del);
 }
+.no-fone-btn{
+  background: none;
+  box-shadow: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+}
 
 .content{
   display: flex;
@@ -248,6 +256,9 @@ header{
 
           img{
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
           }
         }
         li .btn_theme{
