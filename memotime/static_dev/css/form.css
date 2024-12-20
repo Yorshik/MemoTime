@@ -1,8 +1,9 @@
-main{
+main {
   display: grid;
   place-content: center;
 }
-.main-form{
+
+.main-form {
   display: flex;
   flex-direction: column;
   gap: 35px;
@@ -12,36 +13,31 @@ main{
   box-shadow: var(--shadow);
   border: var(--border);
   width: 850px;
-  
-  &.main-form_text{
+
+  &.main-form_text {
     gap: 20px;
   }
-  h2{
-    text-align: center;
-  }
-  .main-form__p{
-    text-align: center;
-  }
-  .danger .errorlist{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 
-    li{
-      color: var(--second-color);
-    }
+  h2 {
+    text-align: center;
   }
-  .danger .errorlist li ul li{
+
+  .main-form__p {
+    text-align: center;
+  }
+
+  .danger {
     background-color: var(--back-err);
     color: var(--text-color-err);
     padding: 10px;
     border-radius: 10px;
     box-shadow: var(--shadow);
   }
-  div:not(:has(input[type="checkbox"])){
+
+  div:not(:has(input[type="checkbox"])) {
     position: relative;
 
-    label{
+    label {
       position: absolute;
       top: 11px;
       left: 15px;
@@ -50,32 +46,37 @@ main{
       color: var(--text-color-form);
       pointer-events: none;
     }
-    input:focus + label,
-    input:not(:focus):valid + label,
-    input:not(:placeholder-shown):not(:empty) + label{
+
+    input:focus+label,
+    input:not(:focus):valid+label,
+    input:not(:placeholder-shown):not(:empty)+label {
       top: -25px;
-      scale: .95; 
+      scale: .95;
     }
   }
-  div:has(img){
+
+  div:has(img) {
     display: grid;
     gap: 35px;
 
-    img{
+    img {
       justify-self: center;
       border-radius: 8px;
     }
   }
-  .links{
+
+  .links {
     display: flex;
     justify-content: space-between;
     color: var(--text-color-form);
   }
-  .check{
-    input[type=checkbox]{
+
+  .check {
+    input[type=checkbox] {
       display: none;
     }
-    .checkbox{
+
+    .checkbox {
       padding: 3px 10px;
       font-size: 20px;
       border-radius: 5px;
@@ -85,17 +86,21 @@ main{
       color: transparent;
       font-weight: 900;
     }
-    input[type=checkbox]:checked + .checkbox{
+
+    input[type=checkbox]:checked+.checkbox {
       color: var(--text-color-form);
     }
-    .link{
+
+    .link {
       pointer-events: auto;
-      a{
+
+      a {
         border-bottom: 2px solid var(--text-color-form);
       }
     }
   }
-  .btn_submit{
+
+  .btn_submit {
     padding: 10px 15px;
     font-size: 20px;
     text-align: center;

@@ -83,6 +83,16 @@ class UserProfileForm(
         )
         widgets = {
             "image": django.forms.FileInput,
+            apps.users.models.User.timezone.field.name: django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-search": "true",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                },
+            ),
         }
 
     def clean_username(self):

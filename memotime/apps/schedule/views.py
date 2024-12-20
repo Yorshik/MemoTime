@@ -93,17 +93,16 @@ class ScheduleListView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.ListView,
 ):
-
     model = models.Schedule
     template_name = "schedule/schedule_list.html"
     context_object_name = "schedules"
 
     def get_queryset(self):
-        return models.Schedule.objects.get_schedules_for_user(user=self.request.user)
+        user = self.request.user
+        return models.Schedule.objects.get_schedules_for_user(user=user)
 
 
 class ScheduleDeleteView(AccessMixin, django.views.generic.View):
-
     model = models.Schedule
 
     def get_object(self):
@@ -156,15 +155,18 @@ class ScheduleDetailView(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["time_schedules"] = (
-            models.TimeSchedule.objects.get_timeschedules_for_schedule(
-                schedule=self.object,
-            )
-        )
-
-        context["time_slots"] = models.TimeSchedule.objects.get_time_slots_for_schedule(
+        time_schedules = models.TimeSchedule.objects.get_timeschedules_for_schedule(
             schedule=self.object,
         )
+        context["time_schedules"] = time_schedules
+
+        time_slots = set()
+        for ts in time_schedules:
+            time_slots.add((ts.time_start, ts.time_end))
+
+        context["time_slots"] = [
+            {"start": start, "end": end} for start, end in sorted(time_slots)
+        ]
 
         context["days"] = [
             {"number": 1, "name": _("Monday")},
@@ -176,6 +178,11 @@ class ScheduleDetailView(
             {"number": 7, "name": _("Sunday")},
         ]
 
+        context["only_view"] = False
+        if self.object.group and self.request.user in self.object.group.user_set.all():
+            if self.object.group.creator != self.request.user:
+                context["only_view"] = True
+
         return context
 
 
@@ -183,7 +190,6 @@ class TimeScheduleCreateView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.CreateView,
 ):
-
     model = models.TimeSchedule
     template_name = "schedule/timeschedule_form.html"
     owner_field = "schedule__user"
@@ -253,7 +259,6 @@ class TimeScheduleCreateView(
 
 
 class TimeScheduleUpdateView(AccessMixin, django.views.generic.UpdateView):
-
     model = models.TimeSchedule
     template_name = "schedule/timeschedule_form.html"
 
@@ -291,7 +296,6 @@ class TimeScheduleUpdateView(AccessMixin, django.views.generic.UpdateView):
 
 
 class TimeScheduleDeleteView(AccessMixin, django.views.generic.View):
-
     model = models.TimeSchedule
 
     def get_object(self):
@@ -317,7 +321,6 @@ class TimeScheduleEventCreateView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.CreateView,
 ):
-
     model = models.Event
     form_class = forms.EventForm
     template_name = "schedule/event_form_from_timeschedule.html"
@@ -343,7 +346,6 @@ class EventCreateView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.CreateView,
 ):
-
     model = models.Event
     template_name = "schedule/event_form.html"
     success_url = django.urls.reverse_lazy("schedule:event-list")
@@ -363,7 +365,6 @@ class EventListView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.ListView,
 ):
-
     model = models.Event
     template_name = "schedule/event_list.html"
     context_object_name = "events"
@@ -390,7 +391,7 @@ class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
-        kwargs["instance"] = self.get_object()
+
         return kwargs
 
     def get_context_data(self, **kwargs):
@@ -398,9 +399,11 @@ class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
         context["event_object"] = self.get_object()
         return context
 
+    def form_valid(self, form):
+        return super().form_valid(form)
+
 
 class EventDeleteView(AccessMixin, django.views.generic.View):
-
     model = models.Event
 
     def get_object(self):
@@ -423,7 +426,6 @@ class TeacherCreateView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.CreateView,
 ):
-
     model = models.Teacher
     form_class = forms.TeacherForm
     template_name = "schedule/teacher_form.html"
@@ -438,7 +440,6 @@ class TeacherListView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.ListView,
 ):
-
     model = models.Teacher
     template_name = "schedule/teacher_list.html"
     context_object_name = "teachers"
@@ -448,7 +449,6 @@ class TeacherListView(
 
 
 class TeacherUpdateView(AccessMixin, django.views.generic.UpdateView):
-
     model = models.Teacher
     form_class = forms.TeacherForm
     template_name = "schedule/teacher_form.html"
@@ -475,7 +475,6 @@ class TeacherUpdateView(AccessMixin, django.views.generic.UpdateView):
 
 
 class TeacherDeleteView(AccessMixin, django.views.generic.DeleteView):
-
     model = models.Teacher
     template_name = "schedule/teacher_confirm_delete.html"
     success_url = django.urls.reverse_lazy("schedule:teacher-list")
@@ -485,7 +484,6 @@ class NoteCreateView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.CreateView,
 ):
-
     model = models.Note
     template_name = "schedule/note_form.html"
     success_url = django.urls.reverse_lazy("schedule:note-list")
@@ -505,7 +503,6 @@ class NoteListView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.ListView,
 ):
-
     model = models.Note
     template_name = "schedule/note_list.html"
     context_object_name = "notes"
@@ -552,7 +549,6 @@ class NoteUpdateView(AccessMixin, django.views.generic.UpdateView):
 
 
 class NoteDeleteView(AccessMixin, django.views.generic.View):
-
     model = models.Note
 
     def get_object(self):

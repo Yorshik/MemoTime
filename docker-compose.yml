@@ -32,13 +32,15 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: django
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn memotime.wsgi:application --bind 0.0.0.0:8000"
+    command: >
+      bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py compilemessages && python manage.py collectstatic --noinput && gunicorn memotime.wsgi:application --bind 0.0.0.0:8000"
     restart: always
     volumes:
       - ./docker/static:/memotime/static
       - ./docker/media:/memotime/media
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     env_file:
       - .env
 
@@ -50,7 +52,7 @@ services:
     command: celery -A memotime worker -l info
     restart: always
     volumes:
-      - ./docker/media:/app/media
+      - ./docker/media:/memotime/media
     depends_on:
       - postgres
       - redis

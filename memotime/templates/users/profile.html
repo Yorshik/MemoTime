@@ -2,15 +2,18 @@
 {% load i18n %}
 {% load static %}
 {% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/multi-select.css' %}">
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock extra_css %}
 {% block body %}
-  <form class="profile" method="post" >
+  <form class="profile" method="post" enctype="multipart/form-data">
     <div class="profile__left">
-      {% if user.profile.image %}
+      {% if user.image %}
         <img src="{{ user.image.url }}" alt="{% translate 'error' %}" class="profile__image">
       {% else %}
-        <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'error' %}" class="profile__image">
+        <img src="{% static 'img/no-avatar.jpg' %}"
+             alt="{% translate 'error' %}"
+             class="profile__image">
       {% endif %}
       <a href="{% url 'users:password-change' %}" class="btn btn_change">{% translate 'Change the password' %}</a>
       <a href="{% url 'users:logout' %}" class="btn">{% translate 'Log Out' %}</a>
@@ -21,26 +24,21 @@
         {% include "includes/form.html" %}
       {% endwith %}
     </div>
-    <button class="btn btn_profile">{% translate 'Change Profile information' %}</button>
+    <button type="submit" class="btn btn_profile">{% translate 'Change Profile information' %}</button>
   </form>
 {% endblock body %}
 {% block extra_js %}
-<script>
+  {% comment %} <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Получаем элементы
     var imageInput = document.getElementById('id_image');
     var changePasswordLink = document.querySelector('.profile__left .btn_change');
     var profileLeft = document.querySelector('.profile__left');
     var profileRight = document.querySelector('.profile__right');
-
-    // Проверяем, что оба элемента существуют
     if (imageInput && changePasswordLink) {
-      // Перемещаем input#id_image в блок .profile__left
       profileLeft.appendChild(imageInput);
-
-      // Перемещаем ссылку на смену пароля в блок .profile__right
       profileRight.appendChild(changePasswordLink);
     }
   });
-</script>
+  </script> {% endcomment %}
+  <script src="{% static 'js/multi-select.js' %}"></script>
 {% endblock extra_js %}

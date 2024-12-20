@@ -8,9 +8,10 @@
 {% for field in form %}
   <div>
     {{ field }}
-    <label for=""{{ field.id_for_label }}>
+    <label for="{{ field.id_for_label }}">
       {{ field.label }}
       {% if field.field.required %}<span class="red">*</span>{% endif %}
     </label>
+    {% for error in field.errors %}<div class="danger">{{ error|escape }}</div>{% endfor %}
   </div>
 {% endfor %}

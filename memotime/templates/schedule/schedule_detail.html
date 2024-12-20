@@ -5,116 +5,148 @@
   <link rel="stylesheet" href="{% static 'css/schedule-detail.css' %}">
 {% endblock extra_css %}
 {% block body %}
-<div class="wrap">
-  <article class="wrap__header">
-    <a href="{% url 'schedule:schedule-list' %}" class="btn btn_back">{% translate 'Back to Schedule List' %}</a>
-    <h2>{% translate 'Schedule' %}</h2>
-  </article>
-  <section class="info">
-    <div class="info__main">
-      <p>
-        <b>{% translate 'Changes by week' %}: </b>
-        {{ schedule.is_static }}
-      </p>
-      <b>
-        {{ schedule.start_date }} — {{ schedule.expiration_date|default:"∞" }}
-      </b>
-      <div class="info__btns">
-        <a href="{% url 'schedule:schedule-update' schedule.pk %}" class="btn" tooltip="Edit" flow="up">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="20"
-               height="20"
-               fill="currentColor"
-               class="bi bi-pencil"
-               viewBox="0 0 16 16">
-            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
-          </svg>
-        </a>
-        <button data-url="{% url 'schedule:schedule-delete' schedule.pk %}" id="btn-del" class="btn" tooltip="Delete" flow="up">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-               width="20" 
-               height="20" 
-               fill="currentColor" 
-               class="bi bi-trash3" 
-               viewBox="0 0 16 16">
-            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-          </svg>
-        </button>
+  <div class="wrap">
+    <article class="wrap__header">
+      <a href="{% url 'schedule:schedule-list' %}" class="btn btn_back">{% translate 'Back to Schedule List' %}</a>
+      <h2>{% translate 'Schedule' %}</h2>
+    </article>
+    <section class="info">
+      <div class="info__main">
+        <p>
+          <b>{% translate 'Changes by week' %}: </b>
+          {{ schedule.is_static }}
+        </p>
+        <b>
+          {{ schedule.start_date }} — {{ schedule.expiration_date|default:"∞" }}
+        </b>
+        {% if not only_view %}
+          <div class="info__btns">
+            <a href="{% url 'schedule:schedule-update' schedule.pk %}"
+               class="btn"
+               tooltip="{% translate 'Edit' %}"
+               flow="up">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="20"
+                   height="20"
+                   fill="currentColor"
+                   class="bi bi-pencil"
+                   viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+              </svg>
+            </a>
+            <button data-url="{% url 'schedule:schedule-delete' schedule.pk %}"
+                    id="btn-del"
+                    class="btn"
+                    tooltip="{% translate 'Delete' %}"
+                    flow="up">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="20"
+                   height="20"
+                   fill="currentColor"
+                   class="bi bi-trash3"
+                   viewBox="0 0 16 16">
+                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+              </svg>
+            </button>
+          </div>
+        {% endif %}
       </div>
-    </div>
-  </section>
-  <section class="time-schedule">
-    <div class="time-schedule__text">
-      <pre></pre>
-      {% if not schedule.is_static %}
-      <form method="get">
-        <label for="week">{% translate 'Odd week' %}</label>
-        <input type="checkbox" name="" id="week">
-        <label for="week" class="switch"></label>
-        <label for="week">{% translate 'Even week' %}</label>
-      </form>
-      {% endif %}
-      <a href="{% url 'schedule:timeschedule-create' schedule.id %}" class="btn" tooltip="Create" flow="up">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-        </svg>
-      </a>
-    </div>
-    <div class="schedule-container">
-      {% for day in days %}
-        <div class="day-column">
-          <b class="day-heading">{{ day.name }}</b>
-          {% for time_slot in time_slots %}
-            {% for timeschedule in time_schedules %}
-              {% if timeschedule.day_number == day.number and timeschedule.time_start == time_slot.start and timeschedule.time_end == time_slot.end %}
-                <div class="time-schedule-item {% if not schedule.is_static %}{% if timeschedule.even %}time-schedule-item-even{% else %}time-schedule-item-odd{% endif %}{% endif %}" 
-                     id="timeschedule-{{ timeschedule.pk }}"
-                     data-even="{{ timeschedule.even }}">
-                  <p>{{ time_slot.start|time:"H:i" }}–{{ time_slot.end|time:"H:i" }}</p>
-                  <b>{{ timeschedule.event.name }}</b>
-                  {% if not schedule.is_static %}({{ timeschedule.even|yesno:"Even,Odd" }}){% endif %}
-                  <div class="btns">
-                    <div tooltip="Edit" flow="up">
-                      <a href="{% url 'schedule:timeschedule-update' timeschedule.pk %}">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="20"
-                             height="20"
-                             fill="currentColor"
-                             class="bi bi-pencil"
-                             viewBox="0 0 16 16">
-                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
-                        </svg>
-                      </a>
-                    </div>
-                    <div tooltip="Add note" flow="up">
-                      <a href="{% url 'schedule:note-create' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                        </svg>
-                      </a>
-                    </div>
-                    <div tooltip="Delete" flow="up">
-                      <button data-url="{% url 'schedule:timeschedule-delete' timeschedule.pk %}" id="btn-del" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-                        </svg>
-                      </button>
-                    </div>
+    </section>
+    <section class="time-schedule">
+      <div class="time-schedule__text">
+        <pre></pre>
+        {% if not schedule.is_static %}
+          <form method="get">
+            <label for="week">{% translate 'Odd week' %}</label>
+            <input type="checkbox" name="" id="week">
+            <label for="week" class="switch"></label>
+            <label for="week">{% translate 'Even week' %}</label>
+          </form>
+        {% endif %}
+        {% if not only_view %}
+          <a href="{% url 'schedule:timeschedule-create' schedule.id %}"
+             class="btn"
+             tooltip="{% translate 'Create' %}"
+             flow="up">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="20"
+                 height="20"
+                 fill="currentColor"
+                 class="bi bi-plus-lg"
+                 viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+      <div class="schedule-container">
+        {% for day in days %}
+          <div class="day-column">
+            <b class="day-heading">{{ day.name }}</b>
+            {% for time_slot in time_slots %}
+              {% for timeschedule in time_schedules %}
+                {% if timeschedule.day_number == day.number and timeschedule.time_start == time_slot.start and timeschedule.time_end == time_slot.end %}
+                  <div class="time-schedule-item {% if not schedule.is_static %}{% if timeschedule.even %}time-schedule-item-even{% else %}time-schedule-item-odd{% endif %}{% endif %}"
+                       id="timeschedule-{{ timeschedule.pk }}"
+                       data-even="{{ timeschedule.even }}">
+                    <p>{{ time_slot.start|time:"H:i" }}–{{ time_slot.end|time:"H:i" }}</p>
+                    <b>{{ timeschedule.event.name|truncatechars:15 }}</b>
+                    {% if not schedule.is_static %}({{ timeschedule.even|yesno:"Even,Odd" }}){% endif %}
+                    {% if not only_view %}
+                      <div class="btns">
+                        <div tooltip="{% translate 'Edit' %}" flow="up">
+                          <a href="{% url 'schedule:timeschedule-update' timeschedule.pk %}">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="20"
+                                 height="20"
+                                 fill="currentColor"
+                                 class="bi bi-pencil"
+                                 viewBox="0 0 16 16">
+                              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                            </svg>
+                          </a>
+                        </div>
+                        <div tooltip="{% translate 'Add note' %}" flow="up">
+                          <a href="{% url 'schedule:note-create' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-plus-lg"
+                                 viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                            </svg>
+                          </a>
+                        </div>
+                        <div tooltip="{% translate 'Delete' %}" flow="up">
+                          <button data-url="{% url 'schedule:timeschedule-delete' timeschedule.pk %}"
+                                  id="btn-del">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-trash3"
+                                 viewBox="0 0 16 16">
+                              <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    {% endif %}
                   </div>
-                </div>
-              {% endif %}
+                {% endif %}
+              {% endfor %}
             {% endfor %}
-          {% endfor %}
-        </div>
-      {% endfor %}
-    </div>
-  </section>
-</div>
-{% include 'includes/modal.html' %}
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+  {% include 'includes/modal.html' %}
 {% endblock body %}
 {% block extra_js %}
-<script src="{% static 'js/libs/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'js/random-color.js' %}"></script>
-<script src="{% static 'js/delete-modal.js' %}"></script>
-<script src="{% static 'js/even-odd-week.js' %}"></script>
+  <script src="{% static 'js/libs/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/random-color.js' %}"></script>
+  <script src="{% static 'js/delete-modal.js' %}"></script>
+  <script src="{% static 'js/even-odd-week.js' %}"></script>
 {% endblock extra_js %}

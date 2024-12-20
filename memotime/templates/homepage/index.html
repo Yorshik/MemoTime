@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% load i18n static %}
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock extra_css %}
 {% block body %}
   <section class="slogan container">
-    <h1 data-speed=".9">{% translate 'Organize your studies and active days — a schedule with notes is always at hand!' %}</h1>
-    <p data-speed=".9">{% translate 'We help you organize your time by offering a schedule with notes and reminders of important events' %}</p>
+    <h1 data-speed=".9">
+      {% translate 'Organize your studies and active days — a schedule with notes is always at hand!' %}
+    </h1>
+    <p data-speed=".9">
+      {% translate 'We help you organize your time by offering a schedule with notes and reminders of important events' %}
+    </p>
     <div class="btns" data-speed=".8">
       <a href="{% url 'schedule:note-list' %}" class="btn btn_landing">{% translate 'Create a note' %}</a>
       <a href="{% url 'schedule:event-list' %}" class="btn btn_landing">{% translate 'Create an event' %}</a>
@@ -27,15 +31,11 @@
       <div class="gallery__right" data-speed="1.1">
         <div class="text-block gallery__item">
           <h2 class="text-block__h">{% translate 'Alerts' %}</h2>
-          <p class="text-block__p">
-            {% translate 'Notifications about notes can be sent by mail and Telegram' %}
-          </p>
+          <p class="text-block__p">{% translate 'Notifications about notes can be sent by mail and Telegram' %}</p>
         </div>
         <div class="text-block gallery__item">
           <h2 class="text-block__h">{% translate 'Adaptation' %}</h2>
-          <p class="text-block__p">
-            {% translate 'Our site has adaptations for different screen sizes' %}
-          </p>
+          <p class="text-block__p">{% translate 'Our site has adaptations for different screen sizes' %}</p>
         </div>
         <div class="text-block gallery__item">
           <h2 class="text-block__h">{% translate 'Availability' %}</h2>
@@ -45,9 +45,7 @@
         </div>
         <div class="text-block gallery__item">
           <h2 class="text-block__h">API</h2>
-          <p class="text-block__p">
-            {% translate 'Our site has a public API that everyone can use' %}
-          </p>
+          <p class="text-block__p">{% translate 'Our site has a public API that everyone can use' %}</p>
         </div>
       </div>
     </section>
@@ -59,7 +57,9 @@
         <div class="items marquee">
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -68,7 +68,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -77,7 +79,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -86,7 +90,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -95,7 +101,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -104,7 +112,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -113,7 +123,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -122,7 +134,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -131,7 +145,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -142,7 +158,9 @@
         <div class="items marquee">
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -151,7 +169,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -160,7 +180,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -169,7 +191,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -178,7 +202,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -187,7 +213,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -196,7 +224,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -205,7 +235,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -214,7 +246,9 @@
           </div>
           <div class="item">
             <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'avatar' %}" class="avatar">
+              <img src="{% static 'img/no-avatar.jpg' %}"
+                   alt="{% translate 'avatar' %}"
+                   class="avatar">
               <p>ФИО</p>
             </div>
             <p>
@@ -227,8 +261,8 @@
   </section>
 {% endblock body %}
 {% block extra_js %}
-<script src="{% static 'js/libs/gsap/gsap.min.js' %}" defer></script>
-<script src="{% static 'js/libs/gsap/ScrollTrigger.min.js' %}" defer></script>
-<script src="{% static 'js/libs/gsap/ScrollSmoother.min.js' %}" defer></script>
-<script src="{% static 'js/scroll.js' %}" defer></script>
+  <script src="{% static 'js/libs/gsap/gsap.min.js' %}" defer></script>
+  <script src="{% static 'js/libs/gsap/ScrollTrigger.min.js' %}" defer></script>
+  <script src="{% static 'js/libs/gsap/ScrollSmoother.min.js' %}" defer></script>
+  <script src="{% static 'js/scroll.js' %}" defer></script>
 {% endblock extra_js %}
