@@ -289,10 +289,3 @@ class GroupUpdateView(
             raise django.http.Http404(_("You are not the creator of this group."))
 
         return obj
-
-    def form_valid(self, form):
-        django.contrib.messages.success(
-            self.request,
-            _("Group updated successfully."),
-        )
-        return super().form_valid(form)

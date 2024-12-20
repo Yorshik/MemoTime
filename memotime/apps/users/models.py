@@ -72,4 +72,8 @@ class Group(django.contrib.auth.models.Group):
         verbose_name_plural = _("groups")
 
     def __str__(self):
+        max_length = 15
+        if len(self.name) > max_length:
+            return self.name[: max_length - 3] + "..."
+
         return self.name

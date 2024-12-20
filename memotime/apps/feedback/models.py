@@ -10,7 +10,6 @@ from django.utils.translation import gettext_lazy as _
 
 __all__ = ()
 
-
 User = django.contrib.auth.get_user_model()
 
 
@@ -39,7 +38,17 @@ class PersonalData(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.name[:15]
+        max_length = 30
+        if self.name:
+            if len(self.name) > max_length:
+                return self.name[: max_length - 3] + "..."
+
+            return self.name
+
+        if self.email:
+            return self.email[:max_length]
+
+        return _("Anonymous")
 
 
 class Feedback(django.db.models.Model):
@@ -83,7 +92,17 @@ class Feedback(django.db.models.Model):
         verbose_name_plural = _("feedbacks")
 
     def __str__(self):
-        return self.personal_data.name[:15]
+        max_length = 35
+        if self.personal_data and self.personal_data.name:
+            if len(self.personal_data.name) > max_length:
+                return (
+                    f"{self.personal_data.name[:max_length-3]}... -"
+                    f" {self.created_on.strftime('%Y-%m-%d')}"
+                )
+
+            return f"{self.personal_data.name} - {self.created_on.strftime('%Y-%m-%d')}"
+
+        return f"{_('Feedback')} - {self.created_on.strftime('%Y-%m-%d')}"
 
 
 @django.dispatch.receiver(django.db.models.signals.pre_save, sender=Feedback)
@@ -131,7 +150,12 @@ class StatusLog(django.db.models.Model):
         verbose_name_plural = _("status change logs")
 
     def __str__(self):
-        return f"{self.feedback} ({self.from_status} → {self.to})"
+        max_length = 40
+        result = f"{self.feedback} ({self.from_status} → {self.to})"
+        if len(result) > max_length:
+            return result[: max_length - 3] + "..."
+
+        return result
 
 
 @django.dispatch.receiver(django.db.models.signals.pre_save, sender=StatusLog)

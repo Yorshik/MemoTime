@@ -5,10 +5,10 @@
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock extra_css %}
 {% block body %}
-  <form class="profile" method="post">
+  <form class="profile" method="post" >
     <div class="profile__left">
       {% if user.profile.image %}
-        <img src="{{ user.profile.image.url }}" alt="{% translate 'error' %}" class="profile__image">
+        <img src="{{ user.image.url }}" alt="{% translate 'error' %}" class="profile__image">
       {% else %}
         <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'error' %}" class="profile__image">
       {% endif %}
