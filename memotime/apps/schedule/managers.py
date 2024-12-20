@@ -1,4 +1,5 @@
 import django.db.models
+from django.db.models import BooleanField, Case, Q, When
 
 import apps.users.models
 
@@ -66,14 +67,33 @@ class EventManager(django.db.models.Manager):
 
 class ScheduleManager(django.db.models.Manager):
     def get_schedules_for_user(self, user):
-        return self.filter(user=user)
+        return (
+            self.filter(
+                Q(user=user) | Q(group__in=user.groups.all()),
+            )
+            .annotate(
+                is_owner=Case(
+                    When(user=user, then=True),
+                    default=False,
+                    output_field=BooleanField(),
+                ),
+            )
+            .distinct()
+        )
 
     def get_schedule_by_pk(self, pk):
-        return self.select_related("user").get(pk=pk)
+        return (
+            self.select_related("user", "group__creator")
+            .prefetch_related("group__user_set")
+            .get(pk=pk)
+        )
 
     def get_schedule_by_pk_and_user(self, pk, user):
         return (
-            self.select_related("user", "group")
+            self.select_related(
+                "user",
+                "group__creator",
+            )
             .prefetch_related(
                 django.db.models.Prefetch(
                     "user__created_groups",
@@ -91,6 +111,7 @@ class ScheduleManager(django.db.models.Manager):
                 "user__username",
                 "group__group_ptr_id",
                 "group__name",
+                "group__creator_id",
             )
             .get(pk=pk, user=user)
         )
@@ -110,15 +131,7 @@ class TimeScheduleManager(django.db.models.Manager):
     def get_time_slots_for_schedule(self, schedule):
         return (
             self.filter(schedule=schedule)
-            .annotate(
-                start=django.db.models.F("time_start"),
-                end=django.db.models.F("time_end"),
-            )
-            .values(
-                "id",
-                "start",
-                "end",
-                "event__name",
-            )
+            .values("time_start", "time_end")
             .distinct()
+            .order_by("time_start")
         )
