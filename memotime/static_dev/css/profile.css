@@ -84,11 +84,11 @@ main {
       display: none;
     }
 
-    /* div:nth-last-child(2) {
+    & > div:nth-last-child(2) {
       display: none !important;
-    } */
-
-    div:not(:has(input[type="checkbox"])) {
+    }
+    
+    & > div:not(:has(#id_is_email_subscribed)){
       position: relative;
       display: flex;
       flex-direction: column;
@@ -112,9 +112,17 @@ main {
         top: -25px;
         scale: .95;
       }
+     }
+    div:has(.multi-select-wrapper){
+      position: static;
+      display: block;
+
+      label{
+        top: -25px !important;
+      }
     }
 
-    div:has(input[type="checkbox"]) {
+    div:has(#id_is_email_subscribed) {
       display: flex;
       flex-wrap: wrap;
 
