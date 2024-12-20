@@ -12,6 +12,9 @@
             <a href="{% url 'schedule:schedule-list' %}">{% translate 'Schedule List' %}</a>
           </li>
           <li>
+            <a href="{% url 'schedule:event-list' %}">{% translate 'Event List' %}</a>
+          </li>
+          <li>
             <a href="{% url 'schedule:note-list' %}">{% translate 'Note List' %}</a>
           </li>
           <li>
@@ -38,12 +41,20 @@
               </select>
             </form>
           </li>
-          {% if request.user.is_authenticated and request.user.is_staff %}
+          {% if request.user.is_authenticated %}
+            {% if user.image %}
             <li>
               <a href="{% url 'users:profile' %}" class="btn btn_prof">
-                <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'error' %}">
+                <img src="{{ user.image.url }}" alt="{% translate 'error' %}">
               </a>
             </li>
+            {% else %}
+              <li>
+                <a href="{% url 'users:profile' %}" class="btn btn_prof">
+                  <img src="{% static 'img/ni-avatar.jpg' %}" alt="{% translate 'error' %}">
+                </a>
+              </li>
+            {% endif %}
           {% else %}
             <li>
               <a href="{% url 'users:login' %}" class="btn btn_login">{% translate 'Log In' %}</a>

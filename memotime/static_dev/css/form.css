@@ -22,16 +22,7 @@ main{
   .main-form__p{
     text-align: center;
   }
-  .danger .errorlist{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    li{
-      color: var(--second-color);
-    }
-  }
-  .danger .errorlist li ul li{
+  .danger{
     background-color: var(--back-err);
     color: var(--text-color-err);
     padding: 10px;

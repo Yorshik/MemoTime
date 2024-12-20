@@ -7,7 +7,6 @@
 {% block body %}
   <form class="main-form" method="post">
     <h2>{% translate 'Sign Up' %}</h2>
-    {% if form.errors %}<div class="danger">{{ form.errors }}</div>{% endif %}
     {% csrf_token %}
     {% with form=form %}
       {% include "includes/form.html" %}
