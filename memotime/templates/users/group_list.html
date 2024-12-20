@@ -6,8 +6,8 @@
 {% endblock extra_css %}
 {% block body %}
   <section>
-    <h1>My Groups</h1>
-    <h2>Groups I Created:</h2>
+    <h1>{% translate "My Groups" %}</h1>
+    <h2>{% translate "Groups I Created:" %}</h2>
     <div class="list">
       {% for group in created_groups %}
         <div class="item">
@@ -16,7 +16,7 @@
             <p>( {{ group.user_set.count }} {% translate 'members' %} )</p>
             <a href="{% url 'users:group-update' group.pk %}"
                class="btn"
-               tooltip="Edit"
+               tooltip="{% translate 'Edit' %}"
                flow="up">
               <svg xmlns="http://www.w3.org/2000/svg"
                    width="20"
@@ -36,7 +36,7 @@
         <div class="err">{% translate 'You have not created any groups.' %}</div>
       {% endfor %}
     </div>
-    <h2>Groups I'm a Member Of:</h2>
+    <h2>{% translate "Groups I'm a Member Of:" %}</h2>
     <div class="list">
       {% for group in member_groups %}
         <div class="item">
