@@ -1,8 +1,9 @@
-main{
+main {
   display: grid;
   place-content: center;
 }
-.profile{
+
+.profile {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -13,7 +14,7 @@ main{
   padding: 40px;
   margin-bottom: 40px;
 
-  .profile__left{
+  .profile__left {
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -21,7 +22,7 @@ main{
     justify-content: center;
     gap: 20px;
 
-    .profile__image{
+    .profile__image {
       width: 400px;
       height: 400px;
       border: var(--border);
@@ -32,12 +33,14 @@ main{
       display: grid;
       place-content: center;
     }
-    input[type="file"]{
+
+    input[type="file"] {
       position: relative;
       padding-left: 210px;
       overflow: hidden;
     }
-    input[type="file"]::file-selector-button{
+
+    input[type="file"]::file-selector-button {
       background-color: var(--back-color);
       box-shadow: var(--shadow-inset);
       border: var(--border);
@@ -50,17 +53,19 @@ main{
       height: 100%;
       width: 200px;
     }
-    .btn{
+
+    .btn {
       padding: 20px 15px;
       width: 100%;
       text-align: center;
 
-      &:hover{
+      &:hover {
         background-color: var(--back-btn-del);
       }
     }
   }
-  .profile__right{
+
+  .profile__right {
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -68,25 +73,28 @@ main{
     gap: 45px;
     flex: .5;
 
-    .btn{
+    .btn {
       font-size: 20px;
       padding: 20px 15px;
       width: 100%;
       text-align: center;
     }
-    .red{
+
+    .red {
       display: none;
     }
-    div:nth-last-child(2){
+
+    /* div:nth-last-child(2) {
       display: none !important;
-    }
-    div:not(:has(input[type="checkbox"])){
+    } */
+
+    div:not(:has(input[type="checkbox"])) {
       position: relative;
       display: flex;
       flex-direction: column;
       gap: 10px;
 
-      label{
+      label {
         position: absolute;
         top: 11px;
         left: 15px;
@@ -96,19 +104,21 @@ main{
         pointer-events: none;
         font-weight: 600;
       }
-      input:focus + label,
-      input:not(:placeholder-shown):valid + label,
-      select:focus + label,
-      select:not(:placeholder-shown):valid + label{
+
+      input:focus+label,
+      input:not(:placeholder-shown):valid+label,
+      select:focus+label,
+      select:not(:placeholder-shown):valid+label {
         top: -25px;
-        scale: .95; 
+        scale: .95;
       }
     }
-    div:has(input[type="checkbox"]){
+
+    div:has(input[type="checkbox"]) {
       display: flex;
       flex-wrap: wrap;
-  
-      input{
+
+      input {
         width: 30px;
         height: 30px;
         accent-color: var(--active-togle);
@@ -119,9 +129,10 @@ main{
         box-shadow: var(--shadow-inset);
         margin-right: 10px;
       }
+
       input::before {
         content: "✓";
-        color:transparent;
+        color: transparent;
         font-weight: 900;
         position: absolute;
         margin: auto;
@@ -131,6 +142,7 @@ main{
         overflow: hidden;
         top: 0;
       }
+
       input:checked::before {
         color: var(--text-color-form);
         left: 50%;
@@ -138,7 +150,8 @@ main{
       }
     }
   }
-  .btn_profile{
+
+  .btn_profile {
     font-size: 20px;
     text-align: center;
     padding: 20px 15px;
