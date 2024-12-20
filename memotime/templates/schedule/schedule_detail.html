@@ -90,7 +90,7 @@
                        id="timeschedule-{{ timeschedule.pk }}"
                        data-even="{{ timeschedule.even }}">
                     <p>{{ time_slot.start|time:"H:i" }}–{{ time_slot.end|time:"H:i" }}</p>
-                    <b>{{ timeschedule.event.name }}</b>
+                    <b>{{ timeschedule.event.name|truncatechars:15 }}</b>
                     {% if not schedule.is_static %}({{ timeschedule.even|yesno:"Even,Odd" }}){% endif %}
                     {% if not only_view %}
                       <div class="btns">

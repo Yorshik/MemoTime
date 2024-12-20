@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block body %}
   <div class="container">
-    <h2>{% trans "Feedback form" %}</h2>
+    <h2>{% translate "Feedback form" %}</h2>
     {% if messages %}
       {% for message in messages %}
         <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}"
@@ -12,7 +12,7 @@
           <button type="button"
                   class="btn-close"
                   data-bs-dismiss="alert"
-                  aria-label="{% trans 'Close' %}"></button>
+                  aria-label="{% translate 'Close' %}"></button>
         </div>
       {% endfor %}
     {% endif %}
@@ -31,7 +31,7 @@
       <p>
         <span class="red">*</span> - {% translate 'required field' %}
       </p>
-      <button type="submit" class="btn btn_submit">{% trans "Send" %}</button>
+      <button type="submit" class="btn btn_submit">{% translate "Send" %}</button>
     </form>
   </div>
 {% endblock body %}

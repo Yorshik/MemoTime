@@ -5,47 +5,47 @@
   <div class="container text-center my-5">
     {% if activation_status == 'success' %}
       <div class="alert alert-success" role="alert">
-        <h1>{% trans "Ваша учетная запись успешно активирована." %}</h1>
-        <p>{% trans "Вы можете войти в систему." %}</p>
-        <a href="{% url 'users:login' %}" class="btn btn-primary">{% trans "Перейти к входу" %}</a>
+        <h1>{% translate "Ваша учетная запись успешно активирована." %}</h1>
+        <p>{% translate "Вы можете войти в систему." %}</p>
+        <a href="{% url 'users:login' %}" class="btn btn-primary">{% translate "Перейти к входу" %}</a>
       </div>
       <p class="text-muted mt-4"
          id="redirection-timer"
-         data-redirect-text="{% trans 'Переадресация...' %}">
-        {% trans "Через" %}
+         data-redirect-text="{% translate 'Переадресация...' %}">
+        {% translate "Через" %}
         <span id="countdown">5</span>
         <span id="seconds-text"
-              data-singular="{% trans 'секунду' %}"
-              data-few="{% trans 'секунды' %}"
-              data-plural="{% trans 'секунд' %}">{% trans 'секунд' %}</span>
-        {% trans "вы будете переадресованы..." %}
+              data-singular="{% translate 'секунду' %}"
+              data-few="{% translate 'секунды' %}"
+              data-plural="{% translate 'секунд' %}">{% translate 'секунд' %}</span>
+        {% translate "вы будете переадресованы..." %}
       </p>
     {% elif activation_status == 'expired' %}
       <div class="alert alert-warning" role="alert">
-        {% trans "Срок действия ссылки для активации учетной записи истек." %}
+        {% translate "Срок действия ссылки для активации учетной записи истек." %}
       </div>
       <form method="post" action="{% url 'users:activate-resend' %}">
         {% csrf_token %}
         <input type="hidden" name="token" value="{{ token }}">
-        <button type="submit" class="btn btn-secondary">{% trans "Отправить ссылку еще раз" %}</button>
+        <button type="submit" class="btn btn-secondary">{% translate "Отправить ссылку еще раз" %}</button>
       </form>
       {% if resend_error %}
-        <div class="alert alert-danger mt-3" role="alert">{% trans "Ошибка при повторной отправке ссылки." %}</div>
+        <div class="alert alert-danger mt-3" role="alert">{% translate "Ошибка при повторной отправке ссылки." %}</div>
         <p>
-          {% trans "Если ошибка повторяется, свяжитесь с техподдержкой:" %} <a href="{% url 'feedback:feedback' %}">{% trans "Обратная связь" %}</a>
+          {% translate "Если ошибка повторяется, свяжитесь с техподдержкой:" %} <a href="{% url 'feedback:feedback' %}">{% translate "Обратная связь" %}</a>
         </p>
       {% endif %}
     {% elif activation_status == 'not_found' %}
-      <div class="alert alert-danger" role="alert">{% trans "Сожалеем, но ваша учетная запись была уничтожена." %}</div>
+      <div class="alert alert-danger" role="alert">{% translate "Сожалеем, но ваша учетная запись была уничтожена." %}</div>
       <p>
-        {% trans "Если у вас возникли вопросы, свяжитесь с техподдержкой:" %} <a href="{% url 'feedback:feedback' %}">{% trans "Обратная связь" %}</a>
+        {% translate "Если у вас возникли вопросы, свяжитесь с техподдержкой:" %} <a href="{% url 'feedback:feedback' %}">{% translate "Обратная связь" %}</a>
       </p>
       <p>
-        {% trans "Или вы можете зарегистрироваться заново:" %} <a href="{% url 'users:signup' %}">{% trans "Зарегистрироваться" %}</a>
+        {% translate "Или вы можете зарегистрироваться заново:" %} <a href="{% url 'users:signup' %}">{% translate "Зарегистрироваться" %}</a>
       </p>
     {% elif activation_status == 'already_activated' %}
-      <div class="alert alert-info" role="alert">{% trans "Ваша учетная запись уже была активирована." %}</div>
-      <a href="{% url 'users:login' %}" class="btn btn-primary">{% trans "Перейти к входу" %}</a>
+      <div class="alert alert-info" role="alert">{% translate "Ваша учетная запись уже была активирована." %}</div>
+      <a href="{% url 'users:login' %}" class="btn btn-primary">{% translate "Перейти к входу" %}</a>
     {% endif %}
   </div>
 {% endblock body %}
