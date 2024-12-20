@@ -1,43 +1,43 @@
 {% block footer %}
-<footer class="footer mt-auto py-3 bg-body-tertiary mt-4">
-  {% load static %}
-  {% load i18n %}
-  <div class="text footer-gap">
-    <a href="mailto:The-MemoTime@yandex.ru">The-MemoTime@yandex.ru</a>
-    <p>© <span id="django-now" data-django-now="{% now 'Y-m-d H:i:s' %}">{% now 'Y' %}</span> {% trans 'Company, Inc' %}</p>
-  </div>
-  <div class="navigation">
-    <nav>
-      <ul class="footer-gap">
-        <li>
-          <a href="{% url 'users:group-list' %}">
-            {% translate 'Group List' %}
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'schedule:teacher-list' %}">
-            {% translate 'Teacher List' %}
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'schedule:event-list' %}">
-            {% translate 'Event List' %}
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'feedback:feedback' %}">
-            {% translate 'Feedback' %}
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <nav>
-      <ul class="footer-gap">
-        <li><a href="https://gitlab.crja72.ru/frixit" target="_blank">Frixit</a></li>
-        <li><a href="https://gitlab.crja72.ru/kirill135790zzz" target="_blank">Yorshik</a></li>
-        <li><a href="https://gitlab.crja72.ru/nicitatyushnyakov" target="_blank">nais2008</a></li>
-      </ul>
-    </nav>
-  </div>
-</footer>
+  <footer class="footer mt-auto py-3 bg-body-tertiary mt-4">
+    {% load static %}
+    {% load i18n %}
+    <div class="text footer-gap">
+      <a href="mailto:The-MemoTime@yandex.ru">The-MemoTime@yandex.ru</a>
+      <p>
+        © <span id="django-now" data-django-now="{% now 'Y-m-d H:i:s' %}">{% now 'Y' %}</span> 'Memotime, Inc'
+      </p>
+    </div>
+    <div class="navigation">
+      <nav>
+        <ul class="footer-gap">
+          <li>
+            <a href="{% url 'users:group-list' %}">{% translate 'Group List' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'schedule:teacher-list' %}">{% translate 'Teacher List' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'schedule:event-list' %}">{% translate 'Event List' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'feedback:feedback' %}">{% translate 'Feedback' %}</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <ul class="footer-gap">
+          <li>
+            <a href="https://gitlab.crja72.ru/frixit" target="_blank">Frixit</a>
+          </li>
+          <li>
+            <a href="https://gitlab.crja72.ru/kirill135790zzz" target="_blank">Yorshik</a>
+          </li>
+          <li>
+            <a href="https://gitlab.crja72.ru/nicitatyushnyakov" target="_blank">nais2008</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
 {% endblock footer %}

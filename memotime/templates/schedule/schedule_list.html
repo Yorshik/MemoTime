@@ -1,3 +1,4 @@
+--- Содержимое файла schedule_list.html (HTML) ---
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
@@ -18,7 +19,7 @@
             <div class="btns">
               <a href="{% url 'schedule:schedule-update' schedule.pk %}"
                  class="btn"
-                 tooltip="Edit"
+                 tooltip="{% translate 'Edit' %}"
                  flow="up">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="20"
@@ -32,7 +33,7 @@
               <button data-url="{% url 'schedule:schedule-delete' schedule.pk %}"
                       class="btn btn_del"
                       id="btn-del"
-                      tooltip="Delete"
+                      tooltip="{% translate 'Delete' %}"
                       flow="up">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="20"

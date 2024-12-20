@@ -23,7 +23,7 @@
           <div class="info__btns">
             <a href="{% url 'schedule:schedule-update' schedule.pk %}"
                class="btn"
-               tooltip="Edit"
+               tooltip="{% translate 'Edit' %}"
                flow="up">
               <svg xmlns="http://www.w3.org/2000/svg"
                    width="20"
@@ -37,7 +37,7 @@
             <button data-url="{% url 'schedule:schedule-delete' schedule.pk %}"
                     id="btn-del"
                     class="btn"
-                    tooltip="Delete"
+                    tooltip="{% translate 'Delete' %}"
                     flow="up">
               <svg xmlns="http://www.w3.org/2000/svg"
                    width="20"
@@ -66,7 +66,7 @@
         {% if not only_view %}
           <a href="{% url 'schedule:timeschedule-create' schedule.id %}"
              class="btn"
-             tooltip="Create"
+             tooltip="{% translate 'Create' %}"
              flow="up">
             <svg xmlns="http://www.w3.org/2000/svg"
                  width="20"
@@ -94,7 +94,7 @@
                     {% if not schedule.is_static %}({{ timeschedule.even|yesno:"Even,Odd" }}){% endif %}
                     {% if not only_view %}
                       <div class="btns">
-                        <div tooltip="Edit" flow="up">
+                        <div tooltip="{% translate 'Edit' %}" flow="up">
                           <a href="{% url 'schedule:timeschedule-update' timeschedule.pk %}">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="20"
@@ -106,7 +106,7 @@
                             </svg>
                           </a>
                         </div>
-                        <div tooltip="Add note" flow="up">
+                        <div tooltip="{% translate 'Add note' %}" flow="up">
                           <a href="{% url 'schedule:note-create' %}">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="16"
@@ -118,7 +118,7 @@
                             </svg>
                           </a>
                         </div>
-                        <div tooltip="Delete" flow="up">
+                        <div tooltip="{% translate 'Delete' %}" flow="up">
                           <button data-url="{% url 'schedule:timeschedule-delete' timeschedule.pk %}"
                                   id="btn-del">
                             <svg xmlns="http://www.w3.org/2000/svg"

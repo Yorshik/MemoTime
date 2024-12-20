@@ -13,7 +13,7 @@
         <div class="item">
           <h4>{{ teacher.name }}</h4>
           <div class="btns">
-            <a href="{% url 'schedule:teacher-update' pk=teacher.pk %}" class="btn" tooltip="Edit" flow="up">
+            <a href="{% url 'schedule:teacher-update' pk=teacher.pk %}" class="btn" tooltip="{% translate 'Edit' %}" flow="up">
               <svg xmlns="http://www.w3.org/2000/svg"
                    width="20"
                    height="20"
@@ -25,7 +25,7 @@
             </a>
             <button data-url="{% url 'schedule:teacher-delete' pk=teacher.pk %}"
                     class="btn btn_del"
-                    tooltip="Delete" flow="up"
+                    tooltip="{% translate 'Delete' %}" flow="up"
                     id="btn-del">
               <svg xmlns="http://www.w3.org/2000/svg"
                     width="20"
