@@ -11,14 +11,6 @@
     {% with form=form %}
       {% include "includes/form.html" %}
     {% endwith %}
-    <div class="check">
-      <input type="checkbox" name="" id="check">
-      <label for="check" class="checkbox">✓</label>
-      <label for="check" class="link">
-        {% translate 'Do you agree to provide your' %}
-        <a href="https://sakhalinzoo.ru/upload/photos/5ed9c4b3a4680_1591329971.jpg">{% translate 'personal data' %}</a>?
-      </label>
-    </div>
     <p>
       <span class="red">*</span> - {% translate 'required field' %}
     </p>

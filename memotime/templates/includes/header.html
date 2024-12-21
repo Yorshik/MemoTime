@@ -43,15 +43,15 @@
           </li>
           {% if request.user.is_authenticated %}
             {% if user.image %}
-            <li>
-              <a href="{% url 'users:profile' %}" class="btn btn_prof">
-                <img src="{{ user.image.url }}" alt="{% translate 'error' %}">
-              </a>
-            </li>
+              <li>
+                <a href="{% url 'users:profile' %}" class="btn btn_prof">
+                  <img src="{{ user.image.url }}" alt="{% translate 'error' %}">
+                </a>
+              </li>
             {% else %}
               <li>
                 <a href="{% url 'users:profile' %}" class="btn btn_prof">
-                  <img src="{% static 'img/ni-avatar.jpg' %}" alt="{% translate 'error' %}">
+                  <img src="{% static 'img/no-avatar.jpg' %}" alt="{% translate 'error' %}">
                 </a>
               </li>
             {% endif %}

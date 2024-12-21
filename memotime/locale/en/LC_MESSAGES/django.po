@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 00:23+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-12-21 12:01+0300\n"
+"PO-Revision-Date: 2024-12-21 15:30+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -138,7 +138,7 @@ msgstr "Created"
 msgid "Date of feedback creation"
 msgstr "Date of feedback creation"
 
-#: .\apps\feedback\models.py:85 .\templates\users\signup.html:19
+#: .\apps\feedback\models.py:85
 msgid "personal data"
 msgstr "Personal data"
 
@@ -220,19 +220,44 @@ msgstr "Schedule"
 msgid "One time reminder"
 msgstr "One-time reminder"
 
-#: .\apps\schedule\forms.py:44 .\templates\schedule\schedule_detail.html:16
+#: .\apps\schedule\forms.py:24 .\apps\schedule\forms.py:177
+#: .\apps\schedule\forms.py:273
+msgid "Select event"
+msgstr "Select event"
+
+#: .\apps\schedule\forms.py:45 .\templates\schedule\schedule_detail.html:16
 msgid "Changes by week"
 msgstr "Changes by week"
 
-#: .\apps\schedule\forms.py:81
+#: .\apps\schedule\forms.py:63
+msgid "Select group"
+msgstr "Select group"
+
+#: .\apps\schedule\forms.py:83
 msgid "Start date must be earlier than the end date."
 msgstr "Start date must be before the end date."
 
-#: .\apps\schedule\forms.py:208 .\apps\schedule\forms.py:304
+#: .\apps\schedule\forms.py:110
+msgid "Select teacher"
+msgstr "Select teacher"
+
+#: .\apps\schedule\forms.py:120
+msgid "Select type"
+msgstr "Select type"
+
+#: .\apps\schedule\forms.py:130
+msgid "Select priority"
+msgstr "Select priority"
+
+#: .\apps\schedule\forms.py:187 .\apps\schedule\forms.py:283
+msgid "Select day"
+msgstr "Select day"
+
+#: .\apps\schedule\forms.py:215 .\apps\schedule\forms.py:313
 msgid "Start time must be earlier than end time."
 msgstr "Start time must be before end time."
 
-#: .\apps\schedule\forms.py:233 .\apps\schedule\forms.py:320
+#: .\apps\schedule\forms.py:240 .\apps\schedule\forms.py:329
 msgid "Time overlaps with an existing event."
 msgstr "Time overlaps with an existing event."
 
@@ -410,31 +435,31 @@ msgstr "Schedule"
 msgid "schedules"
 msgstr "Schedules"
 
-#: .\apps\schedule\models.py:223 .\apps\schedule\views.py:172
+#: .\apps\schedule\models.py:223 .\apps\schedule\views.py:182
 msgid "Monday"
 msgstr "Monday"
 
-#: .\apps\schedule\models.py:224 .\apps\schedule\views.py:173
+#: .\apps\schedule\models.py:224 .\apps\schedule\views.py:183
 msgid "Tuesday"
 msgstr "Tuesday"
 
-#: .\apps\schedule\models.py:225 .\apps\schedule\views.py:174
+#: .\apps\schedule\models.py:225 .\apps\schedule\views.py:184
 msgid "Wednesday"
 msgstr "Wednesday"
 
-#: .\apps\schedule\models.py:226 .\apps\schedule\views.py:175
+#: .\apps\schedule\models.py:226 .\apps\schedule\views.py:185
 msgid "Thursday"
 msgstr "Thursday"
 
-#: .\apps\schedule\models.py:227 .\apps\schedule\views.py:176
+#: .\apps\schedule\models.py:227 .\apps\schedule\views.py:186
 msgid "Friday"
 msgstr "Friday"
 
-#: .\apps\schedule\models.py:228 .\apps\schedule\views.py:177
+#: .\apps\schedule\models.py:228 .\apps\schedule\views.py:187
 msgid "Saturday"
 msgstr "Saturday"
 
-#: .\apps\schedule\models.py:229 .\apps\schedule\views.py:178
+#: .\apps\schedule\models.py:229 .\apps\schedule\views.py:188
 msgid "Sunday"
 msgstr "Sunday"
 
@@ -483,28 +508,28 @@ msgid "time schedules"
 msgstr "Time schedules"
 
 #: .\apps\schedule\views.py:24 .\apps\schedule\views.py:29
-#: .\apps\schedule\views.py:148 .\apps\schedule\views.py:151
-#: .\apps\schedule\views.py:257
+#: .\apps\schedule\views.py:158 .\apps\schedule\views.py:161
+#: .\apps\schedule\views.py:267
 msgid "You cannot view this content."
 msgstr "You cannot view this content."
 
-#: .\apps\schedule\views.py:112
+#: .\apps\schedule\views.py:122
 msgid "Schedule not found"
 msgstr "Schedule not found"
 
-#: .\apps\schedule\views.py:247
+#: .\apps\schedule\views.py:257
 msgid "You cannot add time to someone else's schedule."
 msgstr "You cannot add time to someone else's schedule."
 
-#: .\apps\schedule\views.py:305
+#: .\apps\schedule\views.py:315
 msgid "TimeSchedule not found"
 msgstr "TimeSchedule not found"
 
-#: .\apps\schedule\views.py:413
+#: .\apps\schedule\views.py:423
 msgid "Event not found"
 msgstr "Event not found"
 
-#: .\apps\schedule\views.py:558
+#: .\apps\schedule\views.py:568
 msgid "Note not found"
 msgstr "Note not found"
 
@@ -516,31 +541,43 @@ msgstr "Creator"
 msgid "Users"
 msgstr "Users"
 
-#: .\apps\users\forms.py:29
+#: .\apps\users\forms.py:48
+msgid "You must agree to the personal data processing to register."
+msgstr "You must agree to the personal data processing to register."
+
+#: .\apps\users\forms.py:54
+msgid "Do you agree to provide your <a href='{}'>personal data</a>?"
+msgstr "Do you agree to provide your <a href='{}'>personal data</a>?"
+
+#: .\apps\users\forms.py:65
 msgid "User already exists"
 msgstr "User already exists"
 
-#: .\apps\users\forms.py:40
+#: .\apps\users\forms.py:76
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: .\apps\users\forms.py:104
+#: .\apps\users\forms.py:136
+msgid "Select timezone"
+msgstr "Select timezone"
+
+#: .\apps\users\forms.py:147
 msgid "Пользователь уже существует"
 msgstr "User already exists"
 
-#: .\apps\users\forms.py:115
+#: .\apps\users\forms.py:158
 msgid "Пользователь с таким email уже существует"
 msgstr "User with this email already exists"
 
-#: .\apps\users\forms.py:185 .\apps\users\forms.py:249
+#: .\apps\users\forms.py:228 .\apps\users\forms.py:292
 msgid "Group Name"
 msgstr "Group Name"
 
-#: .\apps\users\forms.py:187 .\apps\users\forms.py:251
+#: .\apps\users\forms.py:230 .\apps\users\forms.py:294
 msgid "Usernames or Emails (comma-separated)"
 msgstr "Usernames or Emails (comma-separated)"
 
-#: .\apps\users\forms.py:189 .\apps\users\forms.py:253
+#: .\apps\users\forms.py:232 .\apps\users\forms.py:296
 msgid ""
 "Enter usernames or email addresses separated by commas. For example: user1,"
 "user2@example.com,user3"
@@ -548,7 +585,7 @@ msgstr ""
 "Enter usernames or email addresses separated by commas. For example: user1,"
 "user2@example.com, user3"
 
-#: .\apps\users\forms.py:227 .\apps\users\forms.py:298
+#: .\apps\users\forms.py:270 .\apps\users\forms.py:341
 #, python-format
 msgid ""
 "Users with the following usernames or emails were not found: %(identifiers)s"
@@ -696,7 +733,7 @@ msgstr "Close"
 
 #: .\templates\feedback\feedback.html:32 .\templates\schedule\note_form.html:23
 #: .\templates\schedule\schedule_form.html:23
-#: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:23
+#: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:15
 msgid "required field"
 msgstr "Required field"
 
@@ -832,7 +869,7 @@ msgid "Theme Icon"
 msgstr "Theme Icon"
 
 #: .\templates\includes\header.html:48 .\templates\includes\header.html:54
-#: .\templates\users\profile.html:12 .\templates\users\profile.html:15
+#: .\templates\users\profile.html:13 .\templates\users\profile.html:17
 msgid "error"
 msgstr "Error"
 
@@ -845,7 +882,7 @@ msgid "Log In"
 msgstr "Log In"
 
 #: .\templates\includes\header.html:63 .\templates\users\signup.html:9
-#: .\templates\users\signup.html:28
+#: .\templates\users\signup.html:20
 msgid "Sign Up"
 msgstr "Sign Up"
 
@@ -896,7 +933,7 @@ msgstr "Add Event"
 #: .\templates\schedule\schedule_detail.html:97
 #: .\templates\schedule\schedule_list.html:21
 #: .\templates\schedule\teacher_list.html:18
-#: .\templates\users\group_list.html:19
+#: .\templates\users\group_list.html:22
 msgid "Edit"
 msgstr "Edit"
 
@@ -954,28 +991,28 @@ msgstr "Create Schedule"
 msgid "Create group"
 msgstr "Create group"
 
-#: .\templates\schedule\schedule_list.html:9
+#: .\templates\schedule\schedule_list.html:10
 msgid "My Schedules"
 msgstr "My Schedules"
 
-#: .\templates\schedule\schedule_list.html:10
+#: .\templates\schedule\schedule_list.html:11
 msgid "Create New Schedule"
 msgstr "Create New Schedule"
 
 #: .\templates\schedule\schedule_list.html:17
-#: .\templates\schedule\schedule_list.html:62
+#: .\templates\schedule\schedule_list.html:60
 msgid "View"
 msgstr "View"
 
-#: .\templates\schedule\schedule_list.html:50
+#: .\templates\schedule\schedule_list.html:49
 msgid "No personal schedules available."
 msgstr "No personal schedules available."
 
-#: .\templates\schedule\schedule_list.html:55
+#: .\templates\schedule\schedule_list.html:54
 msgid "Shared Schedules"
 msgstr "Shared Schedules"
 
-#: .\templates\schedule\schedule_list.html:66
+#: .\templates\schedule\schedule_list.html:63
 msgid "No shared schedules available."
 msgstr "No shared schedules available."
 
@@ -1135,27 +1172,26 @@ msgstr "Create Group"
 msgid "My Groups"
 msgstr "My Groups"
 
-#: .\templates\users\group_list.html:10
+#: .\templates\users\group_list.html:11
 msgid "Groups I Created:"
 msgstr "Groups I Created:"
 
-#: .\templates\users\group_list.html:16 .\templates\users\group_list.html:44
-msgid "members"
-msgstr "Members"
+#: .\templates\users\group_list.html:18 .\templates\users\group_list.html:50
+#, python-format
+msgid "%(member_count)s участник"
+msgid_plural "%(member_count)s участников"
+msgstr[0] "%(member_count)s member"
+msgstr[1] "%(member_count)s members"
 
-#: .\templates\users\group_list.html:36
+#: .\templates\users\group_list.html:41
 msgid "You have not created any groups."
 msgstr "You have not created any groups."
 
-#: .\templates\users\group_list.html:39
+#: .\templates\users\group_list.html:44
 msgid "Groups I'm a Member Of:"
 msgstr "Groups I'm a Member Of:"
 
-#: .\templates\users\group_list.html:50
-msgid "You are not a member of any other groups."
-msgstr "You are not a member of any other groups."
-
-#: .\templates\users\group_list.html:53
+#: .\templates\users\group_list.html:59
 msgid "Create a new group"
 msgstr "Create a new group"
 
@@ -1226,25 +1262,34 @@ msgstr ""
 "If you haven't received the email, make sure you entered the correct address "
 "you registered with and check your spam folder"
 
-#: .\templates\users\profile.html:18
+#: .\templates\users\profile.html:20
 msgid "Change the password"
 msgstr "Change the password"
 
-#: .\templates\users\profile.html:19
+#: .\templates\users\profile.html:21
 msgid "Log Out"
 msgstr "Log Out"
 
-#: .\templates\users\profile.html:27
+#: .\templates\users\profile.html:29
 msgid "Change Profile information"
 msgstr "Change Profile information"
 
 #: .\templates\users\signup.html:18
-msgid "Do you agree to provide your"
-msgstr "Do you agree to provide your"
-
-#: .\templates\users\signup.html:26
 msgid "Do you have an account?"
 msgstr "Do you have an account?"
+
+#~ msgid ""
+#~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"
+#~ "photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
+#~ msgstr ""
+#~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/photos/"
+#~ "5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
+
+#~ msgid "members"
+#~ msgstr "Members"
+
+#~ msgid "You are not a member of any other groups."
+#~ msgstr "You are not a member of any other groups."
 
 #~ msgid "Company, Inc"
 #~ msgstr "Company, Inc"
@@ -1281,4 +1326,3 @@ msgstr "Do you have an account?"
 
 #~ msgid "тайна"
 #~ msgstr "Secret"
-

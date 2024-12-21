@@ -9,7 +9,9 @@
   <form class="profile" method="post" enctype="multipart/form-data">
     <div class="profile__left">
       {% if user.image %}
-        <img src="{{ user.image.url }}" alt="{% translate 'error' %}" class="profile__image">
+        <img src="{{ user.image.url }}"
+             alt="{% translate 'error' %}"
+             class="profile__image">
       {% else %}
         <img src="{% static 'img/no-avatar.jpg' %}"
              alt="{% translate 'error' %}"

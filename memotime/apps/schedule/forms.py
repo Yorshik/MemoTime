@@ -21,6 +21,7 @@ class NoteForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select event"),
                 },
             ),
         }
@@ -59,6 +60,7 @@ class ScheduleForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select group"),
                 },
             ),
         }
@@ -105,6 +107,7 @@ class EventForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select teacher"),
                 },
             ),
             "event_type": django.forms.Select(
@@ -114,6 +117,7 @@ class EventForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select type"),
                 },
             ),
             "priority": django.forms.Select(
@@ -123,6 +127,7 @@ class EventForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select priority"),
                 },
             ),
         }
@@ -169,6 +174,7 @@ class TimeScheduleForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select event"),
                 },
             ),
             "day_number": django.forms.Select(
@@ -178,6 +184,7 @@ class TimeScheduleForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select day"),
                 },
             ),
         }
@@ -263,6 +270,7 @@ class AddTimeScheduleForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select event"),
                 },
             ),
             "day_number": django.forms.Select(
@@ -272,6 +280,7 @@ class AddTimeScheduleForm(django.forms.ModelForm):
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select day"),
                 },
             ),
         }
