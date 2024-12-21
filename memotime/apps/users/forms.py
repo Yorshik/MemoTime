@@ -3,6 +3,7 @@ import django.conf
 import django.contrib.auth.forms
 import django.core.exceptions
 import django.forms
+import django.utils.html
 import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -20,7 +21,14 @@ class CustomCheckboxInput(django.forms.CheckboxInput):
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
-        context["label_text"] = self.attrs.get("label_text")
+        context["label_text"] = self.attrs.pop("label_text", "")
+
+        if "class" in context["widget"]["attrs"]:
+            if "check" not in context["widget"]["attrs"]["class"]:
+                context["widget"]["attrs"]["class"] += " check"
+        else:
+            context["widget"]["attrs"]["class"] = "check"
+
         return context
 
 
@@ -28,6 +36,9 @@ class UserCreationForm(
     apps.core.forms.BaseForm,
     django.contrib.auth.forms.UserCreationForm,
 ):
+    PERSONAL_DATA_LINK = (
+        "https://sakhalinzoo.ru/upload/photos/5ed9c4b3a4680_1591329971.jpg"
+    )
     captcha = captcha.fields.CaptchaField()
     agree_to_data_processing = django.forms.BooleanField(
         required=True,
@@ -39,11 +50,9 @@ class UserCreationForm(
         },
         widget=CustomCheckboxInput(
             attrs={
-                "label_text": _(
-                    "Do you agree to provide your <a"
-                    " href='https://sakhalinzoo.ru/upload/photos/"
-                    "5ed9c4b3a4680_1591329971.jpg'>personal"
-                    " data</a>?",
+                "label_text": django.utils.html.format_html(
+                    _("Do you agree to provide your <a href='{}'>personal data</a>?"),
+                    PERSONAL_DATA_LINK,
                 ),
             },
         ),
@@ -124,6 +133,7 @@ class UserProfileForm(
                     "data-close-list-on-item-select": "true",
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select timezone"),
                 },
             ),
         }

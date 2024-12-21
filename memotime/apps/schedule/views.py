@@ -98,8 +98,18 @@ class ScheduleListView(
     context_object_name = "schedules"
 
     def get_queryset(self):
-        user = self.request.user
-        return models.Schedule.objects.get_schedules_for_user(user=user)
+        return models.Schedule.objects.get_schedules_for_user(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.request.user.id
+        context["owned_schedules"] = [
+            schedule for schedule in context["schedules"] if schedule.user_id == user_id
+        ]
+        context["shared_schedules"] = [
+            schedule for schedule in context["schedules"] if schedule.user_id != user_id
+        ]
+        return context
 
 
 class ScheduleDeleteView(AccessMixin, django.views.generic.View):

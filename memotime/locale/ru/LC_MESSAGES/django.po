@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 02:22+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-12-21 12:01+0300\n"
+"PO-Revision-Date: 2024-12-21 14:30+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -222,19 +222,44 @@ msgstr "Расписание"
 msgid "One time reminder"
 msgstr "Одноразовое напоминание"
 
-#: .\apps\schedule\forms.py:44 .\templates\schedule\schedule_detail.html:16
+#: .\apps\schedule\forms.py:24 .\apps\schedule\forms.py:177
+#: .\apps\schedule\forms.py:273
+msgid "Select event"
+msgstr "Выберите событие"
+
+#: .\apps\schedule\forms.py:45 .\templates\schedule\schedule_detail.html:16
 msgid "Changes by week"
 msgstr "Изменения по неделям"
 
-#: .\apps\schedule\forms.py:81
+#: .\apps\schedule\forms.py:63
+msgid "Select group"
+msgstr "Выберите группу"
+
+#: .\apps\schedule\forms.py:83
 msgid "Start date must be earlier than the end date."
 msgstr "Дата начала должна быть раньше даты окончания."
 
-#: .\apps\schedule\forms.py:208 .\apps\schedule\forms.py:304
+#: .\apps\schedule\forms.py:110
+msgid "Select teacher"
+msgstr "Выберите преподавателя"
+
+#: .\apps\schedule\forms.py:120
+msgid "Select type"
+msgstr "Выберите тип"
+
+#: .\apps\schedule\forms.py:130
+msgid "Select priority"
+msgstr "Выберите приоритет"
+
+#: .\apps\schedule\forms.py:187 .\apps\schedule\forms.py:283
+msgid "Select day"
+msgstr "Выберите день"
+
+#: .\apps\schedule\forms.py:215 .\apps\schedule\forms.py:313
 msgid "Start time must be earlier than end time."
 msgstr "Время начала должно быть раньше времени окончания."
 
-#: .\apps\schedule\forms.py:233 .\apps\schedule\forms.py:320
+#: .\apps\schedule\forms.py:240 .\apps\schedule\forms.py:329
 msgid "Time overlaps with an existing event."
 msgstr "Время пересекается с существующим событием."
 
@@ -412,31 +437,31 @@ msgstr "расписание"
 msgid "schedules"
 msgstr "расписания"
 
-#: .\apps\schedule\models.py:223 .\apps\schedule\views.py:172
+#: .\apps\schedule\models.py:223 .\apps\schedule\views.py:182
 msgid "Monday"
 msgstr "Понедельник"
 
-#: .\apps\schedule\models.py:224 .\apps\schedule\views.py:173
+#: .\apps\schedule\models.py:224 .\apps\schedule\views.py:183
 msgid "Tuesday"
 msgstr "Вторник"
 
-#: .\apps\schedule\models.py:225 .\apps\schedule\views.py:174
+#: .\apps\schedule\models.py:225 .\apps\schedule\views.py:184
 msgid "Wednesday"
 msgstr "Среда"
 
-#: .\apps\schedule\models.py:226 .\apps\schedule\views.py:175
+#: .\apps\schedule\models.py:226 .\apps\schedule\views.py:185
 msgid "Thursday"
 msgstr "Четверг"
 
-#: .\apps\schedule\models.py:227 .\apps\schedule\views.py:176
+#: .\apps\schedule\models.py:227 .\apps\schedule\views.py:186
 msgid "Friday"
 msgstr "Пятница"
 
-#: .\apps\schedule\models.py:228 .\apps\schedule\views.py:177
+#: .\apps\schedule\models.py:228 .\apps\schedule\views.py:187
 msgid "Saturday"
 msgstr "Суббота"
 
-#: .\apps\schedule\models.py:229 .\apps\schedule\views.py:178
+#: .\apps\schedule\models.py:229 .\apps\schedule\views.py:188
 msgid "Sunday"
 msgstr "Воскресенье"
 
@@ -485,28 +510,28 @@ msgid "time schedules"
 msgstr "расписания времени"
 
 #: .\apps\schedule\views.py:24 .\apps\schedule\views.py:29
-#: .\apps\schedule\views.py:148 .\apps\schedule\views.py:151
-#: .\apps\schedule\views.py:257
+#: .\apps\schedule\views.py:158 .\apps\schedule\views.py:161
+#: .\apps\schedule\views.py:267
 msgid "You cannot view this content."
 msgstr "Вы не можете просматривать этот контент."
 
-#: .\apps\schedule\views.py:112
+#: .\apps\schedule\views.py:122
 msgid "Schedule not found"
 msgstr "Расписание не найдено"
 
-#: .\apps\schedule\views.py:247
+#: .\apps\schedule\views.py:257
 msgid "You cannot add time to someone else's schedule."
 msgstr "Вы не можете добавить время в чужое расписание."
 
-#: .\apps\schedule\views.py:305
+#: .\apps\schedule\views.py:315
 msgid "TimeSchedule not found"
 msgstr "TimeSchedule не найден"
 
-#: .\apps\schedule\views.py:413
+#: .\apps\schedule\views.py:423
 msgid "Event not found"
 msgstr "Событие не найдено"
 
-#: .\apps\schedule\views.py:558
+#: .\apps\schedule\views.py:568
 msgid "Note not found"
 msgstr "Заметка не найдена"
 
@@ -518,41 +543,44 @@ msgstr "Создатель"
 msgid "Users"
 msgstr "Пользователи"
 
-#: .\apps\users\forms.py:37
+#: .\apps\users\forms.py:48
 msgid "You must agree to the personal data processing to register."
-msgstr "Вы должны согласиться на обработку персональных данных для регистрации."
+msgstr ""
+"Вы должны согласиться на обработку персональных данных для регистрации."
 
-#: .\apps\users\forms.py:43
-msgid ""
-"Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"
-"photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
-msgstr "Вы согласны предоставить свои <a href='https://sakhalinzoo.ru/upload/photos/5ed9c4b3a4680_1591329971.jpg'>персональные данные</a>?"
+#: .\apps\users\forms.py:54
+msgid "Do you agree to provide your <a href='{}'>personal data</a>?"
+msgstr "Согласны ли вы предоставить свои <a href='{}'>персональные данные</a>?"
 
-#: .\apps\users\forms.py:56
+#: .\apps\users\forms.py:65
 msgid "User already exists"
 msgstr "Пользователь уже существует"
 
-#: .\apps\users\forms.py:67
+#: .\apps\users\forms.py:76
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: .\apps\users\forms.py:137
+#: .\apps\users\forms.py:136
+msgid "Select timezone"
+msgstr "Выберите часовой пояс"
+
+#: .\apps\users\forms.py:147
 msgid "Пользователь уже существует"
 msgstr "Пользователь уже существует"
 
-#: .\apps\users\forms.py:148
+#: .\apps\users\forms.py:158
 msgid "Пользователь с таким email уже существует"
 msgstr "Пользователь с таким email уже существует"
 
-#: .\apps\users\forms.py:218 .\apps\users\forms.py:282
+#: .\apps\users\forms.py:228 .\apps\users\forms.py:292
 msgid "Group Name"
 msgstr "Название группы"
 
-#: .\apps\users\forms.py:220 .\apps\users\forms.py:284
+#: .\apps\users\forms.py:230 .\apps\users\forms.py:294
 msgid "Usernames or Emails (comma-separated)"
 msgstr "Имена пользователей или адреса электронной почты (через запятую)"
 
-#: .\apps\users\forms.py:222 .\apps\users\forms.py:286
+#: .\apps\users\forms.py:232 .\apps\users\forms.py:296
 msgid ""
 "Enter usernames or email addresses separated by commas. For example: user1,"
 "user2@example.com,user3"
@@ -560,7 +588,7 @@ msgstr ""
 "Введите имена пользователей или адреса электронной почты, разделенные "
 "запятыми. Например: user1,user2@example.com,user3"
 
-#: .\apps\users\forms.py:260 .\apps\users\forms.py:331
+#: .\apps\users\forms.py:270 .\apps\users\forms.py:341
 #, python-format
 msgid ""
 "Users with the following usernames or emails were not found: %(identifiers)s"
@@ -909,7 +937,7 @@ msgstr "Добавить событие"
 #: .\templates\schedule\schedule_detail.html:97
 #: .\templates\schedule\schedule_list.html:21
 #: .\templates\schedule\teacher_list.html:18
-#: .\templates\users\group_list.html:19
+#: .\templates\users\group_list.html:22
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -967,28 +995,28 @@ msgstr "Создать расписание"
 msgid "Create group"
 msgstr "Создать группу"
 
-#: .\templates\schedule\schedule_list.html:9
+#: .\templates\schedule\schedule_list.html:10
 msgid "My Schedules"
 msgstr "Мои расписания"
 
-#: .\templates\schedule\schedule_list.html:10
+#: .\templates\schedule\schedule_list.html:11
 msgid "Create New Schedule"
 msgstr "Создать новое расписание"
 
 #: .\templates\schedule\schedule_list.html:17
-#: .\templates\schedule\schedule_list.html:62
+#: .\templates\schedule\schedule_list.html:60
 msgid "View"
 msgstr "Просмотр"
 
-#: .\templates\schedule\schedule_list.html:50
+#: .\templates\schedule\schedule_list.html:49
 msgid "No personal schedules available."
 msgstr "Нет доступных личных расписаний."
 
-#: .\templates\schedule\schedule_list.html:55
+#: .\templates\schedule\schedule_list.html:54
 msgid "Shared Schedules"
 msgstr "Общие расписания"
 
-#: .\templates\schedule\schedule_list.html:66
+#: .\templates\schedule\schedule_list.html:63
 msgid "No shared schedules available."
 msgstr "Нет доступных общих расписаний."
 
@@ -1148,27 +1176,27 @@ msgstr "Создать группу"
 msgid "My Groups"
 msgstr "Мои группы"
 
-#: .\templates\users\group_list.html:10
+#: .\templates\users\group_list.html:11
 msgid "Groups I Created:"
 msgstr "Группы, которые я создал:"
 
-#: .\templates\users\group_list.html:16 .\templates\users\group_list.html:44
-msgid "members"
-msgstr "участники"
+#: .\templates\users\group_list.html:18 .\templates\users\group_list.html:50
+#, python-format
+msgid "%(member_count)s участник"
+msgid_plural "%(member_count)s участников"
+msgstr[0] "%(member_count)s участник"
+msgstr[1] "%(member_count)s участника"
+msgstr[2] "%(member_count)s участников"
 
-#: .\templates\users\group_list.html:36
+#: .\templates\users\group_list.html:41
 msgid "You have not created any groups."
 msgstr "Вы не создали ни одной группы."
 
-#: .\templates\users\group_list.html:39
+#: .\templates\users\group_list.html:44
 msgid "Groups I'm a Member Of:"
 msgstr "Группы, в которых я состою:"
 
-#: .\templates\users\group_list.html:50
-msgid "You are not a member of any other groups."
-msgstr "Вы не состоите ни в одной другой группе."
-
-#: .\templates\users\group_list.html:53
+#: .\templates\users\group_list.html:59
 msgid "Create a new group"
 msgstr "Создать новую группу"
 
@@ -1255,8 +1283,18 @@ msgstr "Изменить информацию профиля"
 msgid "Do you have an account?"
 msgstr "У вас есть аккаунт?"
 
-#~ msgid "Do you agree to provide your"
-#~ msgstr "Согласны ли вы предоставить свои"
+#~ msgid ""
+#~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"
+#~ "photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
+#~ msgstr ""
+#~ "Вы согласны предоставить свои <a href='https://sakhalinzoo.ru/upload/"
+#~ "photos/5ed9c4b3a4680_1591329971.jpg'>персональные данные</a>?"
+
+#~ msgid "You are not a member of any other groups."
+#~ msgstr "Вы не состоите ни в одной другой группе."
+
+#~ msgid "members"
+#~ msgstr "участники"
 
 #~ msgid "Company, Inc"
 #~ msgstr "Компания, Инк"

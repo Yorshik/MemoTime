@@ -1,8 +1,9 @@
-main{
+main {
   display: grid;
   place-content: center;
 }
-.main-form{
+
+.main-form {
   display: flex;
   flex-direction: column;
   gap: 35px;
@@ -12,83 +13,97 @@ main{
   box-shadow: var(--shadow);
   border: var(--border);
   width: 850px;
-  
-  &.main-form_text{
-    gap: 20px;
-  }
-  h2{
-    text-align: center;
-  }
-  .main-form__p{
-    text-align: center;
-  }
-  .danger{
-    background-color: var(--back-err);
-    color: var(--text-color-err);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-  }
-  div:not(:has(input[type="checkbox"])){
-    position: relative;
+}
 
-    label{
-      position: absolute;
-      top: 11px;
-      left: 15px;
-      transition: all .2s;
-      transform-origin: left;
-      color: var(--text-color-form);
-      pointer-events: none;
-    }
-    input:focus + label,
-    input:not(:focus):valid + label,
-    input:not(:placeholder-shown):not(:empty) + label{
-      top: -25px;
-      scale: .95; 
-    }
-  }
-  div:has(img){
-    display: grid;
-    gap: 35px;
+.main-form.main-form_text {
+  gap: 20px;
+}
 
-    img{
-      justify-self: center;
-      border-radius: 8px;
-    }
-  }
-  .links{
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-color-form);
-  }
-  .check{
-    input[type=checkbox]{
-      display: none;
-    }
-    .checkbox{
-      padding: 3px 10px;
-      font-size: 20px;
-      border-radius: 5px;
-      background-color: var(--second-color);
-      border: var(--border);
-      box-shadow: var(--shadow-inset);
-      color: transparent;
-      font-weight: 900;
-    }
-    input[type=checkbox]:checked + .checkbox{
-      color: var(--text-color-form);
-    }
-    .link{
-      pointer-events: auto;
-      a{
-        border-bottom: 2px solid var(--text-color-form);
-      }
-    }
-  }
-  .btn_submit{
-    padding: 10px 15px;
-    font-size: 20px;
-    text-align: center;
-  }
+.main-form h2 {
+  text-align: center;
+}
+
+.main-form .main-form__p {
+  text-align: center;
+}
+
+.main-form .danger {
+  background-color: var(--back-err);
+  color: var(--text-color-err);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.main-form div:not(:has(input[type="checkbox"])) {
+  position: relative;
+}
+
+.main-form div:not(:has(input[type="checkbox"])) label {
+  position: absolute;
+  top: 11px;
+  left: 15px;
+  transition: all 0.2s;
+  transform-origin: left;
+  color: var(--text-color-form);
+  pointer-events: none;
+}
+
+.main-form div:not(:has(input[type="checkbox"])) input:focus+label,
+.main-form div:not(:has(input[type="checkbox"])) input:not(:focus):valid+label,
+.main-form div:not(:has(input[type="checkbox"])) input:not(:placeholder-shown):not(:empty)+label {
+  top: -25px;
+  scale: 0.95;
+}
+
+.main-form div:has(img) {
+  display: grid;
+  gap: 35px;
+}
+
+.main-form div:has(img) img {
+  justify-self: center;
+  border-radius: 8px;
+}
+
+.main-form .links {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color-form);
+}
+
+.main-form .check {
+  /* Targeting the checkbox input directly */
+  display: none;
+}
+
+.main-form .checkbox {
+  /* Styles for the visible checkmark label */
+  padding: 3px 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: var(--second-color);
+  border: var(--border);
+  box-shadow: var(--shadow-inset);
+  color: transparent;
+  font-weight: 900;
+}
+
+.main-form input[type=checkbox]:checked+.checkbox {
+  /* Styles for when the hidden checkbox is checked */
+  color: var(--text-color-form);
+}
+
+.main-form .link {
+  pointer-events: auto;
+}
+
+.main-form .link a {
+  border-bottom: 2px solid var(--text-color-form);
+}
+
+.main-form .btn_submit {
+  padding: 10px 15px;
+  font-size: 20px;
+  text-align: center;
 }
