@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 12:01+0300\n"
+"POT-Creation-Date: 2024-12-21 12:28+0300\n"
 "PO-Revision-Date: 2024-12-21 14:30+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "Пользователь не аутентифицирован."
 msgid "Feedback Author"
 msgstr "Автор обратной связи"
 
-#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:55
+#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:50
 #: .\templates\includes\footer.html:21
 msgid "Feedback"
 msgstr "Обратная связь"
@@ -788,27 +788,27 @@ msgstr "Создать событие"
 msgid "Create a schedule"
 msgstr "Создать расписание"
 
-#: .\templates\homepage\index.html:33
+#: .\templates\homepage\index.html:32
 msgid "Alerts"
 msgstr "Оповещения"
 
-#: .\templates\homepage\index.html:34
-msgid "Notifications about notes can be sent by mail and Telegram"
-msgstr "Уведомления о заметках могут быть отправлены по почте и в Telegram"
+#: .\templates\homepage\index.html:33
+msgid "Notifications about notes can be sent by mail"
+msgstr "Уведомления о заметках можно отправлять по почте."
 
-#: .\templates\homepage\index.html:37
+#: .\templates\homepage\index.html:36
 msgid "Adaptation"
 msgstr "Адаптация"
 
-#: .\templates\homepage\index.html:38
+#: .\templates\homepage\index.html:37
 msgid "Our site has adaptations for different screen sizes"
 msgstr "Наш сайт адаптирован под различные размеры экранов"
 
-#: .\templates\homepage\index.html:41
+#: .\templates\homepage\index.html:40
 msgid "Availability"
 msgstr "Доступность"
 
-#: .\templates\homepage\index.html:43
+#: .\templates\homepage\index.html:42
 msgid ""
 "Translations into several languages are used. There is also an intuitive "
 "interface that is easy to use"
@@ -816,19 +816,9 @@ msgstr ""
 "Используются переводы на несколько языков. Также имеется интуитивно понятный "
 "интерфейс, которым легко пользоваться"
 
-#: .\templates\homepage\index.html:48
-msgid "Our site has a public API that everyone can use"
-msgstr "Наш сайт имеет публичный API, которым может воспользоваться каждый"
-
-#: .\templates\homepage\index.html:61 .\templates\homepage\index.html:72
-#: .\templates\homepage\index.html:83 .\templates\homepage\index.html:94
-#: .\templates\homepage\index.html:105 .\templates\homepage\index.html:116
-#: .\templates\homepage\index.html:127 .\templates\homepage\index.html:138
-#: .\templates\homepage\index.html:149 .\templates\homepage\index.html:162
-#: .\templates\homepage\index.html:173 .\templates\homepage\index.html:184
-#: .\templates\homepage\index.html:195 .\templates\homepage\index.html:206
-#: .\templates\homepage\index.html:217 .\templates\homepage\index.html:228
-#: .\templates\homepage\index.html:239 .\templates\homepage\index.html:250
+#: .\templates\homepage\index.html:56 .\templates\homepage\index.html:67
+#: .\templates\homepage\index.html:78 .\templates\homepage\index.html:91
+#: .\templates\homepage\index.html:102
 msgid "avatar"
 msgstr "аватар"
 
@@ -1282,6 +1272,9 @@ msgstr "Изменить информацию профиля"
 #: .\templates\users\signup.html:18
 msgid "Do you have an account?"
 msgstr "У вас есть аккаунт?"
+
+#~ msgid "Our site has a public API that everyone can use"
+#~ msgstr "Наш сайт имеет публичный API, которым может воспользоваться каждый"
 
 #~ msgid ""
 #~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"

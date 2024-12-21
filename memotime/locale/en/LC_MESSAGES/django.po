@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 12:01+0300\n"
+"POT-Creation-Date: 2024-12-21 12:28+0300\n"
 "PO-Revision-Date: 2024-12-21 15:30+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr "User not authenticated."
 msgid "Feedback Author"
 msgstr "Feedback Author"
 
-#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:55
+#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:50
 #: .\templates\includes\footer.html:21
 msgid "Feedback"
 msgstr "Feedback"
@@ -784,27 +784,27 @@ msgstr "Create an event"
 msgid "Create a schedule"
 msgstr "Create a schedule"
 
-#: .\templates\homepage\index.html:33
+#: .\templates\homepage\index.html:32
 msgid "Alerts"
 msgstr "Alerts"
 
-#: .\templates\homepage\index.html:34
-msgid "Notifications about notes can be sent by mail and Telegram"
-msgstr "Notifications about notes can be sent by email and Telegram."
+#: .\templates\homepage\index.html:33
+msgid "Notifications about notes can be sent by mail"
+msgstr "Notifications about notes can be sent by mail"
 
-#: .\templates\homepage\index.html:37
+#: .\templates\homepage\index.html:36
 msgid "Adaptation"
 msgstr "Adaptation"
 
-#: .\templates\homepage\index.html:38
+#: .\templates\homepage\index.html:37
 msgid "Our site has adaptations for different screen sizes"
 msgstr "Our site has adaptations for different screen sizes."
 
-#: .\templates\homepage\index.html:41
+#: .\templates\homepage\index.html:40
 msgid "Availability"
 msgstr "Availability"
 
-#: .\templates\homepage\index.html:43
+#: .\templates\homepage\index.html:42
 msgid ""
 "Translations into several languages are used. There is also an intuitive "
 "interface that is easy to use"
@@ -812,19 +812,9 @@ msgstr ""
 "Translations into several languages are used. There is also an intuitive "
 "interface that is easy to use."
 
-#: .\templates\homepage\index.html:48
-msgid "Our site has a public API that everyone can use"
-msgstr "Our site has a public API that everyone can use."
-
-#: .\templates\homepage\index.html:61 .\templates\homepage\index.html:72
-#: .\templates\homepage\index.html:83 .\templates\homepage\index.html:94
-#: .\templates\homepage\index.html:105 .\templates\homepage\index.html:116
-#: .\templates\homepage\index.html:127 .\templates\homepage\index.html:138
-#: .\templates\homepage\index.html:149 .\templates\homepage\index.html:162
-#: .\templates\homepage\index.html:173 .\templates\homepage\index.html:184
-#: .\templates\homepage\index.html:195 .\templates\homepage\index.html:206
-#: .\templates\homepage\index.html:217 .\templates\homepage\index.html:228
-#: .\templates\homepage\index.html:239 .\templates\homepage\index.html:250
+#: .\templates\homepage\index.html:56 .\templates\homepage\index.html:67
+#: .\templates\homepage\index.html:78 .\templates\homepage\index.html:91
+#: .\templates\homepage\index.html:102
 msgid "avatar"
 msgstr "Avatar"
 
@@ -1278,12 +1268,15 @@ msgstr "Change Profile information"
 msgid "Do you have an account?"
 msgstr "Do you have an account?"
 
+#~ msgid "Our site has a public API that everyone can use"
+#~ msgstr "Our site has a public API that everyone can use."
+
 #~ msgid ""
 #~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"
 #~ "photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
 #~ msgstr ""
-#~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/photos/"
-#~ "5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
+#~ "Do you agree to provide your <a href='https://sakhalinzoo.ru/upload/"
+#~ "photos/5ed9c4b3a4680_1591329971.jpg'>personal data</a>?"
 
 #~ msgid "members"
 #~ msgstr "Members"
