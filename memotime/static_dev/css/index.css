@@ -35,6 +35,7 @@
       box-shadow: var(--shadow);
       border: var(--border);
       border-radius: 10px;
+      object-fit: cover;
     }
     .image_settings{
       background-color: var(--second-color);
@@ -56,12 +57,14 @@
         right: 50px;
       }
       .tablet{
-        width: 370px;
+        width: 500px;
         height: 410px;
         z-index: 2;
         background-color: var(--back-color);
         position: relative;
         right: -50px;
+        box-shadow: none;
+        border: none;
       }
     }
     .image_screen1, .image_screen2{

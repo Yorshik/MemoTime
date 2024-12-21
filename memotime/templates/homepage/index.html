@@ -20,18 +20,17 @@
   <div class="container">
     <section class="gallery">
       <div class="gallery__left">
-        <div class="image_settings image gallery__item"></div>
+        <img src="{% static 'img/landing-img.png' %}" alt="" class="image_settings image gallery__item">
         <div class="image_adaptation gallery__item">
-          <div class="tablet image"></div>
-          <div class="mobile image"></div>
+          <img class="tablet image" src="{% static 'img/landing-img2_2.png' %}" alt="">
+          <img class="mobile image" src="{% static 'img/landing-img2.png' %}">
         </div>
-        <div class="image_screen1 image gallery__item"></div>
-        <div class="image_screen2 image gallery__item"></div>
+        <img src="{% static 'img/landing-img3.png' %}" alt="" class="image_screen1 image gallery__item">
       </div>
       <div class="gallery__right" data-speed="1.1">
         <div class="text-block gallery__item">
           <h2 class="text-block__h">{% translate 'Alerts' %}</h2>
-          <p class="text-block__p">{% translate 'Notifications about notes can be sent by mail and Telegram' %}</p>
+          <p class="text-block__p">{% translate 'Notifications about notes can be sent by mail' %}</p>
         </div>
         <div class="text-block gallery__item">
           <h2 class="text-block__h">{% translate 'Adaptation' %}</h2>
@@ -42,10 +41,6 @@
           <p class="text-block__p">
             {% translate 'Translations into several languages are used. There is also an intuitive interface that is easy to use' %}
           </p>
-        </div>
-        <div class="text-block gallery__item">
-          <h2 class="text-block__h">API</h2>
-          <p class="text-block__p">{% translate 'Our site has a public API that everyone can use' %}</p>
         </div>
       </div>
     </section>
@@ -60,10 +55,10 @@
               <img src="{% static 'img/no-avatar.jpg' %}"
                    alt="{% translate 'avatar' %}"
                    class="avatar">
-              <p>ФИО</p>
+              <p>Иван Иванов</p>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+              MemoTime помогает мне легко планировать расписание, добавляя события и заметки. Структура расписаний кажется очень продуманной и удобной
             </p>
           </div>
           <div class="item">
@@ -71,10 +66,10 @@
               <img src="{% static 'img/no-avatar.jpg' %}"
                    alt="{% translate 'avatar' %}"
                    class="avatar">
-              <p>ФИО</p>
+              <p>NONE</p>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+              Карточки с информацией о пользователях и их отзывами выглядят очень современно и профессионально. Они создают приятное впечатление о сайте
             </p>
           </div>
           <div class="item">
@@ -82,76 +77,10 @@
               <img src="{% static 'img/no-avatar.jpg' %}"
                    alt="{% translate 'avatar' %}"
                    class="avatar">
-              <p>ФИО</p>
+              <p>Павел НЕ Енот</p>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+              Навигация по сайту интуитивно понятна, легко переходить между разделами и быстро находить нужную информацию. Расположение элементов очень логичное
             </p>
           </div>
         </div>
@@ -161,10 +90,10 @@
               <img src="{% static 'img/no-avatar.jpg' %}"
                    alt="{% translate 'avatar' %}"
                    class="avatar">
-              <p>ФИО</p>
+              <p>Ёжик</p>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+              MemoTime выглядит не только хорошо, но и отлично работает. Сочетание удобного интерфейса и мощных инструментов для планирования делает этот сайт очень полезным
             </p>
           </div>
           <div class="item">
@@ -172,87 +101,10 @@
               <img src="{% static 'img/no-avatar.jpg' %}"
                    alt="{% translate 'avatar' %}"
                    class="avatar">
-              <p>ФИО</p>
+              <p>АЙМА</p>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>ФИО</p>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus officiis a ratione maiores minus rem corporis consequuntur aliquid quisquam eum tempore repellendus sed debitis iusto, architecto fugiat harum nemo.
+              Функция создания групп и совместного использования расписаний — это просто находка. Удобно координировать мероприятия с коллегами или друзьями
             </p>
           </div>
         </div>
