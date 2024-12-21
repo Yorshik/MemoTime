@@ -206,8 +206,7 @@ select {
 .btn_del:hover {
   background-color: var(--back-btn-del);
 }
-
-.no-fone-btn {
+.no-fone-btn{
   background: none;
   box-shadow: none;
   cursor: pointer;

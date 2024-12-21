@@ -68,9 +68,8 @@ class EventManager(django.db.models.Manager):
 class ScheduleManager(django.db.models.Manager):
     def get_schedules_for_user(self, user):
         return (
-            self.filter(
-                Q(user=user) | Q(group__in=user.groups.all()),
-            )
+            self.filter(Q(user=user) | Q(group__in=user.groups.all()))
+            .select_related("user")
             .annotate(
                 is_owner=Case(
                     When(user=user, then=True),
@@ -115,6 +114,9 @@ class ScheduleManager(django.db.models.Manager):
             )
             .get(pk=pk, user=user)
         )
+
+    def get_object_for_user(self, pk, user):
+        return self.get_schedule_by_pk_and_user(pk, user)
 
 
 class TimeScheduleManager(django.db.models.Manager):

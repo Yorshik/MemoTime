@@ -6,11 +6,11 @@
 {% endblock extra_css %}
 {% block body %}
   <section>
-    <h2>{% translate 'My Schedules' %}</h2>
-    <a href="{% url 'schedule:schedule-create' %}" class="btn btn_create">{% translate 'Create New Schedule' %}</a>
-    <div class="list">
-      {% for schedule in schedules %}
-        {% if schedule.is_owner %}
+    {% if owned_schedules %}
+      <h2>{% translate 'My Schedules' %}</h2>
+      <a href="{% url 'schedule:schedule-create' %}" class="btn btn_create">{% translate 'Create New Schedule' %}</a>
+      <div class="list">
+        {% for schedule in owned_schedules %}
           <div class="item">
             <h4>{{ schedule.start_date }} — {{ schedule.expiration_date|default:"∞" }}</h4>
             <a href="{% url 'schedule:schedule-detail' schedule.pk %}"
@@ -45,27 +45,25 @@
               </button>
             </div>
           </div>
-        {% endif %}
-      {% empty %}
-        <li>{% translate 'No personal schedules available.' %}</li>
-      {% endfor %}
-    </div>
-  </section>
-  <section>
-    <h2>{% translate 'Shared Schedules' %}</h2>
-    <div class="list">
-      {% for schedule in schedules %}
-        {% if not schedule.is_owner %}
+        {% empty %}
+          <li>{% translate 'No personal schedules available.' %}</li>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if shared_schedules %}
+      <h2>{% translate 'Shared Schedules' %}</h2>
+      <div class="list">
+        {% for schedule in shared_schedules %}
           <div class="item">
             <h4>{{ schedule.start_date }} — {{ schedule.expiration_date|default:"∞" }}</h4>
             <a href="{% url 'schedule:schedule-detail' schedule.pk %}"
                class="btn btn_check">{% translate 'View' %}</a>
           </div>
-        {% endif %}
-      {% empty %}
-        <li>{% translate 'No shared schedules available.' %}</li>
-      {% endfor %}
-    </div>
+        {% empty %}
+          <li>{% translate 'No shared schedules available.' %}</li>
+        {% endfor %}
+      </div>
+    {% endif %}
   </section>
   {% include 'includes/modal.html' %}
 {% endblock body %}
