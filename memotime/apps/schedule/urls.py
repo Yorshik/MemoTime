@@ -70,44 +70,4 @@ urlpatterns = [
         views.EventDeleteView.as_view(),
         name="event-delete",
     ),
-    django.urls.path(
-        "teacher/",
-        views.TeacherListView.as_view(),
-        name="teacher-list",
-    ),
-    django.urls.path(
-        "teacher/create/",
-        views.TeacherCreateView.as_view(),
-        name="teacher-create",
-    ),
-    django.urls.path(
-        "teacher/<int:pk>/update/",
-        views.TeacherUpdateView.as_view(),
-        name="teacher-update",
-    ),
-    django.urls.path(
-        "teacher/<int:pk>/delete/",
-        views.TeacherDeleteView.as_view(),
-        name="teacher-delete",
-    ),
-    django.urls.path(
-        "notes/",
-        views.NoteListView.as_view(),
-        name="note-list",
-    ),
-    django.urls.path(
-        "note/create/",
-        views.NoteCreateView.as_view(),
-        name="note-create",
-    ),
-    django.urls.path(
-        "note/<int:pk>/update/",
-        views.NoteUpdateView.as_view(),
-        name="note-update",
-    ),
-    django.urls.path(
-        "note/<int:pk>/delete/",
-        views.NoteDeleteView.as_view(),
-        name="note-delete",
-    ),
 ]

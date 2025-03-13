@@ -79,19 +79,4 @@ urlpatterns = [
         apps.users.views.RegisterView.as_view(),
         name="signup",
     ),
-    django.urls.path(
-        "group/create/",
-        apps.users.views.GroupCreateView.as_view(),
-        name="group-create",
-    ),
-    django.urls.path(
-        "groups/",
-        apps.users.views.GroupListView.as_view(),
-        name="group-list",
-    ),
-    django.urls.path(
-        "group/<int:pk>/update/",
-        apps.users.views.GroupUpdateView.as_view(),
-        name="group-update",
-    ),
 ]
