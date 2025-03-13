@@ -20,13 +20,6 @@ class EventAdmin(django.contrib.admin.ModelAdmin):
     autocomplete_fields = ["teacher"]
 
 
-@django.contrib.admin.register(apps.schedule.models.Teacher)
-class TeacherAdmin(django.contrib.admin.ModelAdmin):
-    list_display = ["user", "name"]
-    list_filter = ["user"]
-    search_fields = ["user__username", "name"]
-
-
 @django.contrib.admin.register(apps.schedule.models.TimeSchedule)
 class TimeScheduleAdmin(django.contrib.admin.ModelAdmin):
     list_display = [
@@ -42,9 +35,3 @@ class TimeScheduleAdmin(django.contrib.admin.ModelAdmin):
     search_fields = ["user__username", "schedule__id"]
     autocomplete_fields = ["event", "schedule"]
 
-
-@django.contrib.admin.register(apps.schedule.models.Note)
-class NoteAdmin(django.contrib.admin.ModelAdmin):
-    list_display = ["user", "heading", "disposable", "global_note"]
-    list_filter = ["user", "disposable", "global_note"]
-    search_fields = ["user__username", "heading"]

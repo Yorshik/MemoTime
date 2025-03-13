@@ -6,39 +6,6 @@ import apps.users.models
 __all__ = ()
 
 
-class NoteManager(django.db.models.Manager):
-    def get_notes_for_user(self, user):
-        return self.filter(user=user)
-
-    def get_note_by_pk_and_user(self, pk, user):
-        return (
-            self.select_related("user")
-            .only(
-                "id",
-                "disposable",
-                "global_note",
-                "heading",
-                "description",
-                "user_id",
-                "user__id",
-                "user__username",
-            )
-            .get(pk=pk, user=user)
-        )
-
-
-class TeacherManager(django.db.models.Manager):
-    def get_teachers_for_user(self, user):
-        return self.filter(user=user)
-
-    def get_teacher_by_pk_and_user(self, pk, user):
-        return (
-            self.select_related("user")
-            .only("id", "name", "user__id", "user__username")
-            .get(pk=pk, user=user)
-        )
-
-
 class EventManager(django.db.models.Manager):
     def get_events_for_user(self, user):
         return self.filter(user=user)

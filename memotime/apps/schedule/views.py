@@ -222,9 +222,6 @@ class TimeScheduleCreateView(
         context["events"] = models.Event.objects.get_events_for_user(
             user=self.request.user,
         )
-        context["teachers"] = models.Teacher.objects.get_teachers_for_user(
-            user=self.request.user,
-        )
         context["schedule"] = models.Schedule.objects.get_schedule_by_pk_and_user(
             pk=self.kwargs["schedule_id"],
             user=self.request.user,
@@ -290,9 +287,6 @@ class TimeScheduleUpdateView(AccessMixin, django.views.generic.UpdateView):
         context = super().get_context_data(**kwargs)
         context["event_form"] = forms.EventForm(user=self.request.user)
         context["events"] = models.Event.objects.get_events_for_user(
-            user=self.request.user,
-        )
-        context["teachers"] = models.Teacher.objects.get_teachers_for_user(
             user=self.request.user,
         )
         context["schedule"] = self.object.schedule
@@ -426,151 +420,6 @@ class EventDeleteView(AccessMixin, django.views.generic.View):
         obj = self.get_object()
         obj.delete()
         success_url = django.urls.reverse_lazy("schedule:event-list")
-        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-            return django.http.JsonResponse({"status": "ok"})
-
-        return django.http.HttpResponseRedirect(success_url)
-
-
-class TeacherCreateView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.CreateView,
-):
-    model = models.Teacher
-    form_class = forms.TeacherForm
-    template_name = "schedule/teacher_form.html"
-    success_url = django.urls.reverse_lazy("schedule:teacher-list")
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-
-class TeacherListView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.ListView,
-):
-    model = models.Teacher
-    template_name = "schedule/teacher_list.html"
-    context_object_name = "teachers"
-
-    def get_queryset(self):
-        return models.Teacher.objects.get_teachers_for_user(user=self.request.user)
-
-
-class TeacherUpdateView(AccessMixin, django.views.generic.UpdateView):
-    model = models.Teacher
-    form_class = forms.TeacherForm
-    template_name = "schedule/teacher_form.html"
-    success_url = django.urls.reverse_lazy("schedule:teacher-list")
-
-    def get_object(self, queryset=None):
-        if not hasattr(self, "_teacher_object"):
-            self._teacher_object = models.Teacher.objects.get_teacher_by_pk_and_user(
-                pk=self.kwargs.get(self.pk_url_kwarg),
-                user=self.request.user,
-            )
-
-        return self._teacher_object
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["instance"] = self.get_object()
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["teacher_object"] = self.get_object()
-        return context
-
-
-class TeacherDeleteView(AccessMixin, django.views.generic.DeleteView):
-    model = models.Teacher
-    template_name = "schedule/teacher_confirm_delete.html"
-    success_url = django.urls.reverse_lazy("schedule:teacher-list")
-
-
-class NoteCreateView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.CreateView,
-):
-    model = models.Note
-    template_name = "schedule/note_form.html"
-    success_url = django.urls.reverse_lazy("schedule:note-list")
-    form_class = forms.NoteForm
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        return kwargs
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-
-class NoteListView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.ListView,
-):
-    model = models.Note
-    template_name = "schedule/note_list.html"
-    context_object_name = "notes"
-
-    def get_queryset(self):
-        return models.Note.objects.get_notes_for_user(user=self.request.user)
-
-
-class NoteUpdateView(AccessMixin, django.views.generic.UpdateView):
-    model = models.Note
-    form_class = forms.NoteForm
-    template_name = "schedule/note_form.html"
-    success_url = django.urls.reverse_lazy("schedule:note-list")
-
-    def get_object(self, queryset=None):
-        if not hasattr(self, "_note_object"):
-            self._note_object = (
-                models.Note.objects.select_related("user")
-                .only(
-                    "id",
-                    "disposable",
-                    "global_note",
-                    "heading",
-                    "description",
-                    "user_id",
-                    "user__id",
-                    "user__username",
-                )
-                .get(pk=self.kwargs.get(self.pk_url_kwarg), user=self.request.user)
-            )
-
-        return self._note_object
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        kwargs["instance"] = self.get_object()
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["note_object"] = self.get_object()
-        return context
-
-
-class NoteDeleteView(AccessMixin, django.views.generic.View):
-    model = models.Note
-
-    def get_object(self):
-        try:
-            return self.get_queryset().get(pk=self.kwargs.get("pk"))
-        except models.Note.DoesNotExist:
-            raise django.http.Http404(_("Note not found"))
-
-    def post(self, request, *args, **kwargs):
-        obj = self.get_object()
-        obj.delete()
-        success_url = django.urls.reverse_lazy("schedule:note-list")
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return django.http.JsonResponse({"status": "ok"})
 
