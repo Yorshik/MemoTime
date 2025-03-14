@@ -21,24 +21,10 @@ class ScheduleForm(django.forms.ModelForm):
                 attrs={"type": "date"},
                 format="%Y-%m-%d",
             ),
-            "group": django.forms.Select(
-                attrs={
-                    "class": "selectpicker",
-                    "data-select-all": "false",
-                    "data-search": "true",
-                    "data-close-list-on-item-select": "true",
-                    "data-radio": "true",
-                    "data-allow-unselect-radio": "true",
-                    "data-placeholder": _("Select group"),
-                },
-            ),
         }
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["group"].queryset = user.groups.all()
-        self.fields["start_date"].input_formats = ["%Y-%m-%d"]
-        self.fields["expiration_date"].input_formats = ["%Y-%m-%d"]
 
     def clean(self):
         cleaned_data = super().clean()
@@ -60,24 +46,15 @@ class EventForm(django.forms.ModelForm):
     class Meta:
         model = models.Event
         fields = [
-            "heading",        # Новое поле в начале
-
+            "heading",
             "description",
             "event_type",
-            "disposable",     # Новое поле в конце
+            "disposable",
+        ]
+        exclude = [
+            "user",
         ]
         widgets = {
-            "teacher": django.forms.Select(
-                attrs={
-                    "class": "selectpicker",
-                    "data-select-all": "false",
-                    "data-search": "true",
-                    "data-close-list-on-item-select": "true",
-                    "data-radio": "true",
-                    "data-allow-unselect-radio": "true",
-                    "data-placeholder": _("Select teacher"),
-                },
-            ),
             "event_type": django.forms.Select(
                 attrs={
                     "class": "selectpicker",
@@ -112,7 +89,6 @@ class EventForm(django.forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
-        self.fields["teacher"].queryset = models.Teacher.objects.filter(user=user)
 
         self.fields["user"] = django.forms.ModelChoiceField(
             queryset=models.User.objects.filter(pk=user.pk),
@@ -132,180 +108,180 @@ class EventForm(django.forms.ModelForm):
         return instance
 
 
-# class TimeScheduleForm(django.forms.ModelForm):
-#     class Meta:
-#         model = models.TimeSchedule
-#         fields = [
-#             "time_start",
-#             "time_end",
-#             "event",
-#             "day_number",
-#             "even",
-#         ]
-#         widgets = {
-#             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
-#             "time_end": django.forms.TimeInput(attrs={"type": "time"}),
-#             "event": django.forms.Select(
-#                 attrs={
-#                     "data-search": "true",
-#                     "class": "selectpicker",
-#                     "data-select-all": "false",
-#                     "data-close-list-on-item-select": "true",
-#                     "data-radio": "true",
-#                     "data-allow-unselect-radio": "true",
-#                     "data-placeholder": _("Select event"),
-#                 },
-#             ),
-#             "day_number": django.forms.Select(
-#                 attrs={
-#                     "class": "selectpicker",
-#                     "data-select-all": "false",
-#                     "data-close-list-on-item-select": "true",
-#                     "data-radio": "true",
-#                     "data-allow-unselect-radio": "true",
-#                     "data-placeholder": _("Select day"),
-#                 },
-#             ),
-#         }
+class TimeScheduleForm(django.forms.ModelForm):
+    class Meta:
+        model = models.TimeSchedule
+        fields = [
+            "time_start",
+            "time_end",
+            "event",
+            "day_number",
+            "even",
+        ]
+        widgets = {
+            "time_start": django.forms.TimeInput(attrs={"type": "time"}),
+            "time_end": django.forms.TimeInput(attrs={"type": "time"}),
+            "event": django.forms.Select(
+                attrs={
+                    "data-search": "true",
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select event"),
+                },
+            ),
+            "day_number": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select day"),
+                },
+            ),
+        }
 
-#     def __init__(self, user, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields["event"].queryset = models.Event.objects.filter(user=user)
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["event"].queryset = models.Event.objects.filter(user=user)
 
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         time_start = cleaned_data.get("time_start")
-#         time_end = cleaned_data.get("time_end")
-#         day_number = cleaned_data.get("day_number")
-#         event = cleaned_data.get("event")
-#         even = cleaned_data.get("even")
+    def clean(self):
+        cleaned_data = super().clean()
+        time_start = cleaned_data.get("time_start")
+        time_end = cleaned_data.get("time_end")
+        day_number = cleaned_data.get("day_number")
+        event = cleaned_data.get("event")
+        even = cleaned_data.get("even")
 
-#         if (
-#             not time_start
-#             or not time_end
-#             or not day_number
-#             or not event
-#             or even is None
-#         ):
-#             return cleaned_data
+        if (
+            not time_start
+            or not time_end
+            or not day_number
+            or not event
+            or even is None
+        ):
+            return cleaned_data
 
-#         if time_start >= time_end:
-#             raise ValidationError(
-#                 _("Start time must be earlier than end time."),
-#             )
+        if time_start >= time_end:
+            raise ValidationError(
+                _("Start time must be earlier than end time."),
+            )
 
-#         if event.event_type != models.Event.EventType.SUBJECT:
-#             return cleaned_data
+        if event.event_type != models.Event.EventType.SUBJECT:
+            return cleaned_data
 
-#         schedule_id = (
-#             self.instance.schedule.id
-#             if self.instance and self.instance.schedule
-#             else None
-#         )
+        schedule_id = (
+            self.instance.schedule.id
+            if self.instance and self.instance.schedule
+            else None
+        )
 
-#         if not schedule_id:
-#             return cleaned_data
+        if not schedule_id:
+            return cleaned_data
 
-#         existing_schedules = models.TimeSchedule.objects.filter(
-#             schedule_id=schedule_id,
-#             day_number=day_number,
-#             even=even,
-#             event__event_type=models.Event.EventType.SUBJECT,
-#         ).exclude(pk=self.instance.pk if self.instance else None)
+        existing_schedules = models.TimeSchedule.objects.filter(
+            schedule_id=schedule_id,
+            day_number=day_number,
+            even=even,
+            event__event_type=models.Event.EventType.SUBJECT,
+        ).exclude(pk=self.instance.pk if self.instance else None)
 
-#         for schedule in existing_schedules:
-#             if (time_start < schedule.time_end) and (time_end > schedule.time_start):
-#                 raise ValidationError(
-#                     _("Time overlaps with an existing event."),
-#                 )
+        for schedule in existing_schedules:
+            if (time_start < schedule.time_end) and (time_end > schedule.time_start):
+                raise ValidationError(
+                    _("Time overlaps with an existing event."),
+                )
 
-#         return cleaned_data
+        return cleaned_data
 
 
-# class AddTimeScheduleForm(django.forms.ModelForm):
-#     schedule = django.forms.ModelChoiceField(
-#         queryset=models.Schedule.objects.all(),
-#         widget=django.forms.HiddenInput(),
-#     )
+class AddTimeScheduleForm(django.forms.ModelForm):
+    schedule = django.forms.ModelChoiceField(
+        queryset=models.Schedule.objects.all(),
+        widget=django.forms.HiddenInput(),
+    )
 
-#     class Meta:
-#         model = models.TimeSchedule
-#         fields = [
-#             "schedule",
-#             "time_start",
-#             "time_end",
-#             "event",
-#             "day_number",
-#             "even",
-#         ]
-#         widgets = {
-#             "time_start": django.forms.TimeInput(attrs={"type": "time"}),
-#             "time_end": django.forms.TimeInput(attrs={"type": "time"}),
-#             "event": django.forms.Select(
-#                 attrs={
-#                     "data-search": "true",
-#                     "class": "selectpicker",
-#                     "data-select-all": "false",
-#                     "data-close-list-on-item-select": "true",
-#                     "data-radio": "true",
-#                     "data-allow-unselect-radio": "true",
-#                     "data-placeholder": _("Select event"),
-#                 },
-#             ),
-#             "day_number": django.forms.Select(
-#                 attrs={
-#                     "class": "selectpicker",
-#                     "data-select-all": "false",
-#                     "data-close-list-on-item-select": "true",
-#                     "data-radio": "true",
-#                     "data-allow-unselect-radio": "true",
-#                     "data-placeholder": _("Select day"),
-#                 },
-#             ),
-#         }
+    class Meta:
+        model = models.TimeSchedule
+        fields = [
+            "schedule",
+            "time_start",
+            "time_end",
+            "event",
+            "day_number",
+            "even",
+        ]
+        widgets = {
+            "time_start": django.forms.TimeInput(attrs={"type": "time"}),
+            "time_end": django.forms.TimeInput(attrs={"type": "time"}),
+            "event": django.forms.Select(
+                attrs={
+                    "data-search": "true",
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select event"),
+                },
+            ),
+            "day_number": django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select day"),
+                },
+            ),
+        }
 
-#     def __init__(self, user, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields["event"].queryset = models.Event.objects.filter(user=user)
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["event"].queryset = models.Event.objects.filter(user=user)
 
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         time_start = cleaned_data.get("time_start")
-#         time_end = cleaned_data.get("time_end")
-#         day_number = cleaned_data.get("day_number")
-#         event = cleaned_data.get("event")
-#         even = cleaned_data.get("even")
-#         schedule = cleaned_data.get("schedule")
+    def clean(self):
+        cleaned_data = super().clean()
+        time_start = cleaned_data.get("time_start")
+        time_end = cleaned_data.get("time_end")
+        day_number = cleaned_data.get("day_number")
+        event = cleaned_data.get("event")
+        even = cleaned_data.get("even")
+        schedule = cleaned_data.get("schedule")
 
-#         if (
-#             not time_start
-#             or not time_end
-#             or not day_number
-#             or not event
-#             or even is None
-#             or not schedule
-#         ):
-#             return cleaned_data
+        if (
+            not time_start
+            or not time_end
+            or not day_number
+            or not event
+            or even is None
+            or not schedule
+        ):
+            return cleaned_data
 
-#         if time_start >= time_end:
-#             raise ValidationError(
-#                 _("Start time must be earlier than end time."),
-#             )
+        if time_start >= time_end:
+            raise ValidationError(
+                _("Start time must be earlier than end time."),
+            )
 
-#         if event.event_type != models.Event.EventType.SUBJECT:
-#             return cleaned_data
+        if event.event_type != models.Event.EventType.SUBJECT:
+            return cleaned_data
 
-#         existing_schedules = models.TimeSchedule.objects.filter(
-#             schedule=schedule,
-#             day_number=day_number,
-#             even=even,
-#             event__event_type=models.Event.EventType.SUBJECT,
-#         )
+        existing_schedules = models.TimeSchedule.objects.filter(
+            schedule=schedule,
+            day_number=day_number,
+            even=even,
+            event__event_type=models.Event.EventType.SUBJECT,
+        )
 
-#         for schedule in existing_schedules:
-#             if (time_start < schedule.time_end) and (time_end > schedule.time_start):
-#                 raise ValidationError(
-#                     _("Time overlaps with an existing event."),
-#                 )
+        for schedule in existing_schedules:
+            if (time_start < schedule.time_end) and (time_end > schedule.time_start):
+                raise ValidationError(
+                    _("Time overlaps with an existing event."),
+                )
 
-#         return cleaned_data
+        return cleaned_data

@@ -12,7 +12,7 @@ class EventManager(django.db.models.Manager):
 
     def get_event_by_pk_and_user(self, pk, user):
         return (
-            self.select_related("user", "teacher")
+            self.select_related("user")
             .prefetch_related("notes")
             .only(
                 "id",
@@ -22,11 +22,8 @@ class EventManager(django.db.models.Manager):
                 "event_type",
                 "priority",
                 "user_id",
-                "teacher_id",
                 "user__id",
                 "user__username",
-                "teacher__id",
-                "teacher__name",
             )
             .get(pk=pk, user=user)
         )
@@ -35,7 +32,7 @@ class EventManager(django.db.models.Manager):
 class ScheduleManager(django.db.models.Manager):
     def get_schedules_for_user(self, user):
         return (
-            self.filter(Q(user=user) | Q(group__in=user.groups.all()))
+            self.filter(Q(user=user))
             .select_related("user")
             .annotate(
                 is_owner=Case(
@@ -49,8 +46,7 @@ class ScheduleManager(django.db.models.Manager):
 
     def get_schedule_by_pk(self, pk):
         return (
-            self.select_related("user", "group__creator")
-            .prefetch_related("group__user_set")
+            self.select_related("user")
             .get(pk=pk)
         )
 
@@ -58,26 +54,13 @@ class ScheduleManager(django.db.models.Manager):
         return (
             self.select_related(
                 "user",
-                "group__creator",
-            )
-            .prefetch_related(
-                django.db.models.Prefetch(
-                    "user__created_groups",
-                    queryset=apps.users.models.Group.objects.all(),
-                ),
             )
             .only(
                 "id",
                 "user_id",
-                "group_id",
                 "is_static",
-                "start_date",
-                "expiration_date",
                 "user__id",
                 "user__username",
-                "group__group_ptr_id",
-                "group__name",
-                "group__creator_id",
             )
             .get(pk=pk, user=user)
         )

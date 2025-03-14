@@ -134,7 +134,16 @@ class TimeSchedule(django.db.models.Model):
         choices=DayNumber.choices,
         help_text=_("Day of the week (1-7)"),
     )
-
+    time_start = django.db.models.TimeField(
+        _("start time"),
+        null=True,
+        help_text=_("Start time of the subject/event"),
+    )
+    time_end = django.db.models.TimeField(
+        _("end time"),
+        null=True,
+        help_text=_("End time of the subject/event"),
+    )
     objects = TimeScheduleManager()
 
     class Meta:

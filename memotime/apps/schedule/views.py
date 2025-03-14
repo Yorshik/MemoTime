@@ -47,7 +47,6 @@ class ScheduleCreateView(
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields["group"].queryset = self.request.user.created_groups.all()
         return form
 
     def form_valid(self, form):
@@ -189,10 +188,6 @@ class ScheduleDetailView(
         ]
 
         context["only_view"] = False
-        if self.object.group and self.request.user in self.object.group.user_set.all():
-            if self.object.group.creator != self.request.user:
-                context["only_view"] = True
-
         return context
 
 
