@@ -11,7 +11,7 @@
     <div class="list">
       {% for event in events %}
         <div class="item">
-          <h4>{{ event.name|truncatechars:25 }}</h4>
+          <h4>{{ event.heading|truncatechars:25 }}</h4>
           <div class="btns">
             <a href="{% url 'schedule:event-update' pk=event.pk %}"
                class="btn"

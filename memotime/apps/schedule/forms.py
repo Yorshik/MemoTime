@@ -10,17 +10,10 @@ __all__ = []
 class ScheduleForm(django.forms.ModelForm):
     class Meta:
         model = models.Schedule
-        fields = ["is_static"]
+        fields = ["name", "is_static"]
         labels = {"is_static": _("Changes by week")}
         widgets = {
-            "start_date": django.forms.DateInput(
-                attrs={"type": "date"},
-                format="%Y-%m-%d",
-            ),
-            "expiration_date": django.forms.DateInput(
-                attrs={"type": "date"},
-                format="%Y-%m-%d",
-            ),
+            "name": django.forms.TextInput(),
         }
 
     def __init__(self, user, *args, **kwargs):

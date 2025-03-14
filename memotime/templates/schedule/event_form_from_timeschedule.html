@@ -19,9 +19,6 @@
     {% with form=form %}
       {% include 'includes/form.html' %}
     {% endwith %}
-    <div class="links">
-      <a href="{% url 'schedule:teacher-create' %}">{% translate 'Add Teacher' %}</a>
-    </div>
     <button type="submit" class="btn">{% translate 'Save' %}</button>
   </form>
 {% endblock body %}

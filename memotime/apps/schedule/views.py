@@ -46,8 +46,7 @@ class ScheduleCreateView(
         return kwargs
 
     def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        return form
+        return super().get_form(form_class)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -78,9 +77,7 @@ class ScheduleUpdateView(
         return kwargs
 
     def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        form.fields["group"].queryset = self.get_object().user.created_groups.all()
-        return form
+        return super().get_form(form_class)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

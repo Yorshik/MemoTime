@@ -58,10 +58,10 @@ class Event(django.db.models.Model):
 
     def __str__(self):
         max_length = 25
-        if len(self.name) > max_length:
-            return self.name[: max_length - 3] + "..."
+        if len(self.heading) > max_length:
+            return self.heading[: max_length - 3] + "..."
 
-        return self.name
+        return self.heading
 
 
 class Schedule(django.db.models.Model):
@@ -70,6 +70,12 @@ class Schedule(django.db.models.Model):
         on_delete=django.db.models.CASCADE,
         related_name="schedules",
         help_text=_("User"),
+    )
+    name = django.db.models.TextField(
+        _("name"),
+        help_text="Text",
+        max_length=500,
+        blank=True,
     )
     is_static = django.db.models.BooleanField(
         _("static"),

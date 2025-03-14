@@ -6,13 +6,13 @@
 {% endblock extra_css %}
 {% block body %}
   <section>
+    <h2>{% translate 'My Schedules' %}</h2>
+    <a href="{% url 'schedule:schedule-create' %}" class="btn btn_create">{% translate 'Create New Schedule' %}</a>
     {% if owned_schedules %}
-      <h2>{% translate 'My Schedules' %}</h2>
-      <a href="{% url 'schedule:schedule-create' %}" class="btn btn_create">{% translate 'Create New Schedule' %}</a>
       <div class="list">
         {% for schedule in owned_schedules %}
           <div class="item">
-            <h4>{{ schedule.start_date }} — {{ schedule.expiration_date|default:"∞" }}</h4>
+            <h4>{{ schedule.name }}</h4>
             <a href="{% url 'schedule:schedule-detail' schedule.pk %}"
                class="btn btn_check">{% translate 'View' %}</a>
             <div class="btns">

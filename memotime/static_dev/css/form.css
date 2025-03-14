@@ -49,6 +49,10 @@ main {
   pointer-events: none;
 }
 
+.main-form div:has(input[type="hidden"]){
+  display: none;
+}
+
 .main-form div:not(:has(input[type="checkbox"])) input:focus+label,
 .main-form div:not(:has(input[type="checkbox"])) input:not(:focus):valid+label,
 .main-form div:not(:has(input[type="checkbox"])) input:not(:placeholder-shown):not(:empty)+label {

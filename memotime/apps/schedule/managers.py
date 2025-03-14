@@ -1,8 +1,6 @@
 import django.db.models
 from django.db.models import BooleanField, Case, Q, When
 
-import apps.users.models
-
 __all__ = ()
 
 
@@ -13,14 +11,11 @@ class EventManager(django.db.models.Manager):
     def get_event_by_pk_and_user(self, pk, user):
         return (
             self.select_related("user")
-            .prefetch_related("notes")
             .only(
                 "id",
-                "name",
-                "custom_name",
+                "heading",
                 "description",
                 "event_type",
-                "priority",
                 "user_id",
                 "user__id",
                 "user__username",
