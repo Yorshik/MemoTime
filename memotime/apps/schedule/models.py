@@ -6,62 +6,12 @@ from django.utils.translation import gettext_lazy as _
 from apps.schedule.managers import (
     EventManager,
     ScheduleManager,
-    TimeScheduleManager,
 )
 import apps.users.models
 
 __all__ = ()
 
 User = django.contrib.auth.get_user_model()
-
-
-class Event(django.db.models.Model):
-    class EventType(django.db.models.TextChoices):
-        SUBJECT = "subject", _("Subject")
-        CLUB = "club", _("Club")
-        EVENT = "event", _("Event")
-
-    disposable = django.db.models.BooleanField(
-        _("disposable"),
-        default=True,
-        help_text=_("Determines if the note is used only once"),
-    )
-    heading = django.db.models.CharField(
-        _("heading"),
-        max_length=128,
-        help_text=_("Note heading"),
-    )
-    description = django.db.models.TextField(
-        _("description"),
-        help_text=_("Event description"),
-        max_length=10000,
-        blank=True,
-    )
-    event_type = django.db.models.CharField(
-        _("type"),
-        max_length=20,
-        choices=EventType.choices,
-        help_text=_("Event type"),
-    )
-    user = django.db.models.ForeignKey(
-        User,
-        on_delete=django.db.models.CASCADE,
-        related_name="events",
-        help_text=_("User"),
-    )
-
-    objects = EventManager()
-
-    class Meta:
-        verbose_name = _("event")
-        verbose_name_plural = _("events")
-
-    def __str__(self):
-        max_length = 25
-        if len(self.heading) > max_length:
-            return self.heading[: max_length - 3] + "..."
-
-        return self.heading
 
 
 class Schedule(django.db.models.Model):
@@ -101,7 +51,12 @@ class Schedule(django.db.models.Model):
         return result
 
 
-class TimeSchedule(django.db.models.Model):
+class Event(django.db.models.Model):
+    class EventType(django.db.models.TextChoices):
+        SUBJECT = "subject", _("Subject")
+        CLUB = "club", _("Club")
+        EVENT = "event", _("Event")
+
     class DayNumber(django.db.models.IntegerChoices):
         MONDAY = 1, _("Monday")
         TUESDAY = 2, _("Tuesday")
@@ -119,20 +74,32 @@ class TimeSchedule(django.db.models.Model):
         related_name="timeschedules",
         help_text=_("Schedule"),
     )
-    event = django.db.models.ForeignKey(
-        Event,
-        on_delete=django.db.models.CASCADE,
-        related_name="timeschedules",
-        help_text=_("Event"),
+    disposable = django.db.models.BooleanField(
+        _("disposable"),
+        default=True,
+        help_text=_("Determines if the note is used only once"),
     )
-    even = django.db.models.BooleanField(
-        _("even week"),
-        help_text=_("Even/odd week for the subject"),
+    heading = django.db.models.CharField(
+        _("heading"),
+        max_length=128,
+        help_text=_("Note heading"),
+    )
+    description = django.db.models.TextField(
+        _("description"),
+        help_text=_("Event description"),
+        max_length=10000,
+        blank=True,
+    )
+    event_type = django.db.models.CharField(
+        _("type"),
+        max_length=20,
+        choices=EventType.choices,
+        help_text=_("Event type"),
     )
     user = django.db.models.ForeignKey(
         User,
         on_delete=django.db.models.CASCADE,
-        related_name="timeschedules",
+        related_name="events",
         help_text=_("User"),
     )
     day_number = django.db.models.IntegerField(
@@ -150,16 +117,16 @@ class TimeSchedule(django.db.models.Model):
         null=True,
         help_text=_("End time of the subject/event"),
     )
-    objects = TimeScheduleManager()
+
+    objects = EventManager()
 
     class Meta:
-        verbose_name = _("time schedule")
-        verbose_name_plural = _("time schedules")
+        verbose_name = _("event")
+        verbose_name_plural = _("events")
 
     def __str__(self):
-        max_length = 45
-        result = f"{self.event} - {self.time_start} - {self.time_end}"
-        if len(result) > max_length:
-            return result[: max_length - 3] + "..."
+        max_length = 25
+        if len(self.heading) > max_length:
+            return self.heading[: max_length - 3] + "..."
 
-        return result
+        return self.heading

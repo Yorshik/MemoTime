@@ -23,6 +23,23 @@ class EventManager(django.db.models.Manager):
             .get(pk=pk, user=user)
         )
 
+    def get_timeschedules_for_schedule(self, schedule):
+        return (
+            self.filter(schedule=schedule)
+            .order_by("day_number", "time_start")
+        )
+
+    def get_timeschedule_by_pk_and_user(self, pk, user):
+        return self.select_related("schedule__user").get(pk=pk, schedule__user=user)
+
+    def get_time_slots_for_schedule(self, schedule):
+        return (
+            self.filter(schedule=schedule)
+            .values("time_start", "time_end")
+            .distinct()
+            .order_by("time_start")
+        )
+
 
 class ScheduleManager(django.db.models.Manager):
     def get_schedules_for_user(self, user):
@@ -62,23 +79,3 @@ class ScheduleManager(django.db.models.Manager):
 
     def get_object_for_user(self, pk, user):
         return self.get_schedule_by_pk_and_user(pk, user)
-
-
-class TimeScheduleManager(django.db.models.Manager):
-    def get_timeschedules_for_schedule(self, schedule):
-        return (
-            self.filter(schedule=schedule)
-            .select_related("event")
-            .order_by("day_number", "time_start")
-        )
-
-    def get_timeschedule_by_pk_and_user(self, pk, user):
-        return self.select_related("schedule__user").get(pk=pk, schedule__user=user)
-
-    def get_time_slots_for_schedule(self, schedule):
-        return (
-            self.filter(schedule=schedule)
-            .values("time_start", "time_end")
-            .distinct()
-            .order_by("time_start")
-        )
