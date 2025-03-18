@@ -64,7 +64,7 @@
           </form>
         {% endif %}
         {% if not only_view %}
-          <a href="{% url 'schedule:timeschedule-create' schedule.id %}"
+          <a href="{% url 'schedule:event-create' %}"
              class="btn"
              tooltip="{% translate 'Create' %}"
              flow="up">

@@ -70,8 +70,9 @@ class Event(django.db.models.Model):
 
     schedule = django.db.models.ForeignKey(
         Schedule,
+        null=True,
         on_delete=django.db.models.CASCADE,
-        related_name="timeschedules",
+        related_name="events",
         help_text=_("Schedule"),
     )
     disposable = django.db.models.BooleanField(
@@ -105,6 +106,7 @@ class Event(django.db.models.Model):
     day_number = django.db.models.IntegerField(
         _("day of the week"),
         choices=DayNumber.choices,
+        default=DayNumber.MONDAY,
         help_text=_("Day of the week (1-7)"),
     )
     time_start = django.db.models.TimeField(

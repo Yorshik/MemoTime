@@ -49,7 +49,7 @@ main {
   pointer-events: none;
 }
 
-.main-form div:has(input[type="hidden"]){
+.main-form div > #id_user + label{
   display: none;
 }
 

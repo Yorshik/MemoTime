@@ -161,7 +161,7 @@ class ScheduleDetailView(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        time_schedules = models.TimeSchedule.objects.get_timeschedules_for_schedule(
+        time_schedules = models.Event.objects.get_timeschedules_for_schedule(
             schedule=self.object,
         )
         context["time_schedules"] = time_schedules
