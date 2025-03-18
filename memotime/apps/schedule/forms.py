@@ -10,8 +10,7 @@ __all__ = []
 class ScheduleForm(django.forms.ModelForm):
     class Meta:
         model = models.Schedule
-        fields = ["name", "is_static"]
-        labels = {"is_static": _("Changes by week")}
+        fields = ["name"]
         widgets = {
             "name": django.forms.TextInput(),
         }
@@ -42,7 +41,6 @@ class EventForm(django.forms.ModelForm):
             "heading",
             "description",
             "event_type",
-            "disposable",
             "time_start",
             "time_end",
             "day_number",
@@ -69,11 +67,6 @@ class EventForm(django.forms.ModelForm):
                     "data-radio": "true",
                     "data-allow-unselect-radio": "true",
                     "data-placeholder": _("Select priority"),
-                },
-            ),
-            "disposable": django.forms.CheckboxInput(
-                attrs={
-                    "class": "form-check-input",
                 },
             ),
             "time_start": django.forms.TimeInput(attrs={"type": "time"}),

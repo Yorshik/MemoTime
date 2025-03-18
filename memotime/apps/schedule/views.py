@@ -150,24 +150,18 @@ class ScheduleDetailView(
     def dispatch(self, request, *args, **kwargs):
         schedule = self.get_object()
         if schedule.user != request.user:
-            if not schedule.group:
-                raise django.http.Http404(_("You cannot view this content."))
-
-            if request.user not in schedule.group.user_set.all():
-                raise django.http.Http404(_("You cannot view this content."))
+            raise django.http.Http404(_("You cannot view this content."))
 
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        time_schedules = models.Event.objects.get_timeschedules_for_schedule(
-            schedule=self.object,
-        )
-        context["time_schedules"] = time_schedules
+        events = models.Event.objects.get_timeschedules_for_schedule(schedule=self.object)
+        context["events"] = events
 
         time_slots = set()
-        for ts in time_schedules:
+        for ts in events:
             time_slots.add((ts.time_start, ts.time_end))
 
         context["time_slots"] = [
@@ -194,7 +188,7 @@ class EventCreateView(
 ):
     model = models.Event
     template_name = "schedule/event_form.html"
-    success_url = django.urls.reverse_lazy("schedule:event-list")
+    success_url = django.urls.reverse_lazy("schedule:schedule-list")
     form_class = forms.EventForm
 
     def form_valid(self, form):
@@ -205,6 +199,31 @@ class EventCreateView(
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
         return kwargs
+
+
+class EventCreateView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.CreateView,
+):
+    model = models.Event
+    template_name = "schedule/event_form.html"
+    form_class = forms.EventForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.schedule = models.Schedule.objects.get(pk=self.kwargs['schedule_pk'])
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def get_success_url(self):
+        return django.urls.reverse_lazy(
+            "schedule:schedule-detail",
+            kwargs={"pk": self.kwargs["schedule_pk"]},
+        )
 
 
 class EventListView(
@@ -222,7 +241,7 @@ class EventListView(
 class EventUpdateView(AccessMixin, django.views.generic.UpdateView):
     model = models.Event
     template_name = "schedule/event_form.html"
-    success_url = django.urls.reverse_lazy("schedule:event-list")
+    success_url = django.urls.reverse_lazy("schedule:schedule-list")
     form_class = forms.EventForm
 
     def get_object(self, queryset=None):
@@ -261,7 +280,7 @@ class EventDeleteView(AccessMixin, django.views.generic.View):
     def post(self, request, *args, **kwargs):
         obj = self.get_object()
         obj.delete()
-        success_url = django.urls.reverse_lazy("schedule:event-list")
+        success_url = django.urls.reverse_lazy("schedule:schedule-list")
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return django.http.JsonResponse({"status": "ok"})
 

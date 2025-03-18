@@ -36,7 +36,7 @@ urlpatterns = [
         name="event-list",
     ),
     django.urls.path(
-        "event/create/",
+        "event/create/<int:schedule_pk>/",
         views.EventCreateView.as_view(),
         name="event-create",
     ),

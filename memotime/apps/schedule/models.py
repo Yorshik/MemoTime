@@ -117,6 +117,7 @@ class Event(django.db.models.Model):
     time_end = django.db.models.TimeField(
         _("end time"),
         null=True,
+        blank=True,
         help_text=_("End time of the subject/event"),
     )
 

@@ -64,7 +64,7 @@
           </form>
         {% endif %}
         {% if not only_view %}
-          <a href="{% url 'schedule:event-create' %}"
+          <a href="{% url 'schedule:event-create' schedule.pk  %}"
              class="btn"
              tooltip="{% translate 'Create' %}"
              flow="up">
@@ -84,18 +84,18 @@
           <div class="day-column">
             <b class="day-heading">{{ day.name }}</b>
             {% for time_slot in time_slots %}
-              {% for timeschedule in time_schedules %}
-                {% if timeschedule.day_number == day.number and timeschedule.time_start == time_slot.start and timeschedule.time_end == time_slot.end %}
-                  <div class="time-schedule-item {% if not schedule.is_static %}{% if timeschedule.even %}time-schedule-item-even{% else %}time-schedule-item-odd{% endif %}{% endif %}"
-                       id="timeschedule-{{ timeschedule.pk }}"
-                       data-even="{{ timeschedule.even }}">
-                    <p>{{ time_slot.start|time:"H:i" }}–{{ time_slot.end|time:"H:i" }}</p>
-                    <b>{{ timeschedule.event.heading|truncatechars:15 }}</b>
-                    {% if not schedule.is_static %}({{ timeschedule.even|yesno:"Even,Odd" }}){% endif %}
+              {% for event in events %}
+                {% if event.day_number == day.number and event.time_start == time_slot.start and event.time_end == time_slot.end %}
+                  <div class="time-schedule-item {% if not schedule.is_static %}{% if event.even %}time-schedule-item-even{% else %}time-schedule-item-odd{% endif %}{% endif %}"
+                       id="event-{{ event.pk }}"
+                       data-even="{{ event.even }}">
+                    <p>{{ time_slot.start|time:"H:i" }}{% if time_slot.end %}–{{ time_slot.end|time:"H:i" }}{% endif %}</p>
+                    <b>{{ event.heading|truncatechars:15 }}</b>
+                    {% if not schedule.is_static %}({{ event.even|yesno:"Even,Odd" }}){% endif %}
                     {% if not only_view %}
                       <div class="btns">
                         <div tooltip="{% translate 'Edit' %}" flow="up">
-                          <a href="{% url 'schedule:timeschedule-update' timeschedule.pk %}">
+                          <a href="{% url 'schedule:event-update' event.pk %}">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="20"
                                  height="20"
@@ -107,7 +107,7 @@
                           </a>
                         </div>
                         <div tooltip="{% translate 'Delete' %}" flow="up">
-                          <button data-url="{% url 'schedule:timeschedule-delete' timeschedule.pk %}"
+                          <button data-url="{% url 'schedule:event-delete' event.pk %}"
                                   id="btn-del">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="16"
