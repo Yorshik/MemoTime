@@ -6,7 +6,7 @@
       <img src="{% static '/img/logo.png' %}" alt="{% translate 'Logo' %}">
     </a>
     <div class="burger-container">
-      <nav>
+      <nav id="burgerNavigation">
         <ul>
           <li>
             <a href="{% url 'schedule:schedule-list' %}">{% translate 'Schedule List' %}</a>
@@ -59,7 +59,7 @@
           {% endif %}
         </ul>
       </nav>
-      <button class="btn btn_burger">
+      <button class="btn btn_burger" id="burgerBtn">
         <div class="icon"></div>
       </button>
     </div>

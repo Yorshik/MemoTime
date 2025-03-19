@@ -39,7 +39,7 @@ h2{
     textarea:focus + label,
     textarea:not(:focus):valid + label{
       top: -25px;
-      scale: .95; 
+      scale: .95;
     }
   }
   div:has(img){
@@ -55,4 +55,12 @@ h2{
   padding: 10px 15px;
   font-size: 20px;
   text-align: center;
+}
+
+@media (width <= 1000px) {
+  .main-form{
+    width: 100vw;
+    background: none;
+    box-shadow: none;
+  }
 }

@@ -89,7 +89,7 @@ main {
     & > div:nth-last-child(2) {
       display: none !important;
     }
-    
+
     & > div:not(:has(#id_is_email_subscribed)){
       position: relative;
       display: flex;
@@ -166,5 +166,27 @@ main {
     text-align: center;
     padding: 20px 15px;
     flex-basis: 100%;
+  }
+}
+
+@media (width <= 1600px) {
+  .profile{
+    flex-direction: column;
+    background: none;
+    align-items: center;
+    width: 600px;
+
+    .profile__left, .profile__right{
+      width: 100%;
+    }
+    .btn_profile{
+      flex-basis: auto;
+    }
+  }
+}
+
+@media (width <= 650px) {
+  .profile{
+    width: 100vw;
   }
 }

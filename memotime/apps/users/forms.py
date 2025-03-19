@@ -93,11 +93,25 @@ class UserCreationForm(
         fields = (
             apps.users.models.User.username.field.name,
             apps.users.models.User.email.field.name,
+            apps.users.models.User.timezone.field.name,
             "password1",
             "password2",
             "captcha",
             "agree_to_data_processing",
         )
+        widgets = {
+            apps.users.models.User.timezone.field.name: django.forms.Select(
+                attrs={
+                    "class": "selectpicker",
+                    "data-search": "true",
+                    "data-select-all": "false",
+                    "data-close-list-on-item-select": "true",
+                    "data-radio": "true",
+                    "data-allow-unselect-radio": "true",
+                    "data-placeholder": _("Select timezone"),
+                },
+            ),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -117,8 +131,6 @@ class UserProfileForm(
         fields = (
             apps.users.models.User.username.field.name,
             apps.users.models.User.email.field.name,
-            apps.users.models.User.first_name.field.name,
-            apps.users.models.User.last_name.field.name,
             apps.users.models.User.timezone.field.name,
             apps.users.models.User.is_email_subscribed.field.name,
             apps.users.models.User.image.field.name,

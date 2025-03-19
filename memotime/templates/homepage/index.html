@@ -26,15 +26,15 @@
         <img src="{% static 'img/landing-img3.png' %}" alt="" class="image_screen1 image gallery__item">
       </div>
       <div class="gallery__right" data-speed="1.1">
-        <div class="text-block gallery__item">
+        <div class="text-block gallery__item" data-image="{% static 'img/landing-img.png' %}">
           <h2 class="text-block__h">{% translate 'Alerts' %}</h2>
           <p class="text-block__p">{% translate 'Notifications about notes can be sent by mail' %}</p>
         </div>
-        <div class="text-block gallery__item">
+        <div class="text-block gallery__item" data-image="{% static 'img/landing-img2.png' %},{% static 'img/landing-img2_2.png' %}">
           <h2 class="text-block__h">{% translate 'Adaptation' %}</h2>
           <p class="text-block__p">{% translate 'Our site has adaptations for different screen sizes' %}</p>
         </div>
-        <div class="text-block gallery__item">
+        <div class="text-block gallery__item" data-image="{% static 'img/landing-img3.png' %}">
           <h2 class="text-block__h">{% translate 'Availability' %}</h2>
           <p class="text-block__p">
             {% translate 'Translations into several languages are used. There is also an intuitive interface that is easy to use' %}
@@ -43,72 +43,6 @@
       </div>
     </section>
   </div>
-  <section class="feedbacks">
-    <div class="wrap">
-      <h2>{% translate 'Feedback' %}</h2>
-      <div class="items-wrap">
-        <div class="items marquee">
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>Иван Иванов</p>
-            </div>
-            <p>
-              MemoTime помогает мне легко планировать расписание, добавляя события и заметки. Структура расписаний кажется очень продуманной и удобной
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>NONE</p>
-            </div>
-            <p>
-              Карточки с информацией о пользователях и их отзывами выглядят очень современно и профессионально. Они создают приятное впечатление о сайте
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>Павел НЕ Енот</p>
-            </div>
-            <p>
-              Навигация по сайту интуитивно понятна, легко переходить между разделами и быстро находить нужную информацию. Расположение элементов очень логичное
-            </p>
-          </div>
-        </div>
-        <div class="items marquee">
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>Ёжик</p>
-            </div>
-            <p>
-              MemoTime выглядит не только хорошо, но и отлично работает. Сочетание удобного интерфейса и мощных инструментов для планирования делает этот сайт очень полезным
-            </p>
-          </div>
-          <div class="item">
-            <div class="info-user">
-              <img src="{% static 'img/no-avatar.jpg' %}"
-                   alt="{% translate 'avatar' %}"
-                   class="avatar">
-              <p>АЙМА</p>
-            </div>
-            <p>
-              Функция создания групп и совместного использования расписаний — это просто находка. Удобно координировать мероприятия с коллегами или друзьями
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 {% endblock body %}
 {% block extra_js %}
   <script src="{% static 'js/libs/gsap/gsap.min.js' %}" defer></script>

@@ -97,6 +97,78 @@
   gap: 20px;
 }
 
+@media screen and (max-width: 1300px) {
+  .gallery {
+    flex-direction: column;
+    margin-top: 50px;
+  }
+
+  .gallery__left,
+  .gallery__right {
+    flex: none;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .gallery__left {
+    display: none; /* Скрываем оригинальные изображения */
+  }
+
+  .gallery__right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .gallery__right .gallery__item {
+    width: 100%;
+    margin-bottom: 0 !important;
+    align-items: center;
+
+    p{
+      text-align: center;
+      width: 80%;
+    }
+  }
+
+  /* Общий стиль для псевдоэлементов ::after */
+  .gallery__right .text-block::after {
+    content: "";
+    display: block;
+    margin-top: 20px;
+    width: 90%;
+    max-width: 630px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--shadow);
+    border: var(--border);
+    border-radius: 10px;
+  }
+
+  /* Первый блок (Alerts) */
+  .gallery__right .text-block:nth-child(1)::after {
+    background-image: url("/static/img/landing-img.png");
+  }
+
+  /* Второй блок (Adaptation) - только одно изображение */
+  .gallery__right .text-block:nth-child(2)::after {
+    background-image: url("/static/img/landing-img2.png");
+    /* Для второго изображения (landing-img2_2.png) нужно объединить их в один файл заранее */
+  }
+
+  /* Третий блок (Availability) */
+  .gallery__right .text-block:nth-child(3)::after {
+    background-image: url("/static/img/landing-img3.png");
+  }
+
+  /* Отключаем анимации GSAP для мобильной версии */
+  .gallery__left .gallery__item,
+  .gallery__right .gallery__item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 .wrap {
   padding: 20px;
 
@@ -177,7 +249,7 @@
 }
 
 .marquee {
-  animation: scroll 40s linear infinite;
+  animation: scroll 20s linear infinite;
 }
 .items-wrap:hover .marquee {
   animation-play-state: paused;

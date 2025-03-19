@@ -46,3 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Добавляем обработчик клика на кнопку для переключения темы
   themeToggleBtn.addEventListener("click", toggleTheme);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const burgerBtn = document.querySelector("#burgerBtn")
+  const burgerNavigation = document.querySelector("#burgerNavigation")
+  const html = document.querySelector("html")
+  burgerBtn.addEventListener("click", function(){
+    burgerBtn.classList.toggle("open")
+    burgerNavigation.classList.toggle("open")
+    html.classList.toggle("lock")
+  })
+});

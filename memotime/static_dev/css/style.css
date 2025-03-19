@@ -2,12 +2,21 @@
 @import url(/static/font.css);
 
 html {
-  visibility: hidden;
-  /* Скрываем страницу до применения темы */
+  visibility: visible;
+  overflow-x: hidden !important;
+
+  &.lock{
+    overflow: hidden !important;
+  }
 }
 
 html[data-theme] {
   visibility: visible;
+  overflow-x: hidden !important;
+
+  &.lock{
+    overflow: hidden !important;
+  }
 }
 
 :root {
@@ -81,6 +90,7 @@ html[data-theme] {
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  /* outline: 5px solid #003900; */
   transition: background-color .2s,
     color .2s,
     background .2s,
@@ -120,12 +130,6 @@ body {
     &:not(&.btn, &:has(img)):hover {
       &::after {
         width: 100%;
-        height: 2px;
-        display: block;
-        background-color: var(--text-color);
-        content: " ";
-        position: absolute;
-        top: 34px;
         left: 0;
       }
     }
@@ -310,29 +314,33 @@ header {
     }
 
     .btn_burger {
+      width: 50px;
+      height: 50px;
+      position: relative;
       display: none;
-      margin-left: -20px;
 
       .icon {
         height: 5px;
-        width: 25px;
-        top: 30px;
+        width: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50% );
         background-color: var(--text-color);
         border-radius: 20px;
-        position: absolute;
-        transition-duration: 0.5s;
-        transition-delay: 0.5s;
+        transition-duration: 0.2s;
+        transition-delay: 0.2s;
 
         &:before {
           left: 0;
           position: absolute;
           top: -11px;
           height: 5px;
-          width: 25px;
+          width: 30px;
           background-color: var(--text-color);
           content: "";
           border-radius: 20px;
-          transition: transform 0.5s, top 0.5s 0.5s;
+          transition: transform 0.2s, top 0.2s 0.2s;
 
         }
 
@@ -341,33 +349,99 @@ header {
           position: absolute;
           top: 11px;
           height: 5px;
-          width: 25px;
+          width: 30px;
           background-color: var(--text-color);
           content: "";
           border-radius: 20px;
-          transition: transform 0.5s, top 0.5s 0.5s;
+          transition: transform 0.2s, top 0.2s 0.2s;
         }
       }
 
       &.open {
         .icon {
           transition-duration: 0.1s;
-          transition-delay: 0.5s;
+          transition-delay: 0.2s;
           background: transparent;
 
           &:before {
-            transition: top 0.5s, transform 0.5s 0.5s;
+            transition: top 0.2s, transform 0.2s 0.2s;
             top: 0px;
             transform: rotateZ(-45deg);
           }
 
           &:after {
-            transition: top 0.4s, transform 0.5s 0.5s;
+            transition: top 0.2s, transform 0.2s 0.2s;
             top: 0px;
             transform: rotateZ(45deg);
           }
         }
       }
+    }
+  }
+}
+@media (width <= 1150px) {
+  header .burger-container{
+    nav{
+      position: absolute;
+      background-color: var(--second-color);
+      top: 0;
+      right: -45%;
+      z-index: 2;
+      width: 45%;
+      height: 100vh;
+      transition: right .2s ease-in-out;
+
+      &.open{
+        right: 0;
+      }
+      ul{
+        width: 100%;;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+
+        li{
+          margin-bottom: 40px;
+
+          a{
+            font-size: 20px;
+            background-color: var(--second-color);
+            color: var(--text-color);
+            border-radius: 400px;
+            box-shadow: var(--shadow);
+            border: var(--border);
+            transition: all .2s;
+            padding: 10px 15px;
+
+            &:active {
+              box-shadow: var(--shadow-inset);
+            }
+            &::after{
+              display: block;
+              height: 0;
+            }
+            &.btn_prof{
+              width: 70px;
+              height: 70px;
+            }
+          }
+          .btn_theme{
+            height: 70px;
+            width: 70px;
+
+            img{
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+    }
+    .btn_burger{
+      display: block;
+      position: relative;
+      z-index: 5;
     }
   }
 }
@@ -397,6 +471,25 @@ footer {
   .navigation {
     display: flex;
     gap: 120px;
+  }
+}
+
+@media (width <= 1000px) {
+  footer{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+
+    .navigation{
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+
+      nav ul{
+        align-items: center;
+      }
+    }
   }
 }
 

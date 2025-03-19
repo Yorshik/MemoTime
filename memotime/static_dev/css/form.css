@@ -60,6 +60,15 @@ main {
   scale: 0.95;
 }
 
+.main-form div:has(.multi-select-wrapper){
+  position: static;
+  display: block;
+
+  label{
+    top: -25px !important;
+  }
+}
+
 .main-form div:has(img) {
   display: grid;
   gap: 35px;
@@ -111,3 +120,12 @@ main {
   font-size: 20px;
   text-align: center;
 }
+
+@media (width <= 1000px) {
+  .main-form{
+    width: 100vw;
+    background: none;
+    box-shadow: none;
+  }
+}
+

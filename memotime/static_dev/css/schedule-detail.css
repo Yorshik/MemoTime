@@ -18,7 +18,7 @@
       padding: 10px 15px;
     }
   }
-  
+
   section{
     display: flex;
     flex-direction: column;
@@ -44,6 +44,10 @@
     border-radius: 10px;
     box-shadow: var(--shadow);
     padding: 20px;
+
+    .info__main p{
+      display: none;
+    }
   }
 }
 .time-schedule{
@@ -100,7 +104,7 @@
       & ~ .switch {
         &::before { opacity: 1; }
         &::after {
-          left: 57%; 
+          left: 57%;
         }
       }
     }
@@ -203,5 +207,29 @@
     &#btn_no{
       background-color: var(--back-btn-landing);
     }
+  }
+}
+
+@media (width <= 1500px) {
+  .wrap__header{
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+    align-items: center;
+
+    h2{
+      position: static !important;
+      transform: none !important;
+    }
+  }
+
+  .schedule-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .time-schedule-item .btns div{
+    padding: 10px 13px;
+    border: 1px solid var(--text-color);
+    border-radius: 50%;
   }
 }
