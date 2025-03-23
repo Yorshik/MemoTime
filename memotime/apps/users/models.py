@@ -44,6 +44,12 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
         blank=True,
         help_text=_("Whether Telegram notifications are enabled"),
     )
+    telegram_id = django.db.models.CharField(
+        max_length=20,
+        unique=True,
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = _("user")

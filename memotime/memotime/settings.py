@@ -46,9 +46,9 @@ INSTALLED_APPS = [
     "django.forms",
     # Внешние приложения,
     "captcha",
-    "django_ratelimit",
     "django_redis",
     "django_celery_results",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -159,7 +159,7 @@ LANGUAGES = [
     ("en-us", _("English")),
 ]
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
@@ -198,14 +198,6 @@ EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = f"MemoTime <{EMAIL_HOST_USER}>"
 
 
-RATE_LIMIT = decouple.config("MEMOTIME_RATE_LIMIT", default=False)
-RATE_LIMIT_TIMEOUT = decouple.config(
-    "MEMOTIME_RATE_LIMIT_TIMEOUT",
-    default=60 * 60 * 24,
-    cast=int,
-)
-
-
 CAPTCHA_LENGTH = 6
 CAPTCHA_IMAGE_SIZE = (300, 120)
 CAPTCHA_FONT_SIZE = 40
@@ -213,14 +205,14 @@ CAPTCHA_FONT_SIZE = 40
 
 CELERY_BROKER_URL = decouple.config(
     "CELERY_BROKER_URL",
-    default="redis://redis:6379/0",
+    default="redis://localhost:6379/0",
 )
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_CACHE_BACKEND = "django-cache"
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = "UTC"
+CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_BEAT_MAX_LOOP_INTERVAL = 15
 
 CACHES = {

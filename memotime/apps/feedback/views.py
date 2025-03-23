@@ -6,7 +6,7 @@ import django.utils.translation
 from django.utils.translation import gettext_lazy as _
 import django.views.generic.edit
 
-import apps.core.celery_tasks
+import apps.schedule.celery_tasks
 import apps.feedback.forms
 
 __all__ = ()
@@ -27,7 +27,7 @@ class FeedbackView(django.views.generic.edit.FormView):
         feedback.personal_data = author
         feedback.save()
 
-        apps.core.celery_tasks.send_email_task.delay(
+        apps.schedule.celery_tasks.send_email_task.delay(
             _(f"Thanks for the feedback, {author.name}!"),
             "feedback/email/feedback_confirmation.html",
             {

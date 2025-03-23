@@ -62,7 +62,7 @@ urlpatterns = [
     django.urls.path(
         "reset/done/",
         apps.users.views.CustomPasswordResetCompleteView.as_view(),
-        name="password-reset-complete",
+        name="password_reset_complete",
     ),
     django.urls.path(
         "reset/<uidb64>/<token>/",

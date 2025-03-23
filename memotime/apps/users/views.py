@@ -5,7 +5,6 @@ import django.contrib.auth.views
 import django.contrib.messages
 import django.core.mail
 import django.core.signing
-from django.db.models import BooleanField, Case, Q, Value, When
 import django.http
 import django.shortcuts
 import django.urls
@@ -13,7 +12,7 @@ import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
-import apps.core.celery_tasks
+import apps.schedule.celery_tasks
 import apps.users.forms
 import apps.users.models
 import apps.users.tokens
@@ -36,7 +35,7 @@ class RegisterView(django.views.generic.edit.FormView):
                 ),
             )
 
-            apps.core.celery_tasks.send_email_task.delay(
+            apps.schedule.celery_tasks.send_email_task.delay(
                 _(f"Account activation, {user.username}"),
                 "users/email/user_activation_email.html",
                 {"link": link, "username": user.username},
@@ -134,7 +133,7 @@ class ActivateResendView(django.views.View):
             django.urls.reverse("users:activate", args=[new_token]),
         )
 
-        apps.core.celery_tasks.send_email_task.delay(
+        apps.schedule.celery_tasks.send_email_task.delay(
             _(f"Account reactivation, {user.username}"),
             "users/email/user_reactivation_email.html",
             {"link": link, "username": user.username},
@@ -188,7 +187,7 @@ class CustomPasswordResetConfirmView(
         )
         self.request.session["password_reset_complete"] = True
         del self.request.session["password_reset_confirm"]
-        return super().form_valid(form)
+        return django.shortcuts.redirect(django.urls.reverse("users:password_reset_complete"))
 
     def get_context_data(self, **kwargs):
         self.request.session["password_reset_confirm"] = True

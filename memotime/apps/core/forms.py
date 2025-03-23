@@ -1,3 +1,5 @@
+import django.forms
+
 __all__ = ()
 
 
@@ -13,3 +15,19 @@ class BaseForm:
                 field.field.widget.attrs["class"] = (
                     f"{existing_class} form-control".strip()
                 )
+
+
+class CustomCheckboxInput(django.forms.CheckboxInput):
+    template_name = "widgets/checkbox-input.html"
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context["label_text"] = self.attrs.pop("label_text", "")
+
+        if "class" in context["widget"]["attrs"]:
+            if "check" not in context["widget"]["attrs"]["class"]:
+                context["widget"]["attrs"]["class"] += " check"
+        else:
+            context["widget"]["attrs"]["class"] = "check"
+
+        return context

@@ -16,22 +16,6 @@ normalizer = apps.users.email_normalizer.EmailNormalizer()
 User = django.contrib.auth.get_user_model()
 
 
-class CustomCheckboxInput(django.forms.CheckboxInput):
-    template_name = "widgets/checkbox-input.html"
-
-    def get_context(self, name, value, attrs):
-        context = super().get_context(name, value, attrs)
-        context["label_text"] = self.attrs.pop("label_text", "")
-
-        if "class" in context["widget"]["attrs"]:
-            if "check" not in context["widget"]["attrs"]["class"]:
-                context["widget"]["attrs"]["class"] += " check"
-        else:
-            context["widget"]["attrs"]["class"] = "check"
-
-        return context
-
-
 class UserCreationForm(
     apps.core.forms.BaseForm,
     django.contrib.auth.forms.UserCreationForm,
@@ -48,7 +32,7 @@ class UserCreationForm(
                 "You must agree to the personal data processing to register.",
             ),
         },
-        widget=CustomCheckboxInput(
+        widget=apps.core.forms.CustomCheckboxInput(
             attrs={
                 "label_text": django.utils.html.format_html(
                     _("Do you agree to provide your <a href='{}'>personal data</a>?"),

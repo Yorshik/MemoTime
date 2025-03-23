@@ -77,7 +77,7 @@ class Event(django.db.models.Model):
     )
     disposable = django.db.models.BooleanField(
         _("disposable"),
-        default=True,
+        default=False,
         help_text=_("Determines if the note is used only once"),
     )
     heading = django.db.models.CharField(

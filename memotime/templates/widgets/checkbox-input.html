@@ -1,5 +1,5 @@
 {% load i18n %}
-<input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% for name, value in widget.attrs.items %} {{ name }}="{{ value }}"{% endfor %}>
+<input type="{{ widget.type }}" name="{{ widget.name }}" {% if widget.value %}checked{% endif %}{% for name, value in widget.attrs.items %} {{ name }}="{{ value }}"{% endfor %}>
 <label for="{{ widget.attrs.id }}" class="checkbox">✓</label>
 <label for="{{ widget.attrs.id }}" class="link">
   {% autoescape off %}

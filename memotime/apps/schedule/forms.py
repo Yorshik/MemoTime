@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 import django.forms
 from django.utils.translation import gettext_lazy as _
 
+import apps.core.forms
 from apps.schedule import models
 
 __all__ = []
@@ -96,6 +97,16 @@ class EventForm(django.forms.ModelForm):
             widget=django.forms.HiddenInput(),
             required=False,
         )
+        self.fields["disposable"] = django.forms.BooleanField(
+            required=False,
+            label="",
+            widget=apps.core.forms.CustomCheckboxInput(
+                attrs={
+                    "label_text": _("Is the Event disposable?"),
+                },
+            ),
+        )
+
 
     def clean(self):
         cleaned_data = super().clean()
@@ -149,6 +160,8 @@ class EventForm(django.forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         instance.user = self.user
+        instance.disposable = self.cleaned_data.get('disposable', False)
+        print(f"Saving instance: disposable = {instance.disposable}")
         if commit:
             instance.save()
 

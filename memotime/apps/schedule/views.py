@@ -2,10 +2,13 @@ import django.contrib.auth.mixins
 import django.http
 import django.shortcuts
 import django.urls
+import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
-from apps.schedule import forms, models
+import datetime
+
+from apps.schedule import forms, models, celery_tasks
 
 __all__ = []
 
@@ -193,26 +196,28 @@ class EventCreateView(
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        return kwargs
-
-
-class EventCreateView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.CreateView,
-):
-    model = models.Event
-    template_name = "schedule/event_form.html"
-    form_class = forms.EventForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
         form.instance.schedule = models.Schedule.objects.get(pk=self.kwargs['schedule_pk'])
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        event = form.instance
+        now = django.utils.timezone.now()
+        event_time = event.time_start
+        event_day = event.day_number
+        current_weekday = now.isoweekday()
+        days_until_event = (event_day - current_weekday) % 7
+        if days_until_event == 0 and now.time() > event_time:
+            days_until_event = 7
+
+        event_date = now.date() + datetime.timedelta(days=days_until_event)
+        event_datetime = django.utils.timezone.make_aware(
+            datetime.datetime.combine(event_date, event_time),
+            django.utils.timezone.get_current_timezone()
+        )
+        celery_tasks.send_event_reminder.apply_async(
+            args=[event.id],
+            eta=event_datetime,
+        )
+
+        return response
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
