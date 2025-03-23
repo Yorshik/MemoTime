@@ -73,7 +73,6 @@ class MultiSelect {
         this._updateSelected();
         this._eventHandlers();
 
-        // Скрываем пустой элемент при инициализации
         this._hideEmptyOption();
     }
 
@@ -81,17 +80,17 @@ class MultiSelect {
         let optionsHTML = "";
         for (let i = 0; i < this.options.data.length; i++) {
             optionsHTML += `
-                  <div class="multi-select-option${this.selectedValues.includes(this.options.data[i].value)
+                <div class="multi-select-option${this.selectedValues.includes(this.options.data[i].value)
                     ? " multi-select-selected"
                     : ""
                 }" data-value="${this.options.data[i].value}" ${this.options.data[i].value === "" ? 'style="display: none;"' : ''}>
-                      <span class="multi-select-option-radio"></span>
-                      <span class="multi-select-option-text">${this.options.data[i].html
+                    <span class="multi-select-option-radio"></span>
+                    <span class="multi-select-option-text">${this.options.data[i].html
                     ? this.options.data[i].html
                     : this.options.data[i].text
                 }</span>
-                  </div>
-              `;
+                </div>
+            `;
         }
         let selectAllHTML = "";
         if (
@@ -99,38 +98,36 @@ class MultiSelect {
             this.options.selectAll === "true"
         ) {
             selectAllHTML = `<div class="multi-select-all">
-                  <span class="multi-select-option-radio"></span>
-                  <span class="multi-select-option-text">Select all</span>
-              </div>`;
+                <span class="multi-select-option-radio"></span>
+                <span class="multi-select-option-text">Select all</span>
+            </div>`;
         }
-        let searchHTML = this.options.search === true || this.options.search === "true"
-            ? '<input type="text" class="multi-select-search" placeholder="Search...">'
-            : "";
         let template = `
-              <div class="multi-select ${this.name
+            <div class="multi-select ${this.name
             }"${this.selectElement.id ? ' id="' + this.selectElement.id + '-ms"' : ""
             } style="${this.options.width ? "width:" + this.options.width + ";" : ""}${this.options.height ? "height:" + this.options.height + ";" : ""
             }">
-                  <div class="multi-select-header" style="${this.options.width
+                <div class="multi-select-header" style="${this.options.width
                 ? "width:" + this.options.width + ";"
                 : ""
             }${this.options.height ? "height:" + this.options.height + ";" : ""}">
-                      <span class="multi-select-header-placeholder">${this.options.placeholder
-            }</span>
-                  </div>
-                  <div class="multi-select-options" style="${this.options.dropdownWidth
+                    ${this.options.search === true || this.options.search === "true"
+                ? '<input type="text" class="multi-select-search-header" placeholder="' + this.options.placeholder + '">'
+                : '<span class="multi-select-header-placeholder">' + this.options.placeholder + '</span>'
+            }
+                </div>
+                <div class="multi-select-options" style="${this.options.dropdownWidth
                 ? "width:" + this.options.dropdownWidth + ";"
                 : ""
             }${this.options.dropdownHeight
                 ? "height:" + this.options.dropdownHeight + ";"
                 : ""
             }">
-                        ${searchHTML}
-                        ${selectAllHTML}
-                        ${optionsHTML}
-                  </div>
-              </div>
-          `;
+                    ${selectAllHTML}
+                    ${optionsHTML}
+                </div>
+            </div>
+        `;
         let element = document.createElement("div");
         element.innerHTML = template;
         return element.firstElementChild;
@@ -156,8 +153,6 @@ class MultiSelect {
                             this.selectElement.value = "";
                             this.options.onUnselect(clickedOption.dataset.value, clickedOption.querySelector(".multi-select-option-text").innerHTML, clickedOption);
                             shouldCloseDropdown = true;
-
-                            // Выбираем невидимое поле, если убран селект в radio режиме
                             this._selectEmptyOption();
                         } else {
                             this.element
@@ -208,13 +203,6 @@ class MultiSelect {
 
                 this._updateHeader();
 
-                if (
-                    this.options.search === true ||
-                    this.options.search === "true"
-                ) {
-                    this.element.querySelector(".multi-select-search").value = "";
-                }
-                // Изменения здесь: убираем установку display: flex для всех элементов
                 this.element
                     .querySelectorAll(".multi-select-option")
                     .forEach((opt) => {
@@ -237,16 +225,18 @@ class MultiSelect {
             }
         };
 
-        headerElement.onclick = () =>
-            headerElement.classList.toggle("multi-select-header-active");
+        headerElement.onclick = (e) => {
+            if (!e.target.classList.contains('multi-select-search-header')) {
+                headerElement.classList.toggle("multi-select-header-active");
+            }
+        };
 
         if (this.options.search === true || this.options.search === "true") {
-            let search = this.element.querySelector(".multi-select-search");
+            let search = this.element.querySelector(".multi-select-search-header");
             search.oninput = () => {
                 this.element
                     .querySelectorAll(".multi-select-option")
                     .forEach((option) => {
-                        // Изменения здесь: не устанавливаем display: flex для пустого элемента
                         if (option.dataset.value !== "") {
                             option.style.display =
                                 option
@@ -257,7 +247,9 @@ class MultiSelect {
                                     : "none";
                         }
                     });
+                headerElement.classList.add("multi-select-header-active");
             };
+            search.onclick = (e) => e.stopPropagation();
         }
 
         if (
@@ -322,7 +314,7 @@ class MultiSelect {
         });
 
         if (this.options.radio === true && this.selectElement.value === "") {
-            this.element.querySelector(".multi-select-header").innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
+            this._updateHeader();
         } else {
             this._updateHeader();
         }
@@ -334,27 +326,49 @@ class MultiSelect {
             ".multi-select-option.multi-select-selected",
         );
 
-        // Если выбрано невидимое поле, отображаем плейсхолдер
-        if (this.options.radio && this.selectedValues.includes("")) {
-            headerElement.innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
-        } else if (selectedOptions.length > 0) {
-            let selectedTexts = [];
-            selectedOptions.forEach(option => {
-                if (option.dataset.value !== "") {
-                    selectedTexts.push(option.querySelector(".multi-select-option-text").innerHTML);
+        if (this.options.search === true || this.options.search === "true") {
+            let searchInput = headerElement.querySelector(".multi-select-search-header");
+            if (this.options.radio && this.selectedValues.includes("")) {
+                searchInput.value = "";
+                searchInput.placeholder = this.options.placeholder;
+            } else if (selectedOptions.length > 0) {
+                let selectedTexts = [];
+                selectedOptions.forEach(option => {
+                    if (option.dataset.value !== "") {
+                        selectedTexts.push(option.querySelector(".multi-select-option-text").innerHTML);
+                    }
+                });
+                if (selectedTexts.length === 0) {
+                    searchInput.value = "";
+                    searchInput.placeholder = this.options.placeholder;
+                } else {
+                    searchInput.value = selectedTexts.join(", ");
                 }
-            });
-            if (selectedTexts.length === 0) {
-                headerElement.innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
             } else {
-                headerElement.innerHTML = selectedTexts.join(", ");
+                searchInput.value = "";
+                searchInput.placeholder = this.options.placeholder;
             }
         } else {
-            headerElement.innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
+            if (this.options.radio && this.selectedValues.includes("")) {
+                headerElement.innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
+            } else if (selectedOptions.length > 0) {
+                let selectedTexts = [];
+                selectedOptions.forEach(option => {
+                    if (option.dataset.value !== "") {
+                        selectedTexts.push(option.querySelector(".multi-select-option-text").innerHTML);
+                    }
+                });
+                if (selectedTexts.length === 0) {
+                    headerElement.innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
+                } else {
+                    headerElement.innerHTML = selectedTexts.join(", ");
+                }
+            } else {
+                headerElement.innerHTML = `<span class="multi-select-header-placeholder">${this.options.placeholder}</span>`;
+            }
         }
     }
 
-    // Метод для скрытия пустого поля
     _hideEmptyOption() {
         const emptyOption = this.element.querySelector('.multi-select-option[data-value=""]');
         if (emptyOption) {
@@ -362,16 +376,13 @@ class MultiSelect {
         }
     }
 
-    // Метод для выбора пустого поля
     _selectEmptyOption() {
         const emptyOption = this.element.querySelector('.multi-select-option[data-value=""]');
         if (emptyOption) {
-            // Снимаем выделение со всех остальных опций
             this.element.querySelectorAll('.multi-select-option.multi-select-selected').forEach(option => {
                 option.classList.remove('multi-select-selected');
             });
 
-            // Выбираем пустое поле
             emptyOption.classList.add('multi-select-selected');
             this.options.data.forEach(data => data.selected = false);
             const emptyData = this.options.data.find(data => data.value === "");
@@ -455,7 +466,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll("select.selectpicker").forEach((select) => {
         console.log("Initializing MultiSelect for (selectpicker):", select);
-
         new MultiSelect(select);
     });
 });

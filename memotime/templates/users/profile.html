@@ -19,28 +19,24 @@
       {% endif %}
       <a href="{% url 'users:password-change' %}" class="btn btn_change">{% translate 'Change the password' %}</a>
       <a href="{% url 'users:logout' %}" class="btn">{% translate 'Log Out' %}</a>
+      <span id="btn-del" class="btn" data-url="{% url 'users:logout' %}">{% translate 'Delete Accaount' %}</span>
     </div>
     <div class="profile__right">
       {% csrf_token %}
       {% with form=form %}
         {% include "includes/form.html" %}
+        {% if not user.is_telegram_subscribed %}
+          <a href="https://t.me/MemoTime_BOT" target="_blank" class="link-tg btn">{% translate 'Привязать аккаунт Телеграм' %}</a>
+        {% endif %}
       {% endwith %}
     </div>
-    <button type="submit" class="btn btn_profile">{% translate 'Change Profile information' %}</button>
+    <div class="btns">
+      <button type="submit" class="btn btn_profile">{% translate 'Change Profile information' %}</button>
+    </div>
   </form>
+  {% include 'includes/modal.html' %}
 {% endblock body %}
 {% block extra_js %}
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var imageInput = document.getElementById('id_image');
-    var changePasswordLink = document.querySelector('.profile__left .btn_change');
-    var profileLeft = document.querySelector('.profile__left');
-    var profileRight = document.querySelector('.profile__right');
-    if (imageInput && changePasswordLink) {
-      profileLeft.appendChild(imageInput);
-      profileRight.appendChild(changePasswordLink);
-    }
-  });
-  </script>
   <script src="{% static 'js/multi-select.js' %}"></script>
+  <script src="{% static 'js/delete-modal.js' %}"></script>
 {% endblock extra_js %}

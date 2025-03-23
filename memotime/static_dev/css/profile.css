@@ -36,28 +36,9 @@ main {
       place-content: center;
     }
 
-    input[type="file"] {
-      position: relative;
-      padding-left: 210px;
-      overflow: hidden;
-    }
-
-    input[type="file"]::file-selector-button {
-      background-color: var(--back-color);
-      box-shadow: var(--shadow-inset);
-      border: var(--border);
-      transition: all .2s;
-      cursor: pointer;
-      color: var(--text-color);
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 200px;
-    }
-
     .btn {
-      padding: 20px 15px;
+      padding: 10px;
+      font-size: 14px;
       width: 100%;
       text-align: center;
 
@@ -86,11 +67,30 @@ main {
       display: none;
     }
 
-    & > div:nth-last-child(2) {
-      display: none !important;
+    & > div:has(input[type=file]){
+      input[type="file"] {
+        position: relative;
+        padding-left: 210px;
+        overflow: hidden;
+      }
+
+      input[type="file"]::file-selector-button {
+        background-color: var(--back-color);
+        box-shadow: var(--shadow-inset);
+        border: var(--border);
+        transition: all .2s;
+        cursor: pointer;
+        color: var(--text-color);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 200px;
+      }
     }
 
-    & > div:not(:has(#id_is_email_subscribed)){
+
+    & > div:not(:has(input[type=checkbox])){
       position: relative;
       display: flex;
       flex-direction: column;
@@ -124,7 +124,7 @@ main {
       }
     }
 
-    div:has(#id_is_email_subscribed) {
+    div:has(input[type=checkbox]) {
       display: flex;
       flex-wrap: wrap;
 
@@ -161,15 +161,23 @@ main {
     }
   }
 
-  .btn_profile {
-    font-size: 20px;
-    text-align: center;
-    padding: 20px 15px;
+  .btns{
     flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .link-tg{
+      align-self: flex-start;
+    }
+    .btn_profile{
+      font-size: 20px;
+      padding: 15px;
+    }
   }
 }
 
-@media (width <= 1600px) {
+@media (width <= 1520px) {
   .profile{
     flex-direction: column;
     background: none;
@@ -179,8 +187,9 @@ main {
     .profile__left, .profile__right{
       width: 100%;
     }
-    .btn_profile{
+    .btns{
       flex-basis: auto;
+      width: 100%;
     }
   }
 }
@@ -188,5 +197,42 @@ main {
 @media (width <= 650px) {
   .profile{
     width: 100vw;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.modal-content {
+  background-color: var(--second-color);
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .btns{
+    display: flex;
+    gap: 10px;
+  }
+  .btn{
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 20px;
+
+    &#btn_no{
+      background-color: var(--back-btn-landing);
+    }
   }
 }

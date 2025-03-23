@@ -110,14 +110,20 @@ class UserProfileForm(
         super().__init__(*args, **kwargs)
         del self.fields[apps.users.models.User.password.field.name]
 
+        if self.instance and not self.instance.is_telegram_subscribed:
+            if apps.users.models.User.telegram_id.field.name in self.fields:
+                del self.fields[apps.users.models.User.telegram_id.field.name]
+
     class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
         model = apps.users.models.User
         fields = (
+            apps.users.models.User.image.field.name,
             apps.users.models.User.username.field.name,
             apps.users.models.User.email.field.name,
             apps.users.models.User.timezone.field.name,
             apps.users.models.User.is_email_subscribed.field.name,
-            apps.users.models.User.image.field.name,
+            apps.users.models.User.is_telegram_subscribed.field.name,
+            apps.users.models.User.telegram_id.field.name,
         )
         widgets = {
             "image": django.forms.FileInput,
