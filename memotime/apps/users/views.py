@@ -224,3 +224,14 @@ class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):
 class LoginView(django.contrib.auth.views.LoginView):
     form_class = apps.users.forms.LoginForm
     redirect_authenticated_user = True
+
+
+class DeletView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.View,
+):
+    def get(self, request, *args, **kwargs):
+        request.user.delete()
+        return django.http.HttpResponseRedirect(
+            django.urls.reverse_lazy("homepage:homepage"),
+        )

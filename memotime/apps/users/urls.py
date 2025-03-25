@@ -24,6 +24,11 @@ urlpatterns = [
         name="login",
     ),
     django.urls.path(
+        "delete/",
+        apps.users.views.DeletView.as_view(),
+        name="delete",
+    ),
+    django.urls.path(
         "logout/",
         django.contrib.auth.views.LogoutView.as_view(
             template_name="users/logout.html",
