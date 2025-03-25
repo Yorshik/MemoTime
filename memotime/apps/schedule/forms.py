@@ -107,7 +107,6 @@ class EventForm(django.forms.ModelForm):
             ),
         )
 
-
     def clean(self):
         cleaned_data = super().clean()
         time_start = cleaned_data.get("time_start")
@@ -160,7 +159,7 @@ class EventForm(django.forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         instance.user = self.user
-        instance.disposable = self.cleaned_data.get('disposable', False)
+        instance.disposable = self.cleaned_data.get("disposable", False)
         print(f"Saving instance: disposable = {instance.disposable}")
         if commit:
             instance.save()

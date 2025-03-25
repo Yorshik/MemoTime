@@ -112,6 +112,9 @@ class UserProfileForm(
 
         if self.instance and not self.instance.is_telegram_subscribed:
             if apps.users.models.User.telegram_id.field.name in self.fields:
+                del self.fields[
+                    apps.users.models.User.is_telegram_subscribed.field.name
+                ]
                 del self.fields[apps.users.models.User.telegram_id.field.name]
 
     class Meta(django.contrib.auth.forms.UserChangeForm.Meta):

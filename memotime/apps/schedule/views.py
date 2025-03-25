@@ -160,7 +160,9 @@ class ScheduleDetailView(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        events = models.Event.objects.get_timeschedules_for_schedule(schedule=self.object)
+        events = models.Event.objects.get_timeschedules_for_schedule(
+            schedule=self.object
+        )
         context["events"] = events
 
         time_slots = set()
@@ -196,7 +198,9 @@ class EventCreateView(
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.schedule = models.Schedule.objects.get(pk=self.kwargs['schedule_pk'])
+        form.instance.schedule = models.Schedule.objects.get(
+            pk=self.kwargs["schedule_pk"]
+        )
         response = super().form_valid(form)
         event = form.instance
         now = django.utils.timezone.now()
@@ -210,7 +214,7 @@ class EventCreateView(
         event_date = now.date() + datetime.timedelta(days=days_until_event)
         event_datetime = django.utils.timezone.make_aware(
             datetime.datetime.combine(event_date, event_time),
-            django.utils.timezone.get_current_timezone()
+            django.utils.timezone.get_current_timezone(),
         )
         celery_tasks.send_event_reminder.apply_async(
             args=[event.id],

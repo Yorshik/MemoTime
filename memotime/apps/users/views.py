@@ -187,7 +187,9 @@ class CustomPasswordResetConfirmView(
         )
         self.request.session["password_reset_complete"] = True
         del self.request.session["password_reset_confirm"]
-        return django.shortcuts.redirect(django.urls.reverse("users:password_reset_complete"))
+        return django.shortcuts.redirect(
+            django.urls.reverse("users:password_reset_complete")
+        )
 
     def get_context_data(self, **kwargs):
         self.request.session["password_reset_confirm"] = True

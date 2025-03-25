@@ -24,10 +24,7 @@ class EventManager(django.db.models.Manager):
         )
 
     def get_timeschedules_for_schedule(self, schedule):
-        return (
-            self.filter(schedule=schedule)
-            .order_by("day_number", "time_start")
-        )
+        return self.filter(schedule=schedule).order_by("day_number", "time_start")
 
     def get_timeschedule_by_pk_and_user(self, pk, user):
         return self.select_related("schedule__user").get(pk=pk, schedule__user=user)
@@ -57,10 +54,7 @@ class ScheduleManager(django.db.models.Manager):
         )
 
     def get_schedule_by_pk(self, pk):
-        return (
-            self.select_related("user")
-            .get(pk=pk)
-        )
+        return self.select_related("user").get(pk=pk)
 
     def get_schedule_by_pk_and_user(self, pk, user):
         return (
