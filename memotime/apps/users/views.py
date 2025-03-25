@@ -12,6 +12,7 @@ import django.utils.timezone
 from django.utils.translation import gettext_lazy as _
 import django.views.generic
 
+import apps.core.celery_tasks
 import apps.schedule.celery_tasks
 import apps.users.forms
 import apps.users.models
@@ -35,7 +36,7 @@ class RegisterView(django.views.generic.edit.FormView):
                 ),
             )
 
-            apps.schedule.celery_tasks.send_email_task.delay(
+            apps.core.celery_tasks.send_email_task.delay(
                 _(f"Account activation, {user.username}"),
                 "users/email/user_activation_email.html",
                 {"link": link, "username": user.username},
@@ -133,7 +134,7 @@ class ActivateResendView(django.views.View):
             django.urls.reverse("users:activate", args=[new_token]),
         )
 
-        apps.schedule.celery_tasks.send_email_task.delay(
+        apps.core.celery_tasks.send_email_task.delay(
             _(f"Account reactivation, {user.username}"),
             "users/email/user_reactivation_email.html",
             {"link": link, "username": user.username},
@@ -162,7 +163,7 @@ class ProfileView(
     def form_valid(self, form):
         django.contrib.messages.success(
             self.request,
-            _("Профиль успешно обновлен"),
+            _("Profile Successfully Updated"),
         )
         return super().form_valid(form)
 
@@ -183,7 +184,7 @@ class CustomPasswordResetConfirmView(
     def form_valid(self, form):
         django.contrib.messages.success(
             self.request,
-            _("Пароль успешно изменен"),
+            _("Password successfully Reset"),
         )
         self.request.session["password_reset_complete"] = True
         del self.request.session["password_reset_confirm"]
@@ -226,12 +227,14 @@ class LoginView(django.contrib.auth.views.LoginView):
     redirect_authenticated_user = True
 
 
-class DeletView(
+class DeleteView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.View,
 ):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         request.user.delete()
-        return django.http.HttpResponseRedirect(
-            django.urls.reverse_lazy("homepage:homepage"),
+        django.contrib.auth.logout(request)
+        django.contrib.messages.success(request, _("You have successfully deleted your account."))
+        return django.shortcuts.redirect(
+            django.urls.reverse("homepage:homepage")
         )

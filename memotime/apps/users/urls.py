@@ -25,7 +25,7 @@ urlpatterns = [
     ),
     django.urls.path(
         "delete/",
-        apps.users.views.DeletView.as_view(),
+        apps.users.views.DeleteView.as_view(),
         name="delete",
     ),
     django.urls.path(

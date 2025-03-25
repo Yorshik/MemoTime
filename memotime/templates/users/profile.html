@@ -19,14 +19,14 @@
       {% endif %}
       <a href="{% url 'users:password-change' %}" class="btn btn_change">{% translate 'Change the password' %}</a>
       <span id="btn-del" data-url="{% url 'users:logout' %}" data-question="{% translate 'Are you sure you want to log out of your account' %}?" class="btn">{% translate 'Log Out' %}</span>
-      <span id="btn-del" data-url="{% url 'users:delete' %}" class="btn" data-url="">{% translate 'Delete Accaount' %}</span>
+      <span id="btn-del" data-url="{% url 'users:delete' %}" class="btn" data-url="">{% translate 'Delete Account' %}</span>
     </div>
     <div class="profile__right">
       {% csrf_token %}
       {% with form=form %}
         {% include "includes/form.html" %}
         {% if not user.is_telegram_subscribed %}
-          <a href="https://t.me/MemoTime_BOT" target="_blank" class="link-tg btn">{% translate 'Привязать аккаунт Телеграм' %}</a>
+          <a href="https://t.me/MemoTime_BOT" target="_blank" class="link-tg btn">{% translate 'Link Telegram Account' %}</a>
         {% endif %}
       {% endwith %}
     </div>

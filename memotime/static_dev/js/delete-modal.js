@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       modalQuestion.textContent = question
         ? question
-        : modalQuestion.dataset.defaultText;
+        : modalQuestion.dataset.defaultText
     });
   });
 

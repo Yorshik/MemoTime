@@ -40,7 +40,7 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
     )
     is_telegram_subscribed = django.db.models.BooleanField(
         _("Telegram notifications"),
-        default=True,
+        default=False,
         blank=True,
         help_text=_("Whether Telegram notifications are enabled"),
     )
