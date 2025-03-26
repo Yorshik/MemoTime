@@ -1,0 +1,50 @@
+.main-form{
+  margin-block: 40px;
+
+  div:not(:has(input[type="checkbox"])){
+    label{
+      top: -25px;
+      scale: .95; 
+    }
+  }
+  div:has(input[name="schedule"]){
+    display: none;
+  }
+  div:has(input[type="checkbox"]){
+    display: flex;
+    flex-wrap: wrap;
+
+    input{
+      width: 30px;
+      height: 30px;
+      accent-color: var(--active-togle);
+      appearance: none;
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow: var(--shadow-inset);
+      margin-right: 10px;
+    }
+    input::before {
+      content: "✓";
+      color:transparent;
+      font-weight: 900;
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      top: 0;
+    }
+    input:checked::before {
+      color: var(--text-color-form);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  button{
+    padding: 10px 15px;
+    font-size: 20px;
+  }
+}

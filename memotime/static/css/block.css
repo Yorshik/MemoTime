@@ -1,0 +1,22 @@
+main{
+  display: grid;
+  place-content: center;
+}
+.wrap{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 600px;
+  padding: 20px;
+  background-color: var(--second-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow-inset);
+
+  .btn{
+    text-align: center;
+    padding: 10px 15px;
+  }
+}
+h2{
+  text-align: center;
+}
