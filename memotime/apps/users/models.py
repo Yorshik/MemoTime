@@ -29,7 +29,7 @@ class User(django.contrib.auth.models.AbstractUser, apps.core.models.BaseImageMo
         _("timezone"),
         max_length=50,
         choices=TIMEZONE_CHOICES,
-        default=TIMEZONE_CHOICES[-1],
+        default=("Europe/Moscow", "Europe/Moscow"),
         help_text=_("User's time zone"),
     )
     is_email_subscribed = django.db.models.BooleanField(

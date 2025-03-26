@@ -26,7 +26,7 @@
       {% with form=form %}
         {% include "includes/form.html" %}
         {% if not user.is_telegram_subscribed %}
-          <a href="https://t.me/MemoTime_BOT" target="_blank" class="link-tg btn">{% translate 'Link Telegram Account' %}</a>
+          <a href="https://t.me/MemoTime_BOT?start={{ request.user.username }}_{{ request.LANGUAGE_CODE }}" target="_blank" class="link-tg btn">{% translate 'Link Telegram Account' %}</a>
         {% endif %}
       {% endwith %}
     </div>

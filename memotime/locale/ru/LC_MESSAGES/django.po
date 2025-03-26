@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 12:28+0300\n"
+"POT-Creation-Date: 2025-03-26 11:19+0000\n"
 "PO-Revision-Date: 2024-12-21 14:30+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,392 +20,251 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\apps\core\apps.py:10
+#: apps/core/apps.py:10
 msgid "Базовые сущности"
 msgstr "Базовые сущности"
 
-#: .\apps\core\models.py:17
+#: apps/core/models.py:17
 msgid "image/avatar"
 msgstr "изображение/аватар"
 
-#: .\apps\core\models.py:18
+#: apps/core/models.py:18
 msgid "Note image/profile avatar"
 msgstr "Изображение заметки/аватар профиля"
 
-#: .\apps\feedback\admin.py:43 .\apps\feedback\forms.py:24
-#: .\apps\feedback\models.py:51
+#: apps/feedback/admin.py:43 apps/feedback/forms.py:24
+#: apps/feedback/models.py:51
 msgid "Anonymous"
 msgstr "Аноним"
 
-#: .\apps\feedback\admin.py:45
+#: apps/feedback/admin.py:45
 msgid "Author Name"
 msgstr "Имя автора"
 
-#: .\apps\feedback\admin.py:50
+#: apps/feedback/admin.py:50
 msgid "Author Email"
 msgstr "Email автора"
 
-#: .\apps\feedback\admin.py:63
+#: apps/feedback/admin.py:63
 msgid "Not logged in"
 msgstr "Не авторизован"
 
-#: .\apps\feedback\admin.py:65
+#: apps/feedback/admin.py:65
 msgid "Author User"
 msgstr "Автор"
 
-#: .\apps\feedback\admin.py:79
+#: apps/feedback/admin.py:79
 msgid "User not authenticated."
 msgstr "Пользователь не аутентифицирован."
 
-#: .\apps\feedback\admin.py:113
+#: apps/feedback/admin.py:113
 msgid "Feedback Author"
 msgstr "Автор обратной связи"
 
-#: .\apps\feedback\apps.py:10 .\templates\homepage\index.html:50
-#: .\templates\includes\footer.html:21
+#: apps/feedback/apps.py:10 templates/includes/footer.html:15
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: .\apps\feedback\forms.py:37 .\apps\feedback\forms.py:40
+#: apps/feedback/forms.py:37 apps/feedback/forms.py:40
 msgid " "
 msgstr " "
 
-#: .\apps\feedback\forms.py:51
+#: apps/feedback/forms.py:51
 msgid "Description"
 msgstr "Описание"
 
-#: .\apps\feedback\forms.py:54
+#: apps/feedback/forms.py:54
 msgid "Content of your feedback"
 msgstr "Содержание вашего отзыва"
 
-#: .\apps\feedback\models.py:19 .\apps\feedback\models.py:117
-#: .\apps\users\models.py:56
+#: apps/feedback/models.py:19 apps/feedback/models.py:117
+#: apps/users/models.py:55
 msgid "user"
 msgstr "пользователь"
 
-#: .\apps\feedback\models.py:21
+#: apps/feedback/models.py:21
 msgid "User who submitted the feedback"
 msgstr "Пользователь, отправивший отзыв"
 
-#: .\apps\feedback\models.py:26 .\apps\schedule\models.py:73
-#: .\apps\schedule\models.py:110
+#: apps/feedback/models.py:26 apps/schedule/models.py:25
 msgid "name"
 msgstr "имя"
 
-#: .\apps\feedback\models.py:28
+#: apps/feedback/models.py:28
 msgid "Feedback author"
 msgstr "Автор отзыва"
 
-#: .\apps\feedback\models.py:33
+#: apps/feedback/models.py:33
 msgid "email"
 msgstr "email"
 
-#: .\apps\feedback\models.py:34
+#: apps/feedback/models.py:34
 msgid "Feedback author's email"
 msgstr "Email автора отзыва"
 
-#: .\apps\feedback\models.py:56
+#: apps/feedback/models.py:56
 msgid "received"
 msgstr "получено"
 
-#: .\apps\feedback\models.py:57
+#: apps/feedback/models.py:57
 msgid "in processing"
 msgstr "в обработке"
 
-#: .\apps\feedback\models.py:58
+#: apps/feedback/models.py:58
 msgid "response given"
 msgstr "ответ дан"
 
-#: .\apps\feedback\models.py:61
+#: apps/feedback/models.py:61
 msgid "processing status"
 msgstr "статус обработки"
 
-#: .\apps\feedback\models.py:63
+#: apps/feedback/models.py:63
 msgid "Processing status"
 msgstr "Статус обработки"
 
-#: .\apps\feedback\models.py:69
+#: apps/feedback/models.py:69
 msgid "text"
 msgstr "текст"
 
-#: .\apps\feedback\models.py:71
+#: apps/feedback/models.py:71
 msgid "Feedback content"
 msgstr "Содержание отзыва"
 
-#: .\apps\feedback\models.py:76
+#: apps/feedback/models.py:76
 msgid "created"
 msgstr "создано"
 
-#: .\apps\feedback\models.py:78
+#: apps/feedback/models.py:78
 msgid "Date of feedback creation"
 msgstr "Дата создания отзыва"
 
-#: .\apps\feedback\models.py:85
+#: apps/feedback/models.py:85
 msgid "personal data"
 msgstr "персональные данные"
 
-#: .\apps\feedback\models.py:86
+#: apps/feedback/models.py:86
 msgid "Author's personal data"
 msgstr "Персональные данные автора"
 
-#: .\apps\feedback\models.py:91 .\apps\feedback\models.py:125
+#: apps/feedback/models.py:91 apps/feedback/models.py:125
 msgid "feedback"
 msgstr "отзыв"
 
-#: .\apps\feedback\models.py:92
+#: apps/feedback/models.py:92
 msgid "feedbacks"
 msgstr "отзывы"
 
-#: .\apps\feedback\models.py:119
+#: apps/feedback/models.py:119
 msgid "User who changed the status"
 msgstr "Пользователь, изменивший статус"
 
-#: .\apps\feedback\models.py:127
+#: apps/feedback/models.py:127
 msgid "Feedback for which the status was changed"
 msgstr "Отзыв, для которого был изменен статус"
 
-#: .\apps\feedback\models.py:131
+#: apps/feedback/models.py:131
 msgid "time"
 msgstr "время"
 
-#: .\apps\feedback\models.py:133
+#: apps/feedback/models.py:133
 msgid "Time of status change"
 msgstr "Время изменения статуса"
 
-#: .\apps\feedback\models.py:136
+#: apps/feedback/models.py:136
 msgid "from status"
 msgstr "из статуса"
 
-#: .\apps\feedback\models.py:139
+#: apps/feedback/models.py:139
 msgid "From which status"
 msgstr "Из какого статуса"
 
-#: .\apps\feedback\models.py:142
+#: apps/feedback/models.py:142
 msgid "to status"
 msgstr "в статус"
 
-#: .\apps\feedback\models.py:145
+#: apps/feedback/models.py:145
 msgid "To which status"
 msgstr "В какой статус"
 
-#: .\apps\feedback\models.py:149
+#: apps/feedback/models.py:149
 msgid "status change log"
 msgstr "журнал изменения статуса"
 
-#: .\apps\feedback\models.py:150
+#: apps/feedback/models.py:150
 msgid "status change logs"
 msgstr "журналы изменения статуса"
 
-#: .\apps\feedback\views.py:31
+#: apps/feedback/views.py:32
 #, python-brace-format
 msgid "Thanks for the feedback, {author.name}!"
 msgstr "Спасибо за отзыв, {author.name}!"
 
-#: .\apps\feedback\views.py:42
+#: apps/feedback/views.py:43
 msgid "Thank you! Your feedback has been sent successfully."
 msgstr "Спасибо! Ваш отзыв успешно отправлен."
 
-#: .\apps\feedback\views.py:51
+#: apps/feedback/views.py:52
 msgid "An error occurred while submitting the form."
 msgstr "Произошла ошибка при отправке формы."
 
-#: .\apps\homepage\apps.py:10
+#: apps/homepage/apps.py:10
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: .\apps\schedule\apps.py:10 .\apps\schedule\models.py:237
-#: .\templates\schedule\schedule_detail.html:11
+#: apps/schedule/apps.py:10 apps/schedule/models.py:76
+#: templates/schedule/schedule_detail.html:11
 msgid "Schedule"
 msgstr "Расписание"
 
-#: .\apps\schedule\forms.py:14
-msgid "One time reminder"
-msgstr "Одноразовое напоминание"
-
-#: .\apps\schedule\forms.py:24 .\apps\schedule\forms.py:177
-#: .\apps\schedule\forms.py:273
-msgid "Select event"
-msgstr "Выберите событие"
-
-#: .\apps\schedule\forms.py:45 .\templates\schedule\schedule_detail.html:16
-msgid "Changes by week"
-msgstr "Изменения по неделям"
-
-#: .\apps\schedule\forms.py:63
-msgid "Select group"
-msgstr "Выберите группу"
-
-#: .\apps\schedule\forms.py:83
+#: apps/schedule/forms.py:31
 msgid "Start date must be earlier than the end date."
 msgstr "Дата начала должна быть раньше даты окончания."
 
-#: .\apps\schedule\forms.py:110
-msgid "Select teacher"
-msgstr "Выберите преподавателя"
-
-#: .\apps\schedule\forms.py:120
+#: apps/schedule/forms.py:60
 msgid "Select type"
 msgstr "Выберите тип"
 
-#: .\apps\schedule\forms.py:130
+#: apps/schedule/forms.py:70
 msgid "Select priority"
 msgstr "Выберите приоритет"
 
-#: .\apps\schedule\forms.py:187 .\apps\schedule\forms.py:283
+#: apps/schedule/forms.py:82
 msgid "Select day"
 msgstr "Выберите день"
 
-#: .\apps\schedule\forms.py:215 .\apps\schedule\forms.py:313
+#: apps/schedule/forms.py:87
+#, fuzzy
+#| msgid "Note heading"
+msgid "Event heading"
+msgstr "Заголовок заметки"
+
+#: apps/schedule/forms.py:88
+#, fuzzy
+#| msgid "One time reminder"
+msgid "One-time event"
+msgstr "Одноразовое напоминание"
+
+#: apps/schedule/forms.py:105
+msgid "Is the Event disposable?"
+msgstr ""
+
+#: apps/schedule/forms.py:129
 msgid "Start time must be earlier than end time."
 msgstr "Время начала должно быть раньше времени окончания."
 
-#: .\apps\schedule\forms.py:240 .\apps\schedule\forms.py:329
+#: apps/schedule/forms.py:154
 msgid "Time overlaps with an existing event."
 msgstr "Время пересекается с существующим событием."
 
-#: .\apps\schedule\models.py:22
-msgid "disposable"
-msgstr "одноразовый"
-
-#: .\apps\schedule\models.py:24
-msgid "Determines if the note is used only once"
-msgstr "Определяет, используется ли заметка только один раз"
-
-#: .\apps\schedule\models.py:27
-msgid "global"
-msgstr "глобальная"
-
-#: .\apps\schedule\models.py:29
-msgid "Global note"
-msgstr "Глобальная заметка"
-
-#: .\apps\schedule\models.py:32
-msgid "heading"
-msgstr "заголовок"
-
-#: .\apps\schedule\models.py:34
-msgid "Note heading"
-msgstr "Заголовок заметки"
-
-#: .\apps\schedule\models.py:37 .\apps\schedule\models.py:121
-msgid "description"
-msgstr "описание"
-
-#: .\apps\schedule\models.py:38
-msgid "Note description"
-msgstr "Описание заметки"
-
-#: .\apps\schedule\models.py:46 .\apps\schedule\models.py:81
-#: .\apps\schedule\models.py:153 .\apps\schedule\models.py:175
-#: .\apps\schedule\models.py:261
+#: apps/schedule/models.py:22 apps/schedule/models.py:104
 msgid "User"
 msgstr "Пользователь"
 
-#: .\apps\schedule\models.py:54
-msgid "Event related to the note"
-msgstr "Событие, связанное с заметкой"
-
-#: .\apps\schedule\models.py:60
-msgid "note"
-msgstr "заметка"
-
-#: .\apps\schedule\models.py:61
-msgid "notes"
-msgstr "заметки"
-
-#: .\apps\schedule\models.py:75
-msgid "Teacher's name"
-msgstr "Имя преподавателя"
-
-#: .\apps\schedule\models.py:87
-msgid "teacher"
-msgstr "преподаватель"
-
-#: .\apps\schedule\models.py:88
-msgid "teachers"
-msgstr "преподаватели"
-
-#: .\apps\schedule\models.py:100
-msgid "Subject"
-msgstr "Предмет"
-
-#: .\apps\schedule\models.py:101
-msgid "Club"
-msgstr "Кружок"
-
-#: .\apps\schedule\models.py:102 .\apps\schedule\models.py:251
-msgid "Event"
-msgstr "Событие"
-
-#: .\apps\schedule\models.py:105
-msgid "High"
-msgstr "Высокий"
-
-#: .\apps\schedule\models.py:106
-msgid "Medium"
-msgstr "Средний"
-
-#: .\apps\schedule\models.py:107
-msgid "Low"
-msgstr "Низкий"
-
-#: .\apps\schedule\models.py:112
-msgid "Event name"
-msgstr "Название события"
-
-#: .\apps\schedule\models.py:115
-msgid "custom name"
-msgstr "пользовательское название"
-
-#: .\apps\schedule\models.py:117
-msgid "Custom event name"
-msgstr "Пользовательское название события"
-
-#: .\apps\schedule\models.py:122
-msgid "Event description"
-msgstr "Описание события"
-
-#: .\apps\schedule\models.py:132
-msgid "Teacher"
-msgstr "Преподаватель"
-
-#: .\apps\schedule\models.py:135
-msgid "type"
-msgstr "тип"
-
-#: .\apps\schedule\models.py:138
-msgid "Event type"
-msgstr "Тип события"
-
-#: .\apps\schedule\models.py:141
-msgid "priority"
-msgstr "приоритет"
-
-#: .\apps\schedule\models.py:145
-msgid ""
-"If high, the event is displayed over the subject. If medium priority, "
-"conflicts may arise. If low, the subject overlaps the event."
-msgstr ""
-"Если высокий, событие отображается поверх предмета. Если средний приоритет, "
-"могут возникнуть конфликты. Если низкий, предмет перекрывает событие."
-
-#: .\apps\schedule\models.py:159
-msgid "event"
-msgstr "событие"
-
-#: .\apps\schedule\models.py:160
-msgid "events"
-msgstr "события"
-
-#: .\apps\schedule\models.py:183 .\apps\users\models.py:71
-msgid "group"
-msgstr "группа"
-
-#: .\apps\schedule\models.py:186
+#: apps/schedule/models.py:31
 msgid "static"
 msgstr "статическое"
 
-#: .\apps\schedule\models.py:189
+#: apps/schedule/models.py:34
 msgid ""
 "Determines if the schedule alternates (if False, the 'even' field in "
 "TimeSchedule is used)"
@@ -413,309 +272,327 @@ msgstr ""
 "Определяет, чередуется ли расписание (если False, используется поле 'even' в "
 "TimeSchedule)"
 
-#: .\apps\schedule\models.py:194
-msgid "start date"
-msgstr "дата начала"
-
-#: .\apps\schedule\models.py:196
-msgid "Schedule start date"
-msgstr "Дата начала расписания"
-
-#: .\apps\schedule\models.py:199
-msgid "expiration date"
-msgstr "дата окончания"
-
-#: .\apps\schedule\models.py:203
-msgid "Schedule expiration date"
-msgstr "Дата окончания расписания"
-
-#: .\apps\schedule\models.py:209
+#: apps/schedule/models.py:42
 msgid "schedule"
 msgstr "расписание"
 
-#: .\apps\schedule\models.py:210
+#: apps/schedule/models.py:43
 msgid "schedules"
 msgstr "расписания"
 
-#: .\apps\schedule\models.py:223 .\apps\schedule\views.py:182
+#: apps/schedule/models.py:56
+msgid "Subject"
+msgstr "Предмет"
+
+#: apps/schedule/models.py:57
+msgid "Club"
+msgstr "Кружок"
+
+#: apps/schedule/models.py:58
+msgid "Event"
+msgstr "Событие"
+
+#: apps/schedule/models.py:61 apps/schedule/views.py:177
 msgid "Monday"
 msgstr "Понедельник"
 
-#: .\apps\schedule\models.py:224 .\apps\schedule\views.py:183
+#: apps/schedule/models.py:62 apps/schedule/views.py:178
 msgid "Tuesday"
 msgstr "Вторник"
 
-#: .\apps\schedule\models.py:225 .\apps\schedule\views.py:184
+#: apps/schedule/models.py:63 apps/schedule/views.py:179
 msgid "Wednesday"
 msgstr "Среда"
 
-#: .\apps\schedule\models.py:226 .\apps\schedule\views.py:185
+#: apps/schedule/models.py:64 apps/schedule/views.py:180
 msgid "Thursday"
 msgstr "Четверг"
 
-#: .\apps\schedule\models.py:227 .\apps\schedule\views.py:186
+#: apps/schedule/models.py:65 apps/schedule/views.py:181
 msgid "Friday"
 msgstr "Пятница"
 
-#: .\apps\schedule\models.py:228 .\apps\schedule\views.py:187
+#: apps/schedule/models.py:66 apps/schedule/views.py:182
 msgid "Saturday"
 msgstr "Суббота"
 
-#: .\apps\schedule\models.py:229 .\apps\schedule\views.py:188
+#: apps/schedule/models.py:67 apps/schedule/views.py:183
 msgid "Sunday"
 msgstr "Воскресенье"
 
-#: .\apps\schedule\models.py:231
+#: apps/schedule/models.py:69
 msgid "Day"
 msgstr "День"
 
-#: .\apps\schedule\models.py:240
-msgid "start time"
-msgstr "время начала"
+#: apps/schedule/models.py:79
+msgid "disposable"
+msgstr "одноразовый"
 
-#: .\apps\schedule\models.py:241
-msgid "Start time of the subject/event"
-msgstr "Время начала предмета/события"
+#: apps/schedule/models.py:81
+msgid "Determines if the note is used only once"
+msgstr "Определяет, используется ли заметка только один раз"
 
-#: .\apps\schedule\models.py:244
-msgid "end time"
-msgstr "время окончания"
+#: apps/schedule/models.py:84
+msgid "heading"
+msgstr "заголовок"
 
-#: .\apps\schedule\models.py:245
-msgid "End time of the subject/event"
-msgstr "Время окончания предмета/события"
+#: apps/schedule/models.py:86
+msgid "Note heading"
+msgstr "Заголовок заметки"
 
-#: .\apps\schedule\models.py:254
-msgid "even week"
-msgstr "четная неделя"
+#: apps/schedule/models.py:89
+msgid "description"
+msgstr "описание"
 
-#: .\apps\schedule\models.py:255
-msgid "Even/odd week for the subject"
-msgstr "Четная/нечетная неделя для предмета"
+#: apps/schedule/models.py:90
+msgid "Event description"
+msgstr "Описание события"
 
-#: .\apps\schedule\models.py:264
+#: apps/schedule/models.py:95
+msgid "type"
+msgstr "тип"
+
+#: apps/schedule/models.py:98
+msgid "Event type"
+msgstr "Тип события"
+
+#: apps/schedule/models.py:107
 msgid "day of the week"
 msgstr "день недели"
 
-#: .\apps\schedule\models.py:266
+#: apps/schedule/models.py:110
 msgid "Day of the week (1-7)"
 msgstr "День недели (1-7)"
 
-#: .\apps\schedule\models.py:272
-msgid "time schedule"
-msgstr "расписание времени"
+#: apps/schedule/models.py:113
+msgid "start time"
+msgstr "время начала"
 
-#: .\apps\schedule\models.py:273
-msgid "time schedules"
-msgstr "расписания времени"
+#: apps/schedule/models.py:115
+msgid "Start time of the subject/event"
+msgstr "Время начала предмета/события"
 
-#: .\apps\schedule\views.py:24 .\apps\schedule\views.py:29
-#: .\apps\schedule\views.py:158 .\apps\schedule\views.py:161
-#: .\apps\schedule\views.py:267
+#: apps/schedule/models.py:118
+msgid "end time"
+msgstr "время окончания"
+
+#: apps/schedule/models.py:121
+msgid "End time of the subject/event"
+msgstr "Время окончания предмета/события"
+
+#: apps/schedule/models.py:127
+msgid "event"
+msgstr "событие"
+
+#: apps/schedule/models.py:128
+msgid "events"
+msgstr "события"
+
+#: apps/schedule/views.py:27 apps/schedule/views.py:32
+#: apps/schedule/views.py:156
 msgid "You cannot view this content."
 msgstr "Вы не можете просматривать этот контент."
 
-#: .\apps\schedule\views.py:122
+#: apps/schedule/views.py:121
 msgid "Schedule not found"
 msgstr "Расписание не найдено"
 
-#: .\apps\schedule\views.py:257
-msgid "You cannot add time to someone else's schedule."
-msgstr "Вы не можете добавить время в чужое расписание."
-
-#: .\apps\schedule\views.py:315
-msgid "TimeSchedule not found"
-msgstr "TimeSchedule не найден"
-
-#: .\apps\schedule\views.py:423
+#: apps/schedule/views.py:287
 msgid "Event not found"
 msgstr "Событие не найдено"
 
-#: .\apps\schedule\views.py:568
-msgid "Note not found"
-msgstr "Заметка не найдена"
-
-#: .\apps\users\admin.py:38
-msgid "Creator"
-msgstr "Создатель"
-
-#: .\apps\users\apps.py:10
+#: apps/users/apps.py:10
 msgid "Users"
 msgstr "Пользователи"
 
-#: .\apps\users\forms.py:48
+#: apps/users/forms.py:32
 msgid "You must agree to the personal data processing to register."
 msgstr ""
 "Вы должны согласиться на обработку персональных данных для регистрации."
 
-#: .\apps\users\forms.py:54
+#: apps/users/forms.py:38
 msgid "Do you agree to provide your <a href='{}'>personal data</a>?"
 msgstr "Согласны ли вы предоставить свои <a href='{}'>персональные данные</a>?"
 
-#: .\apps\users\forms.py:65
+#: apps/users/forms.py:49
 msgid "User already exists"
 msgstr "Пользователь уже существует"
 
-#: .\apps\users\forms.py:76
+#: apps/users/forms.py:60
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: .\apps\users\forms.py:136
+#: apps/users/forms.py:95 apps/users/forms.py:141
 msgid "Select timezone"
 msgstr "Выберите часовой пояс"
 
-#: .\apps\users\forms.py:147
+#: apps/users/forms.py:152
 msgid "Пользователь уже существует"
 msgstr "Пользователь уже существует"
 
-#: .\apps\users\forms.py:158
+#: apps/users/forms.py:163
 msgid "Пользователь с таким email уже существует"
 msgstr "Пользователь с таким email уже существует"
 
-#: .\apps\users\forms.py:228 .\apps\users\forms.py:292
-msgid "Group Name"
-msgstr "Название группы"
-
-#: .\apps\users\forms.py:230 .\apps\users\forms.py:294
-msgid "Usernames or Emails (comma-separated)"
-msgstr "Имена пользователей или адреса электронной почты (через запятую)"
-
-#: .\apps\users\forms.py:232 .\apps\users\forms.py:296
-msgid ""
-"Enter usernames or email addresses separated by commas. For example: user1,"
-"user2@example.com,user3"
-msgstr ""
-"Введите имена пользователей или адреса электронной почты, разделенные "
-"запятыми. Например: user1,user2@example.com,user3"
-
-#: .\apps\users\forms.py:270 .\apps\users\forms.py:341
-#, python-format
-msgid ""
-"Users with the following usernames or emails were not found: %(identifiers)s"
-msgstr ""
-"Не найдены пользователи со следующими именами или адресами электронной "
-"почты: %(identifiers)s"
-
-#: .\apps\users\models.py:22
+#: apps/users/models.py:22
 msgid "email address"
 msgstr "адрес электронной почты"
 
-#: .\apps\users\models.py:26
+#: apps/users/models.py:26
 msgid "Unique email address"
 msgstr "Уникальный адрес электронной почты"
 
-#: .\apps\users\models.py:29
+#: apps/users/models.py:29
 msgid "timezone"
 msgstr "часовой пояс"
 
-#: .\apps\users\models.py:33
+#: apps/users/models.py:33
 msgid "User's time zone"
 msgstr "Часовой пояс пользователя"
 
-#: .\apps\users\models.py:36
-msgid "subscription end date"
-msgstr "дата окончания подписки"
-
-#: .\apps\users\models.py:40
-msgid "Date when the subscription ends and is deactivated"
-msgstr "Дата окончания и деактивации подписки"
-
-#: .\apps\users\models.py:43
+#: apps/users/models.py:36
 msgid "email notifications"
 msgstr "email-уведомления"
 
-#: .\apps\users\models.py:46
+#: apps/users/models.py:39
 msgid "Whether email notifications are enabled"
 msgstr "Включены ли email-уведомления"
 
-#: .\apps\users\models.py:49
+#: apps/users/models.py:42
 msgid "Telegram notifications"
 msgstr "Telegram-уведомления"
 
-#: .\apps\users\models.py:52
+#: apps/users/models.py:45
 msgid "Whether Telegram notifications are enabled"
 msgstr "Включены ли Telegram-уведомления"
 
-#: .\apps\users\models.py:57
+#: apps/users/models.py:56
 msgid "users"
 msgstr "пользователи"
 
-#: .\apps\users\models.py:67
-msgid "creator"
-msgstr "создатель"
-
-#: .\apps\users\models.py:72
-msgid "groups"
-msgstr "группы"
-
-#: .\apps\users\views.py:40
+#: apps/users/views.py:40
 #, python-brace-format
 msgid "Account activation, {user.username}"
 msgstr "Активация аккаунта, {user.username}"
 
-#: .\apps\users\views.py:48
+#: apps/users/views.py:48
 msgid "An account activation link has been sent to your email address."
 msgstr "Ссылка для активации аккаунта была отправлена на ваш email."
 
-#: .\apps\users\views.py:53
+#: apps/users/views.py:53
 msgid "You have successfully registered."
 msgstr "Вы успешно зарегистрировались."
 
-#: .\apps\users\views.py:107
+#: apps/users/views.py:107
 msgid "Invalid activation token."
 msgstr "Неверный токен активации."
 
-#: .\apps\users\views.py:138
+#: apps/users/views.py:138
 #, python-brace-format
 msgid "Account reactivation, {user.username}"
 msgstr "Повторная активация аккаунта, {user.username}"
 
-#: .\apps\users\views.py:146
+#: apps/users/views.py:146
 msgid "A new activation link has been sent to your email address."
 msgstr "Новая ссылка для активации была отправлена на ваш email."
 
-#: .\apps\users\views.py:166
-msgid "Профиль успешно обновлен"
-msgstr "Профиль успешно обновлен"
+#: apps/users/views.py:166
+msgid "Profile Successfully Updated"
+msgstr "Профиль Успешно Обновлен"
 
-#: .\apps\users\views.py:187
-msgid "Пароль успешно изменен"
-msgstr "Пароль успешно изменен"
+#: apps/users/views.py:187
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password successfully Reset"
+msgstr "Сброс пароля"
 
-#: .\apps\users\views.py:289
-msgid "You are not the creator of this group."
-msgstr "Вы не являетесь создателем этой группы."
+#: apps/users/views.py:237
+#, fuzzy
+#| msgid "You have successfully registered."
+msgid "You have successfully deleted your account."
+msgstr "Вы успешно зарегистрировались."
 
-#: .\memotime\settings.py:159
+#: bot.py:65
+msgid ""
+"\n"
+"Hey there!\n"
+"I'm the MemoTime bot, your personal notification assistant.\n"
+"I'll make sure you never miss an important event—just connect your account, "
+"and I'll send you reminders right here.\n"
+"Need more info? Type /help.\n"
+msgstr "\nПривет!\nЯ бот сайта MemoTime, твой личный помощник в напоминаниях.\nЯ уверен, что ты никогда не пропустишь важное событие - просто подключи свой аккаунт, и я буду тебе сюда отправлять напоминания.\nНужно больше информации? используй команду /help.\n"
+
+#: bot.py:81
+msgid ""
+"\n"
+"Help Menu\n"
+"Here are the available commands:\n"
+"/login – Log in to your MemoTime account. After using this command, enter "
+"your username first, then send your password in the next message.\n"
+"/logout – Log out of your account.\n"
+"That's all for now.\n"
+msgstr "\nМеню помощи\nВот доступные комманды:\n/login - вход в аккаунт MemoTime. После использования команды введи свой логин, а затем в следующем сообщении пароль\n/logout - выход из аккаунта.\nНа этом все пока что.\n"
+
+#: bot.py:98
+msgid "Enter your username:"
+msgstr "Введи свой логин:"
+
+#: bot.py:108
+#, fuzzy
+#| msgid "Forgot your password?"
+msgid "Enter your password:"
+msgstr "Забыли пароль?"
+
+#: bot.py:122
+msgid "Login successful!"
+msgstr "Вход успешный!"
+
+#: bot.py:124
+msgid "Invalid credentials. Try again."
+msgstr "Неверные данные. Попробуй еще раз"
+
+#: bot.py:154
+msgid "Are you sure you want to quit? Type 'yes' for confirmation"
+msgstr "Ты уверен что хочешь выйти? Напиши 'да' для подтверждения"
+
+#: bot.py:169
+msgid "Logout failed. Maybe you have already logged out?"
+msgstr "Выход из аккаунт не сработал. Возможно, ты уже вышел из аккаунта?"
+
+#: bot.py:177
+msgid "Logout is successful"
+msgstr "Выход из аккаунта успешный"
+
+#: memotime/settings.py:158
 msgid "Russian"
 msgstr "Русский"
 
-#: .\memotime\settings.py:160
+#: memotime/settings.py:159
 msgid "English"
 msgstr "Английский"
 
-#: .\templates\base.html:9
+#: templates/base.html:9
 msgid "LMS project"
 msgstr "Проект LMS"
 
-#: .\templates\base.html:10
+#: templates/base.html:10
 msgid "catalog, cat"
 msgstr "каталог, кот"
 
-#: .\templates\base.html:30
+#: templates/base.html:30
 msgid "произошла ошибка - свяжитесь с нами"
 msgstr "произошла ошибка - свяжитесь с нами"
 
-#: .\templates\feedback\email\feedback_confirmation.html:4
+#: templates/feedback/email/feedback_confirmation.html:4
 msgid "Thank you for your feedback!"
 msgstr "Спасибо за ваш отзыв!"
 
-#: .\templates\feedback\email\feedback_confirmation.html:7
+#: templates/feedback/email/feedback_confirmation.html:7
 #, python-format
 msgid "Hello, %(author_name)s!"
 msgstr "Здравствуйте, %(author_name)s!"
 
-#: .\templates\feedback\email\feedback_confirmation.html:9
+#: templates/feedback/email/feedback_confirmation.html:9
 msgid ""
 "Thank you for your feedback! We appreciate your opinion and will take it "
 "into account in our work."
@@ -723,44 +600,43 @@ msgstr ""
 "Спасибо за ваш отзыв! Мы ценим ваше мнение и обязательно учтем его в нашей "
 "работе."
 
-#: .\templates\feedback\email\feedback_confirmation.html:11
+#: templates/feedback/email/feedback_confirmation.html:11
 msgid "You wrote:"
 msgstr "Вы написали:"
 
-#: .\templates\feedback\feedback.html:6
+#: templates/feedback/feedback.html:6
 msgid "Feedback form"
 msgstr "Форма обратной связи"
 
-#: .\templates\feedback\feedback.html:15
+#: templates/feedback/feedback.html:15
 msgid "Close"
 msgstr "Закрыть"
 
-#: .\templates\feedback\feedback.html:32 .\templates\schedule\note_form.html:23
-#: .\templates\schedule\schedule_form.html:23
-#: .\templates\schedule\teacher_form.html:22 .\templates\users\signup.html:15
+#: templates/feedback/feedback.html:32 templates/schedule/schedule_form.html:23
+#: templates/users/signup.html:16
 msgid "required field"
 msgstr "обязательное поле"
 
-#: .\templates\feedback\feedback.html:34
+#: templates/feedback/feedback.html:34
 msgid "Send"
 msgstr "Отправить"
 
-#: .\templates\homepage\blocked.html:10
+#: templates/homepage/blocked.html:10
 msgid "You have been blocked before"
 msgstr "Вы были заблокированы ранее"
 
-#: .\templates\homepage\blocked.html:10
+#: templates/homepage/blocked.html:10
 msgid "due to suspicious activity of your IP address"
 msgstr "из-за подозрительной активности вашего IP-адреса"
 
-#: .\templates\homepage\blocked.html:12 .\templates\users\logout.html:11
-#: .\templates\users\password_change_done.html:10
-#: .\templates\users\password_reset_complete.html:10
-#: .\templates\users\password_reset_done.html:13
+#: templates/homepage/blocked.html:12 templates/users/logout.html:11
+#: templates/users/password_change_done.html:10
+#: templates/users/password_reset_complete.html:10
+#: templates/users/password_reset_done.html:13
 msgid "Main"
 msgstr "Главная"
 
-#: .\templates\homepage\index.html:9
+#: templates/homepage/index.html:9
 msgid ""
 "Organize your studies and active days — a schedule with notes is always at "
 "hand!"
@@ -768,7 +644,7 @@ msgstr ""
 "Организуйте свою учебу и активный отдых — расписание с заметками всегда под "
 "рукой!"
 
-#: .\templates\homepage\index.html:12
+#: templates/homepage/index.html:12
 msgid ""
 "We help you organize your time by offering a schedule with notes and "
 "reminders of important events"
@@ -776,39 +652,31 @@ msgstr ""
 "Мы помогаем вам организовать свое время, предлагая расписание с заметками и "
 "напоминая о важных событиях"
 
-#: .\templates\homepage\index.html:15
-msgid "Create a note"
-msgstr "Создать заметку"
-
-#: .\templates\homepage\index.html:16
-msgid "Create an event"
-msgstr "Создать событие"
-
-#: .\templates\homepage\index.html:17
+#: templates/homepage/index.html:15
 msgid "Create a schedule"
 msgstr "Создать расписание"
 
-#: .\templates\homepage\index.html:32
+#: templates/homepage/index.html:30
 msgid "Alerts"
 msgstr "Оповещения"
 
-#: .\templates\homepage\index.html:33
+#: templates/homepage/index.html:31
 msgid "Notifications about notes can be sent by mail"
 msgstr "Уведомления о заметках можно отправлять по почте."
 
-#: .\templates\homepage\index.html:36
+#: templates/homepage/index.html:34
 msgid "Adaptation"
 msgstr "Адаптация"
 
-#: .\templates\homepage\index.html:37
+#: templates/homepage/index.html:35
 msgid "Our site has adaptations for different screen sizes"
 msgstr "Наш сайт адаптирован под различные размеры экранов"
 
-#: .\templates\homepage\index.html:40
+#: templates/homepage/index.html:38
 msgid "Availability"
 msgstr "Доступность"
 
-#: .\templates\homepage\index.html:42
+#: templates/homepage/index.html:40
 msgid ""
 "Translations into several languages are used. There is also an intuitive "
 "interface that is easy to use"
@@ -816,293 +684,239 @@ msgstr ""
 "Используются переводы на несколько языков. Также имеется интуитивно понятный "
 "интерфейс, которым легко пользоваться"
 
-#: .\templates\homepage\index.html:56 .\templates\homepage\index.html:67
-#: .\templates\homepage\index.html:78 .\templates\homepage\index.html:91
-#: .\templates\homepage\index.html:102
-msgid "avatar"
-msgstr "аватар"
-
-#: .\templates\includes\base_email.html:17
+#: templates/includes/base_email.html:17
 msgid "Sincerely,"
 msgstr "С уважением,"
 
-#: .\templates\includes\base_email.html:19
+#: templates/includes/base_email.html:19
 msgid "The Memotime Team"
 msgstr "Команда Memotime"
 
-#: .\templates\includes\footer.html:15
-msgid "Group List"
-msgstr "Список групп"
-
-#: .\templates\includes\footer.html:18 .\templates\schedule\teacher_list.html:9
-msgid "Teacher List"
-msgstr "Список преподавателей"
-
-#: .\templates\includes\header.html:6
+#: templates/includes/header.html:6
 msgid "Logo"
 msgstr "Логотип"
 
-#: .\templates\includes\header.html:12
+#: templates/includes/header.html:12
 msgid "Schedule List"
 msgstr "Список расписаний"
 
-#: .\templates\includes\header.html:15 .\templates\schedule\event_list.html:9
-msgid "Event List"
-msgstr "Список событий"
-
-#: .\templates\includes\header.html:18 .\templates\schedule\note_list.html:9
-msgid "Note List"
-msgstr "Список заметок"
-
-#: .\templates\includes\header.html:25
+#: templates/includes/header.html:19
 msgid "Theme"
 msgstr "Тема"
 
-#: .\templates\includes\header.html:28
+#: templates/includes/header.html:22
 msgid "Theme Icon"
 msgstr "Иконка темы"
 
-#: .\templates\includes\header.html:48 .\templates\includes\header.html:54
-#: .\templates\users\profile.html:13 .\templates\users\profile.html:17
+#: templates/includes/header.html:42 templates/includes/header.html:48
+#: templates/users/profile.html:13 templates/users/profile.html:17
 msgid "error"
 msgstr "ошибка"
 
-#: .\templates\includes\header.html:60 .\templates\users\login.html:9
-#: .\templates\users\login.html:24 .\templates\users\logout.html:12
-#: .\templates\users\password_change_done.html:11
-#: .\templates\users\password_reset_complete.html:11
-#: .\templates\users\password_reset_done.html:14
+#: templates/includes/header.html:54 templates/users/login.html:9
+#: templates/users/login.html:24 templates/users/logout.html:12
+#: templates/users/password_change_done.html:11
+#: templates/users/password_reset_complete.html:11
+#: templates/users/password_reset_done.html:14
 msgid "Log In"
 msgstr "Войти"
 
-#: .\templates\includes\header.html:63 .\templates\users\signup.html:9
-#: .\templates\users\signup.html:20
+#: templates/includes/header.html:57 templates/users/signup.html:10
+#: templates/users/signup.html:21
 msgid "Sign Up"
 msgstr "Зарегистрироваться"
 
-#: .\templates\includes\modal.html:4
+#: templates/includes/modal.html:4
 msgid "Are you sure about the removal"
 msgstr "Вы уверены, что хотите удалить"
 
-#: .\templates\includes\modal.html:6
+#: templates/includes/modal.html:6
 msgid "Cancel"
 msgstr "Отмена"
 
-#: .\templates\includes\modal.html:7
+#: templates/includes/modal.html:7
 msgid "Yes"
 msgstr "Да"
 
-#: .\templates\schedule\event_form.html:13
-#: .\templates\schedule\event_form_from_timeschedule.html:13
+#: templates/schedule/event_form.html:13
+#: templates/schedule/event_form_from_timeschedule.html:13
 msgid "Edit Event"
 msgstr "Редактировать событие"
 
-#: .\templates\schedule\event_form.html:15
-#: .\templates\schedule\event_form_from_timeschedule.html:15
+#: templates/schedule/event_form.html:15
+#: templates/schedule/event_form_from_timeschedule.html:15
 msgid "Create Event"
 msgstr "Создать событие"
 
-#: .\templates\schedule\event_form.html:22
-#: .\templates\schedule\event_form_from_timeschedule.html:25
-#: .\templates\schedule\note_form.html:25
-#: .\templates\schedule\schedule_form.html:28
-#: .\templates\schedule\teacher_form.html:24
-#: .\templates\schedule\timeschedule_form.html:25
+#: templates/schedule/event_form.html:22
+#: templates/schedule/event_form_from_timeschedule.html:22
+#: templates/schedule/schedule_form.html:25
+#: templates/schedule/timeschedule_form.html:25
 msgid "Save"
 msgstr "Сохранить"
 
-#: .\templates\schedule\event_form_from_timeschedule.html:23
-#: .\templates\schedule\teacher_list.html:10
-msgid "Add Teacher"
-msgstr "Добавить преподавателя"
+#: templates/schedule/event_list.html:9
+msgid "Event List"
+msgstr "Список событий"
 
-#: .\templates\schedule\event_list.html:10
-#: .\templates\schedule\timeschedule_form.html:23
+#: templates/schedule/event_list.html:10
+#: templates/schedule/timeschedule_form.html:23
 msgid "Add Event"
 msgstr "Добавить событие"
 
-#: .\templates\schedule\event_list.html:18
-#: .\templates\schedule\note_list.html:18
-#: .\templates\schedule\schedule_detail.html:26
-#: .\templates\schedule\schedule_detail.html:97
-#: .\templates\schedule\schedule_list.html:21
-#: .\templates\schedule\teacher_list.html:18
-#: .\templates\users\group_list.html:22
+#: templates/schedule/event_list.html:18
+#: templates/schedule/schedule_detail.html:26
+#: templates/schedule/schedule_detail.html:97
+#: templates/schedule/schedule_list.html:21 templates/users/group_list.html:22
 msgid "Edit"
 msgstr "Редактировать"
 
-#: .\templates\schedule\event_list.html:32
-#: .\templates\schedule\note_list.html:32
-#: .\templates\schedule\schedule_detail.html:40
-#: .\templates\schedule\schedule_detail.html:121
-#: .\templates\schedule\schedule_list.html:35
-#: .\templates\schedule\teacher_list.html:31
+#: templates/schedule/event_list.html:32
+#: templates/schedule/schedule_detail.html:40
+#: templates/schedule/schedule_detail.html:109
+#: templates/schedule/schedule_list.html:35
 msgid "Delete"
 msgstr "Удалить"
 
-#: .\templates\schedule\note_form.html:13
-msgid "Edit Note"
-msgstr "Редактировать заметку"
-
-#: .\templates\schedule\note_form.html:15
-msgid "Create Note"
-msgstr "Создать заметку"
-
-#: .\templates\schedule\note_list.html:10
-msgid "Add Note"
-msgstr "Добавить заметку"
-
-#: .\templates\schedule\schedule_detail.html:10
+#: templates/schedule/schedule_detail.html:10
 msgid "Back to Schedule List"
 msgstr "Назад к списку расписаний"
 
-#: .\templates\schedule\schedule_detail.html:60
+#: templates/schedule/schedule_detail.html:16
+msgid "Changes by week"
+msgstr "Изменения по неделям"
+
+#: templates/schedule/schedule_detail.html:60
 msgid "Odd week"
 msgstr "Нечетная неделя"
 
-#: .\templates\schedule\schedule_detail.html:63
+#: templates/schedule/schedule_detail.html:63
 msgid "Even week"
 msgstr "Четная неделя"
 
-#: .\templates\schedule\schedule_detail.html:69
-#: .\templates\users\group_create.html:14
+#: templates/schedule/schedule_detail.html:69
+#: templates/users/group_create.html:14
 msgid "Create"
 msgstr "Создать"
 
-#: .\templates\schedule\schedule_detail.html:109
-msgid "Add note"
-msgstr "Добавить заметку"
-
-#: .\templates\schedule\schedule_form.html:13
+#: templates/schedule/schedule_form.html:13
 msgid "Edit Schedule"
 msgstr "Редактировать расписание"
 
-#: .\templates\schedule\schedule_form.html:15
+#: templates/schedule/schedule_form.html:15
 msgid "Create Schedule"
 msgstr "Создать расписание"
 
-#: .\templates\schedule\schedule_form.html:26
-msgid "Create group"
-msgstr "Создать группу"
-
-#: .\templates\schedule\schedule_list.html:10
+#: templates/schedule/schedule_list.html:9
 msgid "My Schedules"
 msgstr "Мои расписания"
 
-#: .\templates\schedule\schedule_list.html:11
+#: templates/schedule/schedule_list.html:10
 msgid "Create New Schedule"
 msgstr "Создать новое расписание"
 
-#: .\templates\schedule\schedule_list.html:17
-#: .\templates\schedule\schedule_list.html:60
+#: templates/schedule/schedule_list.html:17
+#: templates/schedule/schedule_list.html:60
 msgid "View"
 msgstr "Просмотр"
 
-#: .\templates\schedule\schedule_list.html:49
+#: templates/schedule/schedule_list.html:49
 msgid "No personal schedules available."
 msgstr "Нет доступных личных расписаний."
 
-#: .\templates\schedule\schedule_list.html:54
+#: templates/schedule/schedule_list.html:54
 msgid "Shared Schedules"
 msgstr "Общие расписания"
 
-#: .\templates\schedule\schedule_list.html:63
+#: templates/schedule/schedule_list.html:63
 msgid "No shared schedules available."
 msgstr "Нет доступных общих расписаний."
 
-#: .\templates\schedule\teacher_form.html:12
-msgid "Edit Teacher"
-msgstr "Редактировать преподавателя"
-
-#: .\templates\schedule\teacher_form.html:14
-msgid "Create Teacher"
-msgstr "Создать преподавателя"
-
-#: .\templates\schedule\timeschedule_form.html:13
+#: templates/schedule/timeschedule_form.html:13
 msgid "Edit entity"
 msgstr "Редактировать сущность"
 
-#: .\templates\schedule\timeschedule_form.html:15
+#: templates/schedule/timeschedule_form.html:15
 msgid "Create entity"
 msgstr "Создать сущность"
 
-#: .\templates\users\activation.html:8
+#: templates/users/activation.html:8
 msgid "Ваша учетная запись успешно активирована."
 msgstr "Ваша учетная запись успешно активирована."
 
-#: .\templates\users\activation.html:9
+#: templates/users/activation.html:9
 msgid "Вы можете войти в систему."
 msgstr "Вы можете войти в систему."
 
-#: .\templates\users\activation.html:10 .\templates\users\activation.html:48
+#: templates/users/activation.html:10 templates/users/activation.html:48
 msgid "Перейти к входу"
 msgstr "Перейти к входу"
 
-#: .\templates\users\activation.html:14
+#: templates/users/activation.html:14
 msgid "Переадресация..."
 msgstr "Переадресация..."
 
-#: .\templates\users\activation.html:15
+#: templates/users/activation.html:15
 msgid "Через"
 msgstr "Через"
 
-#: .\templates\users\activation.html:18
+#: templates/users/activation.html:18
 msgid "секунду"
 msgstr "секунду"
 
-#: .\templates\users\activation.html:19
+#: templates/users/activation.html:19
 msgid "секунды"
 msgstr "секунды"
 
-#: .\templates\users\activation.html:20
+#: templates/users/activation.html:20
 msgid "секунд"
 msgstr "секунд"
 
-#: .\templates\users\activation.html:21
+#: templates/users/activation.html:21
 msgid "вы будете переадресованы..."
 msgstr "вы будете переадресованы..."
 
-#: .\templates\users\activation.html:25
+#: templates/users/activation.html:25
 msgid "Срок действия ссылки для активации учетной записи истек."
 msgstr "Срок действия ссылки для активации учетной записи истек."
 
-#: .\templates\users\activation.html:30
+#: templates/users/activation.html:30
 msgid "Отправить ссылку еще раз"
 msgstr "Отправить ссылку еще раз"
 
-#: .\templates\users\activation.html:33
+#: templates/users/activation.html:33
 msgid "Ошибка при повторной отправке ссылки."
 msgstr "Ошибка при повторной отправке ссылки."
 
-#: .\templates\users\activation.html:35
+#: templates/users/activation.html:35
 msgid "Если ошибка повторяется, свяжитесь с техподдержкой:"
 msgstr "Если ошибка повторяется, свяжитесь с техподдержкой:"
 
-#: .\templates\users\activation.html:35 .\templates\users\activation.html:41
+#: templates/users/activation.html:35 templates/users/activation.html:41
 msgid "Обратная связь"
 msgstr "Обратная связь"
 
-#: .\templates\users\activation.html:39
+#: templates/users/activation.html:39
 msgid "Сожалеем, но ваша учетная запись была уничтожена."
 msgstr "Сожалеем, но ваша учетная запись была уничтожена."
 
-#: .\templates\users\activation.html:41
+#: templates/users/activation.html:41
 msgid "Если у вас возникли вопросы, свяжитесь с техподдержкой:"
 msgstr "Если у вас возникли вопросы, свяжитесь с техподдержкой:"
 
-#: .\templates\users\activation.html:44
+#: templates/users/activation.html:44
 msgid "Или вы можете зарегистрироваться заново:"
 msgstr "Или вы можете зарегистрироваться заново:"
 
-#: .\templates\users\activation.html:44
+#: templates/users/activation.html:44
 msgid "Зарегистрироваться"
 msgstr "Зарегистрироваться"
 
-#: .\templates\users\activation.html:47
+#: templates/users/activation.html:47
 msgid "Ваша учетная запись уже была активирована."
 msgstr "Ваша учетная запись уже была активирована."
 
-#: .\templates\users\email\password_reset_email.html:3
+#: templates/users/email/password_reset_email.html:3
 #, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
@@ -1111,34 +925,34 @@ msgstr ""
 "Вы получили это письмо, потому что запросили сброс пароля для вашей учетной "
 "записи на сайте %(site_name)s."
 
-#: .\templates\users\email\password_reset_email.html:4
+#: templates/users/email/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
 msgstr "Пожалуйста, перейдите на следующую страницу и выберите новый пароль:"
 
-#: .\templates\users\email\password_reset_email.html:8
+#: templates/users/email/password_reset_email.html:8
 msgid "Your username, in case you’ve forgotten:"
 msgstr "Ваше имя пользователя, если вы забыли:"
 
-#: .\templates\users\email\password_reset_email.html:9
+#: templates/users/email/password_reset_email.html:9
 msgid "Thanks for using our site!"
 msgstr "Спасибо за использование нашего сайта!"
 
-#: .\templates\users\email\password_reset_email.html:10
+#: templates/users/email/password_reset_email.html:10
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "Команда %(site_name)s"
 
-#: .\templates\users\email\user_activation_email.html:4
+#: templates/users/email/user_activation_email.html:4
 msgid "Account Activation"
 msgstr "Активация аккаунта"
 
-#: .\templates\users\email\user_activation_email.html:7
-#: .\templates\users\email\user_reactivation_email.html:7
+#: templates/users/email/user_activation_email.html:7
+#: templates/users/email/user_reactivation_email.html:7
 #, python-format
 msgid "Hello, %(username)s!"
 msgstr "Здравствуйте, %(username)s!"
 
-#: .\templates\users\email\user_activation_email.html:8
+#: templates/users/email/user_activation_email.html:8
 msgid ""
 "Thank you for registering! To activate your account, please click the link "
 "below:"
@@ -1146,11 +960,11 @@ msgstr ""
 "Спасибо за регистрацию! Чтобы активировать свою учетную запись, нажмите на "
 "ссылку ниже:"
 
-#: .\templates\users\email\user_reactivation_email.html:4
+#: templates/users/email/user_reactivation_email.html:4
 msgid "Account Reactivation"
 msgstr "Повторная активация аккаунта"
 
-#: .\templates\users\email\user_reactivation_email.html:8
+#: templates/users/email/user_reactivation_email.html:8
 msgid ""
 "It looks like you need to reactivate your account. Please click the link "
 "below to do so:"
@@ -1158,19 +972,19 @@ msgstr ""
 "Похоже, вам нужно повторно активировать свою учетную запись. Пожалуйста, "
 "нажмите на ссылку ниже, чтобы сделать это:"
 
-#: .\templates\users\group_create.html:9
+#: templates/users/group_create.html:9
 msgid "Create Group"
 msgstr "Создать группу"
 
-#: .\templates\users\group_list.html:9
+#: templates/users/group_list.html:9
 msgid "My Groups"
 msgstr "Мои группы"
 
-#: .\templates\users\group_list.html:11
+#: templates/users/group_list.html:11
 msgid "Groups I Created:"
 msgstr "Группы, которые я создал:"
 
-#: .\templates\users\group_list.html:18 .\templates\users\group_list.html:50
+#: templates/users/group_list.html:18 templates/users/group_list.html:50
 #, python-format
 msgid "%(member_count)s участник"
 msgid_plural "%(member_count)s участников"
@@ -1178,78 +992,78 @@ msgstr[0] "%(member_count)s участник"
 msgstr[1] "%(member_count)s участника"
 msgstr[2] "%(member_count)s участников"
 
-#: .\templates\users\group_list.html:41
+#: templates/users/group_list.html:41
 msgid "You have not created any groups."
 msgstr "Вы не создали ни одной группы."
 
-#: .\templates\users\group_list.html:44
+#: templates/users/group_list.html:44
 msgid "Groups I'm a Member Of:"
 msgstr "Группы, в которых я состою:"
 
-#: .\templates\users\group_list.html:59
+#: templates/users/group_list.html:59
 msgid "Create a new group"
 msgstr "Создать новую группу"
 
-#: .\templates\users\group_update.html:9
+#: templates/users/group_update.html:9
 msgid "Edit Group"
 msgstr "Редактировать группу"
 
-#: .\templates\users\group_update.html:10
+#: templates/users/group_update.html:10
 msgid "You can only edit this group if you are its creator"
 msgstr "Вы можете редактировать эту группу, только если вы ее создатель"
 
-#: .\templates\users\group_update.html:15
+#: templates/users/group_update.html:15
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: .\templates\users\login.html:15
+#: templates/users/login.html:15
 msgid "Forgot your password?"
 msgstr "Забыли пароль?"
 
-#: .\templates\users\login.html:16
+#: templates/users/login.html:16
 msgid "Update Cupcha"
 msgstr "Обновить капчу"
 
-#: .\templates\users\login.html:22
+#: templates/users/login.html:22
 msgid "Don`t you have an account?"
 msgstr "У вас нет аккаунта?"
 
-#: .\templates\users\logout.html:9
+#: templates/users/logout.html:9
 msgid "You have logged out of your account"
 msgstr "Вы вышли из своей учетной записи"
 
-#: .\templates\users\logout.html:10
+#: templates/users/logout.html:10
 msgid "Thank you for spending time with us!"
 msgstr "Спасибо, что провели время с нами!"
 
-#: .\templates\users\password_change.html:9
-#: .\templates\users\password_reset_confirm.html:9
+#: templates/users/password_change.html:9
+#: templates/users/password_reset_confirm.html:9
 msgid "Come up with a new password"
 msgstr "Придумайте новый пароль"
 
-#: .\templates\users\password_change.html:15
-#: .\templates\users\password_reset_confirm.html:15
+#: templates/users/password_change.html:15
+#: templates/users/password_reset_confirm.html:15
 msgid "Сhange"
 msgstr "Изменить"
 
-#: .\templates\users\password_change_done.html:9
-#: .\templates\users\password_reset_complete.html:9
+#: templates/users/password_change_done.html:9
+#: templates/users/password_reset_complete.html:9
 msgid "You have changed your password!"
 msgstr "Вы изменили свой пароль!"
 
-#: .\templates\users\password_reset.html:9
+#: templates/users/password_reset.html:9
 msgid "Password reset"
 msgstr "Сброс пароля"
 
-#: .\templates\users\password_reset.html:15
+#: templates/users/password_reset.html:15
 msgid "Reset"
 msgstr "Сбросить"
 
-#: .\templates\users\password_reset_done.html:9
+#: templates/users/password_reset_done.html:9
 msgid "An email has been sent to you with a link to reset your password"
 msgstr "Вам было отправлено письмо со ссылкой для сброса пароля"
 
-#: .\templates\users\password_reset_done.html:11
+#: templates/users/password_reset_done.html:11
 msgid ""
 "If you haven`t received the email, make sure you entered the correct address "
 "you registered with and check your spam folder"
@@ -1257,21 +1071,228 @@ msgstr ""
 "Если вы не получили письмо, убедитесь, что вы ввели правильный адрес, с "
 "которым вы зарегистрировались, и проверьте папку со спамом"
 
-#: .\templates\users\profile.html:20
+#: templates/users/profile.html:20
 msgid "Change the password"
 msgstr "Изменить пароль"
 
-#: .\templates\users\profile.html:21
+#: templates/users/profile.html:21
+#, fuzzy
+#| msgid "You have logged out of your account"
+msgid "Are you sure you want to log out of your account"
+msgstr "Вы вышли из своей учетной записи"
+
+#: templates/users/profile.html:21
 msgid "Log Out"
 msgstr "Выйти"
 
-#: .\templates\users\profile.html:29
+#: templates/users/profile.html:22
+#, fuzzy
+#| msgid "Delete"
+msgid "Delete Account"
+msgstr "Удалить"
+
+#: templates/users/profile.html:29
+msgid "Link Telegram Account"
+msgstr "Привязать Телеграм Аккаунт"
+
+#: templates/users/profile.html:34
 msgid "Change Profile information"
 msgstr "Изменить информацию профиля"
 
-#: .\templates\users\signup.html:18
+#: templates/users/signup.html:19
 msgid "Do you have an account?"
 msgstr "У вас есть аккаунт?"
+
+#~ msgid "Select event"
+#~ msgstr "Выберите событие"
+
+#~ msgid "Select group"
+#~ msgstr "Выберите группу"
+
+#~ msgid "Select teacher"
+#~ msgstr "Выберите преподавателя"
+
+#~ msgid "global"
+#~ msgstr "глобальная"
+
+#~ msgid "Global note"
+#~ msgstr "Глобальная заметка"
+
+#~ msgid "Note description"
+#~ msgstr "Описание заметки"
+
+#~ msgid "Event related to the note"
+#~ msgstr "Событие, связанное с заметкой"
+
+#~ msgid "note"
+#~ msgstr "заметка"
+
+#~ msgid "notes"
+#~ msgstr "заметки"
+
+#~ msgid "Teacher's name"
+#~ msgstr "Имя преподавателя"
+
+#~ msgid "teacher"
+#~ msgstr "преподаватель"
+
+#~ msgid "teachers"
+#~ msgstr "преподаватели"
+
+#~ msgid "High"
+#~ msgstr "Высокий"
+
+#~ msgid "Medium"
+#~ msgstr "Средний"
+
+#~ msgid "Low"
+#~ msgstr "Низкий"
+
+#~ msgid "Event name"
+#~ msgstr "Название события"
+
+#~ msgid "custom name"
+#~ msgstr "пользовательское название"
+
+#~ msgid "Custom event name"
+#~ msgstr "Пользовательское название события"
+
+#~ msgid "Teacher"
+#~ msgstr "Преподаватель"
+
+#~ msgid "priority"
+#~ msgstr "приоритет"
+
+#~ msgid ""
+#~ "If high, the event is displayed over the subject. If medium priority, "
+#~ "conflicts may arise. If low, the subject overlaps the event."
+#~ msgstr ""
+#~ "Если высокий, событие отображается поверх предмета. Если средний "
+#~ "приоритет, могут возникнуть конфликты. Если низкий, предмет перекрывает "
+#~ "событие."
+
+#~ msgid "group"
+#~ msgstr "группа"
+
+#~ msgid "start date"
+#~ msgstr "дата начала"
+
+#~ msgid "Schedule start date"
+#~ msgstr "Дата начала расписания"
+
+#~ msgid "expiration date"
+#~ msgstr "дата окончания"
+
+#~ msgid "Schedule expiration date"
+#~ msgstr "Дата окончания расписания"
+
+#~ msgid "even week"
+#~ msgstr "четная неделя"
+
+#~ msgid "Even/odd week for the subject"
+#~ msgstr "Четная/нечетная неделя для предмета"
+
+#~ msgid "time schedule"
+#~ msgstr "расписание времени"
+
+#~ msgid "time schedules"
+#~ msgstr "расписания времени"
+
+#~ msgid "You cannot add time to someone else's schedule."
+#~ msgstr "Вы не можете добавить время в чужое расписание."
+
+#~ msgid "TimeSchedule not found"
+#~ msgstr "TimeSchedule не найден"
+
+#~ msgid "Note not found"
+#~ msgstr "Заметка не найдена"
+
+#~ msgid "Creator"
+#~ msgstr "Создатель"
+
+#~ msgid "Group Name"
+#~ msgstr "Название группы"
+
+#~ msgid "Usernames or Emails (comma-separated)"
+#~ msgstr "Имена пользователей или адреса электронной почты (через запятую)"
+
+#~ msgid ""
+#~ "Enter usernames or email addresses separated by commas. For example: "
+#~ "user1,user2@example.com,user3"
+#~ msgstr ""
+#~ "Введите имена пользователей или адреса электронной почты, разделенные "
+#~ "запятыми. Например: user1,user2@example.com,user3"
+
+#, python-format
+#~ msgid ""
+#~ "Users with the following usernames or emails were not found: "
+#~ "%(identifiers)s"
+#~ msgstr ""
+#~ "Не найдены пользователи со следующими именами или адресами электронной "
+#~ "почты: %(identifiers)s"
+
+#~ msgid "subscription end date"
+#~ msgstr "дата окончания подписки"
+
+#~ msgid "Date when the subscription ends and is deactivated"
+#~ msgstr "Дата окончания и деактивации подписки"
+
+#~ msgid "creator"
+#~ msgstr "создатель"
+
+#~ msgid "groups"
+#~ msgstr "группы"
+
+#~ msgid "Профиль успешно обновлен"
+#~ msgstr "Профиль успешно обновлен"
+
+#~ msgid "Пароль успешно изменен"
+#~ msgstr "Пароль успешно изменен"
+
+#~ msgid "You are not the creator of this group."
+#~ msgstr "Вы не являетесь создателем этой группы."
+
+#~ msgid "Create a note"
+#~ msgstr "Создать заметку"
+
+#~ msgid "Create an event"
+#~ msgstr "Создать событие"
+
+#~ msgid "avatar"
+#~ msgstr "аватар"
+
+#~ msgid "Group List"
+#~ msgstr "Список групп"
+
+#~ msgid "Teacher List"
+#~ msgstr "Список преподавателей"
+
+#~ msgid "Note List"
+#~ msgstr "Список заметок"
+
+#~ msgid "Add Teacher"
+#~ msgstr "Добавить преподавателя"
+
+#~ msgid "Edit Note"
+#~ msgstr "Редактировать заметку"
+
+#~ msgid "Create Note"
+#~ msgstr "Создать заметку"
+
+#~ msgid "Add Note"
+#~ msgstr "Добавить заметку"
+
+#~ msgid "Add note"
+#~ msgstr "Добавить заметку"
+
+#~ msgid "Create group"
+#~ msgstr "Создать группу"
+
+#~ msgid "Edit Teacher"
+#~ msgstr "Редактировать преподавателя"
+
+#~ msgid "Create Teacher"
+#~ msgstr "Создать преподавателя"
 
 #~ msgid "Our site has a public API that everyone can use"
 #~ msgstr "Наш сайт имеет публичный API, которым может воспользоваться каждый"

@@ -10,7 +10,7 @@ dependencies = [
     "coverage==7.6.4",
     "django==4.2.16",
     "django-betterforms==2.0.0",
-    "django-celery-beat>=2.7.0",
+    "django-celery-beat==2.7.0",
     "django-celery-results==2.5.1",
     "django-debug-toolbar==4.4.6",
     "django-ipware==7.0.1",
